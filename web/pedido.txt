@@ -1,0 +1,15 @@
+id_pedido
+fecha
+id_vendedor
+id cliente
+nombre del cliente
+direccion
+telefono
+id producto
+nombre del producto
+cantidad del producto
+precio unitario
+subtotal
+total subtotal
+iva total
+total
