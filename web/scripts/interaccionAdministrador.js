@@ -5,6 +5,8 @@
 //***********************************************************************************
 
 var pagina;
+var TablaViaticos=null;
+var TablaVisitas=null;
 pagina=$(document);
 pagina.ready(inicializar);
 
@@ -19,9 +21,9 @@ pagina.ready(inicializar);
 
 function inicializar()
 {
-    /************************************************************************************/
-    /********************       OPCION USUARIOS      **********************************/
-    /************************************************************************************/
+/************************************************************************************/
+/********************       OPCION USUARIOS      ************************************/
+/************************************************************************************/
     
     // Variables
     var Usuarios;
@@ -29,12 +31,13 @@ function inicializar()
     Usuarios.click(menuUsuarios);
     //Inicializacion de las opciones
     menuUsuarios();
+    
     $(".nav .menu li a#Usuarios").addClass("active");
     activadorEventosUsuarios();
 
-    /************************************************************************************/
-    /********************       OPCION CLIENTES        **********************************/
-    /************************************************************************************/
+/************************************************************************************/
+/********************       OPCION CLIENTES        **********************************/
+/************************************************************************************/
     
     // Variables
     var clientes;
@@ -42,9 +45,9 @@ function inicializar()
     clientes=$("#Clientes");
     clientes.click(menuClientes);
 
-    /************************************************************************************/
-    /********************       OPCION PRODUCTOS       **********************************/
-    /************************************************************************************/
+/************************************************************************************/
+/********************       OPCION PRODUCTOS       **********************************/
+/************************************************************************************/
     
     // Variables
     var productos;
@@ -52,9 +55,9 @@ function inicializar()
 	productos=$("#Productos")
 	productos.click(menuProductos);
 
-	/************************************************************************************/
-    /********************       OPCION PERFIL       **********************************/
-    /************************************************************************************/
+/************************************************************************************/
+/********************       OPCION PERFIL       *************************************/
+/************************************************************************************/
     
     // Variables
     var perfil;
@@ -67,178 +70,231 @@ function inicializar()
 //**********************************************************************************
 //*************                                                *********************
 //*************  FUNCION QUE ACTIVA LOS EVENTOS PRINCIPALES    *********************
-//*************  DE LA SECCION USUARIOS                      *********************
+//*************  DE LA SECCION USUARIOS                        *********************
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
 
 function activadorEventosUsuarios()
 {
-    // VARIABLES DEL MENU VERTICAL DE LA OPCION USUARIOS
-    var visitasV, listadoV, actividadesV, viaticosV, comisionesV, ubicacionV;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    visitasV=$("#ventasVendedor");
-    visitasV.click(seccionVentas);
-    listadoV=$("#listadoVentas");
-    listadoV.click(seccionListado); 
-    actividadesV=$("#ActividadesVendedor");
-    actividadesV.click(seccionActividades);
+// VARIABLES DEL MENU VERTICAL DE LA OPCION USUARIOS
+    var listadoV, visitasV, viaticosV;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    listadoV=$("#listadoUsuarios");
+    listadoV.click(seccionListado);
+    visitasV=$("#VisitasVendedor");
+    visitasV.click(seccionVisitas);
     viaticosV=$("#viaticosVendedor");
     viaticosV.click(seccionViaticos);
-    comisionesV=$("#comisionesVendedor");
-    comisionesV.click(seccionComisiones);
-    ubicacionV=$("#ubicacionVendedor");
-    ubicacionV.click(seccionUbicacion);
-    //*********************************************************
-    //** VARIABLES DE LAS OPCIONES DEL LISTADO DE USUARIOS **
-    //*********************************************************
-    var adicionarV, modificarV, borrarV, visualizarV, reporteV;
-    var volverVendedor, vBorrarV, vHideDelV;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    adicionarV=$("#AVendedor");
-    adicionarV.click(AddVendedor);
-    modificarV=$(".ModVendedor");
-    modificarV.click(ModVendedor);
-    visualizarV=$(".VerVendedor");
-    visualizarV.click(VerVendedor);
-    borrarV=$(".DelUsuario");
-    borrarV.click(DelVendedor);
+//*******************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE USUARIOS **
+//*******************************************************
+    var adicionarU, modificarU, borrarU, visualizarU;
+    var volverUsuario, vBorrarOk, vBorrarU, vHideDelU;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    adicionarU=$("#AUsuario");
+    adicionarU.click(AddUsuario);
+    modificarU=$(".ModUsuario");
+    modificarU.click(DatosModUsuario);
+    visualizarU=$(".VerUsuario");
+    visualizarU.click(DatosVerUsuario);
+    borrarU=$(".DelUsuario");
+    borrarU.click(DatosDelUsuario);
 
-    volverVendedor=$("#volverAddVendedor");
-    volverVendedor.click(seccionListado);
-    vBorrarV=$("#borrarVendedor");
-    vBorrarV.click(ConfirmDelVendedor);
-    vHideDelV=$("#NotDelVendedor");
-    vHideDelV.click(HideConfirmDelVendedor); 
-    //*****************************************************
-    //** VARIABLES DE LAS OPCIONES DEL LISTADO DE VENTAS **
-    //*****************************************************
-    var addVenta, modVenta, delVentas, verVentas, reporteVentas;
-    var volverVenta, addProducto, modVenta, verVenta, delVenta, hideDelVenta, hideAddProducto;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    addVenta=$(".AdicionarVenta");
-    addVenta.click(AddVenta);
-    modVenta=$(".ModVenta");
-    modVenta.click(ModVenta);
-    verVenta=$(".VerVenta");
-    verVenta.click(VerVenta);
-    delVenta=$(".DelVenta");
-    delVenta.click(ConfirmDelVenta);
-
-    hideDelVenta=$("#NotDelVenta")
-    hideDelVenta.click(HideConfirmDelVenta);
-    volverVentas=$("#volverVenta");
-    volverVentas.click(seccionVentas);
-    addProducto=$(".VentanaAddProducto");
-    addProducto.click(ConfirmAddProducto);
-    hideAddProducto=$("#NotAddProducto");
-    hideAddProducto.click(HideConfirmAddProducto); 
-
+    volverUsuario=$("#volverAddUsuario");
+    volverUsuario.click(seccionListado);
+    vBorrarU=$("#borrarUsuario");
+    vBorrarU.click(ConfirmDelUsuario);
+    vBorrarOk=$("#OkDelUsuario");
+    vBorrarOk.click(DelUsuarioOk);
+    vHideDelU=$("#NotDelUsuario");
+    vHideDelU.click(HideConfirmDelUsuario); 
+//******************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE VISITAS **
+//******************************************************
+    var addVisita, modVisita, delVisita, verVisita;
+    var volverVisitas, vBorrarOk, verVisita, delVisita, hideDelVisita, vBorrarV;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    addVisita=$("#AdVisita");
+    addVisita.click(AddVisita);
+    modVisita=$(".ModVisita");
+    modVisita.click(DatosModVisita);
+    verVisita=$(".VerVisita");
+    verVisita.click(DatosVerVisita);
+    delVisita=$(".DelVisita");
+    delVisita.click(DatosDelVisita);
+    
+    vBorrarOk=$("#OkDelVisita");
+    vBorrarOk.click(DelVisitaOk);
+    vBorrarV=$("#borrarVisita");
+    vBorrarV.click(ConfirmDelVisita);
+    hideDelVisita=$("#NotDelVisita")
+    hideDelVisita.click(HideConfirmDelVisita);
+    volverVisitas=$("#volverVisita");
+    volverVisitas.click(seccionVisitas);
+//*******************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE VIATICOS **
+//*******************************************************
+    var addViatico, modViatico, verViatico, delViatico;
+    var VBorrarOk, VBorrarV, hideDelViatico, volverViatico;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    addViatico=$("#AddViatico");
+    addViatico.click(AddViatico);
+    modViatico=$(".ModViatico");
+    modViatico.click(DatosModViatico);
+    verViatico=$(".VerViatico");
+    verViatico.click(DatosVerViatico);
+    delViatico=$(".DelViatico");
+    delViatico.click(DatosDelViatico);
+    
+    VBorrarOk=$("#OkDelViatico");
+    VBorrarOk.click(DelViaticoOk);
+    VBorrarV=$("#borrarViatico");
+    VBorrarV.click(ConfirmDelViatico);
+    hideDelViatico=$("#NotDelViatico")
+    hideDelViatico.click(HideConfirmDelViatico);
+    volverViatico=$("#volverViatico");
+    volverViatico.click(seccionViaticos);
 }
-function activadorEventosClientes()
+
+function ActivadorEventosClientes()
 {
-    // VARIABLES DEL MENU VERTICAL DE LA OPCION VENDEDORES
-    var listadoC, pedidosC, devolucionesC, recaudoC, ubicacionC;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+// VARIABLES DEL MENU VERTICAL DE LA OPCION VENDEDORES
+    var listadoC, pedidosC, devolucionesC;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     listadoC=$("#listadoClientes");
     listadoC.click(seccionListadoClientes);
-	/*pedidosC=$("#pedidosClientes");
-    pedidosC.click(seccionPedidosClientes); 
+    pedidosC=$("#pedidosClientes");
+    pedidosC.click(seccionPedidosC); 
     devolucionesC=$("#devolucionesClientes");
     devolucionesC.click(seccionDevolucionesC);
-    recaudoC=$("#recaudoClientes");
-    recaudoC.click(seccionRecaudoClientes);
-    ubicacionC=$("#ubicacionClientes");
-    ubicacionC.click(seccionUbicacionCLientes);*/
-	
-	//*********************************************************
-    //** VARIABLES DE LAS OPCIONES DEL LISTADO DE VENDEDORES **
-    //*********************************************************
+
+//*******************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE CLIENTES **
+//*******************************************************
     var adicionarC, modificarC, borrarC, visualizarC, reporteP;
-    var volverCliente, vBorrarC,registrarCliente, vHideDelC;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    var CBorrarOk, volverCliente, BorrarC, vHideDelC;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     adicionarC=$("#ACliente");
     adicionarC.click(AddCliente);
     modificarC=$(".ModCliente");
-    modificarC.click(ModCliente);
+    modificarC.click(DatosModClientes);
     visualizarC=$(".VerCliente");
-    visualizarC.click(VerCliente);
+    visualizarC.click(DatosVerCliente);
     borrarC=$(".DelCliente");
-    borrarC.click(DelCliente);
+    borrarC.click(DatosDelCliente);
     
+    CBorrarOk=$("#OkDelCliente");
+    CBorrarOk.click(DelClienteOk);
     volverCliente=$("#volverAddCliente");
     volverCliente.click(seccionListadoClientes);
-    registrarCliente=$("#registrarAddCliente");
-    registrarCliente.click(seccionListadoClientes);
-    vBorrarC=$("#borrarCliente");
-    vBorrarC.click(ConfirmDelCliente);
+    BorrarC=$("#borrarCliente");
+    BorrarC.click(ConfirmDelCliente);
     vHideDelC=$("#NotDelCliente");
-    vHideDelC.click(HideConfirmDelCliente); 
+    vHideDelC.click(HideConfirmDelCliente);
+//********************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE PEDIDOS   **
+//********************************************************
+    var adicionP, modificarp, visualizarp, borrarP;
+    var PBorrarOk,volverPedido, BorrarP, HideDelP;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    adicionP=$("#AddPedido");
+    adicionP.click(AddPedido);
+    modificarp=$(".ModPedido");
+    modificarp.click(DatosModPedido);
+    visualizarp=$(".VerPedido");
+    visualizarp.click(DatosVerPedido);
+    borrarP=$(".DelPedido");
+    borrarP.click(DatosDelPedido);
+    
+    PBorrarOk=$("#OkDelPedido");
+    PBorrarOk.click(DelPedidoOk);
+    volverPedido=$("#volverAddPedido");
+    volverPedido.click(seccionPedidosC);
+    BorrarP=$("#borrarPedido");
+    BorrarP.click(ConfirmDelPedido);
+    HideDelP=$("#NotDelPedido");
+    HideDelP.click(HideConfirmDelPedido);
+//***********************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE DEVOLUCIONES **
+//***********************************************************
+    var adiciond, modificarp, visualizarp, borrarP;
+    var PBorrarOk,volverPedido, BorrarP, HideDelP;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    adiciond=$("#AddDevolucion");
+    adiciond.click(AddDevolucion);
+    modificarp=$(".ModDevolucion");
+    modificarp.click(DatosModDevolucion);
+    visualizarp=$(".VerPedido");
+    visualizarp.click(DatosVerPedido);
+    borrarP=$(".DelPedido");
+    borrarP.click(DatosDelPedido);
+    
+    PBorrarOk=$("#OkDelPedido");
+    PBorrarOk.click(DelPedidoOk);
+    volverPedido=$("#volverAddDevolucion");
+    volverPedido.click(seccionDevolucionesC);
+    BorrarP=$("#borrarPedido");
+    BorrarP.click(ConfirmDelPedido);
+    HideDelP=$("#NotDelPedido");
+    HideDelP.click(HideConfirmDelPedido);
 }
-
 function  activadorEventosProductos()
 {
-    // VARIABLES DEL MENU VERTICAL DE LA OPCION PRODUCTOS
-    var listadoP, categoriaP, dimencionesP, coloresP, tallasP, materialesP;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+// VARIABLES DEL MENU VERTICAL DE LA OPCION PRODUCTOS
+    var listadoP, LinasP, coloresP, tallasP, materialesP;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     listadoP=$("#listadoProductos");
     listadoP.click(seccionListadoProductos);
-    categoriaP=$("#categoriasProductos");
-    categoriaP.click(seccionCategorias); 
-    /*dimencionesP=$("#dimensionesProducto");
-    dimencionesP.click(seccionDimensiones);
+    LinasP=$("#lineasProd");
+    LinasP.click(seccionListadolineas);
     coloresP=$("#coloresProductos");
-    coloresP.click(seccionColores);
+    coloresP.click(MenuColores);
     tallasP=$("#tallasProductos");
-    tallasP.click(seccionTallas);
+    tallasP.click(Menutallas);
     materialesP=$("#materialesProductos");
-    materialesP.click(seccionMateriales);*/
-	//*********************************************************
-    //** VARIABLES DE LAS OPCIONES DEL LISTADO DE PRODUCTOS **
-    //*********************************************************
+    materialesP.click(Menumateriales);
+//********************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE PRODUCTOS **
+//********************************************************
     var adicionarP, modificarP, borrarP, visualizarP, reporteP;
-    var hideDelProducto, volverProducto, registrarProducto, vBorrarP, vHideDelP;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    var PBorrarOk,volverProducto, vBorrarP, vHideDelP;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     adicionarP=$("#AProducto");
     adicionarP.click(AddProducto);
     modificarP=$(".ModProducto");
-    modificarP.click(ModProducto);
+    modificarP.click(DatosModProductos);
     visualizarP=$(".VerProducto");
-    visualizarP.click(VerProducto);
+    visualizarP.click(DatosVerProducto);
     borrarP=$(".DelProducto");
-    borrarP.click(DelProducto);
+    borrarP.click(DatosDelProducto);
     
+    PBorrarOk=$("#OkDelProducto");
+    PBorrarOk.click(DelProductoOk);
     volverProducto=$("#volverAddProducto");
     volverProducto.click(seccionListadoProductos);
-    registrarProducto=$("#registrarAddProducto");
-    registrarProducto.click(seccionListadoProductos);
     vBorrarP=$("#borrarProducto");
     vBorrarP.click(ConfirmDelProducto);
     vHideDelP=$("#NotDelProducto");
     vHideDelP.click(HideConfirmDelProducto); 
-    //*****************************************************
-    //** VARIABLES DE LAS OPCIONES DEL LISTADO DE ATEGORIAS **
-    //*****************************************************
-    var addCategoria, modCategoria, delCategoria, verCategoria, reporteVentas;
-    var volverCategoria, hideDelCategoria, hideAddCategoria;
-    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    /*addCategoria=$(".AdicionarCategoria");
-    addCategoria.click(AddCategoria);
-    modCategoria=$(".ModCategoria");
-    modCategoria.click(ModCategoria);
-    verCategoria=$(".VerCategoria");
-    verCategoria.click(VerCategoria);
-    delCategoria=$(".DelCategoria");
-    delCategoria.click(ConfirmDelCategoria);
-
-
-
-    hideDelCategoria=$("#NotDelCategoria")
-    hideDelCategoria.click(HideConfirmDelVenta);
-    volverCategoria=$("#volverCategoria");
-    volverCategoria.click(seccionCategorias);
-    hideAddCategoria=$("#NotAddCategoria");
-    hideAddCategoria.click(HideConfirmAddCategoria);*/
+//*******************************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
+//*******************************************************************
+    var addLinea, modViatico, verViatico, delViatico;
+    var VBorrarOk, VBorrarV, hideDelViatico, hideAddLinea;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    addLinea=$(".AddLinea");
+    addLinea.click(ConfirmAddLinea);
+    modViatico=$(".ModViatico");
+    modViatico.click(DatosModViatico);
+    verViatico=$(".VerViatico");
+    verViatico.click(DatosVerViatico);
+    delViatico=$(".DelViatico");
+    delViatico.click(DatosDelViatico);
+    
+    hideAddLinea=$("#NotAddLinea");
+    hideAddLinea.click(HideConfirmAddLinea);
+    
 }
 
 //**********************************************************************************
@@ -306,7 +362,7 @@ function IniciarTabersAnidados()
 //**********************************************************************************
 //*************                                                *********************
 //*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
-//*************  VERTICAL DE LA SECCION VENDEDORES             *********************
+//*************  VERTICAL DE LA SECCION USUARIOS               *********************
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
@@ -315,21 +371,20 @@ function menuUsuarios()
 {
    var codigoHTML = '<div class="encabezado">Gestión de Usuarios</div>'+
                     '<ul class="menu-vertical">'+
-                        '<li><a href="#1" id="listadoVentas"><img src="images/IconoOpciones.png"/> Listado</a></li>'+
-                        '<li><a href="#2" id="ventasVendedor"><img src="images/IconoOpciones.png"/> Visitas</a></li>'+
+                        '<li><a href="#1" id="listadoUsuarios"><img src="images/IconoOpciones.png"/> Listado</a></li>'+
+                        '<li><a href="#2" id="VisitasVendedor"><img src="images/IconoOpciones.png"/> Visitas</a></li>'+
                         '<li><a href="#4" id="viaticosVendedor"><img src="images/IconoOpciones.png"/> Viáticos</a></li>'+
                     '</ul>'; 
 
     $(".content-float-vendedores").html(codigoHTML);
-	$(".content-float-vendedores").show();
-	$(".content-float-vendedores").css({height: 140});
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 130});
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     seccionListado();
-    $(".menu-vertical li a#listadoVisitas").addClass("active");
+    $(".menu-vertical li a#listadoUsuarios").addClass("active");
     activadorEventosUsuarios();
 }
-
 
 //**********************************************************************************
 //**********************************************************************************
@@ -344,22 +399,46 @@ function menuClientes()
 {
    var codigoHTML = '<div class="encabezado">Gestión de Clientes</div>'+
                     '<ul class="menu-vertical">'+
-                        '<li><a href="#1" id="listadoClientes"><img src="images/IconoOpciones.png"/> Clientes</a></li>'+
+                        '<li><a href="#1" id="listadoClientes"><img src="images/IconoOpciones.png"/> Listado</a></li>'+
                         '<li><a href="#2" id="pedidosClientes"><img src="images/IconoOpciones.png"/> Pedidos</a></li>'+
                         '<li><a href="#3" id="devolucionesClientes"><img src="images/IconoOpciones.png"/> Devoluciones</a></li>'+
-						'<li><a href="#4" id="recaudoClientes"><img src="images/IconoOpciones.png"/> Recaudos</a></li>'+
-                        '<li><a href="#5" id="ubicacionClientes"><img src="images/IconoOpciones.png"/> Ubicación Geografica</a></li>'+
                     '</ul>'; 
 
     $(".content-float-vendedores").html(codigoHTML);
-	$(".content-float-vendedores").show();
-    $(".content-float-vendedores").css({height: 200});
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 130});
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     seccionListadoClientes();
     $(".menu-vertical li a#listadoClientes").addClass("active");
-    activadorEventosClientes();
-    //$(".menu-vertical li a#listadoVentas").addClass("active");
+    ActivadorEventosClientes();
+}
+
+//****************************************************************************************
+//****************************************************************************************
+//*************                                                      *********************
+//************* FUNCION OPCI0N PEDIDOS DEL MENU VERTICAL DE CLIENTES *********************
+//*************                                                      *********************
+//****************************************************************************************
+//****************************************************************************************
+
+function seccionPedidosC()
+{
+
+    var codigoHTML = '<div class="encabezado">Gestión de Clientes</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoClientes"><img src="images/IconoOpciones.png"/> Listado</a></li>'+
+                        '<li><a href="#2" id="pedidosClientes"><img src="images/IconoOpciones.png"/> Pedidos</a></li>'+
+                        '<li><a href="#3" id="devolucionesClientes"><img src="images/IconoOpciones.png"/> Devoluciones</a></li>'+
+                    '</ul>'; 
+
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 130});
+    $(".nav .menu li a#Clientes").addClass("active");
+    seccionListadoPedidos();
+    $(".menu-vertical li a#pedidosClientes").addClass("active");
+    ActivadorEventosClientes();
 }
 
 //**********************************************************************************
@@ -376,177 +455,449 @@ function menuProductos()
    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
                     '<ul class="menu-vertical">'+
                         '<li><a href="#1" id="listadoProductos"><img src="images/IconoOpciones.png"/> Productos</a></li>'+
-                        '<li><a href="#2" id="catedoriasProductos"><img src="images/IconoOpciones.png"/> Categorias</a></li>'+
-                        '<li><a href="#3" id="dimencionesProductos"><img src="images/IconoOpciones.png"/> Dimenciones</a></li>'+
-						'<li><a href="#4" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
-                        '<li><a href="#5" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
-                        '<li><a href="#6" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
+                        '<li><a href="#2" id="lineasProd"><img src="images/IconoOpciones.png"/> Lineas de Produccion </a></li>'+
+                        '<li><a href="#3" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
+                        '<li><a href="#4" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
+                        '<li><a href="#5" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
                     '</ul>'; 
 
     $(".content-float-vendedores").html(codigoHTML);
     $(".content-float-vendedores").show();
-    $(".content-float-vendedores").css({height: 230});
+    $(".content-float-vendedores").css({height: 200});
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
+    seccionListadoProductos();
     $(".menu-vertical li a#listadoProductos").addClass("active");
     seccionListadoProductos();
 }
 
 //**********************************************************************************
 //**********************************************************************************
-
-//**********************************************************************************
-//**********************************************************************************
 //*************                                                *********************
-//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
-//*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DE LOS   *********************
-//*************  VENDEDORES                                    *********************
+//*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
+//*************  VERTICAL DE LA SECCION CATEGORIAS              *********************
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
 
-function seccionListado()
+function MenuLineas()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Usuarios</div>'+
+    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoProductos"><img src="images/IconoOpciones.png"/> Productos</a></li>'+
+                        '<li><a href="#2" id="lineasProd"><img src="images/IconoOpciones.png"/> Lineas de Produccion </a></li>'+
+                        '<li><a href="#3" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
+                        '<li><a href="#4" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
+                        '<li><a href="#5" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
+                    '</ul>'; 
+
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 200});
+    $(".nav .menu li a#Productos").addClass("active");
+    $(this).addClass("active");
+    seccionListadolineas();
+    $(".menu-vertical li a#lineasProd").addClass("active");
+    activadorEventosProductos();
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
+//*************  VERTICAL DE LA SECCION COLORES              *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function MenuColores()
+
+{
+    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoProductos"><img src="images/IconoOpciones.png"/> Productos</a></li>'+
+                        '<li><a href="#2" id="lineasProd"><img src="images/IconoOpciones.png"/> Lineas de Produccion </a></li>'+
+                        '<li><a href="#3" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
+                        '<li><a href="#4" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
+                        '<li><a href="#5" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
+                    '</ul>'; 
+                
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 200});
+    $(".nav .menu li a#Productos").addClass("active");
+    $(this).addClass("active");
+    seccionListadoColores();
+    $(".menu-vertical li a#coloresProductos").addClass("active");
+    activadorEventosProductos();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE COLORES                    ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoColores()
+{
+    var request = {"Usuarios":"Colores"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoColores(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//******************************************************************************************
+//******************************************************************************************
+//*************                                                        *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION DE COLORES *********************
+//*************                                                        *********************
+//******************************************************************************************
+//******************************************************************************************
+
+function cargarListadoColores(jsonArray)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Colores de los productos</div>'+
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
                             '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>Cedula</th>'+
-                            '<th>Nombre</th>'+
-                            '<th>Teléfono</th>'+
-                            '<th>Celular</th>'+
-                            '<th>email</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>Carlos Andres Jaramillo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>cajaramillov@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Juan Sebastian Jaramillo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>sebas@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>25180450</td>'+
-                            '<td>Sandra Milena Giraldo</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3012740919</td>'+
-                            '<td>sanmigita@gmail.com</td>'+
-                          '</tr>'+
-                        '</table>'+
-                    '</div>';
+                            '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>id Color</th>'+
+                            '<th>Color</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cod_color + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
 
     $("#datos").html(codigoHTML);
-	$(".content-float-datos").css({width: 630});
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
     $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#listadoVentas").addClass("active");
+    $(".menu-vertical li a#coloresProductos").addClass("active");
+    activadorEventosProductos(); 
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
+//*************  VERTICAL DE LA SECCION TALLAS              *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function Menutallas()
+{
+    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoProductos"><img src="images/IconoOpciones.png"/> Productos</a></li>'+
+                        '<li><a href="#2" id="lineasProd"><img src="images/IconoOpciones.png"/> Lineas de Produccion </a></li>'+
+                        '<li><a href="#3" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
+                        '<li><a href="#4" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
+                        '<li><a href="#5" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
+                    '</ul>'; 
+
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 200});
+    $(".nav .menu li a#Productos").addClass("active");
+    $(this).addClass("active");
+    seccionListadoTalla();
+    $(".menu-vertical li a#tallasProductos").addClass("active");
+    activadorEventosProductos(); 
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE TALLAS                      ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoTalla()
+{
+    var request = {"Usuarios":"Tallas"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoTallas(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+//
+//**************************************************************************************
+//**************************************************************************************
+//*************                                                    *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION TALLAS *********************
+//*************                                                    *********************
+//**************************************************************************************
+//**************************************************************************************
+
+function cargarListadoTallas(jsonArray)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Tallas de los productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>id Talla</th>'+
+                            '<th>Talla</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cod_talla + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#tallasProductos").addClass("active");
+    activadorEventosProductos();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE USUARIOS                    ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function Menumateriales()
+
+{
+    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoProductos"><img src="images/IconoOpciones.png"/> Productos</a></li>'+
+                        '<li><a href="#2" id="lineasProd"><img src="images/IconoOpciones.png"/> Lineas de Produccion </a></li>'+
+                        '<li><a href="#3" id="coloresProductos"><img src="images/IconoOpciones.png"/> Colores</a></li>'+
+                        '<li><a href="#4" id="tallasProductos"><img src="images/IconoOpciones.png"/> Tallas</a></li>'+
+                        '<li><a href="#5" id="materialesProductos"><img src="images/IconoOpciones.png"/> Materiales</a></li>'+
+                    '</ul>'; 
+
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 200});
+    $(".nav .menu li a#Productos").addClass("active");
+    $(this).addClass("active");
+    seccionListadoMateriales();
+    $(".menu-vertical li a#materialesProductos").addClass("active");
+    activadorEventosProductos();  
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE MATERIALES                  ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoMateriales()
+{
+    var request = {"Usuarios":"Materiales"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarMateriales(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************  FUNCION PARA CARGAR LOS DATOS DE LA SECCION MATERIALES   ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarMateriales(jsonArray)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Materiales de los productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>Codigo</th>'+
+                            '<th>Material</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].codigo + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].material + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#materialesProductos").addClass("active");
+    activadorEventosProductos();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE USUARIOS                    ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListado()
+{
+    var request = {"Usuarios":"Listado"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListado(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************   FUNCION PARA CARGAR LOS DATOS DE LA SECCION USUARIOS    ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarListado(jsonArray)
+{    
+   var codigoHTML =      '<div class="encabezado2">Listado de Usuarios</div>'+
+                                        '<div class="tabla">'+
+                                                '<table class="tbonita">'+
+                                                        '<tr align="left">'+
+                                                                '<th><img src="images/b_insrow.png" title="Agregar" id="AUsuario"/></th>'+
+                                                                '<th><a href="ServletInformes?informe=ListadoUsuariosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                                '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                                '<th>Cedula</th>'+
+                                                                '<th>Nombres</th>'+
+                                                                '<th>Apellidos</th>'+
+                                                                '<th>Teléfono</th>'+
+                                                                '<th>Celular</th>'+
+                                                                '<th>email</th>'+
+                                                        '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cedula_usuario + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].apellidos_usuario + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].telefono_usuario + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].celular_usuario + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].email_usuario + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+    
+    $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
+    $(".content-float-datos").css({width: 630});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#listadoUsuarios").addClass("active");
     activadorEventosUsuarios();
 }
 
@@ -554,77 +905,85 @@ function seccionListado()
 //*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
 //*************  SEGUN LAS OPCIONES DE ADICIONAR, MODIFICAR,   *********************
 //*************  VISUALIZAR, BORRAR Y GENERAR INFORME EN LA    *********************
-//*************  OPCION LISTADO DE LOS VENDEDORES              *********************
+//*************  OPCION LISTADO DE LOS USUARIOS              *********************
 //**********************************************************************************
 
-function AddVendedor()
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************         FUNCION PARA ADICIONAR A UN NUEVO USUARIO         ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+
+function AddUsuario()
 {
     var codigoHTML = '<div class="encabezado2">Adicionar Usuario</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
                             '<li><a href="#Laboral">Laboral</a></li>'+
-                            '<li><a href="#Zonas">Zonas</a></li>'+
                         '</ul>'+
-                        
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="10" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form id="form_crear_usuario"  enctype="multipart/form-data">'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
-                                    '<td><input type="text" name="id_usuario" value="" size="20" maxlength="15" required/></td>'+
+                                    '<td><input type="text" name="cedula_usuario" value="" size="20" maxlength="15" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos" value="" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="apellidos_usuario" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombres" value="" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="nombre_usuario" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="" size="20" maxlength="10" required/></td>'+
+                                    '<td><input type="text" name="nickname_usuario" value="" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="" size="20" maxlength="10" required/></td>'+
+                                    '<td><input type="password" name="password_usuario" value="" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
-								  '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
+                                  '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
                                   '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Administrador</option>'+
-                                      '<option value="Sr">Gerente</option>'+
-                                      '<option value="Dq">Jefe de Producción</option>'+
-                                      '<option value="Pr">Jefe Comercial</option>'+
-                                      '<option value="Lv">Vendedor</option>'+
-									  '<option value="Tg">Cliente</option>'+
-                                      '<option value="St">Secretaria</option>'+
-								  '</td>'+
+                                    '<select name="tipo_usuario" style="width:168px;">'+
+                                      '<option value="A">A</option>'+
+                                      '<option value="G">G</option>'+
+                                      '<option value="JP">JP</option>'+
+                                      '<option value="JC">JC</option>'+
+                                      '<option value="V">V</option>'+
+                                      '<option value="S">S</option>'+
+                                  '</td>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion" value="" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="direccion_usuario" value="" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono" value="" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="telefono_usuario" value="" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
-								  '<tr>'+
+                                  '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular" value="" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="celular_usuario" value="" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -634,100 +993,66 @@ function AddVendedor()
                                     '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
                                     '<td><input type="text" name="fecha" id="date_field13" value="" /></td>'+
                                     '<th align="right" style="padding-right:5px;">email</th>'+
-                                    '<td><input type="text" name="email" value="" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="email_usuario" value="" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
-                                    '<td><input type="text" name="cumpleanos" id="date_field14" value="" /></td>'+
+                                    '<td><input type="text" name="fecha_cumpleanos" id="date_field14" value="" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
                                     '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="Ah">Ahorros</option>'+
-                                        '<option value="Crr">Corriente</option>'+
+                                      '<select name="tipo_cuenta_bancaria" style="width:177px">'+
+                                        '<option value="1">Ahorros</option>'+
+                                        '<option value="2">Corriente</option>'+
                                       '</select>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
-                                    '<td><input type="text" name="num_cuenta" value="" /></td>'+
+                                    '<td><input type="text" name="numero_cuenta" value="" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
                                     '<td>'+
                                       '<select name="banco" style="width:177px">'+
-                                        '<option value="">Bancafé</option>'+
-                                        '<option value="">Banco AV Villas</option>'+
-                                        '<option value="">BBVA</option>'+
-                                        '<option value="">Banco Caja Social BCSC</option>'+
-                                        '<option value="">Banco de Bogotá</option>'+
-                                        '<option value="">Banco de Credito</option>'+
-                                        '<option value="">Banco de la República de Colombia</option>'+
-                                        '<option value="">Banco de Occidente</option>'+
-                                        '<option value="">Banco GNB Sudameris</option>'+
-                                        '<option value="">Banco Granahorrar</option>'+
-                                        '<option value="">Banco Popular</option>'+
-                                        '<option value="">Banco Santander Colombia</option>'+
-                                        '<option value="">Bancoldex</option>'+
-                                        '<option value="">Bancolombia</option>'+
-                                        '<option value="">BBVA Banco Ganadero</option>'+
-                                        '<option value="">Citi Bank</option>'+
-                                        '<option value="">Colmena BCSC</option>'+
-                                        '<option value="">Colpatria</option>'+
-                                        '<option value="">Conavi</option>'+
-                                        '<option value="">Davivienda</option>'+
-                                        '<option value="">Megabanco</option>'+
-                                        '<option value="">Banco Finandino</option>'+
-                                        '<option value="">Banco Falabella</option>'+
-                                        '<option value="">Banco Coomeva</option>'+
+                                        '<option value="1">Bancafé</option>'+
+                                        '<option value="2">Banco AV Villas</option>'+
+                                        '<option value="3">BBVA</option>'+
+                                        '<option value="4">Banco Caja Social BCSC</option>'+
+                                        '<option value="5">Banco de Bogotá</option>'+
+                                        '<option value="6">Banco de Credito</option>'+
+                                        '<option value="7">Banco de la República de Colombia</option>'+
+                                        '<option value="8">Banco de Occidente</option>'+
+                                        '<option value="9">Banco GNB Sudameris</option>'+
+                                        '<option value="10">Banco Granahorrar</option>'+
+                                        '<option value="11">Banco Popular</option>'+
+                                        '<option value="12">Banco Santander Colombia</option>'+
+                                        '<option value="13">Bancoldex</option>'+
+                                        '<option value="14">Bancolombia</option>'+
+                                        '<option value="15">BBVA Banco Ganadero</option>'+
+                                        '<option value="16">Citi Bank</option>'+
+                                        '<option value="17">Colmena BCSC</option>'+
+                                        '<option value="18">Colpatria</option>'+
+                                        '<option value="19">Conavi</option>'+
+                                        '<option value="20">Davivienda</option>'+
+                                        '<option value="21">Megabanco</option>'+
+                                        '<option value="22">Banco Finandino</option>'+
+                                        '<option value="23">Banco Falabella</option>'+
+                                        '<option value="24">Banco Coomeva</option>'+
                                       '</select>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
+                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
+                                '<td>'+
+                                    '<select name="id_ubicacion" style="width:165px;" class="ubicacion">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                               '</tr>'+
+                                  '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
-                                      '<textarea name="mensaje" cols="74" rows="6"></textarea>'+
+                                      '<textarea name="otros_datos" cols="74" rows="6"></textarea>'+
                                     '</td>'+
                                   '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<div id="Zonas" class="tab_content">'+
-                              '<table>'+
-                                '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Departamentos</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:177px;">'+
-                                      '<option value="Ah">Amazonas</option>'+
-                                      '<option value="Crr">Antioquia</option>'+
-                                      '<option value="Ah">Bolivar</option>'+
-                                      '<option value="Crr">Caldas</option>'+
-                                      '<option value="Ah">Cauca</option>'+
-                                      '<option value="Crr">Casanare</option><option value="Ah">Guania</option>'+
-                                      '<option value="Crr">Cundinamarca</option><option value="Ah">Santander</option>'+
-                                      '<option value="Crr">Atlantico</option><option value="Ah">Sucre</option>'+
-                                    '</select>'+
-                                  '</td>'+
-                                  '<td align="right" style="padding-right:5px;">Ciudades</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:177px;">'+
-                                      '<option value="Ap">Apia</option>'+
-                                      '<option value="Sr">Santa Rosa</option>'+
-                                      '<option value="Dq">Dosquebradas</option>'+
-                                      '<option value="Pr">Pereira</option>'+
-                                      '<option value="Lv">La Virginia</option>'+
-                                      '<option value="St">Santuario</option>'+
-                                    '</select>'+
-                                  '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="center"><br>'+
-                                    '<input type="button" value="Agregar" class="button" />'+
-                                  '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="left">'+
-                                    'Ciudades Asignadas:<br>'+
-                                    '<textarea name="mensaje" cols="72" rows="5" readonly="readonly"></textarea>'+
-                                  '</td>'+
-                                  '<br>'+
-                                '</tr>'+
                               '</table>'+
                             '</div>'+
                           '</div>'+
@@ -735,8 +1060,8 @@ function AddVendedor()
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
-                                  '<input type="submit" value="Registrar" class="button" />'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
+                                  '<input type="submit" value="Registrar" class="button" id="AdicionarUsuario"/>'+
                               '</td>'+
                             '</tr>'+
                           '</table> '+      
@@ -744,24 +1069,187 @@ function AddVendedor()
                     '</div>';
 
     $("#datos").html(codigoHTML);
+    listUbicacion();
     IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field13').datepick({yearRange: '1980:2050'})
+    $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_usuario").submit(enviarDatosAddUsuario);
     activadorEventosUsuarios();
+    cargarFoto();
 }
 
-function ModVendedor()
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS USUARIOS       ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarFoto()
+{
+    var botonCargarFoto = $("#cargarFoto");
+    
+    new AjaxUpload(botonCargarFoto, 
+    {
+        action: 'ServletFotos',
+        onSubmit : function(file, ext)
+        {
+                if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext)))
+                {
+                        // extensiones permitidas
+                        alert('Error: Solo se permiten imagenes');
+                        // cancela upload
+                        return false;
+                } 
+                else 
+                {
+                        botonCargarFoto.attr("value", "Cargando");
+                        this.disable();
+                }
+        },
+        onComplete: function(file, response)
+        {
+                botonCargarFoto.attr("value", "Cargar Foto");
+                // enable upload button
+                this.enable();			
+                // Agrega archivo a la lista
+                var rutaFoto = "images/Usuarios/" + file;
+                var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
+                $('#rutaFoto').attr("value",file);
+                $('#fotoUsuarios').html(htmlFoto);
+        }	
+    });
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA EL RETORNO AL LISTADO DE USUARIOS                  ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA CARGAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddUsuario(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddUsuario","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddUsuario(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddUsuario(jsonObj)
+{
+    if (jsonObj.AddUsuario  =="true")
+    {
+        alert("El Usuario se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El Usuario no se pudo adicionar");
+    }   
+    
+    seccionListado();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModUsuario()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModUsuario(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS USUARIOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModUsuario(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
                             '<li><a href="#Laboral">Laboral</a></li>'+
-                            '<li><a href="#Zonas">Zonas</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
+                            '<form id="form_modificar_usuario"  enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="left">'+
                                   '<tr>'+
                                       '<td colspan="2" rowspan="10" align="center">'+
@@ -777,46 +1265,45 @@ function ModVendedor()
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
-                                    '<td><input type="text" name="id_usuario" value="9867024" size="20" maxlength="15" /></td>'+
+                                    '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos" value="Jaramillo Villegas" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="apellidos_usuario" value="' + jsonObject.apellidos_usuario+ '" size="20" maxlength="25" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombres" value="Carlos Andres" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="nombre_usuario" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="cajaramillov" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="text" name="nickname_usuario" value="' + jsonObject.nickname_usuario + '" maxlength="10" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="c4rl05" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="password" name="password_usuario" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" "/></td>'+
                                   '</tr>'+
-								  '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
-								  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Administrador</option>'+
-                                      '<option value="Sr">Gerente</option>'+
-                                      '<option value="Dq">Jefe de Producción</option>'+
-                                      '<option value="Pr">Jefe Comercial</option>'+
-                                      '<option value="Lv">Vendedor</option>'+
-									  '<option value="Tg">Cliente</option>'+
-                                      '<option value="St">Secretaria</option>'+
-								  '</td>'+
+                                    '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
+                                  '<td>'+
+                                    '<select name="tipo_usuario" style="width:168px;">'+
+                                      '<option value="A">A</option>'+
+                                      '<option value="G">G</option>'+
+                                      '<option value="JP">JP</option>'+
+                                      '<option value="JC">JC</option>'+
+                                      '<option value="V">V</option>'+
+                                      '<option value="S">S</option>'+
+                                  '</td>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion" value="Coomnes Casa 17" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="direccion_usuario" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono" value="3006731512" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="telefono_usuario" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular" value="3006731512" size="20" maxlength="15" /></td>'+
+                                    '<td><input type="text" name="celular_usuario" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -824,101 +1311,70 @@ function ModVendedor()
                               '<table>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
-                                    '<td><input type="text" name="fecha" id="date_field13" value="01/01/2012" /></td>'+
+                                    '<td><input type="text" name="fecha" id="date_field13" value="' + jsonObject.fecha + '" /></td>'+
                                     '<th align="right" style="padding-right:5px;">email</th>'+
-                                    '<td><input type="text" name="email" value="cajaramillov@gmail.com" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="email_usuario" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
-                                    '<td><input type="text" name="cumpleanos" id="date_field14" value="09/11/1982" /></td>'+
+                                    '<td><input type="text" name="fecha_cumpleanos" id="date_field14" value="' + jsonObject.fecha_cumpleanos + '" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
                                     '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="Ah">Ahorros</option>'+
-                                        '<option value="Crr">Corriente</option>'+
+                                      '<select name="tipo_cuenta_bancaria" style="width:177px">'+
+                                        '<option value="1">Ahorros</option>'+
+                                        '<option value="2">Corriente</option>'+
                                       '</select>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
-                                    '<td><input type="text" name="num_cuenta" value="1122334455" /></td>'+
+                                    '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
                                     '<td>'+
                                       '<select name="banco" style="width:177px">'+
-                                        '<option value="">Bancafé</option>'+
-                                        '<option value="">Banco AV Villas</option>'+
-                                        '<option value="">BBVA</option>'+
-                                        '<option value="">Banco Caja Social BCSC</option>'+
-                                        '<option value="">Banco de Bogotá</option>'+
-                                        '<option value="">Banco de Credito</option>'+
-                                        '<option value="">Banco de la República de Colombia</option>'+
-                                        '<option value="">Banco de Occidente</option>'+
-                                        '<option value="">Banco GNB Sudameris</option>'+
-                                        '<option value="">Banco Granahorrar</option>'+
-                                        '<option value="">Banco Popular</option>'+
-                                        '<option value="">Banco Santander Colombia</option>'+
-                                        '<option value="">Bancoldex</option>'+
-                                        '<option value="">Bancolombia</option>'+
-                                        '<option value="">BBVA Banco Ganadero</option>'+
-                                        '<option value="">Citi Bank</option>'+
-                                        '<option value="">Colmena BCSC</option>'+
-                                        '<option value="">Colpatria</option>'+
-                                        '<option value="">Conavi</option>'+
-                                        '<option value="">Davivienda</option>'+
-                                        '<option value="">Megabanco</option>'+
-                                        '<option value="">Banco Finandino</option>'+
-                                        '<option value="">Banco Falabella</option>'+
-                                        '<option value="">Banco Coomeva</option>'+
+                                        '<option value="1">Bancafé</option>'+
+                                        '<option value="2">Banco AV Villas</option>'+
+                                        '<option value="3">BBVA</option>'+
+                                        '<option value="4">Banco Caja Social BCSC</option>'+
+                                        '<option value="5">Banco de Bogotá</option>'+
+                                        '<option value="6">Banco de Credito</option>'+
+                                        '<option value="7">Banco de la República de Colombia</option>'+
+                                        '<option value="8">Banco de Occidente</option>'+
+                                        '<option value="9">Banco GNB Sudameris</option>'+
+                                        '<option value="10">Banco Granahorrar</option>'+
+                                        '<option value="11">Banco Popular</option>'+
+                                        '<option value="12">Banco Santander Colombia</option>'+
+                                        '<option value="13">Bancoldex</option>'+
+                                        '<option value="14">Bancolombia</option>'+
+                                        '<option value="15">BBVA Banco Ganadero</option>'+
+                                        '<option value="16">Citi Bank</option>'+
+                                        '<option value="17">Colmena BCSC</option>'+
+                                        '<option value="18">Colpatria</option>'+
+                                        '<option value="19">Conavi</option>'+
+                                        '<option value="20">Davivienda</option>'+
+                                        '<option value="21">Megabanco</option>'+
+                                        '<option value="22">Banco Finandino</option>'+
+                                        '<option value="23">Banco Falabella</option>'+
+                                        '<option value="24">Banco Coomeva</option>'+
                                       '</select>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
+                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
+                                    '<td>'+ 
+                                        '<select name="id_ubicacion" style="width:160px;" class="ubicacion">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+ 
+                                    '</td>'+
+                               '</tr>'+
+                                  '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
-                                      '<textarea name="mensaje" cols="74" rows="6">Ingeniero de Sitemas y Computacion</textarea>'+
+                                      '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<div id="Zonas" class="tab_content">'+
-                              '<table>'+
                                 '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Departamentos</td>'+
-                                  '<td>'+
-                                    '<select name="departamento" style="width:177px;">'+
-                                      '<option value="Ah">Amazonas</option>'+
-                                      '<option value="Crr">Antioquia</option>'+
-                                      '<option value="Ah">Bolivar</option>'+
-                                      '<option value="Crr">Caldas</option>'+
-                                      '<option value="Ah">Cauca</option>'+
-                                      '<option value="Crr">Casanare</option><option value="Ah">Guania</option>'+
-                                      '<option value="Crr">Cundinamarca</option><option value="Ah">Santander</option>'+
-                                      '<option value="Crr">Atlantico</option><option value="Ah">Sucre</option>'+
-                                    '</select>'+
-                                  '</td>'+
-                                  '<td align="right" style="padding-right:5px;">Ciudades</td>'+
-                                  '<td>'+
-                                    '<select name="municipio" style="width:177px;">'+
-                                      '<option value="Ap">Apia</option>'+
-                                      '<option value="Sr">Santa Rosa</option>'+
-                                      '<option value="Dq">Dosquebradas</option>'+
-                                      '<option value="Pr">Pereira</option>'+
-                                      '<option value="Lv">La Virginia</option>'+
-                                      '<option value="St">Santuario</option>'+
-                                    '</select>'+
-                                  '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="center"><br>'+
-                                    '<input type="button" value="Agregar" class="button" />'+
-                                  '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="left">'+
-                                    'Ciudades Asignadas:<br>'+
-                                    '<textarea name="mensaje" cols="72" rows="5" readonly="readonly">Apia, Medellin, Santa Marta</textarea>'+
-                                  '</td>'+
-                                  '<br>'+
+                                    '<td><input type="hidden" name="id_usuarioMod" id="id_usuarioMod" value="' + jsonObject.id_usuario + '" /></td>'+
                                 '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -927,7 +1383,7 @@ function ModVendedor()
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
                                   '<input type="submit" value="Registrar" class="button" />'+
                               '</td>'+
                             '</tr>'+
@@ -936,20 +1392,117 @@ function ModVendedor()
                     '</div>';
 
     $("#datos").html(codigoHTML);
+    listUbicacion();
     IniciarTabers();
     $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_usuario").submit(enviarDatosModUsuario);
     activadorEventosUsuarios();
 }
 
-function VerVendedor()
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModUsuario(evento)
+{
+    evento.preventDefault();
+    var id_usuario = $("#id_usuarioMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModUsuario","Datos":datos, "Id_usuario":id_usuario};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModUsuario(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModUsuario(jsonObj)
+{
+    if (jsonObj.ModUsuario  =="true")
+    {
+        alert("El usuario se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El usuario no se pudo modificar");
+    }   
+    
+    seccionListado();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerUsuario()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerUsuario(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA VISUALIZAR LOS USUARIOS ********************
+//********************                                      ********************
+//******************************************************************************
+
+function VerUsuario(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Visualizar Usuario</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
                             '<li><a href="#Laboral">Laboral</a></li>'+
-                            '<li><a href="#Zonas">Zonas</a></li>'+
                         '</ul>'+
                         
                         '<div class="tab_container">'+
@@ -970,39 +1523,39 @@ function VerVendedor()
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
-                                    '<td><input type="text" name="id_usuario" value="9867024" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos" value="Jaramillo Villegas" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="apellidos_usuario" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombres" value="Carlos Andres" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="nombre_usuario" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="cajaramillov" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="nickname_usuario" value="' + jsonObject.nickname_usuario + '" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="c4rl05" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="password" name="password_usuario" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
-								  '<tr>'+
+                                  '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Usuario</th>'+
-                                    '<td><input type="text" name="contrasena" value="Vendedor" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="tipo_usuario" value="' + jsonObject.tipo_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion" value="Coomnes Casa 17" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="direccion_usuario" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono" value="3006731512" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="telefono_usuario" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular" value="3006731512" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="celular_usuario" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -1010,44 +1563,32 @@ function VerVendedor()
                               '<table>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
-                                    '<td><input type="text" name="fecha" id="date_field13" value="01/01/2012" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="fecha" id="date_field13" value="' + jsonObject.fecha + '" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">email</th>'+
-                                    '<td><input type="text" name="email" value="cajaramillov@gmail.com" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
-                                    '<td><input type="text" name="cumpleanos" id="date_field14" value="09/11/1982" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="fecha_cumpleanos" id="date_field14" value="' + jsonObject.fecha_cumpleanos + '" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
-                                    '<td><input type="text" name="tipoCuenta" value="Ahorros" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="tipo_cuenta_bancaria" value="' + jsonObject.tipo_cuenta_bancaria + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
-                                    '<td><input type="text" name="num_cuenta" value="1122334455" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
-                                    '<td><input type="text" name="nomBanco" value="Caja Social" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="banco" value="' + jsonObject.banco + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id ubicacion</th>'+
+                                    '<td><input type="text" name="id_ubicacion" value="' + jsonObject.id_ubicacion + '" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
-                                      '<textarea name="mensaje" cols="74" rows="6" readonly="readonly">Ingeniero de Sitemas y Computacion</textarea>'+
+                                      '<textarea name="otros_datos" cols="74" rows="6" readonly="readonly">' + jsonObject.otros_datos + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<div id="Zonas" class="tab_content">'+
-                              '<table>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="left">'+
-                                    'Departamentos Asignados:<br>'+
-                                    '<textarea style="font-size: 14px;" name="mensaje" cols="75" rows="3" readonly="readonly">Risaralda, Quindio, Caldas</textarea>'+
-                                  '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<td colspan="4" align="left">'+
-                                    'Ciudades Asignadas:<br>'+
-                                    '<textarea style="font-size: 14px;"name="mensaje" cols="75" rows="3" readonly="readonly">Pereira, Manizales, Armenia</textarea>'+
-                                  '</td>'+
-                                '</tr>'+
                               '</table>'+
                             '</div>'+
                           '</div>'+
@@ -1055,25 +1596,59 @@ function VerVendedor()
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
                               '</td>'+
                             '</tr>'+
                           '</table> '+      
                         '</form>'+
                     '</div>';
-					
+                    
     $("#datos").html(codigoHTML);
     IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'});
-    $('#date_field14').datepick({yearRange: '1980:2050'});
     activadorEventosUsuarios();
 }
 
-function DelVendedor()
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelUsuario()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelUsuario(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA ELIMINAR LOS USUARIOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function DelUsuario(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Borrar Usuario</div>'+
                      '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_crear_usuario">'+
+                        '<form action="" method="POST" name="form_borrar_usuario">'+
                             '<table align="center" border="0" align="left">'+
                                 '<tr>'+
                                     '<td colspan="2" rowspan="9" align="center">'+
@@ -1086,46 +1661,46 @@ function DelVendedor()
                                 '</tr>'+
                                 '<tr>'+
                                    '<th align="right" style="padding-right:5px;">Identificación:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">9867024</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.cedula_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Apellidos:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Jaramillo Villegas</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.apellidos_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Nombres:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Carlos Andres</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.nombre_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Nickname:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">cajaramillov</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.nickname_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Contraseña:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">#######</td>'+
+                                  '<td type="password" style="font-size:15px; color: #000; font-weight:bold;">######</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Dirección:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Barrio Milan Coomnes Casa 17</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.direccion_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Teléfono:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">3325618</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.telefono_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Celular:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">3006731512</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.celular_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Fecha Ingreso:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">2012-06-10</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.fecha + '</td>'+
                                   '<th align="right" style="padding-right:5px;">email:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">cajaramillov@gmail.com</td>'+
+                                  '<td style="font-size:15px; color: #000; font-weight:bold;">' + jsonObject.email_usuario + '</td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<td colspan="4" align="center">'+
-                                      '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
-                                      '<a href="#DelV" class="button" id="borrarVendedor" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                      '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
+                                      '<a href="#DelV" class="button" name="' + jsonObject.id_usuario + '" id="borrarUsuario" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
                                   '</td>'+
                                 '</tr>'+
                             '</table>'+       
@@ -1136,16 +1711,17 @@ function DelVendedor()
     activadorEventosUsuarios();
 }
 
-function ConfirmDelVendedor()
+function ConfirmDelUsuario()
 {
+    var id = $(this)[0].name;
     var codigoHTML = '<div class="encabezado2">Borrar Usuario</div>'+
                         '<table align="center">'+
-                            '<tr>'+
+                           '<tr>'+
                               '<th>Está seguro que desea borrar el Usuario?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Si" class="button" id="OkDelVendedor"/>'+
-                                '<input type="button" value="No" class="button" id="NotDelVendedor"/>'+
+                                '<input type="button" value="Si" class="button" id="OkDelUsuario" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelUsuario"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -1156,354 +1732,180 @@ function ConfirmDelVendedor()
     activadorEventosUsuarios();
 }
 
-function HideConfirmDelVendedor()
+function DelUsuarioOk()
+{
+    var id = $(this)[0].name; 
+    var request = {"Usuarios":"DelUsuario","Id_usuario":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelUsuario(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+function verificarDelUsuario(jsonObj)
+{
+    if (jsonObj.DelUsuario  =="true")
+    {
+        alert("El usuario se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El usuario no se pudo borrar");
+    }   
+    
+    seccionListado();
+}
+
+function HideConfirmDelUsuario()
 {
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
-    activadorEventosUsuarios();  
+    activadorEventosUsuarios(); 
 }
 
-//**********************************************************************************
-
-function seccionVentas()
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Visitas</div>'+
-                            '<div id="Fecha" class="tab_content">'+ 
-                                '<form action="" method="POST" name="form_buscar_venta">'+ 
-                                    '<table align="center" border="0" align="left" >'+ 
-                                         '<tr>'+
-										 '<th align="left" style="padding-left:5px;">Vendedor</th>'+ 
-                                            '<td>'+ 
-                                                '<select name="vendedor" style="width:160px;">'+ 
-                                                    '<option value="">Edison</option>'+ 
-                                                    '<option value="">Juan Pablo</option>'+ 
-                                                    '<option value="">Orlando</option>'+ 
-                                                    '<option value="">Sandra Giraldo</option>'+ 
-                                                '</select>'+ 
-                                            '</td>'+
-
-                                          	'<td align="right" style="padding-right:5px;">NIT</td>'+ 
-											'<td><input type="text" name="nit" value="" size="20" maxlength="10" required/></td>'+
-                                        '</tr>'+ 
-										
+//***********************************************************************************
+//********************                                           ********************
+//******************** FUNCION PARA CARGAR EL LISTADO DE VISITAS ********************
+//********************                                           ********************
+//***********************************************************************************
+function seccionVisitas()
+{    
+   var codigoHTML =      '<div class="encabezado2">Listado de Visitas</div>'+
+                            '<div class="tabla">'+
+                                '<form action="" method="POST" id="form_buscar_Visitas">'+
+                                    '<table align="center" border="0" align="left">'+
                                         '<tr>'+ 
-                                            '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+ 
-                                            '<td>'+ 
-                                              '<input id="date_field" type="text" name="fechaInicio" value="" style="font-size:14px;"/>'+ 
-                                            '</td>'+ 
-                                            '<th align="right" style="padding-right:5px;">Fecha Final</th>'+ 
-                                            '<td>'+ 
-                                              '<input id="date_field2" type="text" name="fechaFin" value=""/>'+ 
-                                            '</td>'+ 
-                                        '</tr>'+ 
+                                             '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                                '<td>'+
+                                                '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                                  //'<option value="null"></option>'+
+                                                 '</select>'+
+                                              '</td>'+
+                                            '</tr>'+ 
 
-                                        '<tr>'+ 
-                                            '<td colspan="4" align="center"><br>'+ 
-                                              '<input type="submit" value="Buscar" class="button" />'+ 
-                                            '</td>'+ 
-                                        '</tr> '+ 
-                                    '</table>'+ 
-                                '</form>'+ 
-                                '<br>'+ 
-                                '<table class="tbonita">'+ 
-                                  '<tr align="left">'+ 
-                                    '<th colspan="2"><img src="images/b_insrow.png" title="Adicionar Venta" class="AdicionarVenta" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Generar Reporte" class="ReporteVentas" /></th>'+ 
-                                    '<th>IdVisita</th>'+ 
-                                    '<th>Fecha</th>'+ 
-                                    '<th>Cliente</th>'+ 
-                                    '<th>Vendedor</th>'+
-								    '<th>Asunto</th>'+ 
-                                    '<th>Cuidad</th>'+ 
-                                  '</tr>'+ 
-                         
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta"/></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta"/></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Visualizar" class="VerVenta"/></td>'+ 
-                                    '<td>11111</td>'+ 
-                                    '<td>18/06/2012</td>'+ 
-                                    '<td>Ingenio Risaralda</td>'+ 
-                                    '<td>Carlos Jaramillo</td>'+ 
-                                    '<td>Recaudo</td>'+ 
-									'<td>Medellin</td>'+ 
-                                  '</tr>'+ 
+                                            '<tr>'+ 
+                                                '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+ 
+                                                '<td>'+ 
+                                                  '<input id="date_field1" type="text" name="fechaInicio" value="" style="font-size:14px;"/>'+ 
+                                                '</td>'+ 
+                                                '<th align="right" style="padding-right:5px;">Fecha Final</th>'+ 
+                                                '<td>'+ 
+                                                  '<input id="date_field2" type="text" name="fechaFin" value=""/>'+ 
+                                                '</td>'+ 
+                                            '</tr>'+ 
 
-                                  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Pedido</td>'+
-									'<td>Medellin</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta"/></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta"/></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Visualizar" class="VerVenta"/></td>'+ 
-                                    '<td>11111</td>'+ 
-                                    '<td>18/06/2012</td>'+ 
-                                    '<td>Ingenio Risaralda</td>'+ 
-                                    '<td>Carlos Jaramillo</td>'+ 
-                                    '<td>Recaudo</td>'+ 
-									'<td>Medellin</td>'+ 
-                                  '</tr>'+ 
-								  
-								  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Pedido</td>'+
-									'<td>Medellin</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta"/></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta"/></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Visualizar" class="VerVenta"/></td>'+ 
-                                    '<td>11111</td>'+ 
-                                    '<td>18/06/2012</td>'+ 
-                                    '<td>Ingenio Risaralda</td>'+ 
-                                    '<td>Carlos Jaramillo</td>'+ 
-                                    '<td>Recaudo</td>'+ 
-									'<td>Medellin</td>'+ 
-                                  '</tr>'+
-                                '</table>'+ 
-                            '</div>'+ 
-                        
-                            '<div id="Cliente" class="tab_content">'+ 
-                                '<form action="" method="POST" name="form_buscar_venta_cliente">'+ 
-                                    '<table align="center" border="0" align="left">'+ 
-                                        '<tr>'+ 
-                                            '<th align="right" style="padding-right:5px;">NIT</th>'+ 
-                                            '<td>'+ 
-                                              '<input type="text" name="nit" value=""/>'+ 
-                                            '</td>'+ 
-                                            '<th align="right" style="padding-right:5px;">Nombre</th>'+ 
-                                            '<td>'+ 
-                                              '<input type="text" name="nomCliente" value=""/>'+ 
-                                            '</td>'+ 
-                                        '</tr>'+ 
-
-                                        '<tr>'+ 
-                                            '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+ 
-                                            '<td>'+ 
-                                              '<input id="date_field3" type="text" name="fechaInicio" value=""/>'+ 
-                                            '</td>'+ 
-                                            '<th align="right" style="padding-right:5px;">Fecha Final</th>'+ 
-                                            '<td>'+ 
-                                              '<input id="date_field4" type="text" name="fechaFin" value=""/>'+ 
-                                            '</td>'+ 
-                                        '</tr>'+ 
-                                        '<tr>'+ 
-                                            '<td colspan="4" align="center"><br>'+ 
-                                              '<input type="submit" value="Buscar" class="button" />'+ 
-                                            '</td>'+ 
-                                        '</tr>'+ 
-                                    '</table>'+ 
-                                '</form>'+ 
-                                '<br>'+ 
-                                '<table class="tbonita">'+ 
-                                  '<tr align="left">'+ 
-                                    '<th colspan="2"><img src="images/b_insrow.png" title="agregar" class="AdicionarVenta" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento"  /></th>'+ 
-                                    '<th>IdVisita</th>'+ 
-                                    '<th>Fecha</th>'+ 
-                                    '<th>Cliente</th>'+ 
-                                    '<th>Vendedor</th>'+ 
-                                    '<th>Cuidad</th>'+ 
-                                    '<th>Total</th>'+ 
-                                  '</tr>'+ 
-                         
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta"/></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Visualizar" class="VerVenta" /></td>'+ 
-                                    '<td>11111</td>'+ 
-                                    '<td>18/06/2012</td>'+ 
-                                    '<td>Ingenio Risaralda</td>'+ 
-                                    '<td>Carlos Jaramillo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>45000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-
-                                '</table>'+ 
-                            '</div>'+ 
-
-                            '<div id="Producto" class="tab_content">'+ 
-                                '<form action="" method="POST" name="form_buscar_venta_cliente">'+ 
-                                    '<table align="center" border="0" align="left">'+ 
-                                        '<tr colspan="4">'+ 
-                                        '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+ 
-                                        '<td>'+ 
-                                          '<select name="tipoCuenta" style="width:177px">'+ 
-                                            '<option value="LI">Linea Industrial</option>'+ 
-                                            '<option value="LM">Linea Motociclista</option>'+ 
-                                            '<option value="LH">Linea Hogar</option>'+ 
-                                            '<option value="LF">Linea Infantil</option>'+ 
-                                          '</select>'+ 
-                                        '</td>'+ 
-                                      '</tr>'+ 
-                                      '<tr>'+ 
-                                        '<th align="right" style="padding-right:5px;">Material</th>'+ 
-                                        '<td>'+ 
-                                          '<select name="tipoCuenta" style="width:177px">'+ 
-                                            '<option value="LI">Econoflex</option>'+ 
-                                            '<option value="LM">Greenflex</option>'+ 
-                                            '<option value="LH">Natuflex</option>'+ 
-                                            '<option value="LF">Oxiflex</option>'+ 
-                                            '<option value="LF">Poliester PVC</option>'+ 
-                                            '<option value="LF">PVC Poliester PVC</option>'+ 
-                                          '</select>'+ 
-                                        '</td>'+ 
-                                        '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
-                                        '<td>'+ 
-                                          '<select name="tipoCuenta" style="width:177px">'+ 
-                                            '<option value="LI">Abrigos</option>'+ 
-                                            '<option value="LM">Capas</option>'+ 
-                                            '<option value="LH">Pantalón y Vestido</option>'+ 
-                                            '<option value="LF">Gabardinas</option>'+ 
-                                          '</select>'+ 
-                                        '</td>'+ 
-                                      '</tr>'+ 
-
-                                      '<tr>'+ 
-                                        '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+ 
-                                        '<td>'+ 
-                                          '<input id="date_field5" type="text" name="fechaInicio" value=""/>'+ 
-                                        '</td>'+ 
-                                        '<th align="right" style="padding-right:5px;">Fecha Final</th>'+ 
-                                        '<td>'+ 
-                                          '<input id="date_field6" type="text" name="fechaFin" value=""/>'+ 
-                                        '</td>'+ 
-                                      '</tr>'+ 
-
-                                      '<tr>'+ 
-                                        '<td colspan="4" align="center"><br>'+ 
-                                          '<input type="submit" value="Buscar" class="button" onclick=""/>'+ 
-                                        '</td>'+ 
-                                      '</tr>'+ 
-                                    '</table>'+ 
-                                '</form>'+ 
-                                '<br>'+ 
-                                '<table class="tbonita">'+ 
-                                  '<tr align="left">'+ 
-                                    '<th colspan="2"><img src="images/b_insrow.png" title="agregar" class="AdicionarVenta" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento"  /></th>'+ 
-                                    '<th>IdVisita</th>'+ 
-                                    '<th>Fecha</th>'+ 
-                                    '<th>Cliente</th>'+ 
-                                    '<th>Vendedor</th>'+ 
-                                    '<th>Cuidad</th>'+ 
-                                    '<th>Total</th>'+ 
-                                  '</tr>'+ 
-                         
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta"/></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Visualizar" class="VerVenta" /></td>'+ 
-                                    '<td>11111</td>'+ 
-                                    '<td>18/06/2012</td>'+ 
-                                    '<td>Ingenio Risaralda</td>'+ 
-                                    '<td>Carlos Jaramillo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>45000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr>'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-
-                                  '<tr class="even">'+ 
-                                    '<td><img src="images/b_edit.png" title="Modificar" class="ModVenta" /></td>'+ 
-                                    '<td><img src="images/b_drop.png" title="Eliminar" class="DelVenta" /></td>'+ 
-                                    '<td><img src="images/b_search.png" title="Ampliar" class="VerVenta" /></td>'+ 
-                                    '<td>11112</td>'+ 
-                                    '<td>16/06/2012</td>'+ 
-                                    '<td>InduMotos</td>'+ 
-                                    '<td>Sandra Giraldo</td>'+ 
-                                    '<td>Medellin</td>'+ 
-                                    '<td>5000000</td>'+ 
-                                  '</tr>'+ 
-                                '</table>'+ 
-                            '</div>'+
-                        '</div>'+
-                    '</div>';
-
-	$("#datos").html(codigoHTML);
+                                            '<tr>'+ 
+                                                '<td colspan="4" align="center"><br>'+ 
+                                                  '<input type="submit" value="Buscar" class="button" />'+ 
+                                                '</td>'+ 
+                                            '</tr> '+ 
+                                        '</table>'+
+                                      '</from>'+
+                                      '<br>'+
+                                        '<table class="tbonita" align="center" id="tablaVisitas">'+
+                                            '<tr align="left">'+
+                                                    '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
+                                                    '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                    '<th>Id Visita</th>'+
+                                                    '<th>Fecha</th>'+
+                                                    '<th>Id Cliente</th>'+
+                                                    '<th>Id Usuario</th>'+
+                                            '</tr>'+
+                                        '</div>';
+    $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 600});
     $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#ventasVendedor").addClass("active");
+    $(".menu-vertical li a#VisitasVendedor").addClass("active");
+    if (TablaVisitas != null)
+    {
+        tablaVisitas(TablaVisitas);
+    }
+    cargarListadoVendedores();
     IniciarTabers();
-    $('#date_field').datepick({yearRange: '1980:2050'});
+    $('#date_field1').datepick({yearRange: '1980:2050'});
+    $('#date_field1').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field2').datepick({yearRange: '1980:2050'});
-    $('#date_field3').datepick({yearRange: '1980:2050'});
-    $('#date_field4').datepick({yearRange: '1980:2050'});
-    $('#date_field5').datepick({yearRange: '1980:2050'});
-    $('#date_field6').datepick({yearRange: '1980:2050'});
+    $('#date_field2').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_buscar_Visitas").submit(buscarVisita);
+    activadorEventosUsuarios();
+}   
+    //***********************************************************************************************************
+    
+    function buscarVisita(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"BuscarVisitas","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonArray)
+                    {
+                        tablaVisitas(jsonArray);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+    
+    //***********************************************************************************************************
+    function tablaVisitas(jsonArray)
+{
+    TablaVisitas = jsonArray;
+    
+    var codigoHTML = '<tr align="left">'+
+                        '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
+                        '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                        '<th>Id Visita</th>'+
+                        '<th>Fecha</th>'+
+                        '<th>Id Cliente</th>'+
+                        '<th>Id Usuario</th>'+
+                    '</tr>';
+        
+    var i;    
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVisita" id="' + jsonArray[i].id_visita + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelVisita" id="' + jsonArray[i].id_visita + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerVisita" id="' + jsonArray[i].id_visita + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_visita + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].id_usuario + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    $("#tablaVisitas").html(codigoHTML);
     activadorEventosUsuarios();
 }
 
@@ -1514,254 +1916,399 @@ function seccionVentas()
 //*************  OPCION VENTAS DE LOS VENDEDORES               *********************
 //**********************************************************************************
 
-function AddVenta()
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************               FUNCION PARA UN NUEVA VISITA                      ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function AddVisita()
 {
-    var codigoHTML = '<div class="encabezado2">Adicionar Ventas</div>'+
+    var codigoHTML = '<div class="encabezado2">Adicionar Visitas</div>'+
                      '<div class="tabla">'+
+                     '<form id="form_crear_visita"  enctype="multipart/form-data">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Prod">Productos</a></li>'+
-                            '<li><a href="#Cliente">Cliente</a></li>'+
+                            '<li><a href="#Visit">Nueva Visita</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
-                            '<div id="Prod" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_venta">'+
-                              '<table align="left" border="0" align="left">'+
-                                  '<tr colspan="4">'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
+                            '<div id="Visit" class="tab_content">'+
+                            
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px;">'+
-                                        '<option value="LI">Linea Industrial</option>'+
-                                        '<option value="LM">Linea Motociclista</option>'+
-                                        '<option value="LH">Linea Hogar</option>'+
-                                        '<option value="LF">Linea Infantil</option>'+
-                                      '</select>'+
+                                      '<input id="date_field9" type="text" name="fecha" value=""/>'+
                                     '</td>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                    '<td>'+
+                                    '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
                                     '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="LI">Econoflex</option>'+
-                                        '<option value="LM">Greenflex</option>'+
-                                        '<option value="LH">Natuflex</option>'+
-                                        '<option value="LF">Oxiflex</option>'+
-                                        '<option value="LF">Poliester PVC</option>'+
-                                        '<option value="LF">PVC Poliester PVC</option>'+
-                                      '</select>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+
-                                    '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="LI">Abrigos</option>'+
-                                        '<option value="LM">Capas</option>'+
-                                        '<option value="LH">Pantalón y Vestido</option>'+
-                                        '<option value="LF">Gabardinas</option>'+
-                                      '</select>'+
-                                    '</td>'+
+                                    '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
                                   '</tr>'+
-                                  '<tr>'+
-                                    '<td colspan="4" align="center"><br>'+
-                                      '<input type="button" value="Buscar" class="button" />'+
+                                    '<td colspan="4" align="left">'+
+                                      'Datos Adicionales<br>'+
+                                      '<textarea name="descripcion" cols="74" rows="6"></textarea>'+
                                     '</td>'+
                                   '</tr>'+
                               '</table>'+
-                              
-                              '<ul class="tabs2">'+
-                                '<li><a href="#ListProductos">Listado</a></li>'+
-                                '<li><a href="#SelProductos">Seleccionados</a></li>'+
-                              '</ul>'+
-                              '<div class="tab_container2">'+
-                                '<div id="ListProductos" class="tab_content2">'+
-                                    '<table class="tbonita">'+
-                                      '<tr>'+
-                                        '<th></th>'+
-                                        '<th>Codigo</th>'+
-                                        '<th>Nombre</th>'+
-                                        '<th>Cantidad</th>'+
-                                        '<th>Color</th>'+
-                                        '<th>Talla</th>'+
-                                        '<th>Precio</th>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                    '</table>'+
-                                  '</tr>'+
-                                '</div>'+
-                                '<div id="SelProductos" class="tab_content2">'+
-                                    '<table class="tbonita">'+
-                                      '<tr align="right">'+
-                                        '<th></th>'+
-                                        '<th>Codigo</th>'+
-                                        '<th>Nombre</th>'+
-                                        '<th>Cantidad</th>'+
-                                        '<th>Color</th>'+
-                                        '<th>Talla</th>'+
-                                        '<th>Total</th>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">3</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">150000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">3</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">150000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">1</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">100000</td>'+
-                                      '</tr>'+
-                                    '</table>'+
-                                '</div>'+
-                              '</div>'+
-                            '</div>'+
-                            '<div id="Cliente" class="tab_content">'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">NIT</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="nit" value="" />'+
-                                      '<input type="botton" value="Buscar" class="button" style="text-align:center; width:50px;"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                              '<br>'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Razón Social</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="cumpleanos" value="" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="ciudad" value="" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="dir" value="" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telefono" value="" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th colspan="2" align="left" style="padding-right:5px; font-weight: bold; font-size: 15px;"><br>'+
-                                      'DATOS DE QUIEN AUTORIZA:'+
-                                    '</th>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="nomAutoriza" value=""/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Cargo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="cargoAutoriza" value=""/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono fijo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telAutoriza" value=""/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="celAutoriza" value=""/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td colspan="4" align="left"><br>'+
-                                    'Otros datos:<br />'+
-                                      '<textarea name="mensaje" cols="60" rows="4"></textarea>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                          '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                              '<tr>'+
-                                '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                              '</tr>'+
-                              '<tr>'+
-                                '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                              '</tr>'+
-                          '</table>'+
+                            
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="reset" value="Volver" class="button" id="volverVenta"/>'+
-                                  '<input type="submit" value="Guardar" class="button" />'+
+                                  '<input type="reset" value="Volver" class="button" id="volverVisita"/>'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
                               '</td>'+
                             '</tr>'+
-                          '</table>'+     
+                          '</table> '+ 
+                      '</div>'+
+                      '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_visita").submit(enviarDatosAddVisita);
+    activadorEventosUsuarios();
+}
+
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+//***********************                                                                       ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS A LA BASE DE DATOS PARA SER ADICIONADOS ***********************
+//***********************                                                                       ***********************
+//*********************************************************************************************************************
+//*********************************************************************************************************************
+
+function enviarDatosAddVisita(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddVisita","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarAddVisita(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO ADICIONADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarAddVisita(jsonObj)
+{
+    if (jsonObj.AddVisita  =="true")
+    {
+        alert("La Visita se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("La Visita no se pudo adicionar");
+    }   
+    
+    seccionVisitas();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModVisita()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosVisitas","Id_Visitas":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModVisita(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//**********************************************************************************
+//********************                                          ********************
+//******************** FUNCION PARA MODIFICAR DATOS DE VISITAS  ********************
+//********************                                          ********************
+//**********************************************************************************
+
+function ModVisita(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Visita</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Visit">Datos</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="Visit" class="tab_content">'+
+                            '<form id="form_modificar_visita" enctype="multipart/form-data">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '"/>'+
+                                    '</td>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                    '<td>'+
+                                    '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="left" style="padding-left:5px;">Id Usuario:</th>'+
+                                    '<td>'+
+                                    '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Datos Adicionales:<br>'+
+                                      '<textarea name="descripcion" cols="74" rows="6">' + jsonObject.descripcion + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_visitaMod" id="id_visitaMod" value="' + jsonObject.id_visita + '" /></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverVisita"/>'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
                         '</form>'+
+                      '</div>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabersAnidados();
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_visita").submit(enviarDatosModVisita);
+    activadorEventosUsuarios();
+}
+
+//*******************************************************************************************************************
+//*******************************************************************************************************************
+//***********************                                                                     ***********************
+//*********************** FUNCION PARA ENVIA LOS DATOS A LA BASE DE DATOSPARA SER MODIFICADOS ***********************
+//***********************                                                                     ***********************
+//*******************************************************************************************************************
+//*******************************************************************************************************************
+
+function enviarDatosModVisita(evento)
+{
+    evento.preventDefault();
+    var id_visita = $("#id_visitaMod").val();
+    //alert(id_visitas);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModVisita","Datos":datos, "Id_Visitas":id_visita};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModVisita(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModVisita(jsonObj)
+{
+    if (jsonObj.ModVisita  =="true")
+    {
+        alert("La Visita se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("La Visita no se pudo modificar");
+    }   
+    
+    seccionVisitas();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerVisita()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosVisitas","Id_Visitas":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerVisita(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//******************************************************************************************
+//********************                                                  ********************
+//******************** FUNCION PARA VISUALIZAR LOS DATOS DE LAS VISITAS ********************
+//********************                                                  ********************
+//******************************************************************************************
+
+function VerVisita(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Visualizar Visita</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Visit">Datos</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="Visit" class="tab_content">'+
+                            '<form action="" method="POST" id="form_crear_venta">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
+                                    '</td>'+
+                                  
+                                    '<td align="right" style="padding-right:5px;">Id Cliente:</td>'+ 
+                                    '<td><input type="text" name="cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Datos Adicionales:<br>'+
+                                      '<textarea name="descripcion" cols="74" rows="6">' + jsonObject.descripcion + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_visitaMod" id="id_visitaMod" value="' + jsonObject.id_visita + '" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</form>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverVisita"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                      '</div>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);
@@ -1769,533 +2316,113 @@ function AddVenta()
     activadorEventosUsuarios();
 }
 
-function ConfirmAddProducto()
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelVisita()
 {
-    var codigoHTML='<div class="encabezado2">Adicionar Ventas</div>'+
-                    '<br>'+
-                    '<table align="center">'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                          '<td>'+
-                            '<input type="text" name="dir" value="Linea Industrial" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Material</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono" value="Econoflex" readonly="readonly"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Codigo</th>'+
-                          '<td>'+
-                            '<input type="text" name="cumpleanos" value="111111" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                          '<td>'+
-                            '<input type="text" name="ciudad" value="Vestido de Motociclista" readonly="readonly"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                          '<td>'+
-                            '<input type="text" name="dir" value="50" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Color</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono" value="Negro" readonly="readonly"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Talla</th>'+
-                          '<td>'+
-                            '<input type="text" name="dir" value="XL" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Precio Sugerido</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono" value="45000" readonly="readonly"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                        '<tr>'+
-                          '<th colspan="2" align="left" style="padding-right:5px; font-weight: bold; font-size: 15px;"><br>'+
-                            'DATOS DE LA VENTA:'+
-                          '</th>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Precio de Venta</th>'+
-                          '<td>'+
-                            '<input type="text" name="nomAutoriza" value=""/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                          '<td>'+
-                            '<input type="text" name="cargoAutoriza" value=""/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<td colspan="4" align="center"><br>'+
-                            '<input type="button" value="Calcular" class="button" /><br><br>'+
-                          '</td>'+
-                        '</tr>'+
-                    '</table>'+
-
-                    '<table align="center">'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                          '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                          '<th align="right" style="padding-right:5px;">Valor IVA</th>'+
-                          '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                          '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                        '</tr>'+
-                    '</table>'+
-
-                    '<br>'+
-                    '<table align="center">'+
-                      '<tr>'+
-                        '<td colspan="4" align="center">'+
-                            '<input type="button" value="Aceptar" class="button" id="OkAddProducto"/>'+
-                            '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
-                        '</td>'+
-                      '</tr>'+
-                    '</table>'+               
-                '</div>';
-
-    $("#overAddProducto").css({display: "block"});
-    $("#overAddProducto").html(codigoHTML);
-    $("#fadeAddProducto").css({display: "block"});
-    activadorEventosUsuarios();
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosVisitas","Id_Visitas":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelVisita(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
 }
 
-function HideConfirmAddProducto()
-{
-    $("#overAddProducto").css({display: "none"});
-    $("#fadeAddProducto").css({display: "none"});
-    activadorEventosUsuarios();  
-}
+//****************************************************************************************
+//********************                                                ********************
+//******************** FUNCION PARA ELIMINAR LOS DATOS DE LAS VISITAS ********************
+//********************                                                ********************
+//****************************************************************************************
 
-function ModVenta()
+function DelVisita(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Ventas</div>'+
+    var codigoHTML = '<div class="encabezado2">Eliminar Visita</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Prod">Productos</a></li>'+
-                            '<li><a href="#Cliente">Cliente</a></li>'+
+                            '<li><a href="#Visit">Datos</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
-                            '<div id="Prod" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_venta">'+
-                              '<table align="left" border="0" align="left">'+
-                                  '<tr colspan="4">'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
+                            '<div id="Visit" class="tab_content">'+
+                            '<form id="form_modificar_visita" enctype="multipart/form-data">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
                                     '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px;">'+
-                                        '<option value="LI">Linea Industrial</option>'+
-                                        '<option value="LM">Linea Motociclista</option>'+
-                                        '<option value="LH">Linea Hogar</option>'+
-                                        '<option value="LF">Linea Infantil</option>'+
-                                      '</select>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
+                                    '</td>'+
+                                    '<td align="right" style="padding-right:5px;">Id Cliente:</td>'+ 
+                                    '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+ 
+                                      'Datos Adicionales:<br>'+
+                                      '<textarea name="descripcion" cols="74" rows="6" readonly="readonly">' + jsonObject.descripcion + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
-                                    '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="LI">Econoflex</option>'+
-                                        '<option value="LM">Greenflex</option>'+
-                                        '<option value="LH">Natuflex</option>'+
-                                        '<option value="LF">Oxiflex</option>'+
-                                        '<option value="LF">Poliester PVC</option>'+
-                                        '<option value="LF">PVC Poliester PVC</option>'+
-                                      '</select>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+
-                                    '<td>'+
-                                      '<select name="tipoCuenta" style="width:177px">'+
-                                        '<option value="LI">Abrigos</option>'+
-                                        '<option value="LM">Capas</option>'+
-                                        '<option value="LH">Pantalón y Vestido</option>'+
-                                        '<option value="LF">Gabardinas</option>'+
-                                      '</select>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td colspan="4" align="center"><br>'+
-                                      '<input type="button" value="Buscar" class="button" />'+
-                                    '</td>'+
                                   '</tr>'+
                               '</table>'+
-                              
-                              '<ul class="tabs2">'+
-                                '<li><a href="#ListProductos">Listado</a></li>'+
-                                '<li><a href="#SelProductos">Seleccionados</a></li>'+
-                              '</ul>'+
-                              '<div class="tab_container2">'+
-                                '<div id="ListProductos" class="tab_content2">'+
-                                    '<table class="tbonita">'+
-                                      '<tr>'+
-                                        '<th></th>'+
-                                        '<th>Codigo</th>'+
-                                        '<th>Nombre</th>'+
-                                        '<th>Cantidad</th>'+
-                                        '<th>Color</th>'+
-                                        '<th>Talla</th>'+
-                                        '<th>Precio</th>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/check-button.png" title="Visualizar" class="VentanaAddProducto" /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">50</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">50000</td>'+
-                                      '</tr>'+
-                                    '</table>'+
-                                  '</tr>'+
-                                '</div>'+
-                                '<div id="SelProductos" class="tab_content2">'+
-                                    '<table class="tbonita">'+
-                                      '<tr align="right">'+
-                                        '<th></th>'+
-                                        '<th>Codigo</th>'+
-                                        '<th>Nombre</th>'+
-                                        '<th>Cantidad</th>'+
-                                        '<th>Color</th>'+
-                                        '<th>Talla</th>'+
-                                        '<th>Total</th>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">3</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">150000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">3</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">150000</td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<td><img src="images/b_drop.png" title="Visualizar"  /></td>'+
-                                        '<td style="text-align: center;">11111</td>'+
-                                        '<td>vestido Motociclista</td>'+
-                                        '<td style="text-align: center;">1</td>'+
-                                        '<td>Amarillo</td>'+
-                                        '<td style="text-align: center;">XL</td>'+
-                                        '<td style="text-align: center;">100000</td>'+
-                                      '</tr>'+
-                                    '</table>'+
-                                '</div>'+
-                              '</div>'+
-                            '</div>'+
-                            '<div id="Cliente" class="tab_content">'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">NIT</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="nit" value="123456" />'+
-                                      '<input type="botton" value="Buscar" class="button" style="text-align:center; width:50px;"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                              '<br>'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Razón Social</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="razonSocial" value="Indu Motos S.A." readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="ciudad" value="Medellin" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="dir" value="Calle 80 #12-50" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telefono" value="3252324" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th colspan="2" align="left" style="padding-right:5px; font-weight: bold; font-size: 15px;"><br>'+
-                                      'DATOS DE QUIEN AUTORIZA:'+
-                                    '</th>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="nomAutoriza" value="Pedro Perez"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Cargo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="cargoAutoriza" value="Jefe de Compras"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono fijo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telAutoriza" value="3122324"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="celAutoriza" value="310456789"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td colspan="4" align="left"><br>'+
-                                    'Otros datos:<br />'+
-                                      '<textarea name="mensaje" cols="60" rows="4">Entregar maximo en 10 dias</textarea>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                          '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                              '<tr>'+
-                                '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                              '</tr>'+
-                              '<tr>'+
-                                '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                              '</tr>'+
-                          '</table>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="reset" value="Volver" class="button" id="volverVenta"/>'+
-                                  '<input type="submit" value="Guardar" class="button" />'+
+                                  '<input type="reset" value="Volver" class="button" id="volverVisita"/>'+
+                                  '<a href="#DelVisit" class="button" name="' + jsonObject.id_visita + '" id="borrarVisita" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar</a>'+
                               '</td>'+
                             '</tr>'+
-                          '</table>'+     
+                          '</table> '+ 
                         '</form>'+
+                      '</div>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    IniciarTabersAnidados();
+    IniciarTabers();
     activadorEventosUsuarios();
 }
-
-function VerVenta()
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR  *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+function ConfirmDelVisita()
 {
-    var codigoHTML = '<div class="encabezado2">Datos Ventas</div>'+
-                     '<div class="tabla">'+
-                        '<ul class="tabs">'+
-                            '<li><a href="#Prod">Productos</a></li>'+
-                            '<li><a href="#Cliente">Cliente</a></li>'+
-                        '</ul>'+
-                        '<div class="tab_container">'+
-                            '<div id="Prod" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_venta">'+
-                              '<table align="left" border="0" align="left">'+
-                                  '<tr colspan="4">'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Linea Industrial" readonly="readonly" />'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Ecoflex" readonly="readonly" />'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Abrigos" readonly="readonly" />'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+ 
-                              'LISTADO DE PRODUCTOS:'+
-                              '<table class="tbonita">'+
-                                  '<tr align="right">'+
-                                    '<th>Codigo</th>'+
-                                    '<th>Nombre</th>'+
-                                    '<th>Cantidad</th>'+
-                                    '<th>Color</th>'+
-                                    '<th>Talla</th>'+
-                                    '<th>Total</th>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">3</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">150000</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">3</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">150000</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">1</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">100000</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<div id="Cliente" class="tab_content">'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">NIT</th>'+
-                                     '<td>'+
-                                       '<input type="text" name="nit" value="123456" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Razón Social</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="razonSocial" value="Indu Motos S.A." readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="ciudad" value="Medellin" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="dir" value="Calle 80 #12-50" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telefono" value="3252324" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th colspan="2" align="left" style="padding-right:5px; font-weight: bold; font-size: 15px;"><br>'+
-                                      'DATOS DE QUIEN AUTORIZA:'+
-                                    '</th>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="nomAutoriza" value="Pedro Perez" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Cargo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="cargoAutoriza" value="Jefe de Compras" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Telefono fijo</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="telAutoriza" value="3122324" readonly="readonly"/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="celAutoriza" value="310456789" readonly="readonly"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td colspan="4" align="left"><br>'+
-                                    'Otros datos:<br />'+
-                                      '<textarea name="mensaje" cols="60" rows="4" readonly="readonly">Entregar maximo en 10 dias</textarea>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                          '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                              '<tr>'+
-                                '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                              '</tr>'+
-                              '<tr>'+
-                                '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                              '</tr>'+
-                          '</table>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="reset" value="Volver" class="button" id="volverVenta"/>'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table>'+     
-                        '</form>'+
-                    '</div>';
-
-    $("#datos").html(codigoHTML);
-    IniciarTabersAnidados();
-    activadorEventosUsuarios();
-}
-
-function ConfirmDelVenta()
-{
+    var id = $(this)[0].name;
+    //alert(id);
     var codigoHTML = '<div class="encabezado2">Borrar Visita</div>'+
                         '<table align="center">'+
                             '<tr>'+
                               '<th>Está seguro que desea borrar la Visita?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Si" class="button" id="OkDelVenta"/>'+
-                                '<input type="button" value="No" class="button" id="NotDelVenta"/>'+
+                                '<input type="button" value="Si" class="button" id="OkDelVisita" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelVisita"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -2305,161 +2432,78 @@ function ConfirmDelVenta()
     $("#fadeDelItem").css({display: "block"});
     activadorEventosUsuarios();
 }
+function DelVisitaOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelVisita","Id_Visitas":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelVisita(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelVisita(jsonObj)
+{
+    if (jsonObj.DelVisita  =="true")
+    {
+        alert("La Visita se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Visita no se pudo borrar");
+    }   
+    
+    seccionVisitas();
+}
 
-function HideConfirmDelVenta()
+function HideConfirmDelVisita()
 {
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
-    activadorEventosUsuarios();  
+    activadorEventosUsuarios();    
 }
 
-//**********************************************************************************
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************      FUNCION PARA CARGAR LOS DATOS DE LA SECCION VIATICOS       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
 
-function seccionActividades()
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Actividades de los Vendedores</div>'+
-                     '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_buscar_venta">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                                    '<td>'+
-                                        '<select name="vendedor" style="width:160px;">'+
-                                            '<option value="">Edison</option>'+
-                                            '<option value="">Juan Pablo</option>'+
-                                            '<option value="">Orlando</option>'+
-                                            '<option value="">Sandra Giraldo</option>'+
-                                        '</select>'+
-                                    '</td>'+
-
-                                    '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
-                                    '<td>'+
-                                        '<select name="tipoActividad" style="width:160px;">'+
-                                            '<option value="">Visitas</option>'+
-                                            '<option value="">Recaudos</option>'+
-                                            '<option value="">Quejas</option>'+
-                                        '</select>'+
-                                    '</td>'+
-                                '</tr>'+
-
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+
-                                    '<td>'+
-                                      '<input id="date_field7" type="text" name="fechaInicio" value=""/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Final</th>'+
-                                    '<td>'+
-                                      '<input id="date_field8" type="text" name="fechaFin" value=""/>'+
-                                    '</td>'+
-                                '</tr>'+
-
-                                '<tr>'+
-                                    '<td colspan="4" align="center"><br>'+
-                                      '<input type="submit" value="Buscar" class="button" />'+
-                                    '</td>'+
-                                '</tr>'+
-                            '</table>'+
-                        '</form>'+
-                        '<br>'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" /></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
-                            '<th>IdAct.</th>'+
-                            '<th>Fecha</th>'+
-                            '<th>Cliente</th>'+
-                            '<th>Departamento</th>'+
-                            '<th>Cuidad</th>'+
-                            '<th>Tema</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar"/></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar"/></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                        '</table>'+
-                    '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(this).addClass("active");
-    $('#date_field7').datepick({yearRange: '1980:2050'});
-    $('#date_field8').datepick({yearRange: '1980:2050'});
-}
-
-//**********************************************************************************
-
-function seccionViaticos()
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Viáticos de los Vendedores</div>'+
-                     '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_buscar_venta">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                                    '<td>'+
-                                        '<select name="vendedor" style="width:160px;">'+
-                                            '<option value="">Edison</option>'+
-                                            '<option value="">Juan Pablo</option>'+
-                                            '<option value="">Orlando</option>'+
-                                            '<option value="">Sandra Giraldo</option>'+
-                                        '</select>'+
-                                    '</td>'+
-
-                                    '<th align="right" style="padding-right:5px;">Tipo Viático</th>'+
-                                    '<td>'+
-                                        '<select name="tipoActividad" style="width:160px;">'+
-                                            '<option value="">Transporte</option>'+
-                                            '<option value="">Alimentación</option>'+
-                                            '<option value="">Urbanos</option>'+
-                                            '<option value="">Hospedaje</option>'+
-                                            '<option value="">Otros</option>'+
-                                        '</select>'+
-                                    '</td>'+
+function seccionViaticos(jsonArray)
+{ 
+    var codigoHTML = '<div class="encabezado2">Listado de Viaticos de los Vendedores</div>'+
+                        '<div class="tabla">'+
+                            '<form action="" method="POST" id="form_buscar_viatico">'+
+                                '<table align="center" border="0" align="left">'+
+                                    '<tr>'+                                    
+                                        '<th align="right" style="padding-right:5px;">Tipo Viático</th>'+
+                                       '<td>'+
+                                        '<select name="tipoViatico" style="width:160px;">'+
+                                            '<option value=""></option>'+
+                                            '<option value="Transporte">Transporte</option>'+
+                                            '<option value="Alimentación">Alimentación</option>'+
+                                            '<option value="Urbanos">Urbanos</option>'+
+                                            '<option value="Hospedaje">Hospedaje</option>'+
+                                            '<option value="Otros">Otros</option>'+
+                                        '</select>'+ 
+                                    '</td>'+                               
                                 '</tr>'+
 
                                 '<tr>'+
@@ -2475,263 +2519,1129 @@ function seccionViaticos()
 
                                 '<tr>'+
                                     '<td colspan="4" align="center"><br>'+
-                                      '<input type="submit" value="Buscar" class="button" />'+
+                                      '<input type="submit" value="Buscar" class="button"/>'+
                                     '</td>'+
                                 '</tr>'+
                             '</table>'+
                         '</form>'+
                         '<br>'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" /></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                        '<table class="tbonita" align="center" id="tablaViaticos">'+
+                      '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
+                            '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
-                            '<th>Departamento</th>'+
-                            '<th>Ciudad</th>'+
                             '<th>Concepto</th>'+
                             '<th>Valor</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-
-						  '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-						  
-						  '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-						  
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>Hospedaje</td>'+
-                            '<td>60000</td>'+
-                          '</tr>'+
-                    '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(this).addClass("active");
-    $('#date_field9').datepick({yearRange: '1980:2050'});
-    $('#date_field10').datepick({yearRange: '1980:2050'});
-}
-
-//**********************************************************************************
-
-function seccionComisiones()
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Comisiones de los Vendedores</div>'+
-                     '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_buscar_venta">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                                    '<td>'+
-                                        '<select name="vendedor" style="width:160px;">'+
-                                            '<option value="">Edison</option>'+
-                                            '<option value="">Juan Pablo</option>'+
-                                            '<option value="">Orlando</option>'+
-                                            '<option value="">Sandra Giraldo</option>'+
-                                        '</select>'+
-                                    '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+
-                                    '<td>'+
-                                      '<input id="date_field11" type="text" name="fechaInicio" value=""/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Final</th>'+
-                                    '<td>'+
-                                      '<input id="date_field12" type="text" name="fechaFin" value=""/>'+
-                                    '</td>'+
-                                '</tr>'+
-
-                                '<tr>'+
-                                    '<td colspan="4" align="center"><br>'+
-                                      '<input type="submit" value="Buscar" class="button" />'+
-                                    '</td>'+
-                                '</tr> '+
-                            '</table>'+
-                        '</form>'+
-                        '<br>'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" /></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
-                            '<th>IdVenta</th>'+
-                            '<th>Idfactura</th>'+
-                            '<th>Cliente</th>'+
-                            '<th>Departamento</th>'+
-                            '<th>Cuidad</th>'+
-                            '<th>Dias</th>'+
-                            '<th>Valor</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar"/></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar"/></td>'+
-                            '<td>11111</td>'+
-                            '<td>22-444</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>20</td>'+
-                            '<td>100000</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>22-444</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>20</td>'+
-                            '<td>100000</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>22-444</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>20</td>'+
-                            '<td>100000</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>22-444</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Antioquia</td>'+
-                            '<td>Medellin</td>'+
-                            '<td>20</td>'+
-                            '<td>100000</td>'+
-                          '</tr>'+
-                        '</table>'+
-                        '<br>'+
-                        '<br>'+
+                      '</tr>'+
                         '<table>'+
                             '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL COMISIONES</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="1000000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                            '</tr> '+
-                        '</table> '+ 
+                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL VIÁTICOS $</th>'+
+                                  '<td colspan="2"><input type="text" id="valorTotalViaticos" value="" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
+                            '</tr>'+
+                        '</table>'+  
+                    '</div>';
+                  
+    $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#viaticosVendedor").addClass("active");
+    if (TablaViaticos != null)
+    {
+        tablaViaticos(TablaViaticos);
+    }
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field10').datepick({yearRange: '1980:2050'});
+    $('#date_field10').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_buscar_viatico").submit(buscarViatico);    
+    activadorEventosUsuarios();
+}               
+   //*********************************************************************************************                  
+
+function buscarViatico(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"BuscarViatico","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonArray)
+                    {
+                        tablaViaticos(jsonArray);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+//*********************************************************************************************
+
+    function tablaViaticos(jsonArray)
+    {
+        var codigoHTML = '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
+                            '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>IdViatico</th>'+
+                            '<th>Fecha</th>'+
+                            '<th>Concepto</th>'+
+                            '<th>Valor</th>'+
+                          '</tr>';
+    var i;
+    for (var i = 0; i < jsonArray.length-1; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModViatico" id="' + jsonArray[i].id_viaticos + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelViatico" id="' + jsonArray[i].id_viaticos + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerViatico" id="' + jsonArray[i].id_viaticos + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_viaticos + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].concepto + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].valor + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+
+
+    
+    $("#valorTotalViaticos").val(jsonArray[i].valor_total);
+    $("#tablaViaticos").html(codigoHTML);
+    activadorEventosUsuarios();
+}
+//**********************************************************************************
+//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
+//*************  SEGUN LAS OPCIONES DE ADICIONAR, MODIFICAR,   *********************
+//*************  VISUALIZAR, BORRAR Y GENERAR INFORME EN LA    *********************
+//*************  OPCION LISTADO DE LOS VENDEDORES              *********************
+//**********************************************************************************
+
+//$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA ADICIONAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function AddViatico()
+{
+    var codigoHTML = '<div class="encabezado2">Adicionar Viático</div>'+
+                      '<form id="form_crear_viatico" enctype="multipart/form-data">'+
+                        '<div class="tabla">'+
+                              '<table align="center">'+
+                                 '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="\n\"/>'+
+                                    '</td>'+
+                                    '</tr>'+
+                                   '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Id Usuario:</th>'+
+                                     '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<tr>'+
+                                  '<table align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Concepto:</th>'+
+                                    '<td>'+ 
+                                        '<select name="concepto" style="width:160px;">'+ 
+                                            '<option value=""></option>'+ 
+                                            '<option value="Transporte">Transporte</option>'+ 
+                                            '<option value="Alimentación">Alimentación</option>'+ 
+                                            '<option value="Hospedaje">Hospedaje</option>'+ 
+                                            '<option value="Urbanos">Otros</option>'+ 
+                                        '</select>'+ 
+                                    '</td>'+
+                                    '<td align="right" style="padding-right:5px;">Valor:</td>'+ 
+                                    '<td><input type="text" name="valor" value="" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                     '<td>'+
+                                        '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+
+                                        '</select>'+
+                                     '</td>'+
+                                        '<th align="right" style="padding-right:5px;">Ciudad:</th>'+
+                                     '<td>'+
+                                        '<select name="codMunicipio" style="width:165px;" class="municipios">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                   '</tr>'+
+                                 '</tr>'+
+                              '</table>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverViatico"/>'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                      '</div>'+
+                    '</form>'+
+                   '</div>';
+
+    $("#datos").html(codigoHTML);
+    cargarListadoVendedores();
+    listadoDepartamentos();
+    IniciarTabers();    
+    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_viatico").submit(enviarDatosAddViatico);    
+    activadorEventosUsuarios();
+}
+
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA ENVIAR LOS NUEVOS DATOS DEL DEL VIATICO PARA SER ADICINADO ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function enviarDatosAddViatico(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddViatico","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarAddViatico(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO ADICIONADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarAddViatico(jsonObj)
+{
+    if (jsonObj.AddViatico  =="true")
+    {
+        alert("El Viatico se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El Viatico no se pudo adicionar");
+    }   
+    
+    seccionViaticos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModViatico()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosViaticos","Id_Viaticos":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModViatico(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModViatico(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Viatic" class="tab_content">'+
+                            '<form id="form_modificar_viatico" enctype="multipart/form-data">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '"/>'+
+                                    '</td>'+
+                                    '</tr>'+
+                                   '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Id Usuario:</th>'+
+                                     '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<tr>'+
+                                  '<table align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Concepto:</th>'+
+                                    '<td>'+ 
+                                        '<select name="concepto" style="width:160px;">'+ 
+                                            '<option value=""></option>'+ 
+                                            '<option value="Transporte">Transporte</option>'+ 
+                                            '<option value="Alimentación">Alimentación</option>'+ 
+                                            '<option value="Hospedaje">Hospedaje</option>'+ 
+                                            '<option value="Otros">Otros</option>'+ 
+                                        '</select>'+ 
+                                    '</td>'+
+                                    '<td align="right" style="padding-right:5px;">Valor:</td>'+ 
+                                    '<td><input type="text" name="valor" value="' + jsonObject.valor + '" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                     '<td>'+
+                                        '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+
+                                        '</select>'+
+                                     '</td>'+
+                                        '<th align="right" style="padding-right:5px;">Ciudad:</th>'+
+                                     '<td>'+
+                                        '<select name="codMunicipio" style="width:165px;" class="municipios">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                   '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_viaticoMod" id="id_viaticoMod" value="' + jsonObject.id_viaticos + '" /></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                           '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverViatico"/>'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                        '</form>'+
+                      '</div>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(this).addClass("active");
-    $('#date_field11').datepick({yearRange: '1980:2050'});
-    $('#date_field12').datepick({yearRange: '1980:2050'});
+    cargarListadoVendedores();
+    listadoDepartamentos();
+    IniciarTabersAnidados();
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_viatico").submit(enviarDatosModViatico);
+    activadorEventosUsuarios();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModViatico(evento)
+{
+    evento.preventDefault();
+    var id_viaticos = $("#id_viaticoMod").val();
+    //alert(id_viaticos);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModViatico","Datos":datos, "Id_Viaticos":id_viaticos};
+    var jsonobj=JSON.stringify(request);
+   // alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModViatico(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModViatico(jsonObj)
+{
+    if (jsonObj.ModViatico  =="true")
+    {
+        alert("El Viatico se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Viatico no se pudo modificar");
+    }   
+    seccionViaticos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerViatico()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosViaticos","Id_Viaticos":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerViatico(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA VISUALIZAR LOS VIATICOS ********************
+//********************                                      ********************
+//******************************************************************************
+
+function VerViatico(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">visualizar Viático</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Visit" class="tab_content">'+
+                            '<form action="" method="POST" name="form_crear_venta">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                  '<td align="right" style="padding-right:5px;">Fecha:</td>'+ 
+                                    '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                  '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<tr>'+
+                                  '<table align="center">'+
+                                    '<td align="right" style="padding-right:5px;">Concepto:</td>'+ 
+                                    '<td><input type="text" name="concepto" value="' + jsonObject.concepto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td align="right" style="padding-right:5px;">Total:</td>'+ 
+                                    '<td><input type="text" name="Total" value="' + jsonObject.valor + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td align="right" style="padding-right:5px;">Departamento:</td>'+ 
+                                    '<td><input type="text" name="departamento" value="' + jsonObject.nombre_depto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td align="right" style="padding-right:5px;">Ciudad:</td>'+ 
+                                    '<td><input type="text" name="ciudad" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                       '</form>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverViatico"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                      '</div>'+
+                    '</div>';
+                    
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick({yearRange: '1980:2050'});
+    activadorEventosUsuarios();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelViatico()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosViaticos","Id_Viaticos":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelViatico(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//********************  FUNCION PARA ELIMINAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function DelViatico(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Eliminar Viatico</div>'+
+                     '<div class="tabla">'+
+                         '<div id="Visit" class="tab_content">'+
+                            '<form id="form_eliminar_viatico" enctype="multipart/form-data">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                  '<td align="right" style="padding-right:5px;">Fecha:</td>'+ 
+                                    '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                  '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '<br>'+
+                                  '<br>'+
+                                  '<tr>'+
+                                  '<table align="center">'+
+                                    '<td align="right" style="padding-right:5px;">Concepto:</td>'+ 
+                                    '<td><input type="text" name="concepto" value="' + jsonObject.concepto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td align="right" style="padding-right:5px;">Total:</td>'+ 
+                                    '<td><input type="text" name="Total" value="' + jsonObject.valor + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td align="right" style="padding-right:5px;">Departamento:</td>'+ 
+                                    '<td><input type="text" name="departamento" value="' + jsonObject.nombre_depto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td align="right" style="padding-right:5px;">Ciudad:</td>'+ 
+                                    '<td><input type="text" name="ciudad" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                           '</div>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverViatico"/>'+
+                                  '<a href="#DelVisit" class="button" name="' + jsonObject.id_viaticos + '" id="borrarViatico" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar</a>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                        '</form>'+
+                      '</div>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    activadorEventosUsuarios();
+}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR   *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+function ConfirmDelViatico()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Viatico</div>'+
+                        '<table align="center">'+
+                            '<tr>'+
+                              '<th>Está seguro que desea borrar el Viatico?</th>'+
+                            '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Si" class="button" id="OkDelViatico" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelViatico"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    activadorEventosUsuarios();
+}
+function DelViaticoOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelViatico","Id_Viaticos":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelViatico(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelViatico(jsonObj)
+{
+    if (jsonObj.DelViatico  =="true")
+    {
+        alert("El Viatico se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El Viatico no se pudo borrar");
+    }   
+    
+    seccionViaticos();
+}
+
+function HideConfirmDelViatico()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosUsuarios();    
 }
 
 //**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO DEPARTAMENTO                        *********************
+//**********************************************************************************
+//**********************************************************************************
 
-function seccionUbicacion()
+function listadoDepartamentos()
 {
-    var codigoHTML = '<div class="encabezado2">Ubicación Geográfica de los Vendedores</div>'+
-                     '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_buscar_venta">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                                    '<td>'+
-                                        '<select name="vendedor" style="width:160px;">'+
-                                            '<option value="">Edison</option>'+
-                                            '<option value="">Juan Pablo</option>'+
-                                            '<option value="">Orlando</option>'+
-                                            '<option value="">Sandra Giraldo</option>'+
-                                        '</select>'+
-                                    '</td>'+
-                                    '<td>'+
-                                      '<input type="submit" value="Localizar" class="button" />'+
-                                    '</td>'+
-                                '</tr>'+
-                            '</table>'+
-                        '</form>'+
-                     '</div>'+
-                     '<div class="Ubicacion-Geografica">'+
-                        '<img src="images/mapaUbicacion.png"/>'+
-                     '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(this).addClass("active");
+    var request = {"Usuarios":"Departamentos"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarDeptos(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
 }
 
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+function cargarDeptos(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var j = 0; j < jsonArray.length; j++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[j].cod_departamento +'">'+ jsonArray[j].nombre_depto +'</option>';
+    }
+    
+    $('.deptos').html(codigoHTML);   
+}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO MUNICIPIO                           *********************
+//**********************************************************************************
+//**********************************************************************************
+ function cargarMunicipios()
+{
+    var depto=$('.deptos').val();
+    //alert(depto);
+    var request = {"Usuarios":"Municipios","DatosDepto":depto};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        Municipios(jsonArray);    
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+function Municipios(jsonArray)
+{
+       var codigoHTML;
+                                for (var l = 0; l < jsonArray.length; l++) 
+                                {
+           codigoHTML +=         '<option value="'+ jsonArray[l].codMunicipio +'">'+ jsonArray[l].nombreMunicipio +'</option>';                                                 
+                                }
+           codigoHTML+=          '<option value="null"></option>';   
+    $(".municipios").html(codigoHTML);
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO ID UBICACION                       *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function listUbicacion()
+{
+    var request = {"Usuarios":"Ubicacion"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarUbicacion(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargarUbicacion(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var u = 0; u < jsonArray.length; u++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[u].id_ubicacion +'">'+ jsonArray[u].id_ubicacion +'</option>';
+    }
+    
+    $('.ubicacion').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO ID USUARIO                       *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarListadoVendedores()
+{
+    var request = {"Usuarios":"Vendedores"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarVendedor(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+function cargarVendedor(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var v = 0; v < jsonArray.length; v++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[v].id_usuario +'">'+ jsonArray[v].id_usuario +'</option>';
+    }
+    
+    $('.vendor').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO ID CLIENTE                          *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function ListadoClientes()
+{
+    var request = {"Usuarios":"ComboClientes"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarcomboClient(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargarcomboClient(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var d = 0; d < jsonArray.length; d++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[d].id_cliente +'">'+ jsonArray[d].id_cliente +'</option>';
+    }
+    
+    $('.clients').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO LINEA DE PRODUCCION                 *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarListadolineasCombo()
+{
+    var request = {"Usuarios":"LineasCombo"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarLineasCombo(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargarLineasCombo(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var x = 0; x < jsonArray.length; x++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[x].nombre_linea +'">'+ jsonArray[x].nombre_linea +'</option>';
+    }
+    
+    $('.lines').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO MATERIAL                       *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarComboMateriales()
+{
+    var request = {"Usuarios":"MaterialesCombo"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarMaterialesCombo(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargarMaterialesCombo(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var m = 0; m < jsonArray.length; m++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[m].material +'">'+ jsonArray[m].material +'</option>';
+    }
+    
+    $('.maters').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO TALLAS                              *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarListadoTallasCombo()
+{
+    var request = {"Usuarios":"TallasCombo"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarTallasCombo(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargarTallasCombo(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var t = 0; t < jsonArray.length; t++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[t].talla +'">'+ jsonArray[t].talla +'</option>';
+    }
+    
+    $('.talls').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO COLOR                               *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarColor()
+{
+    var request = {"Usuarios":"Color"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargColor(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargColor(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var f = 0; f < jsonArray.length; f++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[f].color +'">'+ jsonArray[f].color +'</option>';
+    }
+    
+    $('.colors').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO TIPO PRODUCTO                       *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarlistadoTipo()
+{
+    var request = {"Usuarios":"Tipo"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargTipo(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargTipo(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var p = 0; p < jsonArray.length; p++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[p].cod_tipo_producto +'">'+ jsonArray[p].nombre_tipo_producto +'</option>';
+    }
+    
+    $('.tips').html(codigoHTML);   
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CARGA LOS DATOS EN EL COBOBOX     *********************   
+//*************  DEL CAMPO TIPO PRODUCTO                       *********************
+//**********************************************************************************
+//**********************************************************************************
+
+function cargarListadoProductos()
+{
+    var request = {"Usuarios":"ComboProducto"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargP(jsonArray);                          
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+function cargP(jsonArray)
+{
+    var codigoHTML =  '<option value="null"></option>';
+    for (var ñ = 0; ñ < jsonArray.length; ñ++)
+    {
+        codigoHTML += '<option value="'+ jsonArray[ñ].codigo_producto +'">'+ jsonArray[ñ].codigo_producto +'</option>';
+    }
+    
+    $('.prodt').html(codigoHTML);   
+}
 
 //**********************************************************************************
 //**********************************************************************************
@@ -2744,130 +3654,85 @@ function seccionUbicacion()
 //**********************************************************************************
 function seccionListadoProductos()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
-                     '<div class="tabla">'+
-                        '<tr>'+
-                        '<table class="tbonita">'+
-                          '<tr align="center">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>IdProducto</th>'+
-                            '<th>Nombre</th>'+
-                            '<th>Cantidad</th>'+
-                            '<th>Peso</th>'+
-                            '<th>Precio</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
+    var request = {"Usuarios":"Productos"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoProducto(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
 
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
+//*******************************************************************************************************
+//*******************************************************************************************************
+//***********************                                                         ***********************
+//***********************  FUNCION PARA CARGAR LOS DATOS DE LA SECCION PRODUCTOS  ***********************
+//***********************                                                         ***********************
+//*******************************************************************************************************
+//*******************************************************************************************************
 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-
-                         '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-                          
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto"/></td>'+
-                            '<td>111222</td>'+
-                            '<td>Vestido Impermeable moticiclista</td>'+
-                            '<td>50</td>'+
-                            '<td>2.5kg - 4kg 1.8kg</td>'+
-                            '<td>2600000</td>'+
-                          '</tr>'+
-                        '</table>'+
-                    '</div>';
-
+function cargarListadoProducto(jsonArray)
+{    
+   var codigoHTML =  '<div class="encabezado2">Listado de Productos</div>'+
+                            '<div class="tabla">'+
+                               '<tr>'+
+                               '<table class="tbonita">'+
+                                 '<tr align="center">'+
+                                   '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
+                                   '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th>Id Producto</th>'+
+                                   '<th>Nombre</th>'+
+                                   '<th>Cantidad</th>'+
+                                   '<th>Precio</th>'+
+                                   '<th>Código de Barras</th>'+
+                                 '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" id="' + jsonArray[i].codigo_producto + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" id="' + jsonArray[i].codigo_producto + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].codigo_barras + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+    
     $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
     $(".content-float-datos").css({width: 630});
+    $(".nav .menu li a#Productos").addClass("active");
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#listadoProductos").addClass("active");
     activadorEventosProductos();
     //$(".menu-vertical li a").removeClass("active");
     //$(this).addClass("active");
 }
 
 //**********************************************************************************************
-//***************OPCION ADICIONAR PRODUCTO***************************************
+//***************                                                        ***********************
+//***************               OPCION ADICIONAR PRODUCTO                ***********************
+//***************                                                        ***********************
 //**********************************************************************************************
 
 function AddProducto()
@@ -2875,15 +3740,494 @@ function AddProducto()
     var codigoHTML = '<div class="encabezado2">Adicionar Producto</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Personal">Producto</a></li>'+
+                            '<li><a href="#Informacion">Informaciòn</a></li>'+
                         '</ul>'+
-                        
                         '<div class="tab_container">'+
-                            '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="12" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form id="form_crear_producto"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                      '<td colspan="2" rowspan="10" align="center">'+
+                                      '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                      '<td><input type="text" name="nombre" value="" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="left" style="padding-right:5px;">Linea de Producciòn</th>'+
+                                    '<td>'+
+                                        '<select name="nombre_linea" style="width:165px;" class="lines">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td>'+
+                                        '<select name="material" style="width:165px;" class="maters">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
+                                      '<td>'+
+                                        '<select name="cod_tipo_producto" style="width:165px;" class="tips">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                    '<td>'+
+                                        '<select name="talla" style="width:165px;" class="talls">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Color</th>'+
+                                    '<td>'+
+                                        '<select name="color" style="width:165px;" class="colors">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Còdigo de Barras</th>'+
+                                    '<td><input type="text" name="codigo_barras" value="" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                                    '<td><input type="text" name="cantidad" value="" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                    '<td><input type="text" name="precio_costo" value="" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                    '<td><input type="text" name="precio_venta" value="" size="20" maxlength="10"/></td>'+
+                                    '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                    '<td><input type="text" name="precio_descuento" value="" size="20" maxlength="12"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    cargarListadolineasCombo();
+    cargarComboMateriales();
+    cargarListadoTallasCombo();
+    cargarColor();
+    cargarlistadoTipo();
+    IniciarTabers();
+    $("#form_crear_producto").submit(enviarDatosAddProductos);
+    activadorEventosProductos();
+    cargarFoto();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS USUARIOS       ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarFoto()
+{
+    var botonCargarFoto = $("#cargarFoto");
+    
+    new AjaxUpload(botonCargarFoto, 
+    {
+        action: 'ServletFotos',
+        onSubmit : function(file, ext)
+        {
+                if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext)))
+                {
+                        // extensiones permitidas
+                        alert('Error: Solo se permiten imagenes');
+                        // cancela upload
+                        return false;
+                } 
+                else 
+                {
+                        botonCargarFoto.attr("value", "Cargando");
+                        this.disable();
+                }
+        },
+        onComplete: function(file, response)
+        {
+                botonCargarFoto.attr("value", "Cargar Foto");
+                // enable upload button
+                this.enable();			
+                // Agrega archivo a la lista
+                var rutaFoto = "images/Usuarios/" + file;
+                var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
+                $('#rutaFoto').attr("value",file);
+                $('#fotoUsuarios').html(htmlFoto);
+        }	
+    });
+}
+
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA CARGAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddProductos(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddProducto","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddProducto(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddProducto(jsonObj)
+{
+    if (jsonObj.AddProducto  =="true")
+    {
+        alert("El Producto se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El Producto no se pudo adicionar");
+    }   
+    
+    seccionListadoProductos();
+}
+//*******************************************************************************************
+
+function DatosModProductos()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosProductos","Codigo_Producto":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModProducto(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//*******************************************************************************************
+//********************                                                   ********************
+//******************** FUNCION PARA MODIFICAR LOS DATOS DE LOS PRODUCTOS ********************
+//********************                                                   ********************
+//*******************************************************************************************
+
+function ModProducto(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Producto</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Informacion">Informaciòn</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="12" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form id="form_modificar_producto"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                      '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="left" style="padding-right:5px;">Linea de Producciòn</th>'+
+                                    '<td>'+
+                                        '<select name="nombre_linea" style="width:165px;" class="lines">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td>'+
+                                        '<select name="material" style="width:165px;" class="maters">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
+                                      '<td>'+
+                                        '<select name="cod_tipo_producto" style="width:165px;" class="tips">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                    '<td>'+
+                                        '<select name="talla" style="width:165px;" class="talls">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Color</th>'+
+                                    '<td>'+
+                                        '<select name="color" style="width:165px;" class="colors">'+
+                                          //'<option value="null"></option>'+
+                                        '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Còdigo de Barras</th>'+
+                                    '<td><input type="text" name="codigo_barras" value="' + jsonObject.codigo_barras + '" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                                    '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                    '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                    '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10"/></td>'+
+                                    '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                    '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_productoMod" id="id_productoMod" value="' + jsonObject.codigo_producto + '" /></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    cargarListadolineasCombo();
+    cargarComboMateriales();
+    cargarListadoTallasCombo();
+    cargarColor();
+     cargarlistadoTipo();
+    IniciarTabers();
+    $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick({yearRange: '1980:2050'});
+    $("#form_modificar_producto").submit(enviarDatosModProductos);
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModProductos(evento)
+{
+    evento.preventDefault();
+    var codigo_producto = $("#id_productoMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModProducto","Datos":datos, "Codigo_Producto":codigo_producto};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModProducto(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModProducto(jsonObj)
+{
+    if (jsonObj.ModProducto  =="true")
+    {
+        alert("El Producto se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Producto no se pudo modificar");
+    }   
+    
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerProducto()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosProductos","Codigo_Producto":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerProducto(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//********************************************************************************************
+//********************                                                    ********************
+//******************** FUNCION PARA VISUALIZAR LOS DATOS DE LOS PRODUCTOS ********************
+//********************                                                    ********************
+//********************************************************************************************
+
+function VerProducto(jsonObject)
+{
+    
+    var codigoHTML = '<div class="encabezado2">Visualizar Producto</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Informacion">Información</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="producto" class="tab_content">'+
+                            '<form action="" method="POST" name="form_visualizar_producto">'+
+                              '<table align="right" border="0" align="left">'+
+                                  '<tr>'+
+                                      '<td colspan="2" rowspan="12" align="center">'+
                                           '<div class="foto">'+
                                               '<div class="imagen">'+
                                                   '<img src="images/usuario.png" align="center">'+
@@ -2894,276 +4238,52 @@ function AddProducto()
                                           '</div>'+
                                       '</td>'+
                                   '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                    '<td><input type="text" name="id" value="" size="20" maxlength="15" required/></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Linea de Producción</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Linea Industrial</option>'+
-                                      '<option value="Sr">Linea Motociclista</option>'+
-                                      '<option value="Dq">Linea Hogar</option>'+
-                                      '<option value="Pr">Linea Infantil</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Material</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Econoflex</option>'+
-                                      '<option value="Sr">Greenflex</option>'+
-                                      '<option value="Dq">Natuflex</option>'+
-                                      '<option value="Pr">Oxiflex</option>'+
-                                      '<option value="Dq">Poliester PVC</option>'+
-                                      '<option value="Pr">PVC Poliester PVC</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Tipo de Producto</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Vestido de Motociclista</option>'+
-                                      '<option value="Sr">Abrigos</option>'+
-                                      '<option value="Dq">Capas</option>'+
-                                      '<option value="Pr">Pantalón y Vestido</option>'+
-                                      '<option value="Dq">Gabardinas</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                    '<td><input type="text" name="cantidad" value="" size="20" maxlength="10" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Peso</th>'+
-                                    '<td><input type="text" name="peso" value="" size="20" maxlength="35" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Color</th>'+
-                                    '<td><input type="text" name="color" value="" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
-                                    '<td><input type="text" name="talla" value="" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                    '<td><input type="text" name="color" value="" size="20" maxlength="15" /></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor IVA</th>'+
-                                    '<td><input type="text" name="talla" value="" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                                '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                                '</tr>'+
-                            '</table>'+
-                            '</div>'+
-                           '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
-                                  '<input type="submit" value="Registrar" class="button" id="registrarAddProducto"/>'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table> '+      
-                        '</form>'+
-              '</div>';
-
-    $("#datos").html(codigoHTML);
-    IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'});
-    $('#date_field14').datepick({yearRange: '1980:2050'});
-	activadorEventosProductos();
-}
-function ModProducto()
-{
-    var codigoHTML = '<div class="encabezado2">Modificar Producto</div>'+
-                     '<div class="tabla">'+
-                        '<ul class="tabs">'+
-                            '<li><a href="#Personal">Información</a></li>'+
-                        '</ul>'+
-                        
-                        '<div class="tab_container">'+
-                            '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="12" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/surtiplas1.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                    '<td><input type="text" name="id" value="111222" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Linea de Producción</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Linea Industrial</option>'+
-                                      '<option value="Sr">Linea Motociclista</option>'+
-                                      '<option value="Dq">Linea Hogar</option>'+
-                                      '<option value="Pr">Linea Infantil</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Material</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Econoflex</option>'+
-                                      '<option value="Sr">Greenflex</option>'+
-                                      '<option value="Dq">Natuflex</option>'+
-                                      '<option value="Pr">Oxiflex</option>'+
-                                      '<option value="Dq">Poliester PVC</option>'+
-                                      '<option value="Pr">PVC Poliester PVC</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Tipo de Producto</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Vestido de Motociclista</option>'+
-                                      '<option value="Sr">Abrigos</option>'+
-                                      '<option value="Dq">Capas</option>'+
-                                      '<option value="Pr">Pantalón y Vestido</option>'+
-                                      '<option value="Dq">Gabardinas</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                    '<td><input type="text" name="cantidad" value="50" size="20" maxlength="10" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Peso</th>'+
-                                    '<td><input type="text" name="peso" value="2.5kg-4kg-1.8kg" size="20" maxlength="35" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Color</th>'+
-                                    '<td><input type="text" name="color" value="Negro" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
-                                    '<td><input type="text" name="talla" value="XL" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                    '<td><input type="text" name="color" value="250000" size="20" maxlength="15" /></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor IVA</th>'+
-                                    '<td><input type="text" name="talla" value="100000" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                                '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                                '</tr>'+
-                            '</table>'+
-                            '</div>'+
-                           '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
-                                  '<input type="submit" value="Registrar" class="button" id="registrarAddProducto"/>'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table> '+      
-                        '</form>'+
-                    '</div>';
-
-    $("#datos").html(codigoHTML);
-    IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'});
-    $('#date_field14').datepick({yearRange: '1980:2050'});
-    activadorEventosProductos();
-}
-function VerProducto()
-{
-    var codigoHTML = '<div class="encabezado2">Visualizar Producto</div>'+
-                     '<div class="tabla">'+
-                        '<ul class="tabs">'+
-                            '<li><a href="#Informacion">Información</a></li>'+
-                        '</ul>'+
-                        
-                        '<div class="tab_container">'+
-                            '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="right" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="9" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/surtiplas1.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
-                            '<br>'+
                             '<tr>'+
                                 '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                '<td><input type="text" name="id_producto" value="111222" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                             '</tr>'+
                                 '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                '</tr>'+
+                                '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                    '<td><input type="text" name="Linea" value="Linea Industrial" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                 '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Material</th>'+
-                                        '<td><input type="text" name="material" value="Econoflex" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                     '</tr>'+
                                         '<tr>'+
                                             '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
-                                            '<td><input type="text" name="tipo" value="Vestido de Moticiclista" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                            '<td><input type="text" name="nombre_tipo_producto" value="' + jsonObject.cod_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                         '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                            '<td><input type="text" name="cantidad" value="50" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                          '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Peso</th>'+
-                                            '<td><input type="text" name="peso" value="2.5kg-4kg-1.8kg" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                          '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Color</th>'+
-                                            '<td><input type="text" name="color" value="Negro" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                            '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Talla</th>'+
-                                            '<td><input type="text" name="talla" value="XL" size="20" maxlength="12" readonly="readonly"/></td>'+
-                                          '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Color</th>'+
+                                        '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                                        '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Talla:</th>'+
+                                        '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                        '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                        '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                        '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                      '</tr>'+
                                       '</table>'+
                                     '</div>'+
-                            '</table>'+
-                            '<br>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                  '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                  '<th align="left" style="padding-left:90px;">Valor IVA</th>'+
-                                  '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                                '</tr>'+
                             '</table>'+
                             '</div>'+
                             '<br>'+
@@ -3179,73 +4299,120 @@ function VerProducto()
     IniciarTabers();
     activadorEventosProductos();
 }
-function DelProducto()
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelProducto()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosProductos","Codigo_Producto":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelProducto(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************************
+//********************                                                  ********************
+//******************** FUNCION PARA ELIMINAR LOS DATOS DE LOS PRODUCTOS ********************
+//********************                                                  ********************
+//******************************************************************************************
+
+function DelProducto(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
                     '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_crear_usuario">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<td colspan="2" rowspan="9" align="center">'+
-                                        '<div class="foto">'+
-                                            '<div class="imagen">'+
-                                                '<img src="images/surtiplas1.png" align="center">'+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">IdProducto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">111222</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Linea de Producción:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Linea Industrial</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Material:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Econoflex</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Tipo de Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Vestido de Motociclista</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Cantidad:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">50</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Peso:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">2.5kg-4kg-1.8kg</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">color:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Negro</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Talla:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">XL</td>'+
-                                '</tr>'+
-                    '</table>'+
-
-                    '<table align="center">'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Valor sin IVA:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">250000</td>'+
-                          '<th align="right" style="padding-right:5px;">Valor IVA:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">100000</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">2600000</td>'+
-                        '</tr>'+
-                    '</table>'+
-                        '<br>'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Informacion">Información</a><li>'+
+                        '</ul>'+
+                         '<div class="tab_container">'+
+                            '<div id="DelProducto" class="tab_content">'+
+                            '<form action="" method="POST" name="form_borrar_producto">'+
+                              '<table align="right" border="0" align="left">'+
+                                  '<tr>'+
+                                      '<td colspan="2" rowspan="12" align="center">'+
+                                          '<div class="foto">'+
+                                              '<div class="imagen">'+
+                                                  '<img src="images/usuario.png" align="center">'+
+                                              '</div>'+
+                                              '<div>'+
+                                                  '<input type="button" value="Cargar Foto" class="button" '+
+                                              '</div>'+   
+                                          '</div>'+
+                                      '</td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">IdProducto</th>'+
+                                        '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                        '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
+                                        '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Material</th>'+
+                                        '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
+                                        '<td><input type="text" name="cod_tipo_producto" value="' + jsonObject.cod_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Color</th>'+
+                                        '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                                        '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Talla:</th>'+
+                                        '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                        '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                        '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '</tr>'+
+                                        '<tr>'+
+                                          '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                          '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                        '</tr>'+
+                                      '</table>'+
+                                    '</div>'+
+                                '</table>'+
+                            '</div>'+
+                            '</table>'+
                             '<table align="center">'+
                                 '<tr>'+
                                   '<td colspan="4" align="center">'+
                                       '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
-                                      '<a href="#DelV" class="button" id="borrarProducto" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                      '<a href="#DelP" class="button" name="' + jsonObject.codigo_producto + '" id="borrarProducto" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
                                   '</td>'+
                                 '</tr>'+
                             '</table>'+       
@@ -3255,16 +4422,25 @@ function DelProducto()
     $("#datos").html(codigoHTML);
     activadorEventosProductos();
 }
-
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR  *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
 function ConfirmDelProducto()
 {
+    var id = $(this)[0].name;
+    //alert(id);
     var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
                         '<table align="center">'+
                             '<tr>'+
                               '<th>Está seguro que desea borrar el Producto?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Si" class="button" id="OkDelProducto"/>'+
+                                '<input type="button" value="Si" class="button" id="OkDelProducto" name="' + id + '"/>'+
                                 '<input type="button" value="No" class="button" id="NotDelProducto"/>'+
                             '</td>'+
                         '</table>'+
@@ -3275,140 +4451,252 @@ function ConfirmDelProducto()
     $("#fadeDelItem").css({display: "block"});
     activadorEventosProductos();
 }
+function DelProductoOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelProducto","Codigo_Producto":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelProducto(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelProducto(jsonObj)
+{
+    if (jsonObj.DelProducto=="true")
+    {
+        alert("El Producto se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El Producto no se pudo borrar");
+    }   
+    
+    seccionListadoProductos();
+}
 
 function HideConfirmDelProducto()
 {
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
-    activadorEventosProductos();  
+    activadorEventosProductos();    
 }
-//**********************************************************************************
-//**********************************************************************************
-//*************                                                *********************
-//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
-//*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DE LOS   *********************
-//*************  PRODUCTOS                                     *********************
-//*************                                                *********************
-//**********************************************************************************
-//**********************************************************************************
 
-function seccionCategorias()
+//##################################################################################
+//##################################################################################
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE CATEGORIAS                  ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadolineas()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
+    var request = {"Usuarios":"Lineas"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadolineas(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//******************************************************************************************
+//******************************************************************************************
+//*************                                                        *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION CATEGORIAS *********************
+//*************                                                        *********************
+//******************************************************************************************
+//******************************************************************************************
+
+function cargarListadolineas(jsonArray, id)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de lineas de Produccion</div>'+
                      '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_buscar_venta">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                                    '<td>'+
-                                        '<select name="vendedor" style="width:160px;">'+
-                                            '<option value="">Edison</option>'+
-                                            '<option value="">Juan Pablo</option>'+
-                                            '<option value="">Orlando</option>'+
-                                            '<option value="">Sandra Giraldo</option>'+
-                                        '</select>'+
-                                    '</td>'+
-
-                                    '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
-                                    '<td>'+
-                                        '<select name="tipoActividad" style="width:160px;">'+
-                                            '<option value="">Visitas</option>'+
-                                            '<option value="">Recaudos</option>'+
-                                            '<option value="">Quejas</option>'+
-                                        '</select>'+
-                                    '</td>'+
-                                '</tr>'+
-
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+
-                                    '<td>'+
-                                      '<input id="date_field7" type="text" name="fechaInicio" value=""/>'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha Final</th>'+
-                                    '<td>'+
-                                      '<input id="date_field8" type="text" name="fechaFin" value=""/>'+
-                                    '</td>'+
-                                '</tr>'+
-
-                                '<tr>'+
-                                    '<td colspan="4" align="center"><br>'+
-                                      '<input type="submit" value="Buscar" class="button" />'+
-                                    '</td>'+
-                                '</tr>'+
-                            '</table>'+
-                        '</form>'+
-                        '<br>'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" /></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
-                            '<th>IdAct.</th>'+
-                            '<th>Fecha</th>'+
-                            '<th>Cliente</th>'+
-                            '<th>Departamento</th>'+
-                            '<th>Cuidad</th>'+
-                            '<th>Tema</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar"/></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar"/></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" onclick="" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" onclick="" /></td>'+
-                            '<td><img src="images/b_search.png" title="Ampliar" onclick="" /></td>'+
-                            '<td>11111</td>'+
-                            '<td>18/06/2012</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>Risaralda</td>'+
-                            '<td>Pereira</td>'+
-                            '<td>Compras</td>'+
-                          '</tr>'+
-
-                        '</table>'+
-                    '</div>';
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddLinea"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>Codigo</th>'+
+                            '<th>Nombre</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cod_linea + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre_linea + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
 
     $("#datos").html(codigoHTML);
     $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
     $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#catedoriasProductos").addClass("active");
+    $(".menu-vertical li a#lineasProd").addClass("active");
+    activadorEventosProductos(); 
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+function ConfirmAddLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        AddLinea(jsonObject); 
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });  
+}
+
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************         FUNCION PARA ADICIONAR A UN NUEVO USUARIO         ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+
+function AddLinea()
+{
+    var id = $(this)[0].name;
+    var codigoHTML = '<div class="encabezado2">Adicionar Linea</div>'+
+                     '<div class="tabla">'+
+                                '<form id="form_crear_linea"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="NotAddLinea" />'+
+                                  '<input type="submit" value="Registrar" class="button" id="HideConfirmAddLinea" name="' + id + '"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_crear_linea").submit(enviarDatosAddLinea);
     activadorEventosProductos();
 }
-//##################################################################################
-//##################################################################################
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA CARGAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddLinea(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddLinea","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddLinea(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddLinea(jsonObj)
+{
+    if (jsonObj.AddLinea  =="true")
+    {
+        alert("La linea se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("La linea no se pudo adicionar");
+    }   
+    
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overAddItem").css({display: "none"});
+    $("#fadeAddItem").css({display: "none"});
+    activadorEventosProductos();  
+}
 
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
@@ -3423,196 +4711,133 @@ function seccionCategorias()
 //**********************************************************************************
 //**********************************************************************************
 
+
 function seccionListadoClientes()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Clientes</div>'+
-                     '<div class="tabla">'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="ACliente"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>IdCliente</th>'+
-                            '<th>Nombre</th>'+
-                            '<th>Teléfono</th>'+
-                            '<th>Celular</th>'+
-                            '<th>email</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
+    var request = {"Usuarios":"Clientes"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoClientes(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
 
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>ingenior02@gmail.com</td>'+
-                          '</tr>'+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CARGAR LOS DATOS A LA SECCION CLIENTES      ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>ingenior02@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>ingenior02@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>ingenior02@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                            '<td>111111</td>'+
-                            '<td>Ingenio Risaralda</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>ingenior02@gmail.com</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-                            '<td>InduMotos</td>'+
-                            '<td>3325618</td>'+
-                            '<td>3006731512</td>'+
-                            '<td>indium@gmail.com</td>'+
-                          '</tr>'+
-                        '</table>'+
-                    '</div>';
+function cargarListadoClientes(jsonArray)
+{    
+   var codigoHTML = '<div class="encabezado2">Listado de Clientes</div>'+
+                            '<div class="tabla">'+
+                               '<table class="tbonita">'+
+                                 '<tr align="letf">'+
+                                   '<th><img src="images/b_insrow.png" title="Agregar" id="ACliente"/></th>'+
+                                   '<th><a href="ServletInformes?informe=reporteClientesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th>Id Cliente</th>'+
+                                   '<th>Nombre</th>'+
+                                   '<th>Apellido</th>'+
+                                   '<th>Telefono</th>'+
+                                   '<th>Celular</th>'+
+                                   '<th>Email</th>'+
+                                 '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModCliente" id="' + jsonArray[i].id_cliente + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelCliente" id="' + jsonArray[i].id_cliente + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerCliente" id="' + jsonArray[i].id_cliente + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].apellido + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].telefono + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].celular + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].email + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
 
     $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
     $(".content-float-datos").css({width: 630});
-    activadorEventosClientes();
-    //$(".menu-vertical li a").removeClass("active");
-    //$(this).addClass("active");
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#listadoClientes").addClass("active");
+    ActivadorEventosClientes();
+    
 }
+
+//***********************************************************************************
+//********************                                           ********************
+//******************** FUNCION PARA ADICIONAR A UN NUEVO CLIENTE ********************
+//********************                                           ********************
+//***********************************************************************************
+
 function AddCliente()
 {
     var codigoHTML = '<div class="encabezado2">Adicionar Cliente</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Personal">Datos</a></li>'+
+                            '<li><a href="#Personal">Datos Personales</a></li>'+
+                            '<li><a href="#Otros">Datos Adicionales</a></li>'+
                         '</ul>'+
-                        
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form id="form_crear_cliente"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                      '<td colspan="2" rowspan="10" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="cedula" value="" size="20" maxlength="15" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">IdCliente</th>'+
-                                    '<td><input type="text" name="id_usuario" value="" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Razon Social</th>'+
+                                    '<td><input type="text" name="razon_social" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre" value="" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="nombre" value="" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="" size="20" maxlength="10" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Apellido</th>'+
+                                    '<td><input type="text" name="apellido" value="" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="" size="20" maxlength="10" required/></td>'+
-                                  '</tr>'+
-                                  '<td align="right" style="padding-right:5px;">Tipo de Cliente</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Mayorista</option>'+
-                                      '<option value="Sr">Minorista</option>'+
-                                  '</td>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
                                     '<td><input type="text" name="direccion" value="" size="20" maxlength="35" /></td>'+
@@ -3625,8 +4850,358 @@ function AddCliente()
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
                                     '<td><input type="text" name="celular" value="" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Email</th>'+
+                                    '<td><input type="text" name="email" value="" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '</div>'+
+                            '<div id="Otros" class="tab_content">'+
+                                 '<table align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td><input type="text" name="fecha" id="date_field9" value="" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Crédito Maximo</th>'+
+                                    '<td><input type="text" name="maximo_credito" value="" size="20" maxlength="35" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Contacto</th>'+
+                                    '<td><input type="text" name="nombre_contacto" value="" size="20" maxlength="35" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Responsable</th>'+
+                                    '<td><input type="text" name="responsable" value="" size="20" maxlength="35" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Estado</th>'+
+                                    '<td><input type="text" name="estado" value="" size="20" maxlength="35" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                     '<td>'+
+                                        '<select name="cod_departamento" class="deptos" style="width:165px;" onchange="cargarMunicipios()">'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
+                                     '<td>'+
+                                        '<select name="codMunicipio" style="width:165px;" class="municipios">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                     '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-left:5px;">Id Ubicacion</th>'+
+                                    '<td>'+
+                                    '<select name="id_ubicacion" style="width:165px;" class="ubicacion">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Comentarios<br>'+
+                                      '<textarea name="comentario" cols="74" rows="6"></textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
                               '</table>'+
                             '</div>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddCliente" />'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+
+    $("#datos").html(codigoHTML);
+    listUbicacion();
+    cargarListadoVendedores();
+    cargarMunicipios();
+    listadoDepartamentos();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_cliente").submit(enviarDatosAddCliente);
+    ActivadorEventosClientes();
+    cargarFoto();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS USUARIOS       ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarFoto()
+{
+    var botonCargarFoto = $("#cargarFoto");
+    
+    new AjaxUpload(botonCargarFoto, 
+    {
+        action: 'ServletFotos',
+        onSubmit : function(file, ext)
+        {
+                if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext)))
+                {
+                        // extensiones permitidas
+                        alert('Error: Solo se permiten imagenes');
+                        // cancela upload
+                        return false;
+                } 
+                else 
+                {
+                        botonCargarFoto.attr("value", "Cargando");
+                        this.disable();
+                }
+        },
+        onComplete: function(file, response)
+        {
+                botonCargarFoto.attr("value", "Cargar Foto");
+                // enable upload button
+                this.enable();			
+                // Agrega archivo a la lista
+                var rutaFoto = "images/Usuarios/" + file;
+                var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
+                $('#rutaFoto').attr("value",file);
+                $('#fotoUsuarios').html(htmlFoto);
+        }	
+    });
+}
+
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddCliente(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddCliente","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddCliente(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddCliente(jsonObj)
+{
+    if (jsonObj.AddCliente  =="true")
+    {
+        alert("El Cliente se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El Cliente no se pudo adicionar");
+    }   
+    
+    seccionListadoClientes();
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES              ********************
+//********************                                      ********************
+//******************************************************************************
+
+function DatosModClientes()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosClientes","Id_Cliente":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModCliente(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS USUARIOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModCliente(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Personal">Datos Personales</a></li>'+
+                            '<li><a href="#Otros">Datos Adicionales</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="Personal" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form id="form_modificar_cliente"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula + '" size="20" maxlength="15" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Razon Social</th>'+
+                                    '<td><input type="text" name="razon_social" value="' + jsonObject.razon_social + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Apellido</th>'+
+                                    '<td><input type="text" name="apellido" value="' + jsonObject.apellido + '" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
+                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion + '" size="20" maxlength="35" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Teléfono</th>'+
+                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono + '" size="20" maxlength="12" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
+                                    '<td><input type="text" name="celular" value="' + jsonObject.celular + '" size="20" maxlength="12" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Email</th>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email + '" size="20" maxlength="10" required/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '</div>'+
+                            '<div id="Otros" class="tab_content">'+
+                                 '<table align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td><input type="text" name="fecha" id="date_field9" value="' + jsonObject.fecha + '" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Crédito Maximo</th>'+
+                                    '<td><input type="text" name="maximo_credito" value="' + jsonObject.maximo_credito + '" size="20" maxlength="35" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Contacto</th>'+
+                                    '<td><input type="text" name="nombre_contacto" value="' + jsonObject.nombre_contacto + '" size="20" maxlength="35" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Responsable</th>'+
+                                    '<td><input type="text" name="responsable" value="' + jsonObject.responsable + '" size="20" maxlength="35" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Estado</th>'+
+                                    '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                     '<td>'+
+                                        '<select name="cod_departamento" class="deptos" style="width:165px;" onchange="cargarMunicipios()">'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
+                                     '<td>'+
+                                        '<select name="codMunicipio" style="width:165px;" class="municipios">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                     '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+
+                                     '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-left:5px;">Id Ubicacion</th>'+
+                                    '<td>'+
+                                    '<select name="id_ubicacion" style="width:165px;" class="ubicacion">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Comentarios<br>'+
+                                      '<textarea name="comentario" cols="74" rows="6">' + jsonObject.comentario + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                '<tr>'+
+                                    '<td><input type="hidden" name="id_clienteMod" id="id_clienteMod" value="' + jsonObject.id_cliente + '" /></td>'+
                                 '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -3636,7 +5211,7 @@ function AddCliente()
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="button" value="Volver" class="button" id="volverAddCliente" />'+
-                                  '<input type="submit" value="Registrar" class="button" id="registrarAddCliente"/>'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
                               '</td>'+
                             '</tr>'+
                           '</table> '+      
@@ -3644,195 +5219,215 @@ function AddCliente()
                     '</div>';
 
     $("#datos").html(codigoHTML);
+    listUbicacion();
+    listadoDepartamentos();
+    cargarListadoVendedores();
+    cargarMunicipios();
     IniciarTabers();
-    activadorEventosClientes();
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_cliente").submit(enviarDatosModCliente);
+    ActivadorEventosClientes();
 }
-function ModCliente()
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModCliente(evento)
 {
-   var codigoHTML = '<div class="encabezado2">Modificar Producto</div>'+
-                     '<div class="tabla">'+
-                        '<ul class="tabs">'+
-                            '<li><a href="#Personal">Información</a></li>'+
-                        '</ul>'+
-                        
-                        '<div class="tab_container">'+
-                            '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="12" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/surtiplas1.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                    '<td><input type="text" name="id" value="111222" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Linea de Producción</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Linea Industrial</option>'+
-                                      '<option value="Sr">Linea Motociclista</option>'+
-                                      '<option value="Dq">Linea Hogar</option>'+
-                                      '<option value="Pr">Linea Infantil</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Material</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Econoflex</option>'+
-                                      '<option value="Sr">Greenflex</option>'+
-                                      '<option value="Dq">Natuflex</option>'+
-                                      '<option value="Pr">Oxiflex</option>'+
-                                      '<option value="Dq">Poliester PVC</option>'+
-                                      '<option value="Pr">PVC Poliester PVC</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Tipo de Producto</td>'+
-                                  '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Vestido de Motociclista</option>'+
-                                      '<option value="Sr">Abrigos</option>'+
-                                      '<option value="Dq">Capas</option>'+
-                                      '<option value="Pr">Pantalón y Vestido</option>'+
-                                      '<option value="Dq">Gabardinas</option>'+
-                                  '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                    '<td><input type="text" name="cantidad" value="50" size="20" maxlength="10" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Peso</th>'+
-                                    '<td><input type="text" name="peso" value="2.5kg-4kg-1.8kg" size="20" maxlength="35" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Color</th>'+
-                                    '<td><input type="text" name="color" value="Negro" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
-                                    '<td><input type="text" name="talla" value="XL" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                    '<td><input type="text" name="color" value="250000" size="20" maxlength="15" /></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor IVA</th>'+
-                                    '<td><input type="text" name="talla" value="100000" size="20" maxlength="12" /></td>'+
-                                  '</tr>'+
-                                '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                                '</tr>'+
-                            '</table>'+
-                            '</div>'+
-                           '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
-                                  '<input type="submit" value="Registrar" class="button" id="registrarAddProducto"/>'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table> '+      
-                        '</form>'+
-                    '</div>';
-
-    $("#datos").html(codigoHTML);
-    IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'});
-    $('#date_field14').datepick({yearRange: '1980:2050'});
-    activadorEventosClientes();
+    evento.preventDefault();
+    var id_cliente = $("#id_clienteMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModCliente","Datos":datos, "Id_Cliente":id_cliente};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModCliente(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
 }
-function VerCliente()
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModCliente(jsonObj)
+{
+    if (jsonObj.ModCliente  =="true")
+    {
+        alert("El Cliente se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Cliente no se pudo modificar");
+    }   
+    
+    seccionListadoClientes();
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerCliente()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosClientes","Id_Cliente":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerCliente(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//*******************************************************************************
+//********************                                       ********************
+//******************** FUNCION PARA VISUALIZAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES               ********************
+//********************                                       ********************
+//*******************************************************************************
+
+function VerCliente(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Visualizar Cliente</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Informacion">Información</a></li>'+
+                            '<li><a href="#Personal">Datos Personales</a></li>'+
+                            '<li><a href="#Otros">Datos Adicionales</a></li>'+
                         '</ul>'+
-                        
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="right" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="9" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/surtiplas1.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
-                            '<br>'+
-                            '<tr>'+
-                                '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                '<td><input type="text" name="id_producto" value="111222" size="20" maxlength="15" readonly="readonly"/></td>'+
-                            '</tr>'+
-                                '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                    '<td><input type="text" name="Linea" value="Linea Industrial" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                '</tr>'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
                                     '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Material</th>'+
-                                        '<td><input type="text" name="material" value="Econoflex" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
                                     '</tr>'+
-                                        '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
-                                            '<td><input type="text" name="tipo" value="Vestido de Moticiclista" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                        '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                            '<td><input type="text" name="cantidad" value="50" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                          '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Peso</th>'+
-                                            '<td><input type="text" name="peso" value="2.5kg-4kg-1.8kg" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                          '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Color</th>'+
-                                            '<td><input type="text" name="color" value="Negro" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                            '</tr>'+
-                                          '<tr>'+
-                                            '<th align="right" style="padding-right:5px;">Talla</th>'+
-                                            '<td><input type="text" name="talla" value="XL" size="20" maxlength="12" readonly="readonly"/></td>'+
-                                          '</tr>'+
-                                      '</table>'+
-                                    '</div>'+
-                            '</table>'+
-                            '<br>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                  '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                  '<th align="left" style="padding-left:90px;">Valor IVA</th>'+
-                                  '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
+                                '</form>'+
+                                '<form enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Razon Social</th>'+
+                                    '<td><input type="text" name="razon_social" value="' + jsonObject.razon_social + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Apellido</th>'+
+                                    '<td><input type="text" name="apellido" value="' + jsonObject.apellido + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
+                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Teléfono</th>'+
+                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
+                                    '<td><input type="text" name="celular" value="' + jsonObject.celular + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Email</th>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '</div>'+
+                            '<div id="Otros" class="tab_content">'+
+                                 '<table align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td><input type="text" name="fecha" id="date_field9" value="' + jsonObject.fecha + '" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Crédito Maximo</th>'+
+                                    '<td><input type="text" name="maximo_credito" value="' + jsonObject.maximo_credito + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Contacto</th>'+
+                                    '<td><input type="text" name="nombre_contacto" value="' + jsonObject.nombre_contacto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Responsable</th>'+
+                                    '<td><input type="text" name="responsable" value="' + jsonObject.responsable + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Estado</th>'+
+                                    '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<td><input type="text" name="nombre_depto" value="' + jsonObject.nombre_depto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
+                                    '<td><input type="text" name="codMunicipio" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Ubicacion</th>'+
+                                    '<td><input type="text" name="id_ubicacion" value="' + jsonObject.id_ubicacion + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Comentarios<br>'+
+                                      '<textarea name="comentario" cols="74" rows="6" readonly="readonly">' + jsonObject.comentario + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                    '</table>'+
+                                  '</div>'+
                                 '</tr>'+
-                                '<tr>'+
-                                  '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL</th>'+
-                                  '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                                '</tr>'+
-                            '</table>'+
+                              '</table>'+
                             '</div>'+
-                            '<br>'+
+                          '</div>'+
+                          '<br>'+
                             '<table align="center">'+
                               '<tr>'+
                                 '<td colspan="4" align="center">'+
@@ -3843,96 +5438,183 @@ function VerCliente()
                         '</div>';
     $("#datos").html(codigoHTML);
     IniciarTabers();
-    activadorEventosClientes();
+    ActivadorEventosClientes();
 }
-function DelCliente()
-{
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
-                    '<div class="tabla">'+
-                        '<form action="" method="POST" name="form_crear_usuario">'+
-                            '<table align="center" border="0" align="left">'+
-                                '<tr>'+
-                                    '<td colspan="2" rowspan="9" align="center">'+
-                                        '<div class="foto">'+
-                                            '<div class="imagen">'+
-                                                '<img src="images/surtiplas1.png" align="center">'+
-                                            '</div>'+
-                                        '</div>'+
-                                    '</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">IdProducto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">111222</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Linea de Producción:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Linea Industrial</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Material:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Econoflex</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Tipo de Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Vestido de Motociclista</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Cantidad:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">50</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Peso:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">2.5kg-4kg-1.8kg</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">color:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Negro</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Talla:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">XL</td>'+
-                                '</tr>'+
-                    '</table>'+
 
-                    '<table align="center">'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Valor sin IVA:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">250000</td>'+
-                          '<th align="right" style="padding-right:5px;">Valor IVA:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">100000</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">TOTAL:</th>'+
-                          '<td style="font-size:15px; color: #000; font-weight:bold;">2600000</td>'+
-                        '</tr>'+
-                    '</table>'+
-                        '<br>'+
-                            '<table align="center">'+
-                                '<tr>'+
-                                  '<td colspan="4" align="center">'+
-                                      '<input type="button" value="Volver" class="button" id="volverAddProducto" />'+
-                                      '<a href="#DelV" class="button" id="borrarProducto" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
-                                  '</td>'+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelCliente()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosClientes","Id_Cliente":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelCliente(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR LOS DATOS DE UN CLIENTE          ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelCliente(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Eliminar Cliente</div>'+
+                     '<div class="tabla">'+
+                        '<ul class="tabs">'+
+                            '<li><a href="#Personal">Datos Personales</a></li>'+
+                            '<li><a href="#Otros">Datos Adicionales</a></li>'+
+                        '</ul>'+
+                        '<div class="tab_container">'+
+                            '<div id="Personal" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                    '<tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
+                                '</form>'+
+                                '<form enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Razon Social</th>'+
+                                    '<td><input type="text" name="razon_social" value="' + jsonObject.razon_social + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Apellido</th>'+
+                                    '<td><input type="text" name="apellido" value="' + jsonObject.apellido + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
+                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Teléfono</th>'+
+                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
+                                    '<td><input type="text" name="celular" value="' + jsonObject.celular + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Email</th>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</table>'+
+                                  '</div>'+
+                            '<div id="Otros" class="tab_content">'+
+                                 '<table align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td><input type="text" name="fecha" id="date_field9" value="' + jsonObject.fecha + '" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Crédito Maximo</th>'+
+                                    '<td><input type="text" name="maximo_credito" value="' + jsonObject.maximo_credito + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Contacto</th>'+
+                                    '<td><input type="text" name="nombre_contacto" value="' + jsonObject.nombre_contacto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Responsable</th>'+
+                                    '<td><input type="text" name="responsable" value="' + jsonObject.responsable + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Estado</th>'+
+                                    '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<td><input type="text" name="nombre_depto" value="' + jsonObject.nombre_depto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
+                                    '<td><input type="text" name="codMunicipio" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Ubicacion</th>'+
+                                    '<td><input type="text" name="id_ubicacion" value="' + jsonObject.id_ubicacion + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Comentarios<br>'+
+                                      '<textarea name="comentario" cols="74" rows="6" readonly="readonly">' + jsonObject.comentario + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                    '</table>'+
+                                  '</div>'+
                                 '</tr>'+
-                            '</table>'+       
-                        '</form>'+
-                    '</div>';
+                              '</table>'+
+                            '</div>'+
+                          '</div>'+
+                          '<br>'+
+                            '<table align="center">'+
+                              '<tr>'+
+                                '<td colspan="4" align="center">'+
+                                    '<input type="button" value="Volver" class="button" id="volverAddCliente" />'+
+                                    '<a href="#DelC" class="button" name="' + jsonObject.id_cliente + '" id="borrarCliente" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                '</td>'+
+                              '</tr>'+
+                            '</table>'+               
+                        '</div>';
 
     $("#datos").html(codigoHTML);
     IniciarTabers();
-    activadorEventosClientes();
+    ActivadorEventosClientes();
 }
-
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR  *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
 function ConfirmDelCliente()
 {
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Cliente</div>'+
                         '<table align="center">'+
                             '<tr>'+
-                              '<th>Está seguro que desea borrar el Producto?</th>'+
+                              '<th>Está seguro que desea borrar al Cliente?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Si" class="button" id="OkDelProducto"/>'+
-                                '<input type="button" value="No" class="button" id="NotDelProducto"/>'+
+                                '<input type="button" value="Si" class="button" id="OkDelCliente" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelCliente"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -3940,25 +5622,1050 @@ function ConfirmDelCliente()
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
-    activadorEventosClientes();
+    ActivadorEventosClientes();
+}
+function DelClienteOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelCliente","Id_Cliente":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelCliente(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelCliente(jsonObj)
+{
+    if (jsonObj.DelCliente=="true")
+    {
+        alert("El Cliente se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El Cliente no se pudo borrar");
+    }   
+    
+    seccionListadoClientes();
 }
 
 function HideConfirmDelCliente()
 {
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
-    activadorEventosClientes();  
+    ActivadorEventosClientes();    
 }
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-//&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-//%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE PEDIDOS                     ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
 
+function seccionListadoPedidos()
+{
+    var request = {"Usuarios":"Pedidos"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarPedidos(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//****************************************************************************************
+//****************************************************************************************
+//*************                                                      *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION PEDIDOS  *********************
+//*************                                                      *********************
+//****************************************************************************************
+//****************************************************************************************
+
+function cargarPedidos(jsonArray)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Pedidos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="AddPedido"/></th>'+
+                            '<th><a href="ServletInformes?informe=reportePedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>Id Pedido</th>'+
+                            '<th>Id Cliente</th>'+
+                            '<th>Fecha</th>'+
+                            '<th>Hora</th>'+
+                            '<th>Valor Total</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModPedido" id="' + jsonArray[i].id_pedido + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelPedido" id="' + jsonArray[i].id_pedido + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerPedido" id="' + jsonArray[i].id_pedido + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_pedido + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].hora + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].valor_total + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#pedidosClientes").addClass("active");
+    ActivadorEventosClientes(); 
+}
+//**********************************************************************************************
+//***************                                                        ***********************
+//***************               OPCION ADICIONAR PRODUCTO                ***********************
+//***************                                                        ***********************
+//**********************************************************************************************
+
+function AddPedido()
+{
+    var codigoHTML = '<div class="encabezado2">Adicionar Producto</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                '</form>'+
+                                '<br>'+
+                                '<br>'+
+                                '<form id="form_crear_pedido"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                  '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                      '<td>'+
+                                        '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                          //'<option value="null"></option>'+
+                                         '</select>'+
+                                      '</td>'+ 
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                          //'<option value="null"></option>'+
+                                         '</select>'+
+                                    '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="" required/>'+
+                                    '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Hora</th>'+
+                                    '<td><input type="text" name="hora" value="" size="20" maxlength="12"required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<td><input type="text" name="valor_del_iva" value="" size="20" maxlength="10"required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<td><input type="text" name="valor_total" value="" size="20" maxlength="10"required/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddPedido" />'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_pedido").submit(enviarDatosAddPedidos);
+    ActivadorEventosClientes();
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA CARGAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddPedidos(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddPedido","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddPedido(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddPedido(jsonObj)
+{
+    if (jsonObj.AddPedido  =="true")
+    {
+        alert("El Pedido se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El Pedido no se pudo adicionar");
+    }   
+    
+    seccionPedidosC();
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES              ********************
+//********************                                      ********************
+//******************************************************************************
+
+function DatosModPedido()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosPedidos","Id_Pedido":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModPedido(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS USUARIOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModPedido(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Pedido</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                '</form>'+
+                                '<br>'+
+                                '<br>'+
+                                '<form id="form_modificar_pedido"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                  '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                      '<td>'+
+                                        '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                          //'<option value="null"></option>'+
+                                         '</select>'+
+                                      '</td>'+ 
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<td>'+
+                                        '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                          //'<option value="null"></option>'+
+                                         '</select>'+
+                                    '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" required/>'+
+                                    '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Hora</th>'+
+                                    '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12"required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10"required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10"required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_PedidoMod" id="id_PedidoMod" value="' + jsonObject.id_pedido + '" /></td>'+
+                                '</tr>'+
+                              '</table>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddPedido" />'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_pedido").submit(enviarDatosModPedido);
+    ActivadorEventosClientes();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModPedido(evento)
+{
+    evento.preventDefault();
+    var id_pedido = $("#id_PedidoMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModPedido","Datos":datos, "Id_Pedido":id_pedido};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModPedido(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModPedido(jsonObj)
+{
+    if (jsonObj.ModPedido  =="true")
+    {
+        alert("El Pedidos se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Pedidos no se pudo modificar");
+    }   
+    
+    seccionPedidosC();
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerPedido()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosPedidos","Id_Pedido":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerPedido(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//*******************************************************************************
+//********************                                       ********************
+//******************** FUNCION PARA VISUALIZAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES               ********************
+//********************                                       ********************
+//*******************************************************************************
+
+function VerPedido(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Visualizar Pedido</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                '</form>'+
+                                '<br>'+
+                                '<br>'+
+                                '<form id="form_ver_pedido"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
+                                    '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Hora</th>'+
+                                    '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddPedido" />'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+                
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    ActivadorEventosClientes();
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelPedido()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosPedidos","Id_Pedido":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelPedido(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR LOS DATOS DE UN CLIENTE          ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelPedido(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Eliminar Cliente</div>'+
+                     '<div class="tabla">'+
+                            '<div id="Informacion" class="tab_content">'+
+                              '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                                '<table align="center" border="0">'+
+                                '</form>'+
+                                '<br>'+
+                                '<br>'+
+                                '<form id="form_ver_pedido"  enctype="multipart/form-data">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
+                                    '<td>'+
+                                      '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
+                                    '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Hora</th>'+
+                                    '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                          '</div>'+
+                          '<br>'+
+                            '<table align="center">'+
+                              '<tr>'+
+                                '<td colspan="4" align="center">'+
+                                    '<input type="button" value="Volver" class="button" id="volverAddPedido" />'+
+                                    '<a href="#DelP" class="button" name="' + jsonObject.id_pedido + '" id="borrarPedido" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    ActivadorEventosClientes();
+}
 //**********************************************************************************
 //**********************************************************************************
 //*************                                                *********************
-//*************                OPCION PERFIL                   *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR  *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+function ConfirmDelPedido()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Pedido</div>'+
+                        '<table align="center">'+
+                            '<tr>'+
+                              '<th>Está seguro que desea borrar el Pedido?</th>'+
+                            '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Si" class="button" id="OkDelPedido" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelPedido"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    ActivadorEventosClientes();
+}
+function DelPedidoOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelPedido","Id_Pedido":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelPedido(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelPedido(jsonObj)
+{
+    if (jsonObj.DelPedido=="true")
+    {
+        alert("El Pedido se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El Pedido no se pudo borrar");
+    }   
+    
+    seccionPedidosC();
+}
+
+function HideConfirmDelPedido()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    ActivadorEventosClientes();    
+}
+//*********************************************************************************************
+//*********************************************************************************************
+//*************                                                           *********************
+//************* FUNCION OPCI0N DEVOLUCIONES DEL MENU VERTICAL DE CLIENTES *********************
+//*************                                                           *********************
+//*********************************************************************************************
+//*********************************************************************************************
+
+function seccionDevolucionesC()
+{
+
+    var codigoHTML = '<div class="encabezado">Gestión de Clientes</div>'+
+                    '<ul class="menu-vertical">'+
+                        '<li><a href="#1" id="listadoClientes"><img src="images/IconoOpciones.png"/> Listado</a></li>'+
+                        '<li><a href="#2" id="pedidosClientes"><img src="images/IconoOpciones.png"/> Pedidos</a></li>'+
+                        '<li><a href="#3" id="devolucionesClientes"><img src="images/IconoOpciones.png"/> Devoluciones</a></li>'+
+                    '</ul>'; 
+
+    $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").show();
+    $(".content-float-vendedores").css({height: 130});
+    $(".nav .menu li a#Clientes").addClass("active");
+    seccionListadoDevoluciones();
+    $(".menu-vertical li a#devolucionesClientes").addClass("active");
+    ActivadorEventosClientes();
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE DEVOLUCIONES                ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoDevoluciones()
+{
+    var request = {"Usuarios":"Devoluciones"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarDevoluciones(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//********************************************************************************************
+//********************************************************************************************
+//*************                                                          *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION DEVOLUCIONES *********************
+//*************                                                          *********************
+//********************************************************************************************
+//********************************************************************************************
+
+function cargarDevoluciones(jsonArray)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Devoluciones de productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="AddDevolucion"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteDevolucionesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>Id cliente</th>'+
+                            '<th>Codigo Producto</th>'+
+                            '<th>Id Usuario</th>'+
+                            '<th>Id Devolucion</th>'+
+                            '<th>Causa Devolucion</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 == 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModDevolucion" id="' + jsonArray[i].id_devolucion + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_devolucion + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_devolucion + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_usuario + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_devolucion + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].causa_devolucion + '</td>';
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#devolucionesClientes").addClass("active");
+    ActivadorEventosClientes(); 
+}
+//***********************************************************************************
+//********************                                           ********************
+//******************** FUNCION PARA ADICIONAR A UN NUEVO CLIENTE ********************
+//********************                                           ********************
+//***********************************************************************************
+
+function AddDevolucion()
+{
+    var codigoHTML = '<div class="encabezado2">Adicionar Devolución</div>'+
+                     '<div class="tabla">'+
+                     '<form id="form_crear_devolucion"  enctype="multipart/form-data">'+
+                            '<div id="Dev" class="tab_content">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<td>'+
+                                    '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+
+                                  '<th align="left" style="padding-left:5px;">Codigo Producto</th>'+
+                                  '<td>'+
+                                    '<select name="codigo_producto" style="width:165px;" class="prodt">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<td>'+
+                                    '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Causas de la Devolución<br>'+
+                                      '<textarea name="causa_devolucion" cols="74" rows="6"></textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                              '</table>'+
+                        '</div>'+
+                        '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="reset" value="Volver" class="button" id="volverAddDevolucion"/>'+
+                                  '<input type="submit" value="Registrar" class="button"/>'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+ 
+                      '</div>'+
+                      '</form>'+
+                    '</div>';
+
+
+    $("#datos").html(codigoHTML);
+    cargarListadoProductos();
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_crear_devolucion").submit(enviarDatosAddDevolucion);
+    ActivadorEventosClientes();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosAddDevolucion(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddDevolucion","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddDevolucion(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
+//***********************                   CORRECTAMENTE                           **********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function verificarAddDevolucion(jsonObj)
+{
+    if (jsonObj.AddDevolucion  =="true")
+    {
+        alert("La Devolución se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("La Devolución no se pudo adicionar");
+    }   
+    
+    seccionDevolucionesC();
+}
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES              ********************
+//********************                                      ********************
+//******************************************************************************
+
+function DatosModDevolucion()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosDevoluciones","Id_Devolucion":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModDevolucion(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS USUARIOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModDevolucion(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Prdido</div>'+
+                     '<div class="tabla">'+
+                     '<form id="form_modificar_devolucion"  enctype="multipart/form-data">'+
+                            '<div id="Dev" class="tab_content">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<td>'+
+                                    '<select name="id_cliente" style="width:165px;" class="clients">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+
+                                  '<th align="left" style="padding-left:5px;">Codigo Producto</th>'+
+                                  '<td>'+
+                                    '<select name="codigo_producto" style="width:165px;" class="prodt">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<td>'+
+                                    '<select name="id_usuario" style="width:165px;" class="vendor">'+
+                                      //'<option value="null"></option>'+
+                                     '</select>'+
+                                  '</td>'+ 
+                                  '</tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Causas de la Devolución<br>'+
+                                      '<textarea name="causa_devolucion" cols="74" rows="6">' + jsonObject.causa_devolucion + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="id_DevolucionMod" id="id_DevolucionMod" value="' + jsonObject.id_devolucion + '" /></td>'+
+                                '</tr>'+
+                              '</table>'+
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddDevolucion" />'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
+                    '</div>';
+
+    $("#datos").html(codigoHTML);
+    cargarListadoProductos();
+    ListadoClientes();
+    cargarListadoVendedores();
+    IniciarTabers();
+    $('#date_field9').datepick({yearRange: '1980:2050'});
+    $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_devolucion").submit(enviarDatosModDevolucion);
+    ActivadorEventosClientes();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModDevolucion(evento)
+{
+    evento.preventDefault();
+    var id_devolucion = $("#id_DevolucionMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModDevolucion","Datos":datos, "Id_Devolucion":id_devolucion};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModDevolucion(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModDevolucion(jsonObj)
+{
+    if (jsonObj.ModDevolucion  =="true")
+    {
+        alert("La Devolución se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("La Devolución no se pudo modificar");
+    }   
+    
+    seccionDevolucionesC();
+}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
+//*************  VERTICAL DE LA SECCION PERFIL                 *********************
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
@@ -3967,28 +6674,60 @@ function menuPerfil()
 {
    var codigoHTML = '<div class="encabezado">Gestión del Perfil</div>'+
                     '<ul class="menu-vertical">'+
-                        
-                    '</ul>'; 
+                    '</ul>';  
 
     $(".content-float-vendedores").html(codigoHTML);
     $(".content-float-vendedores").hide();
-    $(".content-float-datos").css({width: 860});
+    $(".content-float-datos").css({width: 830});
+    seccionDatosPerfil();
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
-    seccionDatosPerfil();
-    //$(".menu-vertical li a#listadoVentas").addClass("active");
+    
 }
+
+/**********************************************************************************
+*********************                                     *************************
+*********************            SECCION PERFIL           *************************
+*********************                                     *************************
+**********************************************************************************/
+
 function seccionDatosPerfil()
 {
-    var codigoHTML = '<div class="encabezado2">Datos del Administrador</div>'+
-                    '<div class="tabla">'+
+var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModUsuario(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+/**********************************************************************************
+*********************                                     *************************
+*********************   FUNCION PARA MODIFICAR EL PERFIL  *************************
+*********************                                     *************************
+**********************************************************************************/
+function ModUsuario(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
+                     '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Personal">Información</a></li>'+
+                            '<li><a href="#Personal">Personal</a></li>'+
+                            '<li><a href="#Laboral">Laboral</a></li>'+
                         '</ul>'+
-                        
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
+                            '<form id="form_modificar_usuario"  enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="left">'+
                                   '<tr>'+
                                       '<td colspan="2" rowspan="10" align="center">'+
@@ -4001,70 +6740,205 @@ function seccionDatosPerfil()
                                               '</div>'+   
                                           '</div>'+
                                       '</td>'+
-                                    '</tr>'+
+                                  '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
-                                    '<td><input type="text" name="id_usuario" value="396030312" size="20" maxlength="15" required/></td>'+
+                                    '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos" value="Jaramillo Gómez" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="apellidos_usuario" value="' + jsonObject.apellidos_usuario+ '" size="20" maxlength="25" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombres" value="Cristhian David" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="nombre_usuario" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="Crissdav52" size="20" maxlength="10" required/></td>'+
+                                    '<td><input type="text" name="nickname_usuario" value="' + jsonObject.nickname_usuario + '" maxlength="10" "/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="CDDJJJL" size="20" maxlength="10" required/></td>'+
+                                    '<td><input type="password" name="password_usuario" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" "/></td>'+
                                   '</tr>'+
-                                  '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
+                                    '<td align="right" style="padding-right:5px;">Tipo de Usuario</td>'+
                                   '<td>'+
-                                    '<select name="tipoCuenta" style="width:168px;">'+
-                                      '<option value="Ap">Administrador</option>'+
-                                      '<option value="Sr">Gerente</option>'+
-                                      '<option value="Dq">Jefe de Producción</option>'+
-                                      '<option value="Pr">Jefe Comercial</option>'+
-                                      '<option value="Lv">Vendedor</option>'+
-                                      '<option value="Tg">Cliente</option>'+
-                                      '<option value="St">Secretaria</option>'+
+                                    '<select name="tipo_usuario" style="width:168px;">'+
+                                      '<option value="A">A</option>'+
+                                      '<option value="G">G</option>'+
+                                      '<option value="JP">JP</option>'+
+                                      '<option value="JC">JC</option>'+
+                                      '<option value="V">V</option>'+
+                                      '<option value="S">S</option>'+
                                   '</td>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion" value="Cr.8 #5 Frailes" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="direccion_usuario" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono" value="3263360" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="telefono_usuario" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular" value="3218628151" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="celular_usuario" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
+                            '<div id="Laboral" class="tab_content">'+
+                              '<table align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
+                                    '<td><input type="text" name="fecha" id="date_field13" value="' + jsonObject.fecha + '" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">email</th>'+
+                                    '<td><input type="text" name="email_usuario" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
+                                    '<td><input type="text" name="fecha_cumpleanos" id="date_field14" value="' + jsonObject.fecha_cumpleanos + '" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
+                                    '<td>'+
+                                      '<select name="tipo_cuenta_bancaria" style="width:177px">'+
+                                        '<option value="1">Ahorros</option>'+
+                                        '<option value="2">Corriente</option>'+
+                                      '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
+                                    '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Banco</th>'+
+                                    '<td>'+
+                                      '<select name="banco" style="width:177px">'+
+                                        '<option value="1">Bancafé</option>'+
+                                        '<option value="2">Banco AV Villas</option>'+
+                                        '<option value="3">BBVA</option>'+
+                                        '<option value="4">Banco Caja Social BCSC</option>'+
+                                        '<option value="5">Banco de Bogotá</option>'+
+                                        '<option value="6">Banco de Credito</option>'+
+                                        '<option value="7">Banco de la República de Colombia</option>'+
+                                        '<option value="8">Banco de Occidente</option>'+
+                                        '<option value="9">Banco GNB Sudameris</option>'+
+                                        '<option value="10">Banco Granahorrar</option>'+
+                                        '<option value="11">Banco Popular</option>'+
+                                        '<option value="12">Banco Santander Colombia</option>'+
+                                        '<option value="13">Bancoldex</option>'+
+                                        '<option value="14">Bancolombia</option>'+
+                                        '<option value="15">BBVA Banco Ganadero</option>'+
+                                        '<option value="16">Citi Bank</option>'+
+                                        '<option value="17">Colmena BCSC</option>'+
+                                        '<option value="18">Colpatria</option>'+
+                                        '<option value="19">Conavi</option>'+
+                                        '<option value="20">Davivienda</option>'+
+                                        '<option value="21">Megabanco</option>'+
+                                        '<option value="22">Banco Finandino</option>'+
+                                        '<option value="23">Banco Falabella</option>'+
+                                        '<option value="24">Banco Coomeva</option>'+
+                                      '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
+                                    '<td>'+ 
+                                        '<select name="id_ubicacion" style="width:160px;" class="ubicacion">'+
+                                            //'<option value="null"></option>'+
+                                        '</select>'+ 
+                                    '</td>'+
+                               '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Otros datos:<br>'+
+                                      '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                '<tr>'+
+                                    '<td><input type="hidden" name="id_usuarioMod" id="id_usuarioMod" value="' + jsonObject.id_usuario + '" /></td>'+
+                                '</tr>'+
+                              '</table>'+
                             '</div>'+
+                          '</div>'+
                           '<br>'+
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="submit" value="Registrar" class="button"/>'+
+                                  '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
                               '</td>'+
                             '</tr>'+
                           '</table> '+      
                         '</form>'+
-              '</div>';
+                    '</div>';
 
     $("#datos").html(codigoHTML);
+    listUbicacion();
     IniciarTabers();
+    $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field14').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_usuario").submit(enviarDatosModUsuario);
+    activadorEventosUsuarios();
 }
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//*********************** FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS    ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModUsuario(evento)
+{
+    evento.preventDefault();
+    var id_usuario = $("#id_usuarioMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModUsuario","Datos":datos, "Id_usuario":id_usuario};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModUsuario(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModUsuario(jsonObj)
+{
+    if (jsonObj.ModUsuario  =="true")
+    {
+        alert("El usuario se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El usuario no se pudo modificar");
+    }   
+    
+    seccionListado();
+}
+
 //**********************************************************************************
 
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 //$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
-

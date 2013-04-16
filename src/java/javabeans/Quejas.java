@@ -1,35 +1,29 @@
 
 package javabeans;
-
 import org.json.simple.JSONObject;
 
-public class Visitas 
+public class Quejas 
 {
-   private String id_visita; 
+   private String id_queja; 
    private String fecha;
    private String id_cliente;
    private String id_usuario;
    private String descripcion;
    
-   public Visitas()
+   public Quejas()
    {
-       this.id_visita = "";
+       this.id_queja = "";
        this.fecha = "";
        this.id_cliente = "";
-
-       this.id_usuario = "";
- 
-  
-    
+       this.id_usuario = "";   
        this.descripcion = "";
    }
    
-   public Visitas (String id_visita, String fecha, String id_cliente, String id_usuario, String descripcion)
+   public Quejas (String id_queja, String fecha, String id_cliente, String id_usuario, String descripcion)
    {
-       this.id_visita = id_visita; 
+       this.id_queja = id_queja; 
        this.fecha = fecha;
-       this.id_cliente = id_cliente;
- 
+       this.id_cliente = id_cliente; 
        this.id_usuario = id_usuario;
 
 
@@ -40,7 +34,7 @@ public class Visitas
    public JSONObject getJSONObject() 
     {
        JSONObject obj = new JSONObject();
-        obj.put("id_visita", this.id_visita);
+        obj.put("id_queja", this.id_queja);
         obj.put("fecha", this.fecha);
         obj.put("id_cliente", this.id_cliente);
         obj.put("id_usuario", this.id_usuario);
@@ -49,14 +43,14 @@ public class Visitas
         return obj;
     }
    
-   public void setId_visita(String id_visita)
+   public void setId_queja(String id_queja)
     {
-        this.id_visita = id_visita;
+        this.id_queja = id_queja;
     }
    
-   public String getId_visita(String id_visita)
+   public String getId_queja(String id_queja)
     {
-        return this.id_visita;
+        return this.id_queja;
     }
     
    public void setFecha(String fecha)
