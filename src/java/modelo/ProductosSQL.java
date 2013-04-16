@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javabeans.Material;
-import javabeans.Productos;
+import javabeans.productos;
 import javabeans.LineaProduccion;
 import javabeans.TipoProducto;
 import org.json.simple.JSONArray;
