@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 
 /*se crea la clase usuariosSQL que realizara la consulta en la base de datos*/
 
-public class departamentosSQL
+public class departamentosSQL_1
 {   
     
     // Declaramos las variables

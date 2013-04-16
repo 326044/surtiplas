@@ -21,8 +21,8 @@ import modelo.ClientesSQL;
 import modelo.pedidosSQL;
 import modelo.viaticosSQL;
 import modelo.visitasSQL;
-import modelo.departamentosSQL;
-import modelo.municipiosSQL; 
+import modelo.departamentosSQL_1;
+import modelo.municipiosSQL_1; 
 //import modelo.pagosSQL;
 
 
@@ -68,8 +68,8 @@ public class Servletggeneral extends HttpServlet
         pedidosSQL  ped = new pedidosSQL();
         viaticosSQL via = new viaticosSQL();
         visitasSQL vis = new visitasSQL();
-        departamentosSQL dep = new  departamentosSQL();
-        municipiosSQL mun = new municipiosSQL();
+        departamentosSQL_1 dep = new  departamentosSQL_1();
+        municipiosSQL_1 mun = new municipiosSQL_1();
         //pagosSQL pag = new pagosSQL();
 
             
