@@ -1,10 +1,11 @@
-package javabeans;
+  package javabeans;
 
 import org.json.simple.JSONObject;
 
+//estamos creando variables tipo String con el nombre de los campos de la base de datos.
 public class productos 
 {
-    private String codigo_producto;
+    private String codigo_produto;
     private String nombre;
     private String foto;
     private String cantidad;
@@ -12,127 +13,142 @@ public class productos
     private String precio_venta;
     private String precio_descuento;
     private String codigo_barras;
+    private String cod_tipo_producto;
     
-    
+  //inicialisamos la variable con un valor nulo.
     public productos()
     {
-        this.codigo_producto = "";
+        this.codigo_produto = "";
         this.nombre = "";
         this.foto = "";
-        this.cantidad = "";
+        this.cantidad = "";  
         this.precio_costo = "";
-        this.precio_venta = "";
+        this.precio_venta = "";  
         this.precio_descuento = "";
         this.codigo_barras = "";
-        
+        this.cod_tipo_producto = "";
     }
     
-    public productos(String codigo_producto, String nombre, String foto, String cantidad, String precio_costo, String precio_venta, String precio_descuento, String codigo_barras)
+    public productos(String codigo_produto,String nombre, String foto, String cantidad, String precio_costo, String precio_venta, String precio_descuento, String codigo_barras, String cod_tipo_producto)
     {
-        this.codigo_producto = codigo_producto;
+        this.codigo_produto = codigo_produto;
         this.nombre = nombre;
         this.foto = foto;
         this.cantidad = cantidad;
         this.precio_costo = precio_costo;
-        this.precio_venta = precio_venta;
+         this.precio_venta = precio_venta;
         this.precio_descuento = precio_descuento;
         this.codigo_barras = codigo_barras;
-        
+        this.cod_tipo_producto = cod_tipo_producto;      
     }
     
     public JSONObject getJSONObject() 
     {
         JSONObject obj = new JSONObject();
-        obj.put("codigo_producto", this.codigo_producto);
+        obj.put("codigo_producto", this.codigo_produto);
         obj.put("nombre", this.nombre);
         obj.put("foto", this.foto);
         obj.put("cantidad", this.cantidad);
-        obj.put("precio_costo", this.precio_costo);
+        obj.put("precio_costo", this.precio_costo);           
         obj.put("precio_venta", this.precio_venta);
-        obj.put("precio_descuento", this.precio_descuento);
+        obj.put("precio_descuento", this.precio_descuento); 
         obj.put("codigo_barras", this.codigo_barras);
-                   
+        obj.put("cod_tipo_producto", this.cod_tipo_producto);
+        
         return obj;
     }
-    
-    public void setCodProducto(String codigo_producto)
+    /*retorna el valor a otros datos
+                               codigo_produto                                     */    
+    public void setcodigo_produto(String codigo_produto)
     {
-        this.codigo_producto = codigo_producto;
+        this.codigo_produto = codigo_produto;
     }
     
-    public String getCodProducto()
+    public String getcodigo_produtos()
     {
-        return this.codigo_producto;
+        return this.codigo_produto;
     }
-    
-    public void setNombreProducto(String nombre)
+/*                                  nombre                                    */
+    public void setnombre(String id_usuario)
     {
         this.nombre = nombre;
     }
     
-    public String getNombreProducto()
+    public String getnombre()
     {
         return this.nombre;
     }
-    
-    public void setFotoProducto(String foto)
+/*                                    foto                                      */    
+    public void setfoto(String foto)
     {
         this.foto = foto;
     }
     
-    public String getFotoProdcto()
+    public String getfoto()
     {
         return this.foto;
     }
-    
-    public void setCantidad(String cantidad)
+/*                                 cantidad                                 */    
+    public void setcantidad(String cantidad)
     {
         this.cantidad = cantidad;
     }
     
-    public String getCantidado()
+    public String getcantidad()
     {
         return this.cantidad;
     }
-    
-    public void setPrecioCosto(String precio_costo)
+/*                               precio_costo                                   */    
+    public void setprecio_costo(String precio_costo)
     {
         this.precio_costo = precio_costo;
     }
     
-    public String getPrecioCosto()
+    public String getprecio_costo()
     {
         return this.precio_costo;
     }
+    /*                                 precio_venta                                 */    
     
-    public void setPrecioVenta(String precio_venta)
+    public void setprecio_venta(String precio_venta)
     {
         this.precio_venta = precio_venta;
     }
     
-    public String getPrecioVenta()
+    public String getprecio_venta()
     {
         return this.precio_venta;
     }
+/*                                     precio_descuento                                   */    
     
-    public void setPrecioDescuento(String precio_descuento)
+    public void setprecio_descuento(String precio_descuento)
     {
         this.precio_descuento = precio_descuento;
     }
     
-    public String getPrecioDescuento()
+    public String getprecio_descuento()
     {
         return this.precio_descuento;
     }
+    /*                                     codigo_barras                                   */    
     
-    public void setCodigoBarras(String codigo_barras)
+    public void setcodigo_barras(String codigo_barras)
     {
         this.codigo_barras = codigo_barras;
     }
-    
-    public String getCodigoBarras()
+    /*                         getcodigo_barras                   */
+    public String getcodigo_barras()
     {
         return this.codigo_barras;
     }
+    // Boton Borrar
+      public void setcod_tipo_producto(String cod_tipo_producto)
+    {
+        this.cod_tipo_producto = cod_tipo_producto;
+    }
     
+    public String getcod_tipo_producto()
+    {
+        return this.cod_tipo_producto;
+    }
 }
