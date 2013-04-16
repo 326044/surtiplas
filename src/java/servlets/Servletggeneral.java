@@ -17,10 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 /*Importamos los modelos SQL que usaremos */
 
 import modelo.UsuariosSQL;
-import modelo.ClientesSQL;
+import modelo.clientesSQL_1;
 import modelo.pedidosSQL;
-import modelo.viaticosSQL;
-import modelo.visitasSQL;
+import modelo.viaticosSQL_1;
+import modelo.visitasSQL_1;
 import modelo.departamentosSQL_1;
 import modelo.municipiosSQL_1; 
 //import modelo.pagosSQL;
@@ -64,10 +64,10 @@ public class Servletggeneral extends HttpServlet
         /*Le declaramos memoria a los siguientes modelos*/
         
         UsuariosSQL usr = new UsuariosSQL();
-        ClientesSQL cli = new ClientesSQL();
+        clientesSQL_1 cli = new clientesSQL_1();
         pedidosSQL  ped = new pedidosSQL();
-        viaticosSQL via = new viaticosSQL();
-        visitasSQL vis = new visitasSQL();
+        viaticosSQL_1 via = new viaticosSQL_1();
+        visitasSQL_1 vis = new visitasSQL_1();
         departamentosSQL_1 dep = new  departamentosSQL_1();
         municipiosSQL_1 mun = new municipiosSQL_1();
         //pagosSQL pag = new pagosSQL();
@@ -116,7 +116,7 @@ public class Servletggeneral extends HttpServlet
         if (op.equals("Vendedores"))
         {
             JSONArray usuarios = new JSONArray();   
-            usuarios = usr.Obtenervendedores();
+            usuarios = usr.obtenerUsuariosVendedores();
             out.print(usuarios);
         }
         
