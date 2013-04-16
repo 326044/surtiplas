@@ -6,18 +6,14 @@ public class UbicacionGeografica
 {
     private String id_usuario;
     private String lantitud;
-    private String pais;
-    private String departamento;
-    private String ciudad;
+    private String pais;   
     
     
     public UbicacionGeografica()
     {
         this.id_usuario = "";
         this.lantitud = "";
-        this.pais = "";
-        this.departamento = "";
-        this.ciudad = "";
+        this.pais = "";     
        
     }
     
@@ -26,8 +22,6 @@ public class UbicacionGeografica
         this.id_usuario = id_usuario;
         this.lantitud = lantitud;
         this.pais = pais;
-        this.departamento = departamento;
-        this.ciudad = ciudad;
        
     }
     
@@ -36,9 +30,7 @@ public class UbicacionGeografica
         JSONObject obj = new JSONObject();
         obj.put("id_usuario", this.id_usuario);
         obj.put("lantitud", this.lantitud);
-        obj.put("pais", this.pais);
-        obj.put("departamento", this.departamento);
-        obj.put("ciudad", this.ciudad);
+        obj.put("pais", this.pais);        
                            
         return obj;
     }
@@ -71,25 +63,6 @@ public class UbicacionGeografica
     public String getPais()
     {
         return this.pais;
-    }
-    
-    public void setDepartamento(String departamento)
-    {
-        this.departamento = departamento;
-    }
-    
-    public String getDepartamento()
-    {
-        return this.departamento;
-    }
-    
-    public void setCiudad(String ciudad)
-    {
-        this.ciudad = ciudad;
-    }
-    
-    public String getCiudad()
-    {
-        return this.ciudad;
-    }        
+    }    
+          
 }
