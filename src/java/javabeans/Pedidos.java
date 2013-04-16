@@ -73,6 +73,10 @@ public class Pedidos
     {
         this.valor_del_iva = valor_del_iva;
     }
+     public String getvalor_del_iva()
+    {
+       return this.valor_del_iva; 
+    }
      
     public void setvalor_total(String valor_total)
     {

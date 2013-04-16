@@ -400,4 +400,136 @@ public class pedidosSQL {
 
        return(Pedidos);
    }
+    //***********************************************************************************************
+//***********************************************************************************************
+//*************                                                             *********************
+//************* METODO DONDE SE REALIZAN LAS CONSULTA PARA LLAMAR LOS DATOS *********************
+//************* DE LA BASE DE DATOS Y CARGARLOS EN LA INTERFAZ WEB EN CADA  *********************
+//************* UNO DE LOS CAMPOS DEL FORMULARIO                            *********************
+//*************                                                             *********************
+//***********************************************************************************************
+//***********************************************************************************************
+    
+    public JSONObject datosPedidos(String idPedido)
+    {
+        JSONObject pedidos= new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT pedidos.id_pedido, pedidos.valor_del_iva, pedidos.valor_total, pedidos.fecha, pedidos.hora, usuarios.id_usuario, clientes.id_cliente FROM pedidos, usuarios, clientes WHERE usuarios.id_usuario=pedidos.id_usuario AND clientes.id_cliente=pedidos.id_cliente AND pedidos.id_pedido= " + idPedido + ";";
+                     
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            
+            pedidos.put("id_pedido", rs.getString("id_pedido"));
+            pedidos.put("valor_del_iva", rs.getString("valor_del_iva"));
+            pedidos.put("valor_total", rs.getString("valor_total"));
+            pedidos.put("fecha", rs.getString("fecha"));
+            pedidos.put("hora", rs.getString("hora"));
+            pedidos.put("id_usuario", rs.getString("id_usuario"));
+            pedidos.put("id_cliente", rs.getString("id_cliente"));
+       
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return (pedidos);
+    }
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE ADICIONAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE INGRESARON EN LOS CAMPOS DE LA INTERFAZ WEB   *********************
+//************* A TRAVES DEL ESTAMENTO "INSERT INTO" EN LA TABLA PEDIDOS  *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    public boolean AdicionarPedido(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Pedidos usw = new Pedidos("", String.valueOf(datos.get("valor_del_iva")), String.valueOf(datos.get("valor_total")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("hora")), String.valueOf(datos.get("id_cliente")));
+            String tsql;
+            tsql = "INSERT INTO pedidos VALUES(DEFAULT, '";
+            tsql += usw.getvalor_del_iva() + "','" + usw.getvalor_total() + "','" + usw.getid_usuario() + "','" + usw.getfecha() + "','" + usw.gethora() + "','" + usw.getid_cliente() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA PEDIDOS     *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean ModificarPedido(JSONObject datos, String idPedido)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Pedidos usw = new Pedidos("", String.valueOf(datos.get("valor_del_iva")), String.valueOf(datos.get("valor_total")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("hora")), String.valueOf(datos.get("id_cliente")));
+            String tsql;
+            tsql = "UPDATE pedidos SET  valor_del_iva='" + usw.getvalor_del_iva() + "', valor_total='" + usw.getvalor_total() +"', id_usuario='" + usw.getid_usuario() +"', fecha='" + usw.getfecha() + "', hora='" + usw.gethora() + "', id_cliente='" + usw.getid_cliente() + "' WHERE id_pedido = " + idPedido + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS  *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA  PEDIDOS       *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean BorrarPedido(String idPedido)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM pedidos WHERE id_pedido = " + idPedido + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }

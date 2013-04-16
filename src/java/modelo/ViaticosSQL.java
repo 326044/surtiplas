@@ -112,7 +112,69 @@ public class ViaticosSQL
         
         return true;
     }
-     
+
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA VIATICOS      *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean ModificarViaticos(JSONObject datos, String idViaticos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Viaticos usrs = new Viaticos("", String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("valor")), String.valueOf(datos.get("concepto")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("codMunicipio")), String.valueOf(datos.get("doc_soporte")));
+            String tsql;
+            tsql = "UPDATE viaticos SET id_usuario=" + usrs.getId_usuario() + ", valor='" + usrs.getValor() + "', concepto='" + usrs.getConcepto() + "', fecha='" + usrs.getFecha() + "', codMunicipio='" + usrs.getcodMunicipio() + "', doc_soporte='" + usrs.getdoc_soporte() + "' WHERE id_viaticos = " + idViaticos + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS  *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA VIATICOS       *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean BorrarViatico(String idViaticos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM viaticos WHERE id_viaticos = '" + idViaticos + "';";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }    
      //**************************************************************************************
 //*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA*************************
 //*************  PARA BUSCAR LOS VIATICOS YA SEA POR FECHA DE INICIO, FECHA FINAL,************

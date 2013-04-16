@@ -51,7 +51,7 @@ public class ServletAdministrador extends HttpServlet
         System.out.print(jsonObj.toString());
         UsuariosSQL usr = new UsuariosSQL();
         VisitasSQL uss = new VisitasSQL();
-        ViaticosSQL usl = new ViaticosSQL();
+        ViaticosSQL usrs = new ViaticosSQL();
         ProductosAdSQL usj = new ProductosAdSQL();
         ClientesSQL usf = new ClientesSQL();
         LineaProduccionSQL lp = new LineaProduccionSQL();
@@ -470,7 +470,7 @@ public class ServletAdministrador extends HttpServlet
                 Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
-                viaticos = usl.cargarListadoViatico(jsonObject);
+                viaticos = usrs.cargarListadoViatico(jsonObject);
             }
 
             catch (ParseException e) 
@@ -493,7 +493,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usl.AdicionarViatico(jsonObject))
+                if (usrs.AdicionarViatico(jsonObject))
                 {
                     objRes.put("AddViatico", "true");
                     out.print(objRes);
@@ -526,7 +526,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usl.ModificarViaticos(jsonObject, cod))
+                if (usrs.ModificarViaticos(jsonObject, cod))
                 {
                     objRes.put("ModViatico", "true");
                     out.print(objRes);
@@ -549,7 +549,7 @@ public class ServletAdministrador extends HttpServlet
             String cod = String.valueOf(jsonObj.get("Id_Viaticos"));  
             JSONObject objRes = new JSONObject();
             
-            if (usl.BorrarViatico(cod))
+            if (usrs.BorrarViatico(cod))
             {
                 objRes.put("DelViatico", "true");
                 out.print(objRes);
@@ -658,7 +658,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (ush.AdicionarLinea(jsonObject))
+                if (lp.AdicionarLinea(jsonObject))
                 {
                     objRes.put("AddLinea", "true");
                     out.print(objRes);
