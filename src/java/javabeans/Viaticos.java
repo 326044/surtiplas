@@ -17,30 +17,30 @@ public class Viaticos
      private String id_usuario;
      private String valor;
      private String concepto;
-     private String nombre_usuario;
-     private String cedula;
-     private String fecha;       
-    
+     private String fecha;
+     private String codMunicipio;  
+     private String doc_soporte;
+     
      public Viaticos()
      {
        this.id_viaticos = "";
        this.id_usuario = "";
        this.valor = "";
        this.concepto = "";
-       this.nombre_usuario = "";
-       this.cedula = "";
        this.fecha = "";
+       this.codMunicipio = "";
+       this.doc_soporte="";
      }
      
-     public Viaticos(String id_viaticos, String id_usuario, String valor, String concepto, String nombre_usuario, String cedula, String fecha)
+     public Viaticos(String id_viaticos, String id_usuario, String valor, String concepto, String fecha, String codMunicipio, String doc_soporte)
      {
          this.id_viaticos = id_viaticos;
          this.id_usuario = id_usuario;
          this.valor = valor;
          this.concepto = concepto;
-         this.nombre_usuario = nombre_usuario;
-         this.cedula = cedula;
          this.fecha = fecha;
+         this.codMunicipio = codMunicipio;
+         this.doc_soporte = doc_soporte;
      }
      
      public JSONObject getJSONObject()
@@ -50,9 +50,9 @@ public class Viaticos
          obj.put("id_usuario", this.id_usuario);
          obj.put("valor", this.valor);
          obj.put("concepto", this.concepto);
-         obj.put("nombre_usuario", this.nombre_usuario);
-         obj.put("cedula", this.cedula);
          obj.put("fecha", this.fecha);
+         obj.put("codMunicipio", this.codMunicipio);
+         obj.put("doc_soporte", this.doc_soporte);
          
          return obj;
      }
@@ -96,27 +96,7 @@ public class Viaticos
      {
          return this.concepto;
      }        
-     
-     public void setNombre_usuario(String nombre_usuario)
-     {
-         this.nombre_usuario = nombre_usuario;
-     }
-     
-     public String getNombre_usuario()
-     {
-         return this.nombre_usuario;
-     }
-     
-     public void setCedula (String cedula)
-     {
-         this.cedula = cedula;
-     }
-     
-     public String getCedula()
-     {
-         return this.cedula;
-     }
-     
+        
      public void setFecha(String fecha)
      {
          this.fecha = fecha;
@@ -125,6 +105,26 @@ public class Viaticos
      public String getFecha()
      {
          return this.fecha;
-     }        
+     }
+     
+     public void setcodMunicipio(String codMunicipio)
+     {
+         this.codMunicipio = codMunicipio;
+     }
+     
+     public String getcodMunicipio()
+     {
+         return this.codMunicipio;
+     }  
+     
+     public void setdoc_soporte(String doc_soporte)
+     {
+         this.codMunicipio = doc_soporte;
+     }
+     
+     public String getdoc_soporte()
+     {
+         return this.doc_soporte;
+     } 
 }
 
