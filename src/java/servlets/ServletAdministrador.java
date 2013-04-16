@@ -14,18 +14,16 @@ import modelo.ColoresSQL;
 import modelo.ComboClientesSQL;
 import modelo.DepartamentosSQL;
 import modelo.DevolucionesSQL;
-import modelo.LineasComboSQL;
 import modelo.ComboProductoSQL;
-import modelo.LineasSQL;
-import modelo.MaterialesComboSQL;
-import modelo.MaterialesSQL;
+import modelo.LineaProduccionSQL;
+import modelo.MaterialSQL;
 import modelo.MunicipiosSQL;
-import modelo.PedidosSQL;
+import modelo.pedidosSQL;
 import modelo.PerfilSQL;
 import modelo.ProductosAdSQL;
 import modelo.TallasComboSQL;
 import modelo.TallasSQL;
-import modelo.TipoSQL;
+import modelo.TipoProductoSQL;
 import modelo.UbicacionSQL;
 import modelo.UsuariosSQL;
 import modelo.VendedoresSQL;
@@ -56,11 +54,11 @@ public class ServletAdministrador extends HttpServlet
         ViaticosSQL usl = new ViaticosSQL();
         ProductosAdSQL usj = new ProductosAdSQL();
         ClientesSQL usf = new ClientesSQL();
-        LineasSQL ush = new LineasSQL();
+        LineaProduccionSQL lp = new LineaProduccionSQL();
         ColoresSQL usp = new ColoresSQL();
         TallasSQL usb = new TallasSQL();
-        MaterialesSQL use = new MaterialesSQL();
-        PedidosSQL usw = new PedidosSQL();
+        MaterialSQL use = new MaterialSQL();
+        pedidosSQL usw = new pedidosSQL();
         DevolucionesSQL usd = new DevolucionesSQL();
         DepartamentosSQL dpt= new DepartamentosSQL();
         MunicipiosSQL mun= new MunicipiosSQL();
@@ -68,18 +66,16 @@ public class ServletAdministrador extends HttpServlet
         VendedoresSQL ven= new VendedoresSQL();
         ComboClientesSQL cli= new ComboClientesSQL();
         PerfilSQL per= new PerfilSQL();
-        LineasComboSQL lni=new LineasComboSQL();
-        MaterialesComboSQL mtc=new MaterialesComboSQL();
         ComboProductoSQL cp=new ComboProductoSQL();
         TallasComboSQL tc=new TallasComboSQL();
         ColorSQL cl=new ColorSQL();
-        TipoSQL ti=new TipoSQL();
+        TipoProductoSQL ti=new TipoProductoSQL();
 
         
         if (op.equals("Listado"))
         {
             JSONArray usuarios = new JSONArray();
-            usuarios = usr.cargarListado();
+            usuarios = usr.obtenerUsuariosVendedores();
             out.print(usuarios);
         }
         
@@ -98,7 +94,7 @@ public class ServletAdministrador extends HttpServlet
         if (op.equals("Lineas"))
         {
             JSONArray lineas = new JSONArray();
-            lineas = ush.cargarListadolineas();
+            lineas = lp.cargarListadolineas();
             out.print(lineas);
         }
 

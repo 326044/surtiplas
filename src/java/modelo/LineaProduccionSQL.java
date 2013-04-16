@@ -87,5 +87,26 @@ public class LineaProduccionSQL
     
         return(LineaProduccion);
     }
-    
+    public boolean AdicionarLinea(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            LineaProduccion lp = new LineaProduccion("", String.valueOf(datos.get("nombre_linea")));
+            String tsql;
+            tsql = "INSERT INTO linea_produccion VALUES(DEFAULT, '";
+            tsql += lp.getNombre_linea() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }
