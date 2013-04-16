@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 // se importa el modelo
 
-import javabeans.municipios;
+import javabeans.municipios_1;
 
 /* se importan las librerias json que se usaran*/
 
@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 
 /*se crea la clase usuariosSQL que realizara la consulta en la base de datos*/
 
-public class municipiosSQL
+public class municipiosSQL_1
 {   
         // Declaramos las variables
     
@@ -81,7 +81,7 @@ public class municipiosSQL
             
             while(this.rs.next())
             {  
-                municipios mun = new municipios(rs.getString("codMunicipio"), rs.getString("NombreMunicipio"), rs.getString("cod_departamento"));
+                municipios_1 mun = new municipios_1(rs.getString("codMunicipio"), rs.getString("NombreMunicipio"), rs.getString("cod_departamento"));
                 municipio = mun.getJSONObject();
                 System.out.printf(municipio.toString());
                 arraymunicipios.add(municipio);

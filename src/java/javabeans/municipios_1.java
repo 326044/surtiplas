@@ -6,7 +6,7 @@ import org.json.simple.JSONObject;
 
 // hacemos publica la clase Usuarios
 
-public class municipios
+public class municipios_1
 {	
 
 	 // declaro la svariable de tipo cadena
@@ -17,7 +17,7 @@ public class municipios
  
 	// inicializamos las variables vacios
  
-    public municipios()
+    public municipios_1()
     {
         this.codMunicipio = "";
         this.nombreMunicipio = "";         
@@ -27,7 +27,7 @@ public class municipios
 	 /* traemos los datos desde la base de datos para 
      asignarlos a las variables inicializadas*/
 	
-    public municipios(String codMunicipio, String NombreMunicipio, String cod_departamento)
+    public municipios_1(String codMunicipio, String NombreMunicipio, String cod_departamento)
     {
         this.codMunicipio = codMunicipio;
         this.nombreMunicipio = NombreMunicipio;        

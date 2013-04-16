@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 // se importa el modelo
 
-import javabeans.clientes;
+import javabeans.clientes_1;
 
 /* se importan las librerias json que se usaran*/
 
@@ -18,7 +18,7 @@ import org.json.simple.JSONObject;
 
 /*se crea la clase usuariosSQL que realizara la consulta en la base de datos*/
 
-public class clientesSQL
+public class clientesSQL_1
 {
     
     // Declaramos las variables
@@ -82,7 +82,7 @@ public class clientesSQL
             
             while(this.rs.next())
             {  
-                clientes cli = new clientes(rs.getString("id_cliente"), rs.getString("cedula"), rs.getString("razon_social"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"), rs.getString("telefono"), rs.getString("nombre_contacto"), rs.getString("celular"), rs.getString("foto"), rs.getString("email"), rs.getString("maximo_credito"), rs.getString("estado"), rs.getString("comentario"),  rs.getString("documentos_de_soporte"), rs.getString("responsable"), rs.getString("fecha"), rs.getString("codMunicipio"));
+                clientes_1 cli = new clientes_1(rs.getString("id_cliente"), rs.getString("cedula"), rs.getString("razon_social"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"), rs.getString("telefono"), rs.getString("nombre_contacto"), rs.getString("celular"), rs.getString("foto"), rs.getString("email"), rs.getString("maximo_credito"), rs.getString("estado"), rs.getString("comentario"),  rs.getString("documentos_de_soporte"), rs.getString("responsable"), rs.getString("fecha"), rs.getString("codMunicipio"));
                 cliente = cli.getJSONObject();
                 System.out.printf(cliente.toString());
                 arrayclientes.add(cliente);
