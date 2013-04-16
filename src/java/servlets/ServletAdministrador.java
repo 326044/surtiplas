@@ -22,7 +22,7 @@ import modelo.MaterialesSQL;
 import modelo.MunicipiosSQL;
 import modelo.PedidosSQL;
 import modelo.PerfilSQL;
-import modelo.ProductosSQL;
+import modelo.ProductosAdSQL;
 import modelo.TallasComboSQL;
 import modelo.TallasSQL;
 import modelo.TipoSQL;
@@ -54,7 +54,7 @@ public class ServletAdministrador extends HttpServlet
         UsuariosSQL usr = new UsuariosSQL();
         VisitasSQL uss = new VisitasSQL();
         ViaticosSQL usl = new ViaticosSQL();
-        ProductosSQL usj = new ProductosSQL();
+        ProductosAdSQL usj = new ProductosAdSQL();
         ClientesSQL usf = new ClientesSQL();
         LineasSQL ush = new LineasSQL();
         ColoresSQL usp = new ColoresSQL();
