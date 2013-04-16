@@ -72,29 +72,33 @@ function activadorEventosVendedores()
     //*********************************************************
     //** VARIABLES DE LAS OPCIONES DEL LISTADO DE VENDEDORES **
     //*********************************************************
-    var adicionarV, modificarV, borrarV, visualizarV, reporteV;
-    var volverVendedor, vBorrarV, vHideDelV;
+    var adicionarV, modificarV, cod_tipo_productoV, visualizarV, reporteV;
+    var volverVendedor, vBorrarV, vHideDelV,vBorrarOk;
     // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     adicionarV=$("#AVendedor");
     adicionarV.click(AddVendedor);
     modificarV=$(".ModVendedor");
     modificarV.click(ModVendedor);
     visualizarV=$(".VerVendedor");
-    visualizarV.click(VerVendedor);
-    borrarV=$(".DelVendedor");
-    borrarV.click(DelVendedor);
-
+    visualizarV.click(cargarVerProd);
+    
+    cod_tipo_productoV=$(".DelVendedor");
+    cod_tipo_productoV.click(delPro);
+    
     volverVendedor=$("#volverAddVendedor");
     volverVendedor.click(seccionListado);
-    vBorrarV=$("#borrarVendedor");
+    vBorrarV=$("#cod_tipo_productoVendedor");
     vBorrarV.click(ConfirmDelVendedor);
+    vBorrarOk=$("#OkDelVendedor");
+    vBorrarOk.click(DelVendedorOk);
     vHideDelV=$("#NotDelVendedor");
     vHideDelV.click(HideConfirmDelVendedor); 
+    
     //*****************************************************
     //** VARIABLES DE LAS OPCIONES DEL LISTADO DE VENTAS **
     //*****************************************************
     var addVenta, modVenta, delVentas, verVentas, reporteVentas;
-    var volverVenta, addProducto, modVenta, verVenta, delVenta, hideDelVenta, hideAddProducto;
+    var volverVentas, addProducto, modVenta, verVenta, delVenta, hideDelVenta, hideAddProducto;
     // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     addVenta=$(".AdicionarVenta");
     addVenta.click(AddVenta);
@@ -188,6 +192,7 @@ function IniciarTabersAnidados()
 
 function menuVendedores()
 {
+    //Son las tres opciones que tiene el opcion vertical.
    var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
                     '<ul class="menu-vertical">'+
 
@@ -195,7 +200,9 @@ function menuVendedores()
                         '<li><a href="#2" id="ProdBuscar"><img src="images/IconoOpciones.png"/> Buscar</a></li>'+
                         '<li><a href="#3" id="ActividadesVendedor"><img src="images/IconoOpciones.png"/> Rastrear</a></li>'+
                     '</ul>'; 
+    //Estamos agregando y colocando valore en el content-float-vendedores
     $(".content-float-vendedores").html(codigoHTML);
+    //Estamos inicializando que quede subraya la casilla "Productos"
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     seccionListado();
@@ -213,7 +220,7 @@ function menuVendedores()
 //**********************************************************************************
 //**********************************************************************************
 
-function menuClientes()
+/*function menuClientes()
 {
    var codigoHTML = '<div class="encabezado">Gestión de Clientes</div>'+
                     '<ul class="menu-vertical">'+
@@ -226,7 +233,7 @@ function menuClientes()
     seccionListadoClientes();
     //$(".menu-vertical li a#listadoProductos").addClass("active");
 }
-
+*/
 //**********************************************************************************
 //**********************************************************************************
 //*************                                                *********************
@@ -258,7 +265,7 @@ function menuProductos()
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
-
+//Esta sera la funcion la cual llame al perfil.
 function menuPerfil()
 {
    var codigoHTML = '<div class="encabezado">Gestión del Perfil</div>'+
@@ -282,174 +289,100 @@ function menuPerfil()
 //*************                                                *********************
 //*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
 //*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DE LOS   *********************
-//*************  VENDEDORES                                    *********************
+//*************  PRODUCTOS.                                    *********************
 //*************                                                *********************
 //**********************************************************************************
 //**********************************************************************************
 
+//Estamos comunicando al servelt eh indicando cual es la consulta que aremos en este caso sera seleccionar listado.
 function seccionListado()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
-                     '<div class="tabla">'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar producto" id="AVendedor"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>Id-producto</th>'+
-							'<th>Nombre</th>'+
-                            '<th>Fecha Creacion </th>'+
-							'<th>Color Producto</th>'+
-							'<th>Talla Producto</th>'+
-							'<th>Cantidad de Productos</th>'+
-                          '</tr>'+
-                 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor"/></td>'+
-                            '<td>9867024</td>'+
-							'<td>IguanoPato</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
+    var request = {"Pproduccion":"ListadoProductos"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+            data: {produccion:jsonobj},
+            dataType: 'json',
+            url: 'ServletProduccion',
+            type: 'POST',
+            success: function(jsonArray)
+            {
+                cargarListado(jsonArray);     
+            },
+//Esto es una alerta la cual capturara si hay un error al conectar a el serveltProduccion 
+            error: function(jsonArray) 
+            {
+                alert('Error al conectar con serveltProduccion');
+            }
+          });
+}
 
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                           '<td>9867024</td>'+
-						   '<td>ChipaBurro</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
+function cargarListado(jsonArray)
+{    
+    //Este es el encabezado de la tabala.
+    var codigoHTML =     '<div class="encabezado2">Visualizar La Ubicacion Geografica</div>'+
+                         '<div class="tabla">'+
+                            '<ul class="tabs">'+
+                                '<li><a href="#producto">produccion</a></li>'+
+                            '</ul>'+                       
+                            '<div class="tab_container">'+                           
+                                 '<div id="producto" class="tabcontent">'+
+                                     '<table class="tbonita">'+
+                                       '<tr align="left">'+           				   
+                                         '<th colspan="2"></th>'+			                            
+                                         '<th>Nombre</th>'+
+                                         '<th>foto</th>'+
+                                         '<th>Precio costo</th>'+
+                                         '<th>Precio venta</th>'+
+                                         '<th>Precio descuento</th>'+
+                                         '<th>Codigo de barras</th>'+
+                                       '</tr>';      
+                                   
+//Aca estaremos rellenando la tabla con los datos que hay en la base de datos.
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+//Este es el arreglo que usaremos para "colorear" las columbnas de dos colores distintos al intervalo de cada una.
+           if (i % 2 == 0)
+                codigoHTML+=           '<tr>';
+           else
+                codigoHTML+=           '<tr class="even">';
 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                           '<td>9867024</td>'+
-						   '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
 
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-							'<td>9867024</td>'+
-							'<td>TortuPez</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
+           codigoHTML+=                 '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" id="'+ jsonArray[i].codigo_producto + '" /></td>';
+           codigoHTML+=                  '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" id="' + jsonArray[i].codigo_producto + '" /></td>';
+           codigoHTML+=                  '<td>' + jsonArray[i].nombre + '</td>';  
+           codigoHTML+=                  '<td>' + jsonArray[i].foto + '</td>'; 
+           codigoHTML+=                  '<td>' + jsonArray[i].precio_costo + '</td>';
+           codigoHTML+=                  '<td>' + jsonArray[i].precio_venta + '</td>';
+           codigoHTML+=                  '<td>' + jsonArray[i].precio_descuento + '</td>';
+           codigoHTML+=                  '<td>' + jsonArray[i].codigo_barras + '</td>';
+           codigoHTML+=                  '<td>' + jsonArray[i].cod_tipo_producto + '</td>';
+           codigoHTML+=                '</tr>';
+           
+    }
 
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                              '<td>9867024</td>'+
-							  '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                             '<td>9867024</td>'+
-							 '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                              '<td>9867024</td>'+
-							  '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                             '<td>9867024</td>'+
-							 '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-
-                               '<td>9867024</td>'+
-							   '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-
-                          '<tr class="even">'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-                              '<td>9867024</td>'+
-							  '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-						
-                          '<tr>'+
-                            '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" /></td>'+
-                            '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" /></td>'+
-                            '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" /></td>'+
-
-                               '<td>9867024</td>'+
-							   '<td>IguanoCabra</td>'+
-                            '<td>03/09/2012</td>'+
-                            '<td>Verde</td>'+
-                            '<td>S</td>'+
-                            '<td>4000 unid.</td>'+
-                          '</tr>'+
-            
-                    '</div>';
-
+     codigoHTML+=                    '</table>'+
+                                 '</div>'+
+                             '</div>'+
+                         '</div>';  
+        
+    //Estamos rellenando "Datos" del codigo HTML 
     $("#datos").html(codigoHTML);
+     //estamos indicando que se subraye al undirle click en el boton.
     $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#listadoProductos").addClass("active");
+    $(".menu-vertical li a#listadoVentas").addClass("active");
     activadorEventosVendedores();
+    IniciarTabers();
+    $("#listadoProductos").addClass("active");
 }
 
 //**********************************************************************************
 //*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
 //*************  SEGUN LAS OPCIONES DE ADICIONAR, MODIFICAR,   *********************
 //*************  VISUALIZAR, BORRAR Y GENERAR INFORME EN LA    *********************
-//*************  OPCION LISTADO DE LOS VENDEDORES              *********************
+//*************  OPCION LISTADO DE LOS PRODUCTOS               *********************
 //**********************************************************************************
+
+//Estara sera la funcion la cual adicione productos nuevos.
 
 function AddVendedor()
 {
@@ -514,11 +447,12 @@ function AddVendedor()
 
     $("#datos").html(codigoHTML);
     IniciarTabers();
+    //Estos son los calendarios despegables
     $('#date_field13').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick({yearRange: '1980:2050'});
     activadorEventosVendedores();
 }
-
+//Funcion que usaremos para modificar los productos.
 function ModVendedor()
 {
     var codigoHTML = '<div class="encabezado2">Modificar Productos</div>'+
@@ -584,9 +518,36 @@ function ModVendedor()
     activadorEventosVendedores();
 }
 
-function VerVendedor()
+//Esta funcion cargará las consultas del ServeletProduccion.
+function cargarVerProd()
 {
-    var codigoHTML = '<div class="encabezado2">Visualizar Producto</div>'+
+    var id = $(this)[0].id;
+    //alert(id); 
+    var request = {"Pproduccion":"DatosVendedor","Id_producto":id};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    $.ajax({
+            data: {produccion:jsonobj},
+            dataType: 'json',
+            url: 'ServletProduccion',
+            type: 'POST',
+            success: function(JSONArray)
+            {
+                //llamaremos la funcion "VerVendedor"
+                VerVendedor(JSONArray);     
+            },
+            error: function(JSONArray) 
+            {
+                //Esto es una alerta la cual capturara los posibles errores del servlet 
+                alert('Error al conectar con Servletggeneral');
+            }
+          });  
+}
+
+//Aca con el jsonobj relleanremos los campos de labase de datos.
+function VerVendedor(jsonobj)
+{
+   var codigoHTML = '<div class="encabezado2">Visualizar Producto</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Producto</a></li>'+
@@ -604,33 +565,38 @@ function VerVendedor()
                                               '</div>'+
                                               '<div>'+
                                                   '<input type="button" value="Cargar Imagen" class="button" '+
+                                                 
                                               '</div>'+   
                                           '</div>'+
                                       '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
-                                    '<td><input type="text" name="id_usuario" value="IguanoPato" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="id_usuario" value="'+jsonobj.nombre+'" size="20" maxlength="15" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Id Producto</th>'+
-                                    '<td><input type="text" name="apellidos" value="11111" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="apellidos" value="'+jsonobj.foto+'" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Color Producto</th>'+
-                                    '<td><input type="text" name="nombres" value="Verde" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="nombres" value="'+jsonobj.precio_costo+'" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Tallas Disponibles</th>'+
-                                    '<td><input type="text" name="nickname" value="S,M y L" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="nickname" value="'+jsonobj.precio_venta+'" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Cantidad a crear</th>'+
-                                    '<td><input type="text" name="direccion" value="Coomnes Casa 17" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="direccion" value="'+jsonobj.precio_descuento+'" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha de Creacion</th>'+
-                                    '<td><input type="text" name="telefono" value="2012-06-10" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="telefono" value="'+jsonobj.codigo_barras+'" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                   '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha de Creacion</th>'+
+                                    '<td><input type="text" name="telefono" value="'+jsonobj.cod_tipo_producto+'" size="20" maxlength="12" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -644,13 +610,35 @@ function VerVendedor()
                           '</table> '+      
                         '</form>'+
                     '</div>';
-
+  
     $("#datos").html(codigoHTML);
     IniciarTabers();
     activadorEventosVendedores();
+}//Con esta funcion tomaremos la consulta.
+function delPro()
+{
+    var id = $(this)[0].id;
+    //alert(id); 
+    var request = {"Pproduccion":"DelVendedor","Id_producto":id};
+    var jsonobj=JSON.stringify(request);
+    alert(jsonobj.toString());
+    $.ajax({
+            data: {produccion:jsonobj},
+            dataType: 'json',
+            url: 'ServletProduccion',
+            type: 'POST',
+            success: function(jsonObject)
+            {
+                DelVendedor(jsonObject);     
+            },
+            error: function(jsonObject) 
+            {
+                alert('Error al conectar con Servletggeneral');
+            }
+          });  
 }
-
-function DelVendedor()
+//Relelnamos los campos de la tabla del producto.
+function DelVendedor(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
                      '<div class="tabla">'+
@@ -666,61 +654,103 @@ function DelVendedor()
                                     '</td>'+
                                 '</tr>'+
                                 '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Nombre Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">IguanoPato</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Id Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">11111</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Color Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">Verde</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Tallas producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">cajaramillov</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Cantidad Producto:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">444</td>'+
-                                '</tr>'+
-                                '<tr>'+
-                                  '<th align="right" style="padding-right:5px;">Fecha Ingreso:</th>'+
-                                  '<td style="font-size:15px; color: #000; font-weight:bold;">2012-06-10</td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
+                                    '<td><input type="text" name="id_usuario" value="'+jsonObject.nombre+'" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Producto</th>'+
+                                    '<td><input type="text" name="apellidos" value="'+jsonObject.foto+'" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Color Producto</th>'+
+                                    '<td><input type="text" name="nombres" value="'+jsonObject.precio_costo+'" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Tallas Disponibles</th>'+
+                                    '<td><input type="text" name="nickname" value="'+jsonObject.precio_venta+'" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cantidad a crear</th>'+
+                                    '<td><input type="text" name="direccion" value="'+jsonObject.precio_descuento+'" size="20" maxlength="35" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha de Creacion</th>'+
+                                    '<td><input type="text" name="telefono" value="'+jsonObject.codigo_barras+'" size="20" maxlength="12" readonly="readonly"/></td>'+
                                 '</tr>'+
                                 '<tr>'+
                                   '<td colspan="4" align="center">'+
                                       '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
-                                      '<a href="#DelV" class="button" id="borrarVendedor" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                      '<a href="#DelV" class="button" id="' + jsonObject.id_usuario + '" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
                                   '</td>'+
                                 '</tr>'+
                             '</table>'+       
                         '</form>'+
                     '</div>';
-
+      $("#").click();            
     $("#datos").html(codigoHTML);
     activadorEventosVendedores();
 }
-
+//Confirmaremos que estamos seguros de que queremos borrar el producto, saldra una ventana emergente la cual tendra dos opciones "Borrar" y "Eliminar"
 function ConfirmDelVendedor()
 {
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+   var id = $(this)[0].name;
+    var codigoHTML = '<div class="encabezado2">Borrar Vendedor</div>'+
                         '<table align="center">'+
                             '<tr>'+
-                              '<th>Está seguro que desea borrar el Producto</th>'+
+                              '<th>Está seguro que desea cod_tipo_producto el vendedor?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Si" class="button" id="OkDelVendedor"/>'+
+                                '<input type="button" value="Si" class="button" id="OkDelVendedor" name="' + id + '"/>'+
                                 '<input type="button" value="No" class="button" id="NotDelVendedor"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
-
+    //Estaremos blokeando que no se pueda mover nada solo la ventana emergente,
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
     activadorEventosVendedores();
+    
+}
+//hemos mandado la ultima consulta la cual nos elimina.
+function DelVendedorOk()
+{
+    var id = $(this)[0].name; 
+    var request = {"Pproduccion":"DelVendedor","Id_producto":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {produccion:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletProduccion',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelVendedor(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletComercial');
+                    }
+               });
+}
+//Esta funcion genera un mensaje correcto o incorercto. 
+function verificarDelVendedor(jsonObj)
+{
+    if (jsonObj.DelVendedor  =="true")
+    {
+        
+        alert("El vendedor se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("El vendedor no se pudo cod_tipo_producto");
+    }   
+    
+    seccionListado();
 }
 
 function HideConfirmDelVendedor()
@@ -1820,7 +1850,7 @@ function ConfirmDelVenta()
     var codigoHTML = '<div class="encabezado2">Borrar Venta</div>'+
                         '<table align="center">'+
                             '<tr>'+
-                              '<th>Está seguro que desea borrar la Venta?</th>'+
+                              '<th>Está seguro que desea cod_tipo_producto la Venta?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Si" class="button" id="OkDelVenta"/>'+
