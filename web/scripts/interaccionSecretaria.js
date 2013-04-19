@@ -275,7 +275,7 @@ function cargarListado(JSONArray)
 							codigoHTML+=                  '<td>' + JSONArray[k][i].telefono_usuario + '</td>';
 							codigoHTML+=                  '<td>' + JSONArray[k][i].celular_usuario + '</td>';
 							codigoHTML+=                  '<td>' + JSONArray[k][i].email_usuario + '</td>';
-							codigoHTML+=                '</tr>'; 
+							codigoHTML+=                '</tr>';  
 
                }
                 codigoHTML+=                    '</table>'+
