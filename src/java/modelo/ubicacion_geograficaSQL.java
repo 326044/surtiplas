@@ -10,6 +10,7 @@ import java.sql.Statement;
 // se importa el modelo
 
 import javabeans.Usuarios;
+import javabeans.UbicacionGeografica;
 
 /* se importan las librerias json que se usaran*/
 
@@ -101,5 +102,44 @@ public class ubicacion_geograficaSQL
     
         return(vendedores);
     }  
- 
+    //****************************************************************************************
+//****************************************************************************************
+//*************                                                      *********************
+//*************  METODO QUE SE ENCARGA DE REALIZAR LA CONSULTA PARA  *********************
+//*************  LLAMAR LOS DATOS DE LA BASE DE DATOS                *********************
+//*************                                                      *********************
+//****************************************************************************************
+//****************************************************************************************
+    
+    public JSONArray listUbicacion()
+    {
+        JSONArray ubicaciones = new JSONArray();
+        JSONObject ubic = new JSONObject();
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql;
+            sql = "SELECT * FROM ubicacion_geografica";
+            this.rs = this.st.executeQuery(sql);
+            
+            while(this.rs.next())
+            {
+                UbicacionGeografica ub = new UbicacionGeografica(rs.getString("id_ubicacion"), rs.getString("latitud"), rs.getString("longitud"));
+                ubic = ub.getJSONObject();
+                System.out.print(ubic.toString());
+                ubicaciones.add(ubic);
+            }
+            
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    
+        return(ubicaciones);
+    }
 }

@@ -140,14 +140,14 @@ public class ServletAdministrador extends HttpServlet
         {
             String cod = String.valueOf(jsonObj.get("Id_Visitas"));  
             System.out.print(cod);
-            JSONObject visita = uss.datosVisitas(cod);
+            JSONObject visita = uss.DatosVisita(cod);
             out.print(visita);
         }
        if (op.equals("DatosViaticos"))
         {
             String cod = String.valueOf(jsonObj.get("Id_Viaticos"));  
             System.out.print(cod);
-            JSONObject viatico = usl.datosViaticos(cod);
+            JSONObject viatico = usrs.DatosViatico(cod);
             out.print(viatico);
         }
         if (op.equals("DatosProductos"))
