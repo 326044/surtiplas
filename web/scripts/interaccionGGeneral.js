@@ -2738,12 +2738,18 @@ function seccionViaticos()
                                                         
                                                         /*Se crea la tabla donde se ubicaran los datos*/
                                                         							
-                                                '</tr>'+       
-                                            '</table>'+										
-                                        '</form>'+     
-                                    '</tr>'+       									
-                                '</table>'+																														
-                            '</div>'+		   
+                                                                    '</tr>'+       
+                                                                '</table>'+										
+                                                                '<table class="tbonita">'+
+                                                                   '<tr align="left">'+           				   
+                                                                        '<th></th>'+
+                                                                        '<th>id_visita</th>'+
+                                                                        '<th>fecha</th>'+
+                                                                        '<th>id_cliente</th>'+
+                                                                        '<th>id_usuario</th>'+
+                                                                        '<th>descripcion</th>'+
+                                                                    '</tr>'+   																			                                                                                                                                         									
+                                                                '</table>'+     		   
                                                 
                                                 /*Se crea la tercera pestaña con sus propiedades y caracteristicas*/
 
