@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.ClientesSQL;
+import modelo.clientes1SQL;
 import modelo.ColorSQL;
 import modelo.ColoresSQL;
 import modelo.ComboClientesSQL;
@@ -54,7 +54,7 @@ public class ServletAdministrador extends HttpServlet
         VisitasSQL uss = new VisitasSQL();
         ViaticosSQL usrs = new ViaticosSQL();
         ProductosAdSQL usj = new ProductosAdSQL();
-        ClientesSQL usf = new ClientesSQL();
+        clientes1SQL usf = new clientes1SQL();
         LineaProduccionSQL lp = new LineaProduccionSQL();
         ColoresSQL usp = new ColoresSQL();
         TallasSQL usb = new TallasSQL();
@@ -95,7 +95,7 @@ public class ServletAdministrador extends HttpServlet
         if (op.equals("Lineas"))
         {
             JSONArray lineas = new JSONArray();
-            lineas = lp.cargarListadolineas();
+            lineas = lp.ObtenerLineasProduccion();
             out.print(lineas);
         }
 
@@ -114,13 +114,13 @@ public class ServletAdministrador extends HttpServlet
         if (op.equals("Materiales"))
         {
             JSONArray materiales = new JSONArray();
-            materiales = use.cargarMateriales();
+            materiales = use.ObtenerMateriales();
             out.print(materiales);
         }
         if (op.equals("Pedidos"))
         {
             JSONArray pedidos = new JSONArray();
-            pedidos = usw.cargarPedidos();
+            pedidos = usw.obtenerPedidos();
             out.print(pedidos);
         }
         if (op.equals("Devoluciones"))
@@ -157,13 +157,7 @@ public class ServletAdministrador extends HttpServlet
             JSONObject producto = usj.datosProductos(cod);
             out.print(producto);
         }
-        if (op.equals("DatosLineas"))
-        {
-            String cod = String.valueOf(jsonObj.get("CodLinea"));  
-            System.out.print(cod);
-            JSONObject lineas = ush.datosLineas(cod);
-            out.print(lineas);
-        }
+
         if (op.equals("DatosClientes"))
         {
             String cod = String.valueOf(jsonObj.get("Id_Cliente"));  
@@ -236,20 +230,6 @@ public class ServletAdministrador extends HttpServlet
             out.print(devolucion);
         }
         
-        if (op.equals("LineasCombo"))
-        {   
-            JSONArray lines = new JSONArray();
-            lines = lni.cargarListadolineasCombo();
-            out.print(lines);
-	}
-        
-        if (op.equals("MaterialesCombo"))
-        {   
-            JSONArray maters = new JSONArray();
-            maters = mtc.cargarComboMateriales();
-            out.print(maters);
-	}
-        
         if (op.equals("TallasCombo"))
         {   
             JSONArray talls = new JSONArray();
@@ -270,14 +250,7 @@ public class ServletAdministrador extends HttpServlet
             colors = cl.cargarColor();
             out.print(colors);
 	}
-        
-        if (op.equals("Tipo"))
-        {   
-            JSONArray Tips = new JSONArray();
-            Tips = ti.cargarlistadoTipo();
-            out.print(Tips);
-	}
-        
+
         if (op.equals("AddUsuario"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
@@ -291,7 +264,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.AdicionarUsuario(jsonObject))
+                if (usr.AdicionarUsuario(jsonObject,this.IdUsuario))
                 {
                     objRes.put("AddUsuario", "true");
                     out.print(objRes);
@@ -323,7 +296,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.ModificarUsuario(jsonObject, cod))
+                if (usr.ModificarUsuario(jsonObject,this.IdUsuario, cod))
                 {
                     objRes.put("ModUsuario", "true");
                     out.print(objRes);
