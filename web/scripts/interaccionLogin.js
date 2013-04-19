@@ -198,8 +198,20 @@ function cargarUsuario(jsonObj)
         window.location = "comercial.jsp";
     }  
 	
-	if (jsonObj.TipoUsuario =="S")
+    if (jsonObj.TipoUsuario =="S")
     {
         window.location = "secretaria.jsp";
     } 
+    if (jsonObj.TipoUsuario =="V")
+    {
+        window.location = "vendedor.jsp";
+    }
+    if (jsonObj.TipoUsuario =="P")
+    {
+        window.location = "produccion.jsp";
+    }
+    if (jsonObj.TipoUsuario =="G")
+    {
+        window.location = "ggeneral.jsp";
+    }
 }
