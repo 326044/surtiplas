@@ -60,7 +60,7 @@ public class UsuariosSQL
             
             while(this.rs.next())
             {
-                Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"));
+                Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"), rs.getString("id_ubicacion"));
                 vendedor = usr.getJSONObject();
                 System.out.printf(vendedor.toString());
                 vendedores.add(vendedor);
@@ -108,39 +108,39 @@ public class UsuariosSQL
         return false;
     }
     
-    public String TipoUsuario(String nickname, String clave)
+    
+     public JSONObject TipoUsuario(String nickname, String clave)
     {
-       try
+        JSONObject vendedor = new JSONObject();
+        try
         {
-            String tipoUsr;
             this.cn = getConnection();
             this.st = this.cn.createStatement();
             String sql;
-            sql = "SELECT tipo_usuario FROM usuarios WHERE nickname_usuario = '" + nickname + "' AND password_usuario = '" + clave + "';";
+            sql = "SELECT tipo_usuario, id_usuario FROM usuarios WHERE nickname_usuario = '" + nickname + "' AND password_usuario = '" + clave + "';";
             this.rs = this.st.executeQuery(sql);
             
             if (this.rs.first())
             {
-                tipoUsr = this.rs.getString("tipo_usuario");
+                vendedor.put("TipoUsuario", this.rs.getString("tipo_usuario"));
+                vendedor.put("IdUsuario", this.rs.getString("id_usuario"));
                 this.desconectar();
-                return tipoUsr;
+                return vendedor;
             }
-            
-            else
-            {
-                this.desconectar();
-                return "Sin tipo";
-            }
+           
         }
     
         catch(Exception e)
         {
             e.printStackTrace();
         }
-    
-        return "Sin tipo";
+       
+        vendedor.put("TipoUsuario", "false");
+        vendedor.put("IdUsuario", "false");
+        return vendedor;
     }
     
+     
     public JSONObject datosUsuario(String idUsuario)
     {
         JSONObject vendedor = new JSONObject();
@@ -151,7 +151,7 @@ public class UsuariosSQL
             String sql = "SELECT * FROM usuarios WHERE id_usuario = '" + idUsuario + "';";
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
-            Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"));
+            Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"), rs.getString("id_ubicacion"));
             vendedor = usr.getJSONObject();
             this.desconectar();
         }
@@ -170,7 +170,7 @@ public class UsuariosSQL
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
-            Usuarios usr = new Usuarios("", String.valueOf(datos.get("nombres")), String.valueOf(datos.get("apellidos")), String.valueOf(datos.get("cedula")), String.valueOf(datos.get("direccion")), String.valueOf(datos.get("telefono")), String.valueOf(datos.get("celular")), String.valueOf(datos.get("email")), String.valueOf(datos.get("nickname")), String.valueOf(datos.get("contrasena")), String.valueOf(tipoUsuario), "foto_usuario", String.valueOf(datos.get("fecha_ingreso")),  String.valueOf(datos.get("fecha_cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipoCuenta")),  String.valueOf(datos.get("num_cuenta")),  String.valueOf(datos.get("otros_datos")));
+            Usuarios usr = new Usuarios("", String.valueOf(datos.get("nombres")), String.valueOf(datos.get("apellidos")), String.valueOf(datos.get("cedula")), String.valueOf(datos.get("direccion")), String.valueOf(datos.get("telefono")), String.valueOf(datos.get("celular")), String.valueOf(datos.get("email")), String.valueOf(datos.get("nickname")), String.valueOf(datos.get("contrasena")), String.valueOf(tipoUsuario), "foto_usuario", String.valueOf(datos.get("fecha_ingreso")),  String.valueOf(datos.get("fecha_cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipoCuenta")),  String.valueOf(datos.get("num_cuenta")),String.valueOf(datos.get("otros_datos")), String.valueOf(datos.get("id_ubicacion")));
             String tsql;
             tsql = "INSERT INTO usuarios VALUES(DEFAULT, '";
             tsql += usr.getNombres() + "','" + usr.getApellidos() + "','" + usr.getCedula() + "','" + usr.getDireccion()+ "','" + usr.getTelefono()+ "','" + usr.getCelular() + "','" + usr.getEmail() + "','" + usr.getNickname() + "','" + usr.getPassword() + "','" + usr.getTipo() + "','" + usr.getFoto()+"','" + usr.getFechaIngreso()+"','" + usr.getFechaCumple()+"'," + usr.getBanco()+"," + usr.getTipoCuenta()+",'" + usr.getNumCuenta()+"','" + usr.getOtrosDatos()+"')";
@@ -193,7 +193,7 @@ public class UsuariosSQL
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
-            Usuarios usr = new Usuarios("", String.valueOf(datos.get("nombres")), String.valueOf(datos.get("apellidos")), String.valueOf(datos.get("cedula")), String.valueOf(datos.get("direccion")), String.valueOf(datos.get("telefono")), String.valueOf(datos.get("celular")), String.valueOf(datos.get("email")), String.valueOf(datos.get("nickname")), String.valueOf(datos.get("contrasena")), String.valueOf(tipoUsuario), "foto_usuario", String.valueOf(datos.get("fecha")),  String.valueOf(datos.get("cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipoCuenta")),  String.valueOf(datos.get("num_cuenta")),  String.valueOf(datos.get("otrosDatos")));
+            Usuarios usr = new Usuarios("", String.valueOf(datos.get("nombres")), String.valueOf(datos.get("apellidos")), String.valueOf(datos.get("cedula")), String.valueOf(datos.get("direccion")), String.valueOf(datos.get("telefono")), String.valueOf(datos.get("celular")), String.valueOf(datos.get("email")), String.valueOf(datos.get("nickname")), String.valueOf(datos.get("contrasena")), String.valueOf(tipoUsuario), "foto_usuario", String.valueOf(datos.get("fecha")),  String.valueOf(datos.get("cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipoCuenta")),  String.valueOf(datos.get("num_cuenta")),  String.valueOf(datos.get("otrosDatos")), String.valueOf(datos.get("id_ubicacion")));
             String tsql;
             tsql = "UPDATE usuarios SET  nombre_usuario='" + usr.getNombres() +"', apellidos_usuario='" + usr.getApellidos() +"', cedula_usuario='" + usr.getCedula() + "', direccion_usuario='" + usr.getDireccion() + "', telefono_usuario='" + usr.getTelefono() + "', celular_usuario='" + usr.getCelular() + "', email_usuario='" + usr.getEmail() + "', nickname_usuario='" + usr.getNickname() + "', password_usuario='" + usr.getPassword() + "', tipo_usuario='" + tipoUsuario + "', foto_usuario='" + usr.getFoto() +"', fecha='" + usr.getFechaIngreso() + "', fecha_cumpleanos='" + usr.getFechaCumple()+"', banco=" + usr.getBanco() + ", tipo_cuenta_bancaria=" + usr.getTipoCuenta() + ", numero_cuenta='" + usr.getNumCuenta()+"', otros_datos='" + usr.getOtrosDatos() + "' WHERE id_usuario = " + id_usuario + ";";
             this.st.execute(tsql);

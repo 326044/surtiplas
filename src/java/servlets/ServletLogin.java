@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package servlets;
 
 import java.io.IOException;
@@ -11,13 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.UsuariosSQL;
 import org.json.simple.JSONObject;
 
-/**
- *
- * @author cajaramillov
- */
 @WebServlet(name = "ServletLogin", urlPatterns = {"/ServletLogin"})
 public class ServletLogin extends HttpServlet 
 {
@@ -34,16 +27,20 @@ public class ServletLogin extends HttpServlet
         
         if (usr.AutenticarUsuario(usuario, clave))
         { 
-            String tipoUsuario =  usr.TipoUsuario(usuario, clave);
-            obj.put("TipoUsuario", tipoUsuario);
+            obj =  usr.TipoUsuario(usuario, clave);
+            HttpSession session = request.getSession(true);
+            session.setMaxInactiveInterval(20 * 60); 
+            session.setAttribute("TipoUsuario", String.valueOf(obj.get("TipoUsuario")));
+            session.setAttribute("IdUsuario", String.valueOf(obj.get("IdUsuario")));
+            session.setAttribute("Usuario", usuario);
+            session.setAttribute("Clave", clave);
+            System.out.print(String.valueOf(session.getAttribute("TipoUsuario")));
+            System.out.print(String.valueOf(session.getAttribute("IdUsuario")));
+            System.out.print(String.valueOf(session.getAttribute("Usuario")));
+            System.out.print(String.valueOf(session.getAttribute("Clave")));
+            String tipoUsuario = String.valueOf(obj.get("TipoUsuario"));
             out.print(obj);
-        }
-        
-        else
-        {
-            obj.put("TipoUsuario", "false");
-            out.print(obj);
-        }           
+        }        
     } 
     
     @Override
@@ -64,3 +61,4 @@ public class ServletLogin extends HttpServlet
         return "Short description";
     }// </editor-fold>
 }
+
