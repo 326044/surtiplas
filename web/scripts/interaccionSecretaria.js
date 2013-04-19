@@ -269,13 +269,13 @@ function cargarListado(JSONArray)
                       else
 							codigoHTML+=           '<tr class="even">';
 							codigoHTML+=                  '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" id="' + JSONArray[k][i].id_usuario + '" /></td>';
-							codigoHTML+=                  '<td>' + JSONArray[k][i].cedula + '</td>';
-							codigoHTML+=                  '<td>' + JSONArray[k][i].nombres + '</td>';  
-							codigoHTML+=                  '<td>' + JSONArray[k][i].apellidos + '</td>'; 
-							codigoHTML+=                  '<td>' + JSONArray[k][i].telefono + '</td>';
-							codigoHTML+=                  '<td>' + JSONArray[k][i].celular + '</td>';
-							codigoHTML+=                  '<td>' + JSONArray[k][i].email + '</td>';
-							codigoHTML+=                '</tr>';
+							codigoHTML+=                  '<td>' + JSONArray[k][i].cedula_usuario + '</td>';
+							codigoHTML+=                  '<td>' + JSONArray[k][i].nombre_usuario + '</td>';  
+							codigoHTML+=                  '<td>' + JSONArray[k][i].apellidos_usuario + '</td>'; 
+							codigoHTML+=                  '<td>' + JSONArray[k][i].telefono_usuario + '</td>';
+							codigoHTML+=                  '<td>' + JSONArray[k][i].celular_usuario + '</td>';
+							codigoHTML+=                  '<td>' + JSONArray[k][i].email_usuario + '</td>';
+							codigoHTML+=                '</tr>';  
 
                }
                 codigoHTML+=                    '</table>'+
