@@ -347,12 +347,12 @@ function cargarListado(jsonArray)
                       // se le asigna la funcion "VerVendedor" a la imagen                      
                       
                       codigoHTML+=                  '<td><img src="images/b_search.png" class="VerVendedor" id="'+jsonArray[k][i].cedula+'"/></td>';
-                      codigoHTML+=                  '<td>'+ jsonArray[k][i].cedula + '</td>';
-                      codigoHTML+=                  '<td>' + jsonArray[k][i].nombres + '</td>';  
-                      codigoHTML+=                  '<td>' + jsonArray[k][i].direccion + '</td>'; 
-                      codigoHTML+=                  '<td>' + jsonArray[k][i].telefono + '</td>';
-                      codigoHTML+=                  '<td>' + jsonArray[k][i].celular + '</td>';
-                      codigoHTML+=                  '<td>' + jsonArray[k][i].email + '</td>';
+                      codigoHTML+=                  '<td>'+ jsonArray[k][i].cedula_usuario + '</td>';
+                      codigoHTML+=                  '<td>' + jsonArray[k][i].nombre_usuario + '</td>';  
+                      codigoHTML+=                  '<td>' + jsonArray[k][i].direccion_usuario + '</td>'; 
+                      codigoHTML+=                  '<td>' + jsonArray[k][i].telefono_usuario + '</td>';
+                      codigoHTML+=                  '<td>' + jsonArray[k][i].celular_usuario + '</td>';
+                      codigoHTML+=                  '<td>' + jsonArray[k][i].email_usuario + '</td>';
                       codigoHTML+=                '</tr>';
 
                }
