@@ -2074,14 +2074,15 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML=  '<tr>'+
+       codigoHTML=  '<form enctype="multipart/form-data">'+
+                     '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id visita</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field29" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input id="date_field85" type="text" name="fecha" value="" style="font-size:14px;"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2123,8 +2124,12 @@ function addcampos(A)
                               'Descripcion:<br>'+
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
-                        '</tr>';  
+                        '</tr>'+
+                     '</form>';                  
+    
+   
     }
+    
     else if(A==2)
     {
          codigoHTML=  '<tr>'+
@@ -2238,7 +2243,9 @@ function addcampos(A)
                             '</td>'+
                         '</tr>';
     }
-    
+    //$("#overAddProducto").html(codigoHTML);
+    $('#date_field85').datepick({yearRange: '1980:2050'}); 
+    $('#date_field85').datepick('option', {dateFormat: $.datepick.ATOM}); 
     $("#campos").html(codigoHTML);
 }
 
