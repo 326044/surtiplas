@@ -39,6 +39,7 @@ import org.json.simple.parser.ParseException;
 @WebServlet(name = "ServletAdministrador", urlPatterns = {"/ServletAdministrador"})
 public class ServletAdministrador extends HttpServlet 
 {  
+    private String IdUsuario;
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 
     {
         request.setCharacterEncoding("utf8");
@@ -370,7 +371,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (uss.AdicionarVisita(jsonObject))
+                if (uss.AdicionarVisita(jsonObject,this.IdUsuario))
                 {
                     objRes.put("AddVisita", "true");
                     out.print(objRes);
@@ -449,7 +450,7 @@ public class ServletAdministrador extends HttpServlet
                 Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
-                visitas = uss.cargarListadoVist(jsonObject);
+                visitas = uss.obtenerListadoVisitas(jsonObject,this.IdUsuario);
             }
 
             catch (ParseException e) 
@@ -470,7 +471,7 @@ public class ServletAdministrador extends HttpServlet
                 Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
-                viaticos = usrs.cargarListadoViatico(jsonObject);
+                viaticos = usrs.obtenerListadoViaticos(jsonObject,this.IdUsuario);
             }
 
             catch (ParseException e) 
@@ -493,7 +494,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usrs.AdicionarViatico(jsonObject))
+                if (usrs.AdicionarViatico(jsonObject,this.IdUsuario))
                 {
                     objRes.put("AddViatico", "true");
                     out.print(objRes);

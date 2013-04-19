@@ -82,7 +82,7 @@ public class VisitasSQL
     }
     
     
-    //**************************************************************************************
+//**************************************************************************************
 //*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA*************************
 //*************  PARA BUSCAR LAS VISITAS DEL CLIENTE YA SEA POR********************  
 //*************  FECHA DE INICIO, FECHA FINAL O SI DESEA VER TODOS*********************
@@ -150,8 +150,69 @@ public class VisitasSQL
     
         return(Visitas);
     }
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA VISITAS      *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+     
+    public boolean ModificarVisita(JSONObject datos, String idVisitas)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Visitas uss = new Visitas("", String.valueOf(datos.get("fecha")), String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("descripcion")));
+            String tsql;
+            tsql = "UPDATE visitas SET fecha='" + uss.getFecha() +"', id_cliente=" + uss.getId_cliente() + ", id_usuario=" + uss.getId_usuario() + ", descripcion='" + uss.getDescripcion() + "' WHERE id_visita = " + idVisitas + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
     
-    //**************************************************************************************
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS  *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA VISITAS        *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean BorrarVisita(String idVist)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM visitas WHERE id_visita = " + idVist + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+//**************************************************************************************
 //*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA*************************
 //*************  PARA VISUALIZAR LOS DATOS DE LAS VISITAS DEL CLIENTE********************    
 //**************************************************************************************
