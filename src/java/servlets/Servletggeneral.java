@@ -54,6 +54,7 @@ public class Servletggeneral extends HttpServlet
 		
 		// Le asignamos el json a la aplicacion
 		
+                        
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("gerente"));

@@ -393,7 +393,7 @@ function cargarListado(jsonArray)
                    if (j % 2 == 0)
                         codigoHTML+=               '<tr>';
                    else
-                    
+                       codigoHTML+=           '<tr class="even">';
                    // se le asigna la funcion "VerClientes" a la imagen
                                       
                    
