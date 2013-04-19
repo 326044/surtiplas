@@ -1980,8 +1980,7 @@ function AddActividades()
                         '<tr>'+                                   
                             '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
                             '<td>'+
-                                '<select name="tipoActividad" style="width:160px;"  onChange="addcampos(this.value)">'+
-                                    '<option ></option>'+
+                                '<select name="tipoActividad" style="width:160px;"  onChange="addcampos(this.value)">'+                                   
                                     '<option value="1">Visitas</option>'+
                                     '<option value="2">Recaudos</option>'+
                                     '<option value="3">Quejas</option>'+
@@ -2076,7 +2075,7 @@ function addcampos(A)
     if(A==1)
     {
        codigoHTML=  '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id</th>'+
+                          '<th align="right" style="padding-right:5px;">Id visita</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
                           '</td>'+
@@ -2129,7 +2128,7 @@ function addcampos(A)
     else if(A==2)
     {
          codigoHTML=  '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Recaudo</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
                           '</td>'+
@@ -2189,7 +2188,7 @@ function addcampos(A)
     else
     {
         codigoHTML = '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Queja</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
                           '</td>'+
@@ -2624,22 +2623,7 @@ function AdicionarBusquedaClientes(jsonArray)
     activadorEventosClientes();
 }
 
-function SerializeToJson(form)
-{
-    var o = {};
-    var a = form;
-    $.each(a, function() {
-        if (o[this.name] !== undefined) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-}
+
 
 //**********************************************************************************
 //**********************************************************************************
@@ -3394,22 +3378,7 @@ function AddCliente()
     activadorEventosClientes();
 }
 
-function SerializeToJson(form)
-{
-    var o = {};
-    var a = form;
-    $.each(a, function() {
-        if (o[this.name] !== undefined) {
-            if (!o[this.name].push) {
-                o[this.name] = [o[this.name]];
-            }
-            o[this.name].push(this.value || '');
-        } else {
-            o[this.name] = this.value || '';
-        }
-    });
-    return o;
-}
+
 
 function enviarDatosAddCliente(evento)
 {
