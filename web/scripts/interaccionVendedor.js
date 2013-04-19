@@ -3491,8 +3491,10 @@ function VerCliente(jsonObject, id)
                                 '<li><a href="#Personal">Personal</a></li>'+
                                 '<li><a href="#actividad">Actividades</a></li>'+  
                                 '<li><a href="#zona">Ubicacion</a></li>'+                        
-                            '</ul>'+                        
-                        '<div class="tab_container">'+                        
+                            '</ul>'+
+                        
+                        '<div class="tab_container">'+
+                        
                          '<div id="Personal" class="tab_content">'+                        
                               '<table align="center" border="0" align="left">'+                        
                                   '<tr>'+
@@ -3506,7 +3508,8 @@ function VerCliente(jsonObject, id)
                                               '</div>'+   
                                           '</div>'+
                                       '</td>'+
-                                  '</tr>'+                     
+                                  '</tr>'+                                
+                                
                                  '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Fecha</th>'+
                                     '<td><input type="text" name="fecha_Icliente" id="date_field16"value="' + jsonObject.fecha + '" size="10"/ readonly="readonly"></td>'+                                                                   
@@ -3537,21 +3540,32 @@ function VerCliente(jsonObject, id)
                                     '<td><input type="text" name="email" value="' + jsonObject.email + '" size="20" maxlength="12" readonly="readonly"/></td>'+                                                                                                               
                                  '</tr>'+                         
                             '</table>'+                        
-                           '</div>'+                     
+                           '</div>'+
+                        
                            '<div id="zona" class="tab_content">'+
                             '<table align="center" border="0" align="left">'+                                  
                                   '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Latitud</th>'+
-                                    '<td><input type="text" name="lalitudC" value="" size="15" maxlength="15"/ ></td>'+                                                                   
+                                    '<td><input type="text" name="lalitud" value="'+ jsonObject.latitud +'" size="15" maxlength="15"/ ></td>'+                                                                   
                                     '<th align="right" style="padding-right:10px;">Longitud</th>'+
-                                    '<td><input type="text" name="longitudC" value="" size="15" maxlength="15" /></td>'+                                   
-                                  '</tr>'+                                                                                                                                                               
+                                    '<td><input type="text" name="longitud" value="'+ jsonObject.longitud +'" size="15" maxlength="15" /></td>'+                                   
+                                  '</tr>'+
+                                  '<th align="right" style="padding-right:10px;">Departamento</th>'+
+                                    '<td><input type="text" name="depto" value="'+ jsonObject.nombre_depto +'" size="15" maxlength="15"/ ></td>'+                                                                   
+                                    '<th align="right" style="padding-right:10px;">Municipio</th>'+
+                                    '<td><input type="text" name="municipio" value="'+ jsonObject.NombreMunicipio +'" size="15" maxlength="15" /></td>'+                                   
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td colspan="4" align="center">'+
+                                     '<input type="button" id="MapCliente" value="Cargar" class="button"> '+
+                                    '</td>'+
+                                  '</tr>'+                                  
                               '</table>'+
-                              '<br>'+
                               '<div class="Ubicacion-Geografica">'+
-                                '<img src="images/mapaUbicacion.png"/>'+
+                                
                               '</div>'+                                              
-                            '</div>'+                            
+                            '</div>'+
+                            
                             '<div id="actividad" class="tab_content">'+
                               '<ul class="tabs2">'+
                                 '<li><a href="#visitas">Visitas</a></li>'+
@@ -3581,7 +3595,8 @@ function VerCliente(jsonObject, id)
                                         '</tr> '+ 
                                     '</table>'+ 
                                 '</form>'+
-                                '<br>'+              
+                                '<br>'+
+                        
                                 
                               '<table class="tbonita" align="center" width="700" id="tablaVisita">'+
                                 '<tr align="left">'+
@@ -3633,7 +3648,8 @@ function VerCliente(jsonObject, id)
                                     '<th>Asunto</th>'+ 
                                   '</tr>'+                                
                                 '</table>'+     
-                                '</div>'+                       
+                                '</div>'+                    
+                                
                                '<div id="recaudo" class="tab_content2">'+
                                     '<form id="enviarDatosBuscarPagoCliente" enctype="multipart/form-data">'+ 
                                     '<table align="center" border="0" align="left">'+                                         
@@ -3684,10 +3700,13 @@ function VerCliente(jsonObject, id)
                         '</form>'+                        
                         '</div>';
   
+    var lat =jsonObject.latitud;
+    var lon= jsonObject.longitud;
+    
     $("#datos").html(codigoHTML);
-    activadorEventosClientes();
-    $(".Ubicacion-Geografica").css({width: 840});
-    IniciarTabersAnidados(); 
+    activadorEventosClientes();    
+    IniciarTabersAnidados();
+    $(".Ubicacion-Geografica").css({width: 820});    
     $('#date_field17').datepick({yearRange: '1980:2050'});
     $('#date_field17').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field18').datepick({yearRange: '1980:2050'});
@@ -3702,7 +3721,24 @@ function VerCliente(jsonObject, id)
     $('#date_field22').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_buscar_visita_cliente").submit(enviarDatosBuscarVisitaCliente);
     $("#form_buscar_quejas_cliente").submit(enviarDatosBuscarQuejaCliente);
-    $("#enviarDatosBuscarPagoCliente").submit(enviarDatosBuscarPagoCliente);     
+    $("#enviarDatosBuscarPagoCliente").submit(enviarDatosBuscarPagoCliente);
+    $('#MapCliente').click(function(){
+        var latlon = new google.maps.LatLng(lat, lon);
+        alert(lat);
+        var myOptions = {
+                                    zoom: 17,
+                                    center: latlon,
+                                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                                };
+                                
+    var map = new google.maps.Map($(".Ubicacion-Geografica").get(0), myOptions);
+
+    var marcador = new google.maps.Marker({
+                                                                            position: latlon,
+                                                                            map: map,
+                                                                            title: "ubicación"
+                                                                        });
+    });
 }
 
 function localizame() 

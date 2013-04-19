@@ -346,7 +346,7 @@ function cargarListado(jsonArray)
                        
                       // se le asigna la funcion "VerVendedor" a la imagen                      
                       
-                      codigoHTML+=                  '<td><img src="images/b_search.png" class="VerVendedor" id="'+jsonArray[k][i].cedula+'"/></td>';
+                      codigoHTML+=                  '<td><img src="images/b_search.png" class="VerVendedor" id="'+jsonArray[k][i].cedula_usuario+'"/></td>';
                       codigoHTML+=                  '<td>'+ jsonArray[k][i].cedula_usuario + '</td>';
                       codigoHTML+=                  '<td>' + jsonArray[k][i].nombre_usuario + '</td>';  
                       codigoHTML+=                  '<td>' + jsonArray[k][i].direccion_usuario + '</td>'; 

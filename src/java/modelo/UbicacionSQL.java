@@ -9,7 +9,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javabeans.UbicacionGeografica;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 /**
  *
