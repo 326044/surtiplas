@@ -54,6 +54,7 @@ public class Servletggeneral extends HttpServlet
 		
 		// Le asignamos el json a la aplicacion
 		
+                        
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
         JSONObject jsonObj = (JSONObject) JSONValue.parse(request.getParameter("gerente"));
@@ -77,7 +78,7 @@ public class Servletggeneral extends HttpServlet
         if (op.equals("ListadoVendedoresClientes"))
         {
             JSONArray vendedores = new JSONArray();
-            vendedores = usr.obtenerUsuariosVendedores();
+            vendedores = usr.obtenerUsuariosVendedores1();
             JSONArray clientes = new JSONArray();
             clientes = cli.obtenerClientes();
 			
