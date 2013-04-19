@@ -80,9 +80,5 @@ public class UbicacionSQL
         
         return true;
     }
-
-    public JSONArray listUbicacion() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }
+    
