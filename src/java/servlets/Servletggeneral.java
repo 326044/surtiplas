@@ -78,7 +78,7 @@ public class Servletggeneral extends HttpServlet
         if (op.equals("ListadoVendedoresClientes"))
         {
             JSONArray vendedores = new JSONArray();
-            vendedores = usr.obtenerUsuariosVendedores1();
+            vendedores = usr.obtenerUsuariosVendedores();
             JSONArray clientes = new JSONArray();
             clientes = cli.obtenerClientes();
 			

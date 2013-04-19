@@ -228,47 +228,5 @@ public class UsuariosSQL
         }
         
         return true;
-    }
-    public JSONArray obtenerUsuariosVendedores1()
-    {   
-        // Le declaramos memoria a las variables vendedores y vendedor
-        
-        JSONArray vendedores = new JSONArray();
-        JSONObject vendedor = new JSONObject();
-        
-        try
-        {
-            this.cn = getConnection();
-            this.st = this.cn.createStatement();
-            String sql;
-            
-            // creamos la sentencia que realizara la consulta
-            
-            sql = "SELECT * FROM usuarios WHERE tipo_usuario = 'V'";
-            this.rs = this.st.executeQuery(sql);
-            
-            while(this.rs.next())
-            {   
-                 Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"), rs.getString("id_ubicacion"));
-                vendedor = usr.getJSONObject();
-                System.out.printf(vendedor.toString());
-                vendedores.add(vendedor);
-            }
-            
-            // Nos desconectamos de la base de datos
-            
-            this.desconectar();
-        }
-    
-        /*colocamos un catch para que atrape cualquier clase de error al intentar conectar */
-        
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-    
-        // Le decimos que si encontro o no el error returne a la variable nombrada vendedores
-        
-        return(vendedores);
-    }  
+    }   
 }
