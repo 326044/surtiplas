@@ -18,6 +18,7 @@ function inicializar()
     var Gcomecial;
     vendedores=$("#Vendedores");
     vendedores.click(menuVendedores);
+    alert("nicolas es gay");
     
 /* Inicializacion de los eventos */
 

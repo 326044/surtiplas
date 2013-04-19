@@ -56,7 +56,7 @@
                             <li><a href="#c" id="Clientes">Financiera</a></li>
                             <li><a href="#p" id="Productos">Produccion</a></li>
                             <li><a href="#pr" id="Perfil">Perfil</a></li>
-                            <li><a href="index.html">Salir</a></li>
+                            <li><a href="index.jsp">Salir</a></li>
                         </ul>
                     </nav>
                     <section class="content">
