@@ -1133,12 +1133,17 @@ function seccionViaticos()
                                                         '</td>'+											
                                                         '<table class="tbonita id="TablaPagos">'+
                                                          '<tr align="left">'+           				                                       
+                                                            '<th></th>'+
+                                                            '<th></th>'+
+                                                            '<th></th>'+
+                                                            '<th></th>'+
                                                             '<th>id_pago</th>'+
                                                             '<th>id_pedido</th>'+                               
                                                             '<th>id_cliente</th>'+                                                                                                                        
                                                             '<th>fecha</th>'+                                                                                                      
                                                             '<th>cantidad_de_pago</th>'+   
-                                                            '<th>descripcion</th>'+
+                                                            '<th>descripcion</th>'+                                                            
+                                                            '<th></th>'+                                                            
                                                         '</tr>'+
                                                 '</table>'+										
                                                 
@@ -1166,8 +1171,29 @@ function seccionViaticos()
                                                         '</td>'+                                   					
                                                         '<tr>'+
                                                             '<td colspan="4" align="center"><input type="submit" value="Ver" class="button" />'+
-                                                        '</td>'+			
-                                                        
+                                                        '</td>'+			                                                        
+                                                        '<table class="tbonita">'+
+                                                                '<tr align="left">'+           				   
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th>id_visita</th>'+
+                                                                    '<th>fecha</th>'+
+                                                                    '<th>id_cliente</th>'+
+                                                                    '<th>id_usuario</th>'+
+                                                                    '<th>descripcion</th>'+                                  
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+                                                                    
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+
+                                                                    '<th></th>'+                                                                        
+                                                                '</tr>'+   																			
+                                                            '</form>'+     
+							'</tr>'+       									
+                                                    '</table>'+		
                                                         /*Se crea la tabla donde se ubicaran los datos*/
                                                         							
                                                 '</tr>'+       
@@ -1192,8 +1218,7 @@ function seccionViaticos()
                                                                                 '<option value="All">Todos</option>'+
                                                                                 '<option value="MasPedidos">Mas Pedidos</option>'+
                                                                                 '<option value="MenosPedidos">Menos Pedidos</option>'+
-                                                                                '</select>'+
-                                                                                '<th align="right" style="padding-right:5px;">Valor</th>'+                                                                                
+                                                                                '</select>'+                                                                                                                                                             
                                                                             '</td>'+                                   
                                                                             '<tr>'+
                                                                                 '<td colspan="4" align="center"><input type="submit" value="Ver" class="button" />'+
@@ -1203,7 +1228,8 @@ function seccionViaticos()
                                                             /*Se crea la tabla donde se ubicaran los datos*/    
                                                                 
                                                             '<table class="tbonita">'+
-                                                                '<tr align="left">'+           				   
+                                                                '<tr align="left">'+           				                                                                                                                                           
+                                                                    '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th>id_pedido</th>'+
                                                                     '<th>valor_del_iva</th>'+
@@ -1212,6 +1238,7 @@ function seccionViaticos()
                                                                     '<th>fecha</th>'+
                                                                     '<th>hora</th>'+
                                                                     '<th>id_cliente</th>'+
+                                                                    '<th></th>'+                                                                                                                                  
                                                                 '</tr>'+   																			
                                                             '</form>'+     
 							'</tr>'+       									
