@@ -214,4 +214,8 @@ function cargarUsuario(jsonObj)
     {
         window.location = "ggeneral.jsp";
     }
+    if (jsonObj.TipoUsuario =="A")
+    {
+        window.location = "administrador.jsp";
+    } 
 }
