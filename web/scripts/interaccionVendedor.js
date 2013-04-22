@@ -2015,7 +2015,8 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML=  '<form enctype="multipart/form-data">'+
+       codigoHTML=  '</div>'+
+           '<form enctype="multipart/form-data">'+
                      '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id visita</th>'+
                           '<td>'+
@@ -2023,7 +2024,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field85" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2067,18 +2068,20 @@ function addcampos(A)
                             '</td>'+
                         '</tr>'+
                         '<table align="center">'+
-                        '<tr>'+
-                          '<td colspan="4" align="center">'+
-                              '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                              '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
-                              '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                          '</td>'+
-                        '</tr>'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
+                                  '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
+                                  '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                              '</td>'+
+                            '</tr>'+
                       '</table>'+
-                     '</form>';                  
+                     '</form>'+
+                     '</div>';
+    $('#date_field32').datepick({yearRange: '1980:2050'}); 
+    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
     
-   
-    }
+    }  
     
     else if(A==2)
     {
@@ -2216,44 +2219,11 @@ function addcampos(A)
                     '</form>';
     }
     //$("#overAddProducto").html(codigoHTML);
-    $("#datos").html(codigoHTML);
-     listadoDepartamentos();
-    $('#date_field85').datepick({yearRange: '1980:2050'}); 
-    $('#date_field85').datepick('option', {dateFormat: $.datepick.ATOM}); 
-    $("#campos").html(codigoHTML);
-}
-
-function camposAdicionalesPagos()
-{
-      var codigoHTML=   '<tr>'+
-                          '<th align="right" colspan="0" style="padding-right:5px;">Estado Cliente</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono_vis" value="debe" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" colspan="0" style="padding-right:5px;">Valor $</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono_vis" value="150000" readonly="readonly"/>'+
-                          '</td>'+                          
-                          '</tr>'+
-                          '<th align="right" colspan="0" style="padding-right:5px;">Tipo de Pago</th>'+
-                          '<td>'+
-                            '<input type="text" name="tipo_de_pago" value=""/>'+
-                          '</td>'+
-                          '<th align="right" colspan="0" style="padding-right:5px;">Numero de Factura</th>'+
-                          '<td>'+
-                            '<input type="text" name="numero_de_factura" value=""/>'+
-                          '</td>'+
-                          '<tr>'+
-                          '<th align="right" colspan="2" style="padding-right:5px;">Forma de Pago</th>'+
-                          '<td>'+
-                            '<input type="text" name="forma_de_pago" value=""/>'+
-                          '</tr>'+
-                        '<tr>';
- 
+    listadoDepartamentos();
    
-    $("#datos").html(codigoHTML);
+    $("#campos").html(codigoHTML);
     activadorEventosClientes();
-    activadorEventosVendedores();                  
+    activadorEventosVendedores();
 }
 
 function crearActividadVisita(evento)
@@ -2332,7 +2302,6 @@ function seccionViaticos()
                                         '</select>'+ 
                                     '</td>'+                               
                                 '</tr>'+
-
                                 '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Inicial</th>'+
                                     '<td>'+
