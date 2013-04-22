@@ -1976,80 +1976,21 @@ function AddActividades()
                     '<form id="form_crear_actividad" enctype="multipart/form-data">'+
                     '<br>'+
                     '<table align="center">'+
-                     '<tbody>'+
+                     '<tbody id="campos">'+
                         '<tr>'+                                   
                             '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
                             '<td>'+
-                                '<select name="tipoActividad" style="width:160px;"  onChange="addcampos(this.value)">'+                                   
+                                '<select name="tipoActividad" style="width:180px;"  onChange="addcampos(this.value)">'+ 
+                                    '<option value="0">Seleccione La Actividad</option>'+
                                     '<option value="1">Visitas</option>'+
                                     '<option value="2">Recaudos</option>'+
                                     '<option value="3">Quejas</option>'+
                                 '</select>'+
                             '</td>'+                           
                         '</tr>'+
-                     '</tbody>'+
-                     '<tbody id="campos">'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id</th>'+
-                          '<td>'+
-                            '<input type="text" name="id" value="" readonly="readonly"/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Fecha</th>'+
-                          '<td>'+
-                            '<input id="date_field29" type="text" name="fecha" value="" style="font-size:14px;"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Cliente</th>'+
-                          '<td>'+
-                            '<input type="text" name="razonSocial" value="" />'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Vendedor</th>'+
-                          '<td>'+
-                            '<input type="text" name="id_usuario" value="" readonly="readonly"/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
-                          '<td>'+
-                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+                      
-                            '</select>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Ciudad</th>'+
-                          '<td>'+
-                             '<select name="codMunicipio" style="width:160px;" class="municipios">'+
-                                 '<option value="null"></option>'+
-                             '</select>'+ 
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                          '<th align="right" style="padding-right:5px;">NIT</th>'+
-                          '<td>'+
-                            '<input type="text" name="id_cliente" value=""/>'+
-                          '</td>'+
-                          '<th align="right" style="padding-right:5px;">Telefono</th>'+
-                          '<td>'+
-                            '<input type="text" name="telefono" value=""/>'+
-                          '</td>'+
-                        '</tr>'+
-                        '<tr>'+
-                            '<td colspan="4" align="left">'+
-                              'Descripcion:<br>'+
-                              '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
-                            '</td>'+
-                        '</tr>'+ 
-                     '</tbody>'+
+                     '</tbody>'+                     
                     '</table>'+ 
-                    '<br>'+
-                    '<table align="center">'+
-                      '<tr>'+
-                        '<td colspan="4" align="center">'+
-                            '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                            '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
-                        '</td>'+
-                      '</tr>'+
-                    '</table>'+
+                    '<br>'+                    
                     '</form>'+
                 '</div>';
     
@@ -2125,6 +2066,15 @@ function addcampos(A)
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
                         '</tr>'+
+                        '<table align="center">'+
+                        '<tr>'+
+                          '<td colspan="4" align="center">'+
+                              '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
+                              '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
+                              '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                          '</td>'+
+                        '</tr>'+
+                      '</table>'+
                      '</form>';                  
     
    
@@ -2132,7 +2082,8 @@ function addcampos(A)
     
     else if(A==2)
     {
-         codigoHTML=  '<tr>'+
+         codigoHTML=  '<form>'+
+                        '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id Recaudo</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
@@ -2187,12 +2138,23 @@ function addcampos(A)
                           '<th align="right" colspan="2" style="padding-right:5px;">Forma de Pago</th>'+
                           '<td>'+
                             '<input type="text" name="forma_de_pago" value=""/>'+
+                          '</tr>'+                          
+                        '<tr>'+
+                        '<table align="center">'+
+                          '<tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
+                                '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
+                                '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                            '</td>'+
                           '</tr>'+
-                        '<tr>';
+                        '</table>'+
+                        '<form>';
     }
     else
     {
-        codigoHTML = '<tr>'+
+        codigoHTML = '<form>'+
+                        '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id Queja</th>'+
                           '<td>'+
                             '<input type="text" name="id" value="" readonly="readonly"/>'+
@@ -2241,9 +2203,21 @@ function addcampos(A)
                               'Descripcion:<br>'+
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
-                        '</tr>';
+                        '</tr>'+
+                        '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
+                                  '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
+                                  '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                              '</td>'+
+                            '</tr>'+
+                        '</table>'+
+                    '</form>';
     }
     //$("#overAddProducto").html(codigoHTML);
+    $("#datos").html(codigoHTML);
+     listadoDepartamentos();
     $('#date_field85').datepick({yearRange: '1980:2050'}); 
     $('#date_field85').datepick('option', {dateFormat: $.datepick.ATOM}); 
     $("#campos").html(codigoHTML);
