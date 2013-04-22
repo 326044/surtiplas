@@ -60,7 +60,7 @@ public class UsuariosSQL
             
             while(this.rs.next())
             {
-                Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"), rs.getString("id_ubicacion"));
+                Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nickname_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"),  rs.getString("id_ubicacion"));                
                 vendedor = usr.getJSONObject();
                 System.out.printf(vendedor.toString());
                 vendedores.add(vendedor);
@@ -141,27 +141,59 @@ public class UsuariosSQL
     }
     
      
+//***********************************************************************************************
+//***********************************************************************************************
+//*************                                                             *********************
+//************* METODO DONDE SE REALIZAN LAS CONSULTA PARA LLAMAR LOS DATOS *********************
+//************* DE LA BASE DE DATOS Y CARGARLOS EN LA INTERFAZ WEB EN CADA  *********************
+//************* UNO DE LOS CAMPOS DEL FORMULARIO                            *********************
+//*************                                                             *********************
+//***********************************************************************************************
+//***********************************************************************************************
+    
     public JSONObject datosUsuario(String idUsuario)
     {
-        JSONObject vendedor = new JSONObject();
+        JSONObject Usuarios = new JSONObject();
         try
         {
             this.cn = getConnection();
             this.st = this.cn.createStatement();
-            String sql = "SELECT * FROM usuarios WHERE id_usuario = '" + idUsuario + "';";
+            String sql = "SELECT usuarios.id_usuario, usuarios.nombre_usuario, usuarios.apellidos_usuario, usuarios.cedula_usuario,"
+                    + " usuarios.direccion_usuario, usuarios.telefono_usuario, usuarios.celular_usuario, usuarios.email_usuario,"
+                    + " usuarios.nickname_usuario, usuarios.password_usuario, usuarios.tipo_usuario, usuarios.foto_usuario, usuarios.fecha,"
+                    + " usuarios.fecha_cumpleanos, usuarios.banco, usuarios.tipo_cuenta_bancaria, usuarios.numero_cuenta,"
+                    + " usuarios.otros_datos, ubicacion_geografica.id_ubicacion FROM usuarios, ubicacion_geografica WHERE ubicacion_geografica.id_ubicacion=usuarios.id_ubicacion AND usuarios.id_usuario= " + idUsuario + ";";
+                    
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
-            Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("nickname_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"), rs.getString("id_ubicacion"));
-            vendedor = usr.getJSONObject();
+            
+            Usuarios.put("id_usuario", rs.getString("id_usuario"));
+            Usuarios.put("nombre_usuario", rs.getString("nombre_usuario"));
+            Usuarios.put("apellidos_usuario", rs.getString("apellidos_usuario"));
+            Usuarios.put("cedula_usuario", rs.getString("cedula_usuario"));
+            Usuarios.put("direccion_usuario", rs.getString("direccion_usuario"));
+            Usuarios.put("telefono_usuario", rs.getString("telefono_usuario"));
+            Usuarios.put("celular_usuario", rs.getString("celular_usuario"));
+            Usuarios.put("email_usuario", rs.getString("email_usuario"));
+            Usuarios.put("nickname_usuario", rs.getString("nickname_usuario"));
+            Usuarios.put("password_usuario", rs.getString("password_usuario"));
+            Usuarios.put("tipo_usuario", rs.getString("tipo_usuario"));
+            Usuarios.put("foto_usuario", rs.getString("foto_usuario"));
+            Usuarios.put("fecha", rs.getString("fecha"));
+            Usuarios.put("fecha_cumpleanos", rs.getString("fecha_cumpleanos"));
+            Usuarios.put("banco", rs.getString("banco"));
+            Usuarios.put("tipo_cuenta_bancaria", rs.getString("tipo_cuenta_bancaria"));
+            Usuarios.put("numero_cuenta", rs.getString("numero_cuenta"));
+            Usuarios.put("otros_datos", rs.getString("otros_datos"));
+            Usuarios.put("id_ubicacion", rs.getString("id_ubicacion"));
+            
             this.desconectar();
         }
-    
-        catch(Exception e)
+    catch(Exception e)
         {
             e.printStackTrace();
         }
-     
-        return vendedor;
+        return Usuarios;
     }
     
     public boolean AdicionarUsuario(JSONObject datos, String tipoUsuario)
@@ -194,7 +226,7 @@ public class UsuariosSQL
             this.st = cn.createStatement();
             Usuarios usr = new Usuarios("", String.valueOf(datos.get("nickname_usuario")), String.valueOf(datos.get("nombre_usuario")), String.valueOf(datos.get("apellidos_usuario")), String.valueOf(datos.get("cedula_usuario")), String.valueOf(datos.get("direccion_usuario")), String.valueOf(datos.get("telefono_usuario")), String.valueOf(datos.get("celular_usuario")), String.valueOf(datos.get("email_usuario")), String.valueOf(datos.get("password_usuario")), String.valueOf(datos.get("tipo_usuario")), "foto_usuario", String.valueOf(datos.get("fecha")),  String.valueOf(datos.get("fecha_cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipo_cuenta_bancaria")),  String.valueOf(datos.get("numero_cuenta")),  String.valueOf(datos.get("otros_datos")),  String.valueOf(datos.get("id_ubicacion")));
             String tsql;
-            tsql = "UPDATE usuarios SET  nombre_usuario='" + usr.getNombres() +"', apellidos_usuario='" + usr.getApellidos() +"', cedula_usuario='" + usr.getCedula() + "', direccion_usuario='" + usr.getDireccion() + "', telefono_usuario='" + usr.getTelefono() + "', celular_usuario='" + usr.getCelular() + "', email_usuario='" + usr.getEmail() + "', nickname_usuario='" + usr.getNickname() + "', password_usuario='" + usr.getPassword() + "', tipo_usuario='" + tipoUsuario + "', foto_usuario='" + usr.getFoto() +"', fecha='" + usr.getFechaIngreso() + "', fecha_cumpleanos='" + usr.getFechaCumple()+"', banco=" + usr.getBanco() + ", tipo_cuenta_bancaria=" + usr.getTipoCuenta() + ", numero_cuenta='" + usr.getNumCuenta()+"', otros_datos='" + usr.getOtrosDatos() + "', id_ubicacion='" + usr.getIdUbicacion() + "' WHERE id_usuario = " + id_usuario + ";";
+            tsql = "UPDATE usuarios SET  nickname_usuario='" + usr.getNickname() + "', nombre_usuario='" + usr.getNombres() +"', apellidos_usuario='" + usr.getApellidos() +"', cedula_usuario='" + usr.getCedula() + "', direccion_usuario='" + usr.getDireccion() + "', telefono_usuario='" + usr.getTelefono() + "', celular_usuario='" + usr.getCelular() + "', email_usuario='" + usr.getEmail() + "',password_usuario='" + usr.getPassword() + "', tipo_usuario='" + usr.getTipo() + "', foto_usuario='" + usr.getFoto() +"', fecha='" + usr.getFechaIngreso() + "', fecha_cumpleanos ='" + usr.getFechaCumple()+"', banco=" + usr.getBanco() + ", tipo_cuenta_bancaria=" + usr.getTipoCuenta() + ", numero_cuenta='" + usr.getNumCuenta()+"', otros_datos='" + usr.getOtrosDatos() + "', id_ubicacion=" + usr.getIdUbicacion() + " WHERE id_usuario = " + id_usuario + ";";            
             this.st.execute(tsql);
             this.desconectar();
         }
