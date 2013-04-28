@@ -255,6 +255,87 @@ public class ViaticosSQL
     
         return(Viaticos);
     }
-   
-   
-}
+   //****************************************************************************************
+//****************************************************************************************
+//*************                                                      *********************
+//*************  METODO QUE SE ENCARGA DE REALIZAR LA CONSULTA PARA  *********************
+//*************  LLAMAR LOS DATOS DE LA BASE DE DATOS                *********************
+//*************                                                      *********************
+//****************************************************************************************
+//****************************************************************************************
+    
+    public JSONArray cargarListadoViatico(JSONObject jsonObject)
+    {
+        JSONArray Viaticos = new JSONArray();
+        JSONObject viatico = new JSONObject();
+        JSONObject viaticot = new JSONObject();
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String fechaInicio= String.valueOf(jsonObject.get("fechaInicio"));
+            String fechaFin= String.valueOf(jsonObject.get("fechaFin"));
+            String tipoViatico= String.valueOf(jsonObject.get("tipoViatico"));            
+            String tsql = null;
+            String tsql2 = null;
+            
+            if("".equals(fechaInicio))
+            {
+                if("".equals(fechaFin))
+                {
+                    if("".equals(tipoViatico))
+                    {
+                        tsql = "SELECT * FROM viaticos"; 
+                        System.out.printf(tsql.toString());                        
+                        tsql2 = "SELECT SUM(valor) AS valor_total FROM viaticos;";                        
+                    }
+                    else
+                    {
+                        tsql = "SELECT * FROM viaticos WHERE concepto='"+ tipoViatico +"';";
+                        System.out.printf(tsql.toString());
+                        tsql2 = "SELECT SUM(valor) AS valor_total FROM viaticos WHERE concepto='"+ tipoViatico +"';";
+                    }
+                }                 
+            }
+            else if("".equals(tipoViatico))
+            {
+                tsql = "SELECT * FROM viaticos WHERE fecha BETWEEN '"+ fechaInicio +"' AND '"+ fechaFin +"';";
+                System.out.printf(tsql.toString());
+                tsql2 = "SELECT SUM(valor) AS valor_total FROM viaticos WHERE fecha BETWEEN '"+ fechaInicio +"' AND '"+ fechaFin +"';";
+            }
+            else
+            {
+                tsql = "SELECT * FROM viaticos WHERE fecha BETWEEN '"+ fechaInicio +"' AND '"+ fechaFin +"' AND concepto='" +tipoViatico+ "';";
+                System.out.printf(tsql.toString());
+                tsql2 = "SELECT SUM(valor) AS valor_total FROM viaticos WHERE fecha BETWEEN '"+ fechaInicio +"' AND '"+ fechaFin +"' AND concepto='" +tipoViatico+ "';";
+            }
+            
+            this.rs = this.st.executeQuery(tsql);
+            
+            while(this.rs.next())
+            {
+                Viaticos via = new Viaticos(rs.getString("id_viaticos"), rs.getString("id_usuario"), rs.getString("valor"), rs.getString("concepto"), rs.getString("fecha"), rs.getString("codMunicipio"), rs.getString("doc_soporte"));
+                viatico = via.getJSONObject();
+                System.out.printf(viatico.toString());
+                Viaticos.add(viatico);               
+            }
+            
+            this.rs = this.st.executeQuery(tsql2);
+            this.rs.first();
+            
+            viaticot.put("valor_total", rs.getString("valor_total"));
+            System.out.printf(viaticot.toString());
+            Viaticos.add(viaticot);
+            
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();            
+        }
+    
+        return(Viaticos);
+    }
+  }
