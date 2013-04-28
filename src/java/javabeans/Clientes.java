@@ -71,7 +71,7 @@ public class Clientes
         this.responsable = responsable;
         this.fecha = fecha;
         this.codMunicipio = codMunicipio;
-        this.id_usuario = fecha;
+        this.id_usuario = id_usuario;
         this.id_ubicacion = id_ubicacion;
     }
     //Actualizar los valores

@@ -1071,7 +1071,7 @@ function AddUsuario()
     $("#datos").html(codigoHTML);
     listUbicacion();
     IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'})
+    $('#date_field13').datepick({yearRange: '1980:2050'});
     $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
@@ -4759,7 +4759,7 @@ function cargarListadoClientes(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+           if (i % 2 == 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -4929,7 +4929,7 @@ function AddCliente()
     cargarMunicipios();
     listadoDepartamentos();
     IniciarTabers();
-    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_crear_cliente").submit(enviarDatosAddCliente);
     ActivadorEventosClientes();
