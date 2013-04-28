@@ -3287,7 +3287,7 @@ function Municipios(jsonArray)
        var codigoHTML;
                                 for (var l = 0; l < jsonArray.length; l++) 
                                 {
-           codigoHTML +=         '<option value="'+ jsonArray[l].codMunicipio +'">'+ jsonArray[l].nombreMunicipio +'</option>';                                                 
+           codigoHTML +=         '<option value="'+ jsonArray[l].codMunicipio +'">'+ jsonArray[l].NombreMunicipio +'</option>';                                                 
                                 }
            codigoHTML+=          '<option value="null"></option>';   
     $(".municipios").html(codigoHTML);
