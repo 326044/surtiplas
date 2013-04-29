@@ -222,6 +222,7 @@ public class ServletAdministrador extends HttpServlet
             JSONObject perfil = per.datosPerfil(cod);
             out.print(perfil);
         }
+        
         if (op.equals("DatosDevoluciones"))
         {
             String cod = String.valueOf(jsonObj.get("Id_Devolucion"));  
@@ -879,6 +880,24 @@ public class ServletAdministrador extends HttpServlet
             catch (ParseException e) 
             {
                 e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("DelDevolucion"))
+        {
+            String cod = String.valueOf(jsonObj.get("Id_Devolucion"));  
+            JSONObject objRes = new JSONObject();
+            
+            if (usd.BorrarDevolucion(cod))
+            {
+                objRes.put("DelDevolucion", "true");
+                out.print(objRes);
+            }
+
+            else
+            {
+                objRes.put("DelDevolucion", "false");
+                out.print(objRes);
             }
         }
         

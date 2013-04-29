@@ -207,7 +207,7 @@ public class DevolucionesSQL
         
         return true;
     }
-    /*//**********************************************************************************************
+//**********************************************************************************************
 //**********************************************************************************************
 //*************                                                            *********************
 //************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS  *********************
@@ -217,14 +217,14 @@ public class DevolucionesSQL
 //**********************************************************************************************
 //**********************************************************************************************
     
-    public boolean BorrarCliente(String idClientes)
+    public boolean BorrarDevolucion(String idDevolucion)
     {
         try
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
             String tsql;
-            tsql = "DELETE FROM clientes WHERE id_cliente = '" + idClientes + "';";
+            tsql = "DELETE FROM devolucion WHERE id_devolucion = '" + idDevolucion + "';";
             this.st.execute(tsql);
             this.desconectar();
         }
@@ -236,5 +236,5 @@ public class DevolucionesSQL
         }
         
         return true;
-    }*/
+    }
 }

@@ -218,26 +218,26 @@ function ActivadorEventosClientes()
 //***********************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE DEVOLUCIONES **
 //***********************************************************
-    var adiciond, modificarp, visualizarp, borrarP;
-    var PBorrarOk,volverPedido, BorrarP, HideDelP;
+    var adiciond, modificard, visualizard, borrard;
+    var DBorrarOk,volverDevolucion, Borrard, HideDeld;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     adiciond=$("#AddDevolucion");
     adiciond.click(AddDevolucion);
-    modificarp=$(".ModDevolucion");
-    modificarp.click(DatosModDevolucion);
-    visualizarp=$(".VerPedido");
-    visualizarp.click(DatosVerPedido);
-    borrarP=$(".DelPedido");
-    borrarP.click(DatosDelPedido);
+    modificard=$(".ModDevolucion");
+    modificard.click(DatosModDevolucion);
+    visualizard=$(".VerDevolucion");
+    visualizard.click(DatosVerDevolucion);
+    borrard=$(".DelDevolucion");
+    borrard.click(DatosDelDevolucion);
     
-    PBorrarOk=$("#OkDelPedido");
-    PBorrarOk.click(DelPedidoOk);
-    volverPedido=$("#volverAddDevolucion");
-    volverPedido.click(seccionDevolucionesC);
-    BorrarP=$("#borrarPedido");
-    BorrarP.click(ConfirmDelPedido);
-    HideDelP=$("#NotDelPedido");
-    HideDelP.click(HideConfirmDelPedido);
+    DBorrarOk=$("#OkDelDevolucion");
+    DBorrarOk.click(DelDevolucionOk);
+    volverDevolucion=$("#volverAddDevolucion");
+    volverDevolucion.click(seccionDevolucionesC);
+    Borrard=$("#borrarDevolucion");
+    Borrard.click(ConfirmDelDevolucion);
+    HideDeld=$("#NotDelDevolucion");
+    HideDeld.click(HideConfirmDelDevolucion);
 }
 function  activadorEventosProductos()
 {
@@ -4688,7 +4688,7 @@ function verificarAddLinea(jsonObj)
         alert("La linea no se pudo adicionar");
     }   
     
-    HideConfirmAddLinea();
+    seccionListadolineas();
 }
 
 function HideConfirmAddLinea()
@@ -6364,8 +6364,8 @@ function cargarDevoluciones(jsonArray)
                 codigoHTML+=               '<tr class="even">';
             
            codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModDevolucion" id="' + jsonArray[i].id_devolucion + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_devolucion + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_devolucion + '" /></td>';
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelDevolucion" id="' + jsonArray[i].id_devolucion + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerDevolucion" id="' + jsonArray[i].id_devolucion + '" /></td>';
             codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>';
             codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
             codigoHTML+=                          '<td>' + jsonArray[i].id_usuario + '</td>';
@@ -6661,6 +6661,239 @@ function verificarModDevolucion(jsonObj)
     
     seccionDevolucionesC();
 }
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerDevolucion()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosDevoluciones","Id_Devolucion":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerDevolucion(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//*******************************************************************************
+//********************                                       ********************
+//******************** FUNCION PARA VISUALIZAR LOS DATOS DE  ********************
+//********************            LOS CLIENTES               ********************
+//********************                                       ********************
+//*******************************************************************************
+
+function VerDevolucion(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Visualizar Devolución</div>'+
+                     '<div class="tabla">'+
+                     '<form id=""  enctype="multipart/form-data">'+
+                            '<div id="Dev" class="tab_content">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<td><input type="text" name="Id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Codigo Producto</th>'+
+                                    '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Causas de la Devolución<br>'+
+                                      '<textarea name="causa_devolucion" cols="74" rows="6" readonly="readonly">' + jsonObject.causa_devolucion + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                    '</table>'+
+                                  '</div>'+
+                                '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                          '</div>'+
+                          '<br>'+
+                            '<table align="center">'+
+                              '<tr>'+
+                                '<td colspan="4" align="center">'+
+                                    '<input type="button" value="Volver" class="button" id="volverAddDevolucion" />'+
+                                '</td>'+
+                              '</tr>'+
+                            '</table>'+               
+                        '</div>';
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    ActivadorEventosClientes();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelDevolucion()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosDevoluciones","Id_Devolucion":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelDevolucion(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR LOS DATOS DE UN CLIENTE          ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelDevolucion(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Eliminar Devolución</div>'+
+                     '<div class="tabla">'+
+                     '<form id="from_eliminar_devolucion"  enctype="multipart/form-data">'+
+                            '<div id="Dev" class="tab_content">'+
+                              '<table align="center" border="0" align="center">'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<td><input type="text" name="Id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Codigo Producto</th>'+
+                                    '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                                  '</tr>'+
+                                    '<td colspan="4" align="left">'+
+                                      'Causas de la Devolución<br>'+
+                                      '<textarea name="causa_devolucion" cols="74" rows="6" readonly="readonly">' + jsonObject.causa_devolucion + '</textarea>'+
+                                    '</td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                          '</div>'+
+                          '<br>'+
+                            '<table align="center">'+
+                              '<tr>'+
+                                '<td colspan="4" align="center">'+
+                                    '<input type="button" value="Volver" class="button" id="volverAddCliente" />'+
+                                    '<a href="#DelC" class="button" name="' + jsonObject.id_devolucion + '" id="borrarDevolucion" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
+                                '</td>'+
+                              '</tr>'+
+                            '</table>'+               
+                        '</div>';
+
+    $("#datos").html(codigoHTML);
+    IniciarTabers();
+    ActivadorEventosClientes();
+}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//************* FUNCION QUE LLAMA AL LIGHTBOX PARA CONFIRMAR  *********************
+//************* LA ELIMINACION DE LOS DATOS                    *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+function ConfirmDelDevolucion()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Devolucion</div>'+
+                        '<table align="center">'+
+                            '<tr>'+
+                              '<th>Está seguro que desea borrar la devolución?</th>'+
+                            '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Si" class="button" id="OkDelDevolucion" name="' + id + '"/>'+
+                                '<input type="button" value="No" class="button" id="NotDelDevolucion"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    ActivadorEventosClientes();
+}
+function DelDevolucionOk()
+{
+    var id = $(this)[0].name; 
+    //alert(id);
+    var request = {"Usuarios":"DelDevolucion","Id_Devolucion":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelDevolucion(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelDevolucion(jsonObj)
+{
+    if (jsonObj.DelDevolucion=="true")
+    {
+        alert("La Devolución se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Devolución no se pudo borrar");
+    }   
+    
+    seccionDevolucionesC();
+}
+
+function HideConfirmDelDevolucion()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    ActivadorEventosClientes();    
+}
+
 //**********************************************************************************
 //**********************************************************************************
 //*************                                                *********************
@@ -6694,7 +6927,7 @@ function menuPerfil()
 function seccionDatosPerfil()
 {
 var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var request = {"Usuarios":"DatosPerfil","Id_usuario":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
