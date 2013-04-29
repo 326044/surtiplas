@@ -424,7 +424,7 @@ public class ServletAdministrador extends HttpServlet
                 Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
-                visitas = uss.obtenerListadoVisitas(jsonObject,this.IdUsuario);
+                visitas = uss.cargarListadoVist(jsonObject);
             }
 
             catch (ParseException e) 
