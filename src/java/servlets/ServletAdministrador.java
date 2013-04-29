@@ -468,7 +468,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usrs.AdicionarViatico(jsonObject,this.IdUsuario))
+                if (usrs.AdicionarViaticos(jsonObject))
                 {
                     objRes.put("AddViatico", "true");
                     out.print(objRes);

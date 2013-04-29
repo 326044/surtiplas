@@ -52,26 +52,28 @@ public class ViaticosSQL
     
     public JSONObject DatosViatico(String id_viaticos)
     {
-        JSONObject viaticos = new JSONObject();
+        JSONObject viaticos= new JSONObject();
         try
         {
             this.cn = getConnection();
             this.st = this.cn.createStatement();
-            String sql = "SELECT viaticos.fecha, viaticos.concepto, viaticos.valor, municipios.NombreMunicipio, departamentos.nombre_depto"
-                    + " FROM viaticos, usuarios, municipios, departamentos"
-                    + " WHERE viaticos.id_usuario=usuarios.id_usuario AND viaticos.codMunicipio=municipios.codMunicipio AND departamentos.cod_departamento=municipios.cod_departamento"
-                    + " AND viaticos.id_viaticos=" +id_viaticos + ";"; 
-            
+            String sql = "SELECT viaticos.id_viaticos, viaticos.valor, viaticos.concepto, viaticos.fecha, viaticos.doc_soporte,"
+                    + "municipios.nombreMunicipio, departamentos.nombre_depto, usuarios.id_usuario FROM viaticos, municipios, usuarios,"
+                    + "departamentos WHERE municipios.codMunicipio=viaticos.codMunicipio AND departamentos.cod_departamento=municipios.cod_departamento "
+                    + "AND usuarios.id_usuario=viaticos.id_usuario AND viaticos.id_viaticos='" + id_viaticos + "';";
+                    
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
-            viaticos.put("fecha", rs.getString("fecha"));
-            viaticos.put("concepto", rs.getString("concepto"));
+            
+            viaticos.put("id_viaticos", rs.getString("id_viaticos"));
+            viaticos.put("id_usuario", rs.getString("id_usuario"));
             viaticos.put("valor", rs.getString("valor"));
-            viaticos.put("NombreMunicipio", rs.getString("NombreMunicipio"));            
+            viaticos.put("concepto", rs.getString("concepto"));
+            viaticos.put("fecha", rs.getString("fecha"));
+            viaticos.put("nombreMunicipio", rs.getString("nombreMunicipio"));
             viaticos.put("nombre_depto", rs.getString("nombre_depto"));
-            
-            System.out.printf(viaticos.toString());
-            
+            viaticos.put("doc_soporte", rs.getString("doc_soporte"));
+
             this.desconectar();
         }
     
@@ -79,8 +81,7 @@ public class ViaticosSQL
         {
             e.printStackTrace();
         }
-     
-        return viaticos;
+        return (viaticos);
     }
     
  //**************************************************************************************
@@ -112,7 +113,39 @@ public class ViaticosSQL
         
         return true;
     }
-
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE ADICIONAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE INGRESARON EN LOS CAMPOS DE LA INTERFAZ WEB   *********************
+//************* A TRAVES DEL ESTAMENTO "INSERT INTO" EN LA TABLA VIATICOS  *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+      
+    public boolean AdicionarViaticos(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Viaticos usrs = new Viaticos("", String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("valor")), String.valueOf(datos.get("concepto")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("codMunicipio")), String.valueOf(datos.get("doc_soporte")));
+            String tsql;
+            tsql = "INSERT INTO viaticos VALUES(DEFAULT, '";
+            tsql +=  usrs.getId_usuario() + "','" + usrs.getValor()+ "','" + usrs.getConcepto()+ "','" + usrs.getFecha() + "','" + usrs.getcodMunicipio() + "','" + usrs.getdoc_soporte() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+    
 //**********************************************************************************************
 //**********************************************************************************************
 //*************                                                            *********************
