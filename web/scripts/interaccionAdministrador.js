@@ -4620,7 +4620,7 @@ function AddLinea()
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="button" value="Volver" class="button" id="NotAddLinea" />'+
-                                  '<input type="submit" value="Registrar" class="button" id="HideConfirmAddLinea" name="' + id + '"/>'+
+                                  '<input type="submit" value="Registrar" class="button" name="' + id + '"/>'+
                               '</td>'+
                             '</tr>'+
                           '</table> '+      
