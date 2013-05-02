@@ -28,7 +28,7 @@ import modelo.UbicacionSQL;
 import modelo.UsuariosSQL;
 import modelo.VendedoresSQL;
 import modelo.ViaticosSQL;
-import modelo.VisitasSQL;
+import modelo.VisitasAdSQL;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -51,7 +51,7 @@ public class ServletAdministrador extends HttpServlet
         System.out.print(op);
         System.out.print(jsonObj.toString());
         UsuariosSQL usr = new UsuariosSQL();
-        VisitasSQL uss = new VisitasSQL();
+        VisitasAdSQL uss = new VisitasAdSQL();
         ViaticosSQL usrs = new ViaticosSQL();
         ProductosAdSQL usj = new ProductosAdSQL();
         clientes1SQL usf = new clientes1SQL();
@@ -140,7 +140,7 @@ public class ServletAdministrador extends HttpServlet
         {
             String cod = String.valueOf(jsonObj.get("Id_Visitas"));  
             System.out.print(cod);
-            JSONObject visita = uss.DatosVisita(cod);
+            JSONObject visita = uss.datosVisitas(cod);
             out.print(visita);
         }
        if (op.equals("DatosViaticos"))
@@ -345,7 +345,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (uss.AdicionarVisita(jsonObject,this.IdUsuario))
+                if (uss.AdicionarVisita(jsonObject))
                 {
                     objRes.put("AddVisita", "true");
                     out.print(objRes);
