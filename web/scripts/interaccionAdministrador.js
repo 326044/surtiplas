@@ -52,7 +52,7 @@ function inicializar()
     // Variables
     var productos;
 	//Inicializacion de las opciones
-	productos=$("#Productos")
+	productos=$("#Productos");
 	productos.click(menuProductos);
 
 /************************************************************************************/
@@ -128,7 +128,7 @@ function activadorEventosUsuarios()
     vBorrarOk.click(DelVisitaOk);
     vBorrarV=$("#borrarVisita");
     vBorrarV.click(ConfirmDelVisita);
-    hideDelVisita=$("#NotDelVisita")
+    hideDelVisita=$("#NotDelVisita");
     hideDelVisita.click(HideConfirmDelVisita);
     volverVisitas=$("#volverVisita");
     volverVisitas.click(seccionVisitas);
@@ -151,7 +151,7 @@ function activadorEventosUsuarios()
     VBorrarOk.click(DelViaticoOk);
     VBorrarV=$("#borrarViatico");
     VBorrarV.click(ConfirmDelViatico);
-    hideDelViatico=$("#NotDelViatico")
+    hideDelViatico=$("#NotDelViatico");
     hideDelViatico.click(HideConfirmDelViatico);
     volverViatico=$("#volverViatico");
     volverViatico.click(seccionViaticos);
@@ -582,7 +582,7 @@ function cargarListadoColores(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -687,7 +687,7 @@ function cargarListadoTallas(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -792,7 +792,7 @@ function cargarMateriales(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -872,7 +872,7 @@ function cargarListado(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -1191,7 +1191,7 @@ function enviarDatosAddUsuario(evento)
 
 function verificarAddUsuario(jsonObj)
 {
-    if (jsonObj.AddUsuario  =="true")
+    if (jsonObj.AddUsuario  ==="true")
     {
         alert("El Usuario se adicionó correctamente");
     }
@@ -1447,7 +1447,7 @@ function enviarDatosModUsuario(evento)
 
 function verificarModUsuario(jsonObj)
 {
-    if (jsonObj.ModUsuario  =="true")
+    if (jsonObj.ModUsuario  ==="true")
     {
         alert("El usuario se modificó correctamente");
     }
@@ -1758,7 +1758,7 @@ function DelUsuarioOk()
 
 function verificarDelUsuario(jsonObj)
 {
-    if (jsonObj.DelUsuario  =="true")
+    if (jsonObj.DelUsuario  ==="true")
     {
         alert("El usuario se ha borrado correctamente");
     }
@@ -1831,7 +1831,7 @@ function seccionVisitas()
     $(".tbonita").css({width: 600});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#VisitasVendedor").addClass("active");
-    if (TablaVisitas != null)
+    if (TablaVisitas !== null)
     {
         tablaVisitas(TablaVisitas);
     }
@@ -1889,7 +1889,7 @@ function seccionVisitas()
     var i;    
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -1982,7 +1982,7 @@ function AddVisita()
     ListadoClientes();
     cargarListadoVendedores();
     IniciarTabers();
-    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
@@ -2051,7 +2051,7 @@ function enviarDatosAddVisita(evento)
 
 function verificarAddVisita(jsonObj)
 {
-    if (jsonObj.AddVisita  =="true")
+    if (jsonObj.AddVisita  ==="true")
     {
         alert("La Visita se adicionó correctamente");
     }
@@ -2215,7 +2215,7 @@ function enviarDatosModVisita(evento)
 
 function verificarModVisita(jsonObj)
 {
-    if (jsonObj.ModVisita  =="true")
+    if (jsonObj.ModVisita  ==="true")
     {
         alert("La Visita se modificó correctamente");
     }
@@ -2458,7 +2458,7 @@ function DelVisitaOk()
 }
 function verificarDelVisita(jsonObj)
 {
-    if (jsonObj.DelVisita  =="true")
+    if (jsonObj.DelVisita  ==="true")
     {
         alert("La Visita se ha borrado correctamente");
     }
@@ -2546,7 +2546,7 @@ function seccionViaticos(jsonArray)
     $(".tbonita").css({width: 620});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#viaticosVendedor").addClass("active");
-    if (TablaViaticos != null)
+    if (TablaViaticos !== null)
     {
         tablaViaticos(TablaViaticos);
     }
@@ -2599,7 +2599,7 @@ function buscarViatico(evento)
     var i;
     for (var i = 0; i < jsonArray.length-1; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -2708,7 +2708,7 @@ function AddViatico()
     cargarListadoVendedores();
     listadoDepartamentos();
     IniciarTabers();    
-    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_crear_viatico").submit(enviarDatosAddViatico);    
     activadorEventosUsuarios();
@@ -2775,7 +2775,7 @@ function enviarDatosAddViatico(evento)
 
 function verificarAddViatico(jsonObj)
 {
-    if (jsonObj.AddViatico  =="true")
+    if (jsonObj.AddViatico  ==="true")
     {
         alert("El Viatico se adicionó correctamente");
     }
@@ -2952,7 +2952,7 @@ function enviarDatosModViatico(evento)
 
 function verificarModViatico(jsonObj)
 {
-    if (jsonObj.ModViatico  =="true")
+    if (jsonObj.ModViatico  ==="true")
     {
         alert("El Viatico se modificó correctamente");
     }
@@ -3195,7 +3195,7 @@ function DelViaticoOk()
 }
 function verificarDelViatico(jsonObj)
 {
-    if (jsonObj.DelViatico  =="true")
+    if (jsonObj.DelViatico  ==="true")
     {
         alert("El Viatico se ha borrado correctamente");
     }
@@ -3698,7 +3698,7 @@ function cargarListadoProducto(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -3957,7 +3957,7 @@ function enviarDatosAddProductos(evento)
 
 function verificarAddProducto(jsonObj)
 {
-    if (jsonObj.AddProducto  =="true")
+    if (jsonObj.AddProducto  ==="true")
     {
         alert("El Producto se adicionó correctamente");
     }
@@ -4165,7 +4165,7 @@ function enviarDatosModProductos(evento)
 
 function verificarModProducto(jsonObj)
 {
-    if (jsonObj.ModProducto  =="true")
+    if (jsonObj.ModProducto  ==="true")
     {
         alert("El Producto se modificó correctamente");
     }
@@ -4477,7 +4477,7 @@ function DelProductoOk()
 }
 function verificarDelProducto(jsonObj)
 {
-    if (jsonObj.DelProducto=="true")
+    if (jsonObj.DelProducto==="true")
     {
         alert("El Producto se ha borrado correctamente");
     }
@@ -4550,7 +4550,7 @@ function cargarListadolineas(jsonArray, id)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -4678,7 +4678,7 @@ function enviarDatosAddLinea(evento)
 
 function verificarAddLinea(jsonObj)
 {
-    if (jsonObj.AddLinea  =="true")
+    if (jsonObj.AddLinea  ==="true")
     {
         alert("La linea se adicionó correctamente");
     }
@@ -4759,7 +4759,7 @@ function cargarListadoClientes(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-           if (i % 2 == 0)
+           if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -5041,7 +5041,7 @@ function enviarDatosAddCliente(evento)
 
 function verificarAddCliente(jsonObj)
 {
-    if (jsonObj.AddCliente  =="true")
+    if (jsonObj.AddCliente  ==="true")
     {
         alert("El Cliente se adicionó correctamente");
     }
@@ -5275,7 +5275,7 @@ function enviarDatosModCliente(evento)
 
 function verificarModCliente(jsonObj)
 {
-    if (jsonObj.ModCliente  =="true")
+    if (jsonObj.ModCliente  ==="true")
     {
         alert("El Cliente se modificó correctamente");
     }
@@ -5650,7 +5650,7 @@ function DelClienteOk()
 }
 function verificarDelCliente(jsonObj)
 {
-    if (jsonObj.DelCliente=="true")
+    if (jsonObj.DelCliente==="true")
     {
         alert("El Cliente se ha borrado correctamente");
     }
@@ -5724,7 +5724,7 @@ function cargarPedidos(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -5814,7 +5814,7 @@ function AddPedido()
     ListadoClientes();
     cargarListadoVendedores();
     IniciarTabers();
-    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_crear_pedido").submit(enviarDatosAddPedidos);
     ActivadorEventosClientes();
@@ -5863,7 +5863,7 @@ function enviarDatosAddPedidos(evento)
 
 function verificarAddPedido(jsonObj)
 {
-    if (jsonObj.AddPedido  =="true")
+    if (jsonObj.AddPedido  ==="true")
     {
         alert("El Pedido se adicionó correctamente");
     }
@@ -6021,7 +6021,7 @@ function enviarDatosModPedido(evento)
 
 function verificarModPedido(jsonObj)
 {
-    if (jsonObj.ModPedido  =="true")
+    if (jsonObj.ModPedido  ==="true")
     {
         alert("El Pedidos se modificó correctamente");
     }
@@ -6258,7 +6258,7 @@ function DelPedidoOk()
 }
 function verificarDelPedido(jsonObj)
 {
-    if (jsonObj.DelPedido=="true")
+    if (jsonObj.DelPedido==="true")
     {
         alert("El Pedido se ha borrado correctamente");
     }
@@ -6358,7 +6358,7 @@ function cargarDevoluciones(jsonArray)
                                  
     for (var i = 0; i < jsonArray.length; i++)
     {
-            if (i % 2 == 0)
+            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -6446,7 +6446,7 @@ function AddDevolucion()
     ListadoClientes();
     cargarListadoVendedores();
     IniciarTabers();
-    $('#date_field9').datepick({yearRange: '1980:2050'})
+    $('#date_field9').datepick({yearRange: '1980:2050'});
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_crear_devolucion").submit(enviarDatosAddDevolucion);
     ActivadorEventosClientes();
@@ -6496,7 +6496,7 @@ function enviarDatosAddDevolucion(evento)
 
 function verificarAddDevolucion(jsonObj)
 {
-    if (jsonObj.AddDevolucion  =="true")
+    if (jsonObj.AddDevolucion  ==="true")
     {
         alert("La Devolución se adicionó correctamente");
     }
@@ -6649,7 +6649,7 @@ function enviarDatosModDevolucion(evento)
 
 function verificarModDevolucion(jsonObj)
 {
-    if (jsonObj.ModDevolucion  =="true")
+    if (jsonObj.ModDevolucion  ==="true")
     {
         alert("La Devolución se modificó correctamente");
     }
@@ -6874,7 +6874,7 @@ function DelDevolucionOk()
 }
 function verificarDelDevolucion(jsonObj)
 {
-    if (jsonObj.DelDevolucion=="true")
+    if (jsonObj.DelDevolucion==="true")
     {
         alert("La Devolución se ha borrado correctamente");
     }
@@ -7158,7 +7158,7 @@ function enviarDatosModUsuario(evento)
 
 function verificarModUsuario(jsonObj)
 {
-    if (jsonObj.ModUsuario  =="true")
+    if (jsonObj.ModUsuario  ==="true")
     {
         alert("El usuario se modificó correctamente");
     }
