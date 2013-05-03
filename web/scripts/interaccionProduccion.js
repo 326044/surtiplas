@@ -103,7 +103,7 @@ function activadorEventosVendedores()
     addVenta=$(".AdicionarVenta");
     addVenta.click(AddVenta);
     modVenta=$(".ModVenta");
-    modVenta.click(ModVenta);
+    modVenta.click(DatosModVendedor);
     verVenta=$(".VerVenta");
     verVenta.click(VerVenta);
     delVenta=$(".DelVenta");
@@ -206,7 +206,7 @@ function menuVendedores()
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     seccionListado();
-    $(".menu-vertical li a#listadoProductos").addClass("active")
+    $(".menu-vertical li a#listadoProductos").addClass("active");
     activadorEventosVendedores();
 }
 
@@ -328,7 +328,7 @@ function cargarListado(jsonArray)
                                  '<div id="producto" class="tabcontent">'+
                                      '<table class="tbonita">'+
                                        '<tr align="left">'+           				   
-                                         '<th colspan="2"></th>'+			                            
+                                         '<th colspan="3"></th>'+			                            
                                          '<th>Nombre</th>'+
                                          '<th>foto</th>'+
                                          '<th>Precio costo</th>'+
@@ -347,8 +347,9 @@ function cargarListado(jsonArray)
                 codigoHTML+=           '<tr class="even">';
 
 
-           codigoHTML+=                 '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" id="'+ jsonArray[i].codigo_producto + '" /></td>';
-           codigoHTML+=                  '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" id="' + jsonArray[i].codigo_producto + '" /></td>';
+           codigoHTML+=                 '<td><img src="images/b_drop.png" title="Eliminar" class="DelVendedor" id="'+ jsonArray[i].codigo_producto +'" /></td>';
+           codigoHTML+=                 '<td><img src="images/b_search.png" title="Visualizar" class="VerVendedor" id="'+ jsonArray[i].codigo_producto +'" /></td>';
+           codigoHTML+=                 '<td><img src="images/b_edit.png" title="Modificar" class="ModVendedor" id="'+ jsonArray[i].codigo_producto +'" /></td>';
            codigoHTML+=                  '<td>' + jsonArray[i].nombre + '</td>';  
            codigoHTML+=                  '<td>' + jsonArray[i].foto + '</td>'; 
            codigoHTML+=                  '<td>' + jsonArray[i].precio_costo + '</td>';
@@ -452,65 +453,35 @@ function AddVendedor()
     $('#date_field14').datepick({yearRange: '1980:2050'});
     activadorEventosVendedores();
 }
+function DatosModVendedor()
+{
+    var id = $(this)[0].id;
+    alert(id); 
+    var request = {"Pproduccion":"ModVendedor","Id_producto":id};
+    var jsonobj=JSON.stringify(request);
+    alert(jsonobj.toString());
+    $.ajax({
+            data: {produccion:jsonobj},
+            dataType: 'json',
+            url: 'ServletProduccion',
+            type: 'POST',
+            success: function(jsonObject)
+            {
+                ModVendedor(jsonObject);     
+            },
+            error: function(jsonObject) 
+            {
+                alert('Error al conectar con Servletggeneral');
+            }
+          });  
+}
+
 //Funcion que usaremos para modificar los productos.
 function ModVendedor()
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Productos</div>'+
-                     '<div class="tabla">'+
-                        '<ul class="tabs">'+
-                            '<li><a href="#Personal">Producto</a></li>'+
-                        '</ul>'+
-                        
-                        '<div class="tab_container">'+
-                            '<div id="Personal" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_usuario">'+
-                              '<table align="center" border="0" align="left">'+
-                                  '<tr>'+
-                                      '<td colspan="2" rowspan="9" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Imagen Productos" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
-                                    '<td><input type="text" name="id_usuario" value="IguanoPato" size="20" maxlength="15" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Producto</th>'+
-                                    '<td><input type="text" name="apellidos" value="11111111" size="20" maxlength="25" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Color Producto</th>'+
-                                    '<td><input type="text" name="nombres" value="Verde" size="20" maxlength="25" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Tallas disponibles</th>'+
-                                    '<td><input type="text" name="nickname" value="S,M y L" size="20" maxlength="10" /></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Cantidas a Crear</th>'+
-                                    '<td><input type="text" name="contrasena" value="444" size="20" maxlength="10" /></td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddVendedor" />'+
-                                  '<input type="submit" value="Registrar" class="button" />'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table> '+      
-                        '</form>'+
-                    '</div>';
-
+    var codigoHTML = '<div class="encabezado2">Modificar Productos BLA BLA BLA </div>';
+    
+                    
     $("#datos").html(codigoHTML);
     IniciarTabers();
     $('#date_field13').datepick({yearRange: '1980:2050'});

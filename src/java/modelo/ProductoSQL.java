@@ -103,14 +103,14 @@ public class ProductoSQL
         return datosproducto;
     }
     //Boraremos un producto con el idUsr
-    public boolean BorrarUsuario(String codigo_produto)
+    public boolean BorrarUsuario(String Id_producto)
     {
         try
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
             String tsql;
-            tsql = "DELETE FROM productos WHERE codigo_producto = '" + codigo_produto + "';";
+            tsql = "DELETE FROM productos WHERE codigo_producto = '" + Id_producto + "';";
             this.st.execute(tsql);
             this.desconectar();
         }
@@ -123,4 +123,28 @@ public class ProductoSQL
         
         return true;
     }
+    // Opcion modificar productos.
+    
+        public boolean ModificarProductos(JSONObject datos, String idProductos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
+            String tsql;
+            tsql = "UPDATE productos SET nombre='" + usj.getnombre() + "', foto='" + usj.getfoto() + "', cantidad=" + usj.getcantidad() + ", precio_costo=" + usj.getprecio_costo() + ", precio_venta=" + usj.getprecio_venta() + ", precio_descuento=" + usj.getprecio_descuento() + ", codigo_barras=" + usj.getcodigo_barras() + ", cod_tipo_producto=" + usj.getcod_tipo_producto () + " WHERE codigo_producto = " + idProductos + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+    
 }

@@ -15,6 +15,8 @@ import modelo.ProductoSQL;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONValue;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 /**-
  *
@@ -57,6 +59,7 @@ public class ServletProduccion extends HttpServlet
             System.out.print(vendedor.toString());
             out.print(vendedor);
         }
+        
         if (op.equals("DelVendedor"))
         {                          
             String cod = String.valueOf(jsonObj.get("Id_producto"));  
@@ -75,6 +78,40 @@ public class ServletProduccion extends HttpServlet
                 out.print(objRes);
             }
         }
+               if (op.equals("ModVendedor"))
+        {
+    
+            String cod = String.valueOf(jsonObj.get("Id_vendedor"));
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usr.ModificarUsuario(jsonObject, tipoUsuario, cod))
+                {
+                    objRes.put("ModVendedor", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModVendedor", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        } 
+        
     }
                     
      @Override
