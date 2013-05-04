@@ -638,7 +638,7 @@ function AddVendedor()
 
     $("#datos").html(codigoHTML);
     IniciarTabers();
-    $('#date_field13').datepick({yearRange: '1980:2050'})
+    $('#date_field13').datepick({yearRange: '1980:2050'});
     $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
