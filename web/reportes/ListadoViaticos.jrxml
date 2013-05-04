@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoViaticos" language="groovy" pageWidth="595" pageHeight="612" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9a3aaa2-8aef-4583-9ecb-d304a74a90cf">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="96"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     viaticos.`id_viaticos` AS viaticos_id_viaticos,
+     viaticos.`id_usuario` AS viaticos_id_usuario,
+     viaticos.`valor` AS viaticos_valor,
+     viaticos.`concepto` AS viaticos_concepto,
+     viaticos.`fecha` AS viaticos_fecha
+FROM
+     `viaticos` viaticos]]>
+	</queryString>
+	<field name="viaticos_id_viaticos" class="java.lang.Integer"/>
+	<field name="viaticos_id_usuario" class="java.lang.Integer"/>
+	<field name="viaticos_valor" class="java.lang.Integer"/>
+	<field name="viaticos_concepto" class="java.lang.String"/>
+	<field name="viaticos_fecha" class="java.sql.Date"/>
+	<background>
+		<band height="572" splitType="Stretch">
+			<image>
+				<reportElement uuid="94db0e13-9e92-4600-b73b-a876e894b364" x="0" y="140" width="553" height="320"/>
+				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\marca de agua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="106" width="239" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="d9f161b4-48f2-4b13-aec2-109642708e48" x="0" y="0" width="239" height="106"/>
+				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="277" y="33" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="453" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="163" y="0" width="237" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Viaticos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="-2" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="109" y="0" width="90" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="197" y="0" width="111" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Valor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="414" y="0" width="141" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="109" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Viaticos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="308" y="0" width="106" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Concepto]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="09521e5f-040f-4cde-88cc-4feb46018173" positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="a034f332-c24c-413f-b1a5-06d93500e63f" style="Detail" x="0" y="0" width="107" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{viaticos_id_viaticos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="40303f2d-6a60-4d02-8ea3-0e8d510081c1" style="Detail" x="107" y="0" width="88" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{viaticos_id_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6be86cd9-4138-4b06-9f14-61b80997b9a7" style="Detail" x="195" y="1" width="111" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{viaticos_valor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9dec0b69-7fc4-4bca-a4a0-3f6f37daa06c" style="Detail" x="306" y="0" width="106" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{viaticos_concepto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="602656b0-7c37-45a0-9115-bec267b21f3b" style="Detail" x="412" y="0" width="143" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{viaticos_fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="85" splitType="Stretch">
+			<line>
+				<reportElement uuid="91a7dd5c-ef58-4f59-8562-b2a4621bd1e9" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="207" y="15" width="348" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

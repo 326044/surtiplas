@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoUsuarios" language="groovy" pageWidth="792" pageHeight="612" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec2d6431-8513-475c-b857-2ea5dda414aa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="386"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     usuarios.`id_usuario` AS usuarios_id_usuario,
+     usuarios.`nombre_usuario` AS usuarios_nombre_usuario,
+     usuarios.`apellidos_usuario` AS usuarios_apellidos_usuario,
+     usuarios.`cedula_usuario` AS usuarios_cedula_usuario,
+     usuarios.`direccion_usuario` AS usuarios_direccion_usuario,
+     usuarios.`telefono_usuario` AS usuarios_telefono_usuario,
+     usuarios.`celular_usuario` AS usuarios_celular_usuario,
+     usuarios.`email_usuario` AS usuarios_email_usuario
+FROM
+     `usuarios` usuarios]]>
+	</queryString>
+	<field name="usuarios_id_usuario" class="java.lang.Integer"/>
+	<field name="usuarios_nombre_usuario" class="java.lang.String"/>
+	<field name="usuarios_apellidos_usuario" class="java.lang.String"/>
+	<field name="usuarios_cedula_usuario" class="java.lang.String"/>
+	<field name="usuarios_direccion_usuario" class="java.lang.String"/>
+	<field name="usuarios_telefono_usuario" class="java.lang.String"/>
+	<field name="usuarios_celular_usuario" class="java.lang.String"/>
+	<field name="usuarios_email_usuario" class="java.lang.String"/>
+	<background>
+		<band height="572" splitType="Stretch">
+			<image>
+				<reportElement uuid="cd37b4af-f127-48e0-8b09-0c90ea60d5d1" x="29" y="134" width="643" height="366"/>
+				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\marca de agua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="106" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="474" y="35" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="652" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="883d1d24-2c1d-410d-84fa-4d54573d725e" x="0" y="0" width="244" height="106"/>
+				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="268" y="0" width="237" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Usuarios]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="752" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="29" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6702cb5f-5522-41b9-92eb-f4a7e9f14112" x="29" y="0" width="93" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombres]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="122" y="0" width="93" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Apellidos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="215" y="0" width="83" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cédula]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="298" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Dirección]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="582b2d4b-4fed-475f-bff1-9c1a11d5b634" x="430" y="0" width="84" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Teléfono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ecd63da1-94cc-444c-9251-0c425dc990e2" x="514" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Celular]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a8e6a906-1d1a-4fe7-8640-d3fd63db4c44" x="609" y="0" width="143" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[email]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="93e434b0-c7c2-453b-85b7-2b03b0f3bf4d" positionType="FixRelativeToBottom" x="0" y="15" width="752" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement uuid="912e6d2d-4f67-40cb-980b-8a580f27333b" style="Detail" x="0" y="0" width="29" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_id_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4aa98676-07aa-40b7-83c8-0215b1f68df9" style="Detail" x="29" y="0" width="93" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="78638546-6045-4f76-a72b-a4b80eaa6923" style="Detail" x="122" y="0" width="93" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_apellidos_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="843764b4-441e-46eb-b9a8-08c8e34ea6d8" style="Detail" x="215" y="0" width="83" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_cedula_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="f2be0026-6bb3-4ff1-a1ae-817cc7ea3bed" style="Detail" x="298" y="0" width="132" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_direccion_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4043242d-8c98-4e1c-bf4a-d6dea415baa9" style="Detail" x="430" y="0" width="84" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_telefono_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="b51cc3fb-8cba-4cce-a05e-bd79a4109dd2" style="Detail" x="514" y="0" width="95" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_celular_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="39e2d1ed-d322-4cf8-bb83-c40ab082550d" style="Detail" x="609" y="0" width="143" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{usuarios_email_usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="23" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="100" splitType="Stretch">
+			<line>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="0" width="752" height="4"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="414" y="16" width="348" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
