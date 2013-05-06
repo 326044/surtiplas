@@ -1990,9 +1990,16 @@ function AddActividades()
                         '</tr>'+
                      '</tbody>'+                     
                     '</table>'+ 
+                       '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+                                 
+                                  '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+                                   
+                              '</td>'+
+                            '</tr>'+
+                      '</table>'+
                     '<br>'+                    
                     '</form>'+
-                '</div>';
+                '</div>';           
     
     $("#overAddProducto").css({display: "block"});
     $("#overAddProducto").html(codigoHTML);
@@ -2015,8 +2022,8 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML=  '<div>'+
-           '<form enctype="multipart/form-data">'+
+       codigoHTML= '<div>'+
+                    '<form enctype="multipart/form-data">'+
                      '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id visita</th>'+
                           '<td>'+
@@ -2077,9 +2084,8 @@ function addcampos(A)
                             '</tr>'+
                       '</table>'+
                      '</form>'+
-                     '</div>';
-    $('#date_field32').datepick({yearRange: '1980:2050'}); 
-    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
+                   '</div>';
+    
     
     }  
     
@@ -2093,7 +2099,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field29" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2153,6 +2159,8 @@ function addcampos(A)
                           '</tr>'+
                         '</table>'+
                         '<form>';
+    $('#date_field32').datepick({yearRange: '1980:2050'}); 
+    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
     }
     else
     {
@@ -2164,7 +2172,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field29" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2219,8 +2227,9 @@ function addcampos(A)
                     '</form>';
     }
     //$("#overAddProducto").html(codigoHTML);
-    listadoDepartamentos();
-   
+    $('#date_field32').datepick({yearRange: '1980:2050'}); 
+    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
+    listadoDepartamentos();   
     $("#campos").html(codigoHTML);
     activadorEventosClientes();
     activadorEventosVendedores();
