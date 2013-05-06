@@ -280,18 +280,18 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var addLinea, modViatico, verViatico, delViatico;
-    var VBorrarOk, VBorrarV, hideDelViatico, hideAddLinea;
+    var addLinea, modLinea, verViatico, delViatico;
+    var volverLinea, VBorrarV, hideDelViatico, hideAddLinea;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    addLinea=$(".AddLinea");
-    addLinea.click(ConfirmAddLinea);
-    modViatico=$(".ModViatico");
-    modViatico.click(DatosModViatico);
     verViatico=$(".VerViatico");
     verViatico.click(DatosVerViatico);
     delViatico=$(".DelViatico");
     delViatico.click(DatosDelViatico);
     
+    addLinea=$(".addLinea");
+    addLinea.click(ConfirmAddLinea);
+    modLinea=$(".ModLinea");
+    modLinea.click(DatosModlinea);
     hideAddLinea=$("#NotAddLinea");
     hideAddLinea.click(HideConfirmAddLinea);
     
@@ -4542,7 +4542,7 @@ function cargarListadolineas(jsonArray, id)
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddLinea"/></th>'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Nombre</th>'+
@@ -4555,9 +4555,9 @@ function cargarListadolineas(jsonArray, id)
            else
                 codigoHTML+=               '<tr class="even">';
             
-           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" id="' + id + '" class="ModLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].cod_linea + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].cod_linea + '" /></td>';
             codigoHTML+=                          '<td>' + jsonArray[i].cod_linea + '</td>';
             codigoHTML+=                          '<td>' + jsonArray[i].nombre_linea + '</td>';  
             codigoHTML+=                   '</tr>';
@@ -4607,41 +4607,29 @@ function ConfirmAddLinea()
 function AddLinea()
 {
     var id = $(this)[0].name;
-    var codigoHTML = '<div class="encabezado2">Adicionar Linea</div>'+
-                     '<div class="tabla">'+
-                                '<form id="form_crear_linea"  enctype="multipart/form-data"  align="center">'+
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+                        '<table align="center">'+
+                            '<form id="form_crear_linea"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
                                     '<td><input type="text" name="cod_linea" value="" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="nombre_linea" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="NotAddLinea" />'+
-                                  '<input type="submit" value="Registrar" class="button" name="' + id + '"/>'+
-                              '</td>'+
-                            '</tr>'+
-                          '</table> '+      
-                        '</form>'+
-                    '</div>';
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddLinea"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosAddLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
 
-    $("#datos").html(codigoHTML);
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
     $("#form_crear_linea").submit(enviarDatosAddLinea);
     activadorEventosProductos();
 }
-//***************************************************************************************************************
-//***************************************************************************************************************
-//***********************                                                                 ***********************
-//*********************** FUNCION PARA CARGAR LOS DATOS Y ADICIONARLOS A LA BASE DE DATOS ***********************
-//***********************                                                                 ***********************
-//***************************************************************************************************************
-//***************************************************************************************************************
-
 function enviarDatosAddLinea(evento)
 {
     evento.preventDefault();
@@ -4667,37 +4655,158 @@ function enviarDatosAddLinea(evento)
                 }
            });
 }
-//*********************************************************************************************************
-//*********************************************************************************************************
-//***********************                                                           ***********************
-//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN ADICIONADO ***********************
-//***********************                   CORRECTAMENTE                           **********************
-//***********************                                                           ***********************
-//*********************************************************************************************************
-//*********************************************************************************************************
-
 function verificarAddLinea(jsonObj)
 {
-    if (jsonObj.AddLinea  ==="true")
+    if (jsonObj.AddLinea=="true")
     {
-        alert("La linea se adicionó correctamente");
+        alert("La Linea se ha adicionado correctamente");
     }
     
     else
     {
-        alert("La linea no se pudo adicionar");
+        alert("La Linea no se pudo adicionar");
     }   
     
-    seccionListadolineas();
+    HideConfirmAddLinea();
 }
 
 function HideConfirmAddLinea()
 {
-    $("#overAddItem").css({display: "none"});
-    $("#fadeAddItem").css({display: "none"});
-    activadorEventosProductos();  
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModlinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
 }
 
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
+                     '<div class="tabla">'+
+                            '<form id="form_modificar_linea"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="cod_lineamod" id="cod_lineamod" value="' + jsonObject.cod_linea + '" /></td>'+
+                                  '</tr>'+
+                                '</br>'+
+                              '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddLinea"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosModLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                    '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_modificar_linea").submit(enviarDatosModLinea);
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModLinea(evento)
+{
+    evento.preventDefault();
+    var cod_linea = $("#cod_lineamod").val();
+    //alert(id_viaticos);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModLinea","Datos":datos, "CodLinea":cod_linea};
+    var jsonobj=JSON.stringify(request);
+   // alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModLinea(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModLinea(jsonObj)
+{
+    if (jsonObj.ModLinea  ==="true")
+    {
+        alert("La Linea se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("La Linea no se pudo modificar");
+    }   
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 

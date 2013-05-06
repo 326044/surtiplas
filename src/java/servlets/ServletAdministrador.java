@@ -137,6 +137,13 @@ public class ServletAdministrador extends HttpServlet
             out.print(devoluciones);
         }
 
+        if (op.equals("DatosLineas"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodLinea"));   
+            JSONObject linea = lp.Datoslineas(cod);
+            out.print(linea);
+        }
+        
         if (op.equals("DatosUsuario"))
         {
             String cod = String.valueOf(jsonObj.get("Id_usuario"));   
@@ -649,6 +656,39 @@ public class ServletAdministrador extends HttpServlet
                 else
                 {
                     objRes.put("AddLinea", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("ModLinea"))
+        {
+            String cod = String.valueOf(jsonObj.get("Codlinea"));
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (lp.ModificarLinea(jsonObject, cod))
+                {
+                    objRes.put("ModLinea", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModLinea", "false");
                     out.print(objRes);
                 }
                 

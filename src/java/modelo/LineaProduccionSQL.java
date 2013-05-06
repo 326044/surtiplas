@@ -87,6 +87,37 @@ public class LineaProduccionSQL
     
         return(LineaProduccion);
     }
+    
+    //*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA*************************
+//*************  PARA VISUALIZAR LOS VIATICOS                  ********************    
+//**************************************************************************************
+    
+    public JSONObject Datoslineas(String lineacod)
+    {
+        JSONObject viaticos= new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT linea_produccion.cod_linea, linea_produccion.nombre_linea FROM linea_produccion WHERE linea_produccion.cod_linea='" + lineacod + "';";
+                    
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            
+            viaticos.put("cod_linea", rs.getString("cod_linea"));
+            viaticos.put("nombre_linea", rs.getString("nombre_linea"));
+            
+
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return (viaticos);
+    }
+    
     public boolean AdicionarLinea(JSONObject datos)
     {
         try
@@ -109,5 +140,36 @@ public class LineaProduccionSQL
         
         return true;
     }
+  
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA VIATICOS      *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
     
+    public boolean ModificarLinea(JSONObject datos, String Codlinea)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            LineaProduccion lp = new LineaProduccion("", String.valueOf(datos.get("nombre_linea")));
+            String tsql;
+            tsql = "UPDATE linea_produccion SET nombre_linea=" + lp.getNombre_linea() + " WHERE cod_linea = " + Codlinea + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }
