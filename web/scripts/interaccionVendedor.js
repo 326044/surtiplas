@@ -1990,6 +1990,7 @@ function AddActividades()
                         '</tr>'+
                      '</tbody>'+                     
                     '</table>'+ 
+                    '<br>'+
                        '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+                                 
@@ -2078,7 +2079,6 @@ function addcampos(A)
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                                  '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
                                   '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
                               '</td>'+
                             '</tr>'+
@@ -2152,8 +2152,7 @@ function addcampos(A)
                         '<table align="center">'+
                           '<tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                                '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
+                                '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+                              
                                 '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
                             '</td>'+
                           '</tr>'+
@@ -2219,7 +2218,6 @@ function addcampos(A)
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                                  '<input type="button" value="cancelar" class="button" id="NotAddProducto"/>'+
                                   '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
                               '</td>'+
                             '</tr>'+
