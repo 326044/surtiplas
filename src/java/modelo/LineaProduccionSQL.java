@@ -92,20 +92,20 @@ public class LineaProduccionSQL
 //*************  PARA VISUALIZAR LOS VIATICOS                  ********************    
 //**************************************************************************************
     
-    public JSONObject Datoslineas(String lineacod)
+    public JSONObject Datoslineas(String codlinea)
     {
-        JSONObject viaticos= new JSONObject();
+        JSONObject Lineas= new JSONObject();
         try
         {
             this.cn = getConnection();
             this.st = this.cn.createStatement();
-            String sql = "SELECT linea_produccion.cod_linea, linea_produccion.nombre_linea FROM linea_produccion WHERE linea_produccion.cod_linea='" + lineacod + "';";
+            String sql = "SELECT linea_produccion.cod_linea, linea_produccion.nombre_linea FROM linea_produccion WHERE linea_produccion.cod_linea='" + codlinea + "';";
                     
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
             
-            viaticos.put("cod_linea", rs.getString("cod_linea"));
-            viaticos.put("nombre_linea", rs.getString("nombre_linea"));
+            Lineas.put("cod_linea", rs.getString("cod_linea"));
+            Lineas.put("nombre_linea", rs.getString("nombre_linea"));
             
 
             this.desconectar();
@@ -115,7 +115,7 @@ public class LineaProduccionSQL
         {
             e.printStackTrace();
         }
-        return (viaticos);
+        return (Lineas);
     }
     
     public boolean AdicionarLinea(JSONObject datos)
@@ -159,7 +159,7 @@ public class LineaProduccionSQL
             this.st = cn.createStatement();
             LineaProduccion lp = new LineaProduccion("", String.valueOf(datos.get("nombre_linea")));
             String tsql;
-            tsql = "UPDATE linea_produccion SET nombre_linea=" + lp.getNombre_linea() + " WHERE cod_linea = " + Codlinea + ";";
+            tsql = "UPDATE linea_produccion SET nombre_linea='" + lp.getNombre_linea() + "' WHERE cod_linea = " + Codlinea + ";";
             this.st.execute(tsql);
             this.desconectar();
         }
