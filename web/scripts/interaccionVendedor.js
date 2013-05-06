@@ -2015,7 +2015,7 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML=  '</div>'+
+       codigoHTML=  '<div>'+
            '<form enctype="multipart/form-data">'+
                      '<tr>'+
                           '<th align="right" style="padding-right:5px;">Id visita</th>'+
