@@ -67,6 +67,7 @@ public class ServletAdministrador extends HttpServlet
         VendedoresSQL ven= new VendedoresSQL();
         ComboClientesSQL cli= new ComboClientesSQL();
         PerfilSQL per= new PerfilSQL();
+        TipoProductoSQL tp=new TipoProductoSQL();
         ComboProductoSQL cp=new ComboProductoSQL();
         TallasComboSQL tc=new TallasComboSQL();
         ColorSQL cl=new ColorSQL();
@@ -116,6 +117,12 @@ public class ServletAdministrador extends HttpServlet
             JSONArray materiales = new JSONArray();
             materiales = use.ObtenerMateriales();
             out.print(materiales);
+        }
+        if (op.equals("Tipo"))
+        {
+            JSONArray tipo = new JSONArray();
+            tipo = tp.ObtenerTipoProducto();
+            out.print(tipo);
         }
         if (op.equals("Pedidos"))
         {

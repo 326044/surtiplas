@@ -3417,9 +3417,9 @@ function cargarcomboClient(jsonArray)
 //**********************************************************************************
 //**********************************************************************************
 
-function cargarListadolineasCombo()
+function ObtenerLineasProduccion()
 {
-    var request = {"Usuarios":"LineasCombo"};
+    var request = {"Usuarios":"Lineas"};
     var jsonobj=JSON.stringify(request);
     $.ajax({
                     data: {administrador:jsonobj},
@@ -3456,9 +3456,9 @@ function cargarLineasCombo(jsonArray)
 //**********************************************************************************
 //**********************************************************************************
 
-function cargarComboMateriales()
+function ObtenerMateriales()
 {
-    var request = {"Usuarios":"MaterialesCombo"};
+    var request = {"Usuarios":"Materiales"};
     var jsonobj=JSON.stringify(request);
     $.ajax({
                     data: {administrador:jsonobj},
@@ -3573,7 +3573,7 @@ function cargColor(jsonArray)
 //**********************************************************************************
 //**********************************************************************************
 
-function cargarlistadoTipo()
+function ObtenerTipoProducto()
 {
     var request = {"Usuarios":"Tipo"};
     var jsonobj=JSON.stringify(request);
@@ -3841,11 +3841,11 @@ function AddProducto()
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    cargarListadolineasCombo();
-    cargarComboMateriales();
+    ObtenerLineasProduccion();
+    ObtenerMateriales();
     cargarListadoTallasCombo();
     cargarColor();
-    cargarlistadoTipo();
+    ObtenerTipoProducto();
     IniciarTabers();
     $("#form_crear_producto").submit(enviarDatosAddProductos);
     activadorEventosProductos();
@@ -4108,11 +4108,11 @@ function ModProducto(jsonObject)
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    cargarListadolineasCombo();
-    cargarComboMateriales();
+    ObtenerLineasProduccion();
+    ObtenerMateriales();
     cargarListadoTallasCombo();
     cargarColor();
-     cargarlistadoTipo();
+    ObtenerTipoProducto();
     IniciarTabers();
     $('#date_field13').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick({yearRange: '1980:2050'});
