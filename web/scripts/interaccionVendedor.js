@@ -2004,20 +2004,13 @@ function AddActividades()
     
     $("#overAddProducto").css({display: "block"});
     $("#overAddProducto").html(codigoHTML);
-    $("#fadeAddProducto").css({display: "block"});
-    $('#date_field29').datepick({yearRange: '1980:2050'});
-    $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#fadeAddProducto").css({display: "block"});    
     listadoDepartamentos();
     $("#form_crear_actividad").submit(crearActividadVisita);  
     activadorEventosClientes();
     activadorEventosVendedores();
 }
 
-/*function addCampo()
-{
-  alert("ddd");
- 
-}*/
 function addcampos(A)
 {
     var codigoHTML;
@@ -2032,7 +2025,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input id="date_field29" type="text" name="fecha" value="" style="font-size:14px;"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2086,6 +2079,7 @@ function addcampos(A)
                      '</form>'+
                    '</div>';
     
+   
     
     }  
     
@@ -2224,9 +2218,10 @@ function addcampos(A)
                         '</table>'+
                     '</form>';
     }
-    //$("#overAddProducto").html(codigoHTML);
-    $('#date_field32').datepick({yearRange: '1980:2050'}); 
-    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
+
+    //$("#overAddProducto").html(codigoHTML);    
+    $('#date_field29').datepick({yearRange: '1980:2050'});
+    $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
     listadoDepartamentos();   
     $("#campos").html(codigoHTML);
     activadorEventosClientes();
