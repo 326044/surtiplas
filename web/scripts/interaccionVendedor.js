@@ -1470,7 +1470,6 @@ function AddPedido()
 
 
 
-
 function ConfirmAddProducto()
 {
     var codigoHTML='<div class="encabezado2">Adicionar Producto</div>'+
@@ -2077,8 +2076,7 @@ function addcampos(A)
                             '</tr>'+
                       '</table>'+
                      '</form>'+
-                   '</div>';
-    
+                   '</div>'; 
    
     
     }  
@@ -3044,13 +3042,7 @@ function AgrViatico()
                                     '<td>'+
                                       '<input type="text" name="fecha" id="date_field15" value="" required/>'+                                      
                                     '</td>'+
-                                  '</tr>'+
-                                  //'<tr>'+
-                                    //'<th align="right" style="padding-right:5px;">Nit</th>'+
-                                    //'<td>'+
-                                      //'<input type="hidde" name="id_usuario" value="4" readonly="readonly" />'+                                      
-                                    //'</td>'+
-                                  //'</tr>'+
+                                  '</tr>'+                                  
                               '</table>'+
                               '<br>'+
                               '<br>'+
@@ -3078,7 +3070,6 @@ function AgrViatico()
                                         '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()"  required>'+                                           
                                         '</select>'+ 
                                     '</td>'+ 
-
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                        '<td>'+
                                         '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+
@@ -3516,9 +3507,7 @@ function VerCliente(jsonObject, id)
                                         '</tr> '+ 
                                     '</table>'+ 
                                 '</form>'+
-                                '<br>'+
-                        
-                                
+                                '<br>'+                      
                               '<table class="tbonita" align="center" width="700" id="tablaVisita">'+
                                 '<tr align="left">'+
                                     '<th colspan="1"><img src="images/b_insrow.png" title="Adicionar Visita" id="'+ id +'" class="addVisita"/></th>'+
@@ -3531,8 +3520,7 @@ function VerCliente(jsonObject, id)
                                     '<th>Asunto</th>'+ 
                                   '</tr>'+
                                  '</table>'+                                   
-                                '</div>'+
-                                                          
+                                '</div>'+                                            
                                 '<div id="quejas" class="tab_content2">'+
                                     '<form id="form_buscar_quejas_cliente" enctype="multipart/form-data">'+ 
                                     '<table align="center" border="0" align="left">'+                                         
@@ -3569,8 +3557,7 @@ function VerCliente(jsonObject, id)
                                     '<th>Asunto</th>'+ 
                                   '</tr>'+                                
                                 '</table>'+     
-                                '</div>'+                    
-                                
+                                '</div>'+                  
                                '<div id="recaudo" class="tab_content2">'+
                                     '<form id="enviarDatosBuscarPagoCliente" enctype="multipart/form-data">'+ 
                                     '<table align="center" border="0" align="left">'+                                         
@@ -3583,9 +3570,7 @@ function VerCliente(jsonObject, id)
                                             '<td>'+ 
                                               '<input id="date_field22" type="text" name="fechaFin" value=""/>'+ 
                                             '</td>'+ 
-                                        '</tr>'+ 
-
-                                        '<tr>'+ 
+                                        '</tr>'+                             '<tr>'+ 
                                             '<td colspan="4" align="center"><br>'+ 
                                               '<input type="submit" value="Buscar" class="button" />'+ 
                                             '</td>'+
