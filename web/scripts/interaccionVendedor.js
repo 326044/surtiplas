@@ -2078,27 +2078,30 @@ function addcampos(A)
                       '</table>'+                   
                      '</form>'+
                    '</div>';   
-   $("#overAddProducto").html(codigoHTML);
+   
     }  
     
     else if(A==2)
     {
-         codigoHTML=  '<form>'+
+         codigoHTML=  '<div class="encabezado2">Adicionar Pago</div>'+
+                     '<form id="" enctype="multipart/form-data">'+
+                    '<br>'+
+                    '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id Recaudo</th>'+
+                          '<th align="right" style="padding-right:5px;">IdRecaudo</th>'+
                           '<td>'+
-                            '<input type="text" name="id" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_vis" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input type="text" name="fecha" value="" id="date_field29"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="razonSocial" value="" />'+
+                            '<input type="text" name="cliente_que" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
@@ -2106,17 +2109,25 @@ function addcampos(A)
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
-                          '<td>'+
-                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+                      
-                            '</select>'+
-                          '</td>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                             '<select name="codMunicipio" style="width:160px;" class="municipios">'+
-                                 '<option value="null"></option>'+
-                             '</select>'+ 
-                          '</td>'+                        
+                            '<input type="text" name="ciudad_que" value="" readonly="readonly"/>'+
+                          '</td>'+
+                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
+                          '<td>'+
+                            '<input type="text" name="depto_que" value="" readonly="readonly"/>'+
+                          '</td>'+
+                        '</tr>'+
+                        '<tr>'+
+                          '<th align="right" style="padding-right:5px;">NIT</th>'+
+                          '<td>'+
+                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
+                          '</td>'+
+                          '<th align="right" style="padding-right:5px;">Telefono</th>'+
+                          '<td>'+
+                            '<input type="text" name="telefono_que" value="" readonly="readonly"/>'+
+                          '</td>'+
+                        '</tr>'+
                         '<tr>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Estado Cliente</th>'+
                           '<td>'+
@@ -2139,85 +2150,101 @@ function addcampos(A)
                           '<th align="right" colspan="2" style="padding-right:5px;">Forma de Pago</th>'+
                           '<td>'+
                             '<input type="text" name="forma_de_pago" value=""/>'+
-                          '</tr>'+                          
-                        '<tr>'+
-                        '<table align="center">'+
-                          '<tr>'+
-                            '<td colspan="4" align="center">'+
-                                '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+                              
-                                '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                            '</td>'+
                           '</tr>'+
-                        '</table>'+
-                        '<form>';
+                        '<tr>'+
+                            '<td colspan="4" align="left">'+
+                              'Comentario:<br>'+
+                              '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
+                            '</td>'+
+                        '</tr>'+                              
+                    '</table>'+                
+
+                    '<br>'+
+                    '<table align="center">'+
+                      '<tr>'+
+                        '<td colspan="4" align="center">'+
+                            '<input type="submit" value="Aceptar" class="button" id="OkAddRecaudo"/>'+
+                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                            '<input type="button" value="cancelar" class="button" id="NotAddRecaudo"/>'+
+                        '</td>'+
+                      '</tr>'+
+                    '</table>'+
+                    '</form>'+
+                '</div>';
     $('#date_field32').datepick({yearRange: '1980:2050'}); 
     $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
     }
     else
     {
-        codigoHTML = '<form>'+
+        codigoHTML = '<div class="encabezado2">Adicionar Queja</div>'+
+                    '<form id="form_crear_queja" enctype="multipart/form-data">'+
+                    '<br>'+
+                    '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id Queja</th>'+
+                          '<th align="right" style="padding-right:5px;">IdQuejas</th>'+
                           '<td>'+
-                            '<input type="text" name="id" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_que" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
-                            '<input id="date_field32" type="text" name="fecha" value="" style="font-size:14px;"/>'+
+                            '<input type="text" name="fecha" value="" id="date_field29"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
-                        '<tr>'+
+                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="razonSocial" value="" />'+
+                            '<input type="text" name="cliente_que" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
-                            '<input type="text" name="id_usuario" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_usuario" value="4" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
-                          '<td>'+
-                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+                      
-                            '</select>'+
-                          '</td>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                             '<select name="codMunicipio" style="width:160px;" class="municipios">'+
-                                 '<option value="null"></option>'+
-                             '</select>'+ 
+                            '<input type="text" name="ciudad_que" value="" readonly="readonly"/>'+
+                          '</td>'+
+                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
+                          '<td>'+
+                            '<input type="text" name="depto_que" value="" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">NIT</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value=""/>'+
+                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono" value=""/>'+
+                            '<input type="text" name="telefono_que" value="" readonly="readonly"/>'+
                           '</td>'+
-                        '</tr>'+
-                        '<tr>'+                        
+                        '</tr>'+                        
+                        '<tr>'+
                             '<td colspan="4" align="left">'+
-                              'Descripcion:<br>'+
+                              'Queja o Reclamo:<br>'+
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
-                        '</tr>'+
-                        '<table align="center">'+
-                            '<tr>'+
-                              '<td colspan="4" align="center">'+
-                                  '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                                  '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                              '</td>'+
-                            '</tr>'+
-                        '</table>'+
-                    '</form>';
+                        '</tr>'+                              
+                    '</table>'+                
+
+                    '<br>'+
+                    '<table align="center">'+
+                      '<tr>'+
+                        '<td colspan="4" align="center">'+
+                            '<input type="submit" value="Aceptar" class="button" id="OkAddQuejas"/>'+
+                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                            '<input type="button" value="cancelar" class="button" id="NotAddQuejas"/>'+
+                        '</td>'+
+                      '</tr>'+
+                    '</table>'+
+                    '</form>'+
+                '</div>';
+
     }
 
-    //$("#overAddProducto").html(codigoHTML);    
+    $("#overAddProducto").html(codigoHTML);
     $('#date_field29').datepick({yearRange: '1980:2050'});
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
     listadoDepartamentos();   
