@@ -2016,11 +2016,11 @@ function addcampos(A)
     if(A==1)
     {
        codigoHTML= '<div class="encabezado2">Adicionar Visita</div>'+
-                    '<form id="" enctype="multipart/form-data">'+
+                    '<form id="form_crear_actividad_visita" enctype="multipart/form-data">'+
                     '<br>'+                   
                     '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">IdVisita</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Visita</th>'+
                           '<td>'+
                             '<input type="text" name="id_visi" value="" readonly="readonly"/>'+
                           '</td>'+
@@ -2033,7 +2033,7 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="cliente_vis" value="" readonly="readonly"/>'+
+                            '<input type="text" name="cliente_vis" value=""/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
@@ -2043,21 +2043,22 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                            '<input type="text" name="ciudad_vis" value="" readonly="readonly"/>'+
+                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()"  required>'+                                           
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Departamento</th>'+
                           '<td>'+
-                            '<input type="text" name="depto_vis" value="" readonly="readonly"/>'+
+                            '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+                            
+                            '</select>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">NIT</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_cliente" value=""/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_vis" value="" readonly="readonly"/>'+
+                            '<input type="text" name="telefono_vis" value="" />'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2249,6 +2250,7 @@ function addcampos(A)
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
     listadoDepartamentos();   
     $("#campos").html(codigoHTML);
+    $("#form_crear_actividad_visita").submit(crearActividadVisita);
     activadorEventosClientes();
     activadorEventosVendedores();
 }
