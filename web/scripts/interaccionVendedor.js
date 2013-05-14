@@ -2015,12 +2015,14 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML= '<div>'+
-                    '<form enctype="multipart/form-data">'+
-                     '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Id visita</th>'+
+       codigoHTML= '<div class="encabezado2">Adicionar Visita</div>'+
+                    '<form id="" enctype="multipart/form-data">'+
+                    '<br>'+                   
+                    '<table align="center">'+
+                        '<tr>'+
+                          '<th align="right" style="padding-right:5px;">IdVisita</th>'+
                           '<td>'+
-                            '<input type="text" name="id" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_visi" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
@@ -2031,7 +2033,7 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="razonSocial" value="" />'+
+                            '<input type="text" name="cliente_vis" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
@@ -2039,26 +2041,23 @@ function addcampos(A)
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
-                          '<td>'+
-                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+                      
-                            '</select>'+
-                          '</td>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                             '<select name="codMunicipio" style="width:160px;" class="municipios">'+
-                                 '<option value="null"></option>'+
-                             '</select>'+ 
+                            '<input type="text" name="ciudad_vis" value="" readonly="readonly"/>'+
+                          '</td>'+
+                          '<th align="right" style="padding-right:5px;">Departamento</th>'+
+                          '<td>'+
+                            '<input type="text" name="depto_vis" value="" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">NIT</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value=""/>'+
+                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono" value=""/>'+
+                            '<input type="text" name="telefono_vis" value="" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2066,19 +2065,20 @@ function addcampos(A)
                               'Descripcion:<br>'+
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
-                        '</tr>'+
+                        '</tr>'+                              
+                    '</table>'+                      
                         '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
                                   '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
+                                   '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
                               '</td>'+
                             '</tr>'+
-                      '</table>'+
+                      '</table>'+                   
                      '</form>'+
-                   '</div>'; 
-   
-    
+                   '</div>';   
+   $("#overAddProducto").html(codigoHTML);
     }  
     
     else if(A==2)
