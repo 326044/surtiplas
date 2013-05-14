@@ -3101,8 +3101,7 @@ function AgrViatico()
                                     '</td>'+ 
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                        '<td>'+
-                                        '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+
-                                            //'<option value="null"></option>'+
+                                        '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+                                           
                                          '</select>'+
                                     '</td>'+ 
                                   '</tr>'+                                  
