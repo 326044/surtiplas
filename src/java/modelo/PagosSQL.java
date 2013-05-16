@@ -60,7 +60,7 @@ public class PagosSQL
             this.st = this.cn.createStatement();
             String sql;
             sql = "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, departamentos.nombre_depto, "
-                    + "pagos.descripcion, pagos.tipo_de_pago, pagos.forma_de_pago, pagos.numero_de_factura, pagos.cantidad_de_pago, clientes.id_cliente, clientes.telefono"
+                    + "pagos.descripcion, pagos.tipo_de_pago, pagos.forma_de_pago, pagos.cantidad_de_pago, clientes.id_cliente, clientes.telefono"
                     + " FROM pagos, clientes, usuarios, municipios, departamentos"
                     + " WHERE pagos.id_cliente=clientes.id_cliente AND pagos.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio AND municipios.cod_departamento=departamentos.cod_departamento"
                     + " AND pagos.id_pago="+ id +" ORDER BY pagos.fecha DESC;";
@@ -79,7 +79,7 @@ public class PagosSQL
                 pago.put("tipo_de_pago", rs.getString("tipo_de_pago"));
                 pago.put("forma_de_pago", rs.getString("forma_de_pago")); 
                 pago.put("cantidad_de_pago", rs.getString("cantidad_de_pago"));  
-                pago.put("numero_de_factura", rs.getString("numero_de_factura"));  
+                //pago.put("numero_de_factura", rs.getString("numero_de_factura"));  
                 pago.put("descripcion", rs.getString("descripcion"));
                  System.out.printf(pago.toString());
                  
@@ -105,10 +105,10 @@ public class PagosSQL
         {            
             this.cn = getConnection();
             this.st = cn.createStatement();
-            Pagos pag= new Pagos("", String.valueOf(datos.get("numero_de_factura")), String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("id_vendedor")), String.valueOf(datos.get("tipo_de_pago")), String.valueOf(datos.get("cantidad_de_pago")), String.valueOf(datos.get("forma_de_pago")), String.valueOf(datos.get("descripcion")));
+            Pagos pag= new Pagos("", String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("id_vendedor")), String.valueOf(datos.get("tipo_de_pago")), String.valueOf(datos.get("cantidad_de_pago")), String.valueOf(datos.get("forma_de_pago")), String.valueOf(datos.get("descripcion")));
             String tsql;
             tsql = "INSERT INTO pagos VALUES(DEFAULT, '";
-            tsql += pag.getNumero_de_factura() + "', " + pag.getId_cliente()+ "," + pag.getId_usuario() + ",'" + pag.getFecha() + "','" + pag.getTipo_de_pago() + "'," + pag.getCantidad_de_pago() + ",'" + pag.getForma_de_pago() + "','" + pag.getDescripcion() + "')";
+            tsql += pag.getId_cliente()+ "," + pag.getId_usuario() + ",'" + pag.getFecha() + "','" + pag.getTipo_de_pago() + "'," + pag.getCantidad_de_pago() + ",'" + pag.getForma_de_pago() + "','" + pag.getDescripcion() + "')";
             this.st.execute(tsql);
             System.out.printf(tsql.toString());
             this.desconectar();

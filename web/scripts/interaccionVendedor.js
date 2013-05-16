@@ -2085,13 +2085,13 @@ function addcampos(A)
     else if(A==2)
     {
          codigoHTML=  '<div class="encabezado2">Adicionar Pago</div>'+
-                     '<form id="" enctype="multipart/form-data">'+
+                     '<form id="form_crear_actividad_pago" enctype="multipart/form-data">'+
                     '<br>'+
                     '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">IdRecaudo</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Recaudo</th>'+
                           '<td>'+
-                            '<input type="text" name="id_vis" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_pago" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
@@ -2102,41 +2102,42 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="cliente_que" value="" readonly="readonly"/>'+
+                            '<input type="text" name="cliente_que" value="" />'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
                             '<input type="text" name="id_usuario" value="" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
-                        '<tr>'+
+                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                            '<input type="text" name="ciudad_que" value="" readonly="readonly"/>'+
+                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()"  required>'+                                           
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Departamento</th>'+
                           '<td>'+
-                            '<input type="text" name="depto_que" value="" readonly="readonly"/>'+
+                            '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+                            
+                            '</select>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">NIT</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_cliente" value="" />'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_que" value="" readonly="readonly"/>'+
+                            '<input type="text" name="telefono_que" value="" />'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Estado Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_vis" value="debe" readonly="readonly"/>'+
+                            '<input type="text" name="telefono_vis" value="" />'+
                           '</td>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Valor $</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_vis" value="150000" readonly="readonly"/>'+
+                            '<input type="text" name="telefono_vis" value="150000" />'+
                           '</td>'+                          
                           '</tr>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Tipo de Pago</th>'+
@@ -2172,8 +2173,7 @@ function addcampos(A)
                     '</table>'+
                     '</form>'+
                 '</div>';
-    $('#date_field32').datepick({yearRange: '1980:2050'}); 
-    $('#date_field32').datepick('option', {dateFormat: $.datepick.ATOM});
+   
     }
     else
     {
@@ -2182,7 +2182,7 @@ function addcampos(A)
                     '<br>'+
                     '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">IdQuejas</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Quejas</th>'+
                           '<td>'+
                             '<input type="text" name="id_que" value="" readonly="readonly"/>'+
                           '</td>'+
@@ -2251,6 +2251,7 @@ function addcampos(A)
     listadoDepartamentos();   
     $("#campos").html(codigoHTML);
     $("#form_crear_actividad_visita").submit(crearActividadVisita);
+    $("#form_crear_actividad_pago").submit(crearActividadPago);
     activadorEventosClientes();
     activadorEventosVendedores();
 }
@@ -2311,6 +2312,64 @@ function HideConfirmAddActividad()
     $("#fadeAddProducto").css({display: "none"});
     activadorEventosClientes();  
 }
+
+function crearActividadPago(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Vendedores":"AddPago","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonObj)
+                    {
+                        verificarAddActividadPago(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//*******************************************************************************
+//*******************************************************************************
+//*******************************************************************************
+//*************  MENSAJE QUE NOS INFORMA SI EL PAGO SE ADICIONO ******************
+//*************  CORRECTAMENTE O SI FALLO                         ******************
+//*******************************************************************************
+//*******************************************************************************
+//*******************************************************************************
+
+function verificarAddActividadPago(jsonObj)
+{
+    if (jsonObj.AddPago  =="true")
+    {
+        alert("El pago se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El pago no se pudo adicionar");
+    }   
+    
+    HideConfirmAddActividadPago();
+}
+
+function HideConfirmAddActividadPago()
+{
+    $("#overAddProducto").css({display: "none"});
+    $("#fadeAddProducto").css({display: "none"});
+    activadorEventosClientes();  
+}
+
 //**********************************************************************************
 function seccionViaticos()
 {
@@ -4581,9 +4640,9 @@ function AddPagoCliente(jsonObject)
                     '<br>'+
                     '<table align="center">'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">IdRecaudo</th>'+
+                          '<th align="right" style="padding-right:5px;">Id Recaudo</th>'+
                           '<td>'+
-                            '<input type="text" name="id_vis" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_pago" value="" readonly="readonly"/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
@@ -4635,10 +4694,10 @@ function AddPagoCliente(jsonObject)
                           '<td>'+
                             '<input type="text" name="tipo_de_pago" value=""/>'+
                           '</td>'+
-                          '<th align="right" colspan="0" style="padding-right:5px;">Numero de Factura</th>'+
+                          /*'<th align="right" colspan="0" style="padding-right:5px;">Numero de Factura</th>'+
                           '<td>'+
                             '<input type="text" name="numero_de_factura" value=""/>'+
-                          '</td>'+
+                          '</td>'+*/
                           '<tr>'+
                           '<th align="right" colspan="2" style="padding-right:5px;">Forma de Pago</th>'+
                           '<td>'+
