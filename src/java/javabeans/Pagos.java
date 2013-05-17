@@ -18,7 +18,7 @@ public class Pagos
     private String id_cliente;
     private String id_usuario;
     private String fecha;
-    private String id_vendedor;
+   //private String id_vendedor;
     private String tipo_de_pago;
     private String cantidad_de_pago;
     private String forma_de_pago;
@@ -31,21 +31,21 @@ public class Pagos
         this.id_cliente = "";
         this.id_usuario = "";
         this.fecha = "";
-        this.id_vendedor = "";
+       // this.id_vendedor = "";
         this.tipo_de_pago = "";
         this.cantidad_de_pago = "";
         this.forma_de_pago = ""; 
         this.descripcion = ""; 
     }
      //Metodo para llamar los datos de la base de datos para agregarlos a cada campo correspondiente 
-    public Pagos (String id_pago, String id_cliente, String id_usuario, String fecha, String id_vendedor, String tipo_de_pago, String cantidad_de_pago, String forma_de_pago, String descripcion)
+    public Pagos (String id_pago, String id_cliente, String id_usuario, String fecha, String tipo_de_pago, String cantidad_de_pago, String forma_de_pago, String descripcion)
     {
         this.id_pago = id_pago;
         //this.numero_de_factura = numero_de_factura;
         this.id_cliente = id_cliente;
         this.id_usuario = id_usuario;
         this.fecha = fecha;
-        this.id_vendedor = id_vendedor;
+        //this.id_vendedor = id_vendedor;
         this.tipo_de_pago = tipo_de_pago;
         this.cantidad_de_pago = cantidad_de_pago;
         this.forma_de_pago = forma_de_pago; 
@@ -61,7 +61,7 @@ public class Pagos
         obj.put("id_cliente", this.id_cliente);
         obj.put("id_usuario", this.id_usuario);
         obj.put("fecha", this.fecha);
-        obj.put("id_vendedor", this.id_vendedor);
+       // obj.put("id_vendedor", this.id_vendedor);
         obj.put("tipo_de_pago", this.tipo_de_pago);
         obj.put("cantidad_de_pago", this.cantidad_de_pago);
         obj.put("forma_de_pago", this.forma_de_pago);
@@ -120,7 +120,7 @@ public class Pagos
         return this.fecha;
     }
     // establecer id_vendedor
-    public void setId_vendedor(String id_vendedor)
+   /* public void setId_vendedor(String id_vendedor)
     {
         this.id_vendedor = id_vendedor;
     }
@@ -128,7 +128,7 @@ public class Pagos
     public String getId_vendedor()
     {
         return this.id_vendedor;
-    }
+    }*/
     // establecer tipo_de_pago 
     public void setTipo_de_pago(String tipo_de_pago)
     {

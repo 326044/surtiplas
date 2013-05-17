@@ -105,7 +105,7 @@ public class PagosSQL
         {            
             this.cn = getConnection();
             this.st = cn.createStatement();
-            Pagos pag= new Pagos("", String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("id_vendedor")), String.valueOf(datos.get("tipo_de_pago")), String.valueOf(datos.get("cantidad_de_pago")), String.valueOf(datos.get("forma_de_pago")), String.valueOf(datos.get("descripcion")));
+            Pagos pag= new Pagos("", String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("tipo_de_pago")), String.valueOf(datos.get("cantidad_de_pago")), String.valueOf(datos.get("forma_de_pago")), String.valueOf(datos.get("descripcion")));
             String tsql;
             tsql = "INSERT INTO pagos VALUES(DEFAULT, '";
             tsql += pag.getId_cliente()+ "," + pag.getId_usuario() + ",'" + pag.getFecha() + "','" + pag.getTipo_de_pago() + "'," + pag.getCantidad_de_pago() + ",'" + pag.getForma_de_pago() + "','" + pag.getDescripcion() + "')";
