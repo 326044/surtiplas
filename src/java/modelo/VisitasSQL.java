@@ -299,7 +299,7 @@ public class VisitasSQL
                         
                         while(this.rs.next())
             {
-                Pagos pag = new Pagos(rs.getString("id_pago"), rs.getString("id_cliente"), rs.getString("id_usuario"), rs.getString("fecha"), rs.getString("id_vendedor"), rs.getString("tipo_de_pago"), rs.getString("cantidad_de_pago"), rs.getString("forma_de_pago"), rs.getString("descripcion"));
+                Pagos pag = new Pagos(rs.getString("id_pago"), rs.getString("id_cliente"), rs.getString("id_usuario"), rs.getString("fecha"), rs.getString("tipo_de_pago"), rs.getString("cantidad_de_pago"), rs.getString("forma_de_pago"), rs.getString("descripcion"));
                 actividad = pag.getJSONObject();
                 System.out.printf(actividad.toString());
                 Actividades.add(actividad);           
