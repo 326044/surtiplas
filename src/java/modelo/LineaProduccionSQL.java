@@ -99,15 +99,11 @@ public class LineaProduccionSQL
         {
             this.cn = getConnection();
             this.st = this.cn.createStatement();
-            String sql = "SELECT linea_produccion.cod_linea, linea_produccion.nombre_linea FROM linea_produccion WHERE linea_produccion.cod_linea='" + codlinea + "';";
-                    
+            String sql = "SELECT * FROM linea_produccion WHERE cod_linea = '" + codlinea + "';";
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
-            
-            Lineas.put("cod_linea", rs.getString("cod_linea"));
-            Lineas.put("nombre_linea", rs.getString("nombre_linea"));
-            
-
+            LineaProduccion lp = new LineaProduccion(rs.getString("cod_linea"), rs.getString("nombre_linea"));
+            Lineas = lp.getJSONObject();
             this.desconectar();
         }
     
