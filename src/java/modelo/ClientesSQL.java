@@ -140,7 +140,7 @@ public class ClientesSQL
             cliente.put("telefono", rs.getString("telefono"));
             cliente.put("email", rs.getString("email"));
             cliente.put("id_cliente", rs.getString("id_cliente"));
-             cliente.put("nombre_usuario", rs.getString("nombre_usuario"));
+            cliente.put("nombre_usuario", rs.getString("nombre_usuario"));
             cliente.put("apellido", rs.getString("apellido"));
             cliente.put("direccion", rs.getString("direccion"));
             cliente.put("celular", rs.getString("celular"));

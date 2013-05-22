@@ -3553,11 +3553,9 @@ function VerCliente(jsonObject, id)
                                     '</td>'+
                                   '</tr>'+                                  
                               '</table>'+
-                              '<div class="Ubicacion-Geografica">'+
-                                
+                              '<div class="Ubicacion-Geografica">'+                                
                               '</div>'+                                              
-                            '</div>'+
-                            
+                            '</div>'+                            
                             '<div id="actividad" class="tab_content">'+
                               '<ul class="tabs2">'+
                                 '<li><a href="#visitas">Visitas</a></li>'+
