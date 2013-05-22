@@ -126,7 +126,7 @@ public class ClientesSQL
             this.cn = getConnection();
             this.st = this.cn.createStatement();          
             String sql = "SELECT clientes.fecha, clientes.nombre, clientes.razon_social, clientes.telefono, clientes.email,"
-                    + " clientes.id_cliente, usuarios.nombre_usuario, clientes.apellido, clientes.direccion, clientes.celular, departamentos.nombre_depto,"
+                    + " clientes.id_cliente, clientes.cedula, usuarios.nombre_usuario, clientes.apellido, clientes.direccion, clientes.celular, departamentos.nombre_depto,"
                     + " municipios.NombreMunicipio "
                     + " FROM clientes, municipios, departamentos, usuarios WHERE clientes.codMunicipio=municipios.codMunicipio AND usuarios.id_usuario=clientes.id_usuario AND departamentos.cod_departamento=municipios.cod_departamento AND"
                     + " id_cliente = '" + id_cliente + "';";
@@ -139,6 +139,7 @@ public class ClientesSQL
             cliente.put("razon_social", rs.getString("razon_social"));
             cliente.put("telefono", rs.getString("telefono"));
             cliente.put("email", rs.getString("email"));
+            cliente.put("cedula", rs.getString("cedula"));
             cliente.put("id_cliente", rs.getString("id_cliente"));
             cliente.put("nombre_usuario", rs.getString("nombre_usuario"));
             cliente.put("apellido", rs.getString("apellido"));

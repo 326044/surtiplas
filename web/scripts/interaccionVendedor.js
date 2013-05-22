@@ -3530,7 +3530,11 @@ function VerCliente(jsonObject, id)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Email</th>'+
                                     '<td><input type="text" name="email" value="' + jsonObject.email + '" size="20" maxlength="12" readonly="readonly"/></td>'+                                                                                                               
-                                 '</tr>'+                         
+                                 '</tr>'+  
+                                 '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.cedula + '" size="20" maxlength="12" readonly="readonly"/></td>'+                                                                                                               
+                                 '</tr>'+   
                             '</table>'+                        
                            '</div>'+
                         
