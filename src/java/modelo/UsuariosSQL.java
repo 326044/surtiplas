@@ -45,6 +45,38 @@ public class UsuariosSQL
         }
     }
     
+    public JSONArray cargarListado()
+    {
+        JSONArray usuarios = new JSONArray();
+        JSONObject usuario = new JSONObject();
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql;
+            sql = "SELECT * FROM usuarios WHERE tipo_usuario = 'A' or tipo_usuario ='G' or tipo_usuario = 'C' or tipo_usuario ='JP' or tipo_usuario ='JC' or tipo_usuario ='V' or tipo_usuario ='S'";
+            this.rs = this.st.executeQuery(sql);
+            
+            while(this.rs.next())
+            {
+                Usuarios usr = new Usuarios(rs.getString("id_usuario"), rs.getString("nickname_usuario"), rs.getString("nombre_usuario"), rs.getString("apellidos_usuario"), rs.getString("cedula_usuario"), rs.getString("direccion_usuario"), rs.getString("telefono_usuario"), rs.getString("celular_usuario"), rs.getString("email_usuario"), rs.getString("password_usuario"), rs.getString("tipo_usuario"), rs.getString("foto_usuario"), rs.getString("fecha"),  rs.getString("fecha_cumpleanos"),  rs.getString("banco"),  rs.getString("tipo_cuenta_bancaria"),  rs.getString("numero_cuenta"),  rs.getString("otros_datos"),  rs.getString("id_ubicacion"));                
+                usuario = usr.getJSONObject();
+                System.out.printf(usuario.toString());
+                usuarios.add(usuario);
+            }
+            
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    
+        return(usuarios);
+    }  
+    
     public JSONArray obtenerUsuariosVendedores()
     {
         JSONArray vendedores = new JSONArray();
@@ -204,7 +236,7 @@ public class UsuariosSQL
             this.st = cn.createStatement();
             Usuarios usr = new Usuarios("", String.valueOf(datos.get("nickname_usuario")), String.valueOf(datos.get("nombre_usuario")), String.valueOf(datos.get("apellidos_usuario")), String.valueOf(datos.get("cedula_usuario")), String.valueOf(datos.get("direccion_usuario")), String.valueOf(datos.get("telefono_usuario")), String.valueOf(datos.get("celular_usuario")), String.valueOf(datos.get("email_usuario")), String.valueOf(datos.get("password_usuario")), String.valueOf(datos.get("tipo_usuario")), "foto_usuario", String.valueOf(datos.get("fecha")),  String.valueOf(datos.get("fecha_cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipo_cuenta_bancaria")),  String.valueOf(datos.get("numero_cuenta")),  String.valueOf(datos.get("otros_datos")),  String.valueOf(datos.get("id_ubicacion")));            String tsql;
             tsql = "INSERT INTO usuarios VALUES(DEFAULT, '";
-            tsql += usr.getNombres() + "','" + usr.getApellidos() + "','" + usr.getCedula() + "','" + usr.getDireccion()+ "','" + usr.getTelefono()+ "','" + usr.getCelular() + "','" + usr.getEmail() + "','" + usr.getNickname() + "','" + usr.getPassword() + "','" + usr.getTipo() + "','" + usr.getFoto()+"','" + usr.getFechaIngreso()+"','" + usr.getFechaCumple()+"'," + usr.getBanco()+"," + usr.getTipoCuenta()+",'" + usr.getNumCuenta()+"','" + usr.getOtrosDatos()+"','" + usr.getIdUbicacion()+"')";
+            tsql += usr.getNickname() + "','" + usr.getNombres() + "','" + usr.getApellidos() + "','" + usr.getCedula() + "','" + usr.getDireccion()+ "','" + usr.getTelefono()+ "','" + usr.getCelular() + "','" + usr.getEmail() + "','" + usr.getPassword() + "','" + usr.getTipo() + "','" + usr.getFoto()+"','" + usr.getFechaIngreso()+"','" + usr.getFechaCumple()+"'," + usr.getBanco()+"," + usr.getTipoCuenta()+",'" + usr.getNumCuenta()+"','" + usr.getOtrosDatos()+"','" + usr.getIdUbicacion()+"')";
             this.st.execute(tsql);
             this.desconectar();
         }
