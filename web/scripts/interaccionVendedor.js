@@ -2015,8 +2015,7 @@ function addcampos(A)
     var codigoHTML;
     if(A==1)
     {
-       codigoHTML= '<div class="encabezado2">Adicionar Visita</div>'+
-                    '<form id="form_crear_actividad_visita" enctype="multipart/form-data">'+
+       codigoHTML= '<form id="form_crear_actividad_visita" enctype="multipart/form-data">'+
                     '<br>'+                   
                     '<table align="center">'+
                         '<tr>'+
@@ -2072,8 +2071,7 @@ function addcampos(A)
                             '<tr>'+
                               '<td colspan="4" align="center">'+
                                   '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
-                                  '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                                   '<input type="button" value="Cancelar" class="button" id="NotAddProducto"/>'+ 
+                                  '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                                    
                               '</td>'+
                             '</tr>'+
                       '</table>'+                   
@@ -2084,8 +2082,7 @@ function addcampos(A)
     
     else if(A==2)
     {
-         codigoHTML=  '<div class="encabezado2">Adicionar Pago</div>'+
-                     '<form id="form_crear_actividad_pago" enctype="multipart/form-data">'+
+         codigoHTML= '<form id="form_crear_actividad_pago" enctype="multipart/form-data">'+
                     '<br>'+
                     '<table align="center">'+
                         '<tr>'+
@@ -2166,8 +2163,7 @@ function addcampos(A)
                       '<tr>'+
                         '<td colspan="4" align="center">'+
                             '<input type="submit" value="Aceptar" class="button" id="OkAddRecaudo"/>'+
-                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                            '<input type="button" value="cancelar" class="button" id="NotAddRecaudo"/>'+
+                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                             
                         '</td>'+
                       '</tr>'+
                     '</table>'+
@@ -2177,8 +2173,7 @@ function addcampos(A)
     }
     else
     {
-        codigoHTML = '<div class="encabezado2">Adicionar Queja</div>'+
-                    '<form id="form_crear_queja" enctype="multipart/form-data">'+
+        codigoHTML = '<form id="form_crear_queja" enctype="multipart/form-data">'+
                     '<br>'+
                     '<table align="center">'+
                         '<tr>'+
@@ -2235,8 +2230,7 @@ function addcampos(A)
                       '<tr>'+
                         '<td colspan="4" align="center">'+
                             '<input type="submit" value="Aceptar" class="button" id="OkAddQuejas"/>'+
-                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+ 
-                            '<input type="button" value="cancelar" class="button" id="NotAddQuejas"/>'+
+                            '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                             
                         '</td>'+
                       '</tr>'+
                     '</table>'+
@@ -2244,8 +2238,7 @@ function addcampos(A)
                 '</div>';
 
     }
-
-    $("#overAddProducto").html(codigoHTML);
+    
     $('#date_field29').datepick({yearRange: '1980:2050'});
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
     listadoDepartamentos();   
