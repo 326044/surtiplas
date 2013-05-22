@@ -77,7 +77,7 @@ public class ServletAdministrador extends HttpServlet
         if (op.equals("Listado"))
         {
             JSONArray usuarios = new JSONArray();
-            usuarios = usr.obtenerUsuariosVendedores();
+            usuarios = usr.cargarListado();
             out.print(usuarios);
         }
         

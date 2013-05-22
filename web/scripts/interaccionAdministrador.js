@@ -3328,7 +3328,6 @@ function cargarUbicacion(jsonArray)
     {
         codigoHTML += '<option value="'+ jsonArray[u].id_ubicacion +'">'+ jsonArray[u].id_ubicacion +'</option>';
     }
-    
     $('.ubicacion').html(codigoHTML);   
 }
 
