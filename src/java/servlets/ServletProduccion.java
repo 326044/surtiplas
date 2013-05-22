@@ -78,6 +78,8 @@ public class ServletProduccion extends HttpServlet
                 out.print(objRes);
             }
         }
+        
+        //Modificar Productos.
                if (op.equals("ModVendedor"))
         {
     
@@ -93,7 +95,7 @@ public class ServletProduccion extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.ModificarUsuario(jsonObject, tipoUsuario, cod))
+ /*               if (pro.BorrarUsuario(JSONObject))
                 {
                     objRes.put("ModVendedor", "true");
                     out.print(objRes);
@@ -104,7 +106,7 @@ public class ServletProduccion extends HttpServlet
                     objRes.put("ModVendedor", "false");
                     out.print(objRes);
                 }
-                
+                */
             } 
             catch (ParseException e) 
             {
