@@ -4103,7 +4103,7 @@ function AddVisitaCliente(jsonObject)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
-                            '<input type="text" name="id_usuario" value="'+jsonObject.NombreUsuario+'" readonly="readonly"/>'+
+                            '<input type="text" name="nombre_usuario" value="'+jsonObject.nombre_usuario+'" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
