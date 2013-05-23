@@ -3463,7 +3463,7 @@ function DatosVerCliente()
                     {
                         VerCliente(jsonObject, id);     
                     },
-                    error: function(jsonArray) 
+                    error: function() 
                     {
                         alert('Error al conectar con ServletVendedor');
                     }
@@ -3487,10 +3487,8 @@ function VerCliente(jsonObject, id)
                                 '<li><a href="#Personal">Personal</a></li>'+
                                 '<li><a href="#actividad">Actividades</a></li>'+  
                                 '<li><a href="#zona">Ubicacion</a></li>'+                        
-                            '</ul>'+
-                        
-                        '<div class="tab_container">'+
-                        
+                            '</ul>'+                        
+                        '<div class="tab_container">'+                        
                          '<div id="Personal" class="tab_content">'+                        
                               '<table align="center" border="0" align="left">'+                        
                                   '<tr>'+
@@ -3537,7 +3535,7 @@ function VerCliente(jsonObject, id)
                                  '</tr>'+  
                                  '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Cedula</th>'+
-                                    '<td><input type="text" name="email" value="' + jsonObject.cedula + '" size="20" maxlength="12" readonly="readonly"/></td>'+                                                                                                               
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula + '" size="20" maxlength="12" readonly="readonly"/></td>'+                                                                                                               
                                  '</tr>'+   
                             '</table>'+                        
                            '</div>'+
