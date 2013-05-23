@@ -4554,7 +4554,7 @@ function cargarListadolineas(jsonArray, id)
            else
                 codigoHTML+=               '<tr class="even">';
             
-           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" id="' + id + '" class="ModLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
                                                                '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].cod_linea + '" /></td>'+
                                                                '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].cod_linea + '" /></td>';
             codigoHTML+=                          '<td>' + jsonArray[i].cod_linea + '</td>';
@@ -4711,10 +4711,9 @@ function DatosModlinea()
 //********************                                      ********************
 //******************************************************************************
 
-function ModLinea(jsonObject)
+function ModLinea(jsonObject, id)
 {
-    var id = $(this)[0].name;
-    //alert(id);
+    
     var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
                      '<div class="tabla">'+
                             '<form id="form_modificar_linea"  enctype="multipart/form-data"  align="center">'+
