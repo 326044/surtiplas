@@ -3359,7 +3359,11 @@ function AddCliente()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Email</th>'+
                                     '<td><input type="text" name="email" value="" size="20" maxlength="50"  required/></td>'+                                                                             
-                                 '</tr>'+                                 
+                                 '</tr>'+
+                                 '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="cedula" value="" size="20" maxlength="50"  required/></td>'+                                                                             
+                                 '</tr>'+   
                                 '</table>'+                                                           
                             '</div>'+
                             '<div id="zona" class="tab_content">'+
@@ -3504,7 +3508,7 @@ function VerCliente(jsonObject, id)
                                 
                                  '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Fecha</th>'+
-                                    '<td><input type="text" name="fecha_Icliente" id="date_field16"value="' + jsonObject.fecha + '" size="10"/ readonly="readonly"></td>'+                                                                   
+                                    '<td><input type="text" name="fecha_Icliente" id="date_field16" value="' + jsonObject.fecha + '" size="10"/ readonly="readonly"></td>'+                                                                   
                                     '<th align="right" style="padding-right:10px;">NIT</th>'+
                                     '<td><input type="text" name="nit" value="' + jsonObject.id_cliente+ '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -3689,8 +3693,7 @@ function VerCliente(jsonObject, id)
                         '</div>';
   
     var lat =jsonObject.latitud;
-    var lon= jsonObject.longitud;
-    
+    var lon= jsonObject.longitud;    
     $("#datos").html(codigoHTML);
     activadorEventosClientes();    
     IniciarTabersAnidados();

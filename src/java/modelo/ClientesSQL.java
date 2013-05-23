@@ -116,7 +116,7 @@ public class ClientesSQL
 //*************  PARA VISUALIZAR LOS DATOS DE LOS CLIENTES**************************    
 //**********************************************************************************     
     
-    public JSONObject DatosCliente(String id_cliente, String IdUsuario)
+    public JSONObject DatosCliente(String id_cliente, String id_usuario)
     {
         
         JSONObject cliente = new JSONObject();
