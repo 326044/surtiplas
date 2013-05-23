@@ -1539,3 +1539,18 @@ INSERT INTO  `surtiplas`.`tipo_producto`
 (`cod_tipo_producto`,`nombre_tipo_producto`)
 VALUES 
 (DEFAULT , 'abrigos'),(DEFAULT ,'carpas');
+
+INSERT INTO  `surtiplas`.`productos` (
+`codigo_producto` ,
+`nombre` ,
+`foto` ,
+`cantidad` ,
+`precio_costo` ,
+`precio_venta` ,
+`precio_descuento` ,
+`codigo_barras` ,
+`cod_tipo_producto`
+)
+VALUES (
+NULL ,  'carpa',  'd',  '150',  '255',  '534',  '2154',  '1225545',  '1'
+);
