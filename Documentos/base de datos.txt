@@ -1539,3 +1539,6 @@ INSERT INTO  `surtiplas`.`tipo_producto`
 (`cod_tipo_producto`,`nombre_tipo_producto`)
 VALUES 
 (DEFAULT , 'abrigos'),(DEFAULT ,'carpas');
+
+/*Usuario tipo Administrador*/
+INSERT INTO `surtiplas`.`usuarios` (`id_usuario`, `nickname_usuario`, `nombre_usuario`, `apellidos_usuario`, `cedula_usuario`, `direccion_usuario`, `telefono_usuario`, `celular_usuario`, `email_usuario`, `password_usuario`, `tipo_usuario`, `foto_usuario`, `fecha`, `fecha_cumpleanos`, `banco`, `tipo_cuenta_bancaria`, `numero_cuenta`, `otros_datos`, `id_ubicacion`) VALUES (NULL, 'a', 'David', 'Jaramillo', '9512110470', 'Mz11', '326', '312', 'cdg@hot.com', 'a', 'A', NULL, '2013-05-24', '2013-05-23', 'Bancafé', 'Ahorros', '4224564874', 'Área Administrativa', '1');
