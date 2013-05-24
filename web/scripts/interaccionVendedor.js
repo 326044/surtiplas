@@ -3301,9 +3301,9 @@ function VerViatico(jsonObject)
 //**********************************************************************************
 //*******************************************************************************
 //*************  FUNCION DE DEL MENU VERTICAL CLIENTES*****************************
-// ************  EN LA TABLA OPCION AGREAGR            *******************************
-//***********************************************************************************
-//**********************************************************************************
+// ************  EN LA TABLA OPCION AGREAGR            ****************************
+//*********************************************************************************
+//*********************************************************************************
 //**********************************************************************************
 
 
@@ -3363,16 +3363,28 @@ function AddCliente()
                                  '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Cedula</th>'+
                                     '<td><input type="text" name="cedula" value="" size="20" maxlength="50"  required/></td>'+                                                                             
-                                 '</tr>'+   
+                                 '</tr>'+ 
+                                 '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Departamento</th>'+
+                                       '<td>'+
+                                        '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()"  required>'+                                           
+                                        '</select>'+ 
+                                    '</td>'+ 
+                                    '<th align="right" style="padding-right:5px;">Ciudad</th>'+
+                                       '<td>'+
+                                        '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+                                           
+                                         '</select>'+
+                                    '</td>'+ 
+                                  '</tr>'+   
                                 '</table>'+                                                           
                             '</div>'+
                             '<div id="zona" class="tab_content">'+
                                 '<table align="center" border="0" align="left" id="tablaMapa">'+
                                     '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Latitud</th>'+
-                                    '<td><input type="text" name="lalitudC" value="" size="15" maxlength="15"/ ></td>'+                                                                   
+                                    '<td><input type="text" name="lalitud" value="" size="15" maxlength="15"/ ></td>'+                                                                   
                                     '<th align="right" style="padding-right:10px;">Longitud</th>'+
-                                    '<td><input type="text" name="longitudC" value="" size="15" maxlength="15" /></td>'+                                   
+                                    '<td><input type="text" name="longitud" value="" size="15" maxlength="15" /></td>'+                                   
                                   '</tr>'+
                                   '<tr>'+
                                   '<td colspan="4" align="center"><br>'+
@@ -3400,7 +3412,7 @@ function AddCliente()
     IniciarTabers();
     $("#form_crear_cliente").submit(enviarDatosAddCliente);
     $("#mapa").click(localizame);
-    //localizame();
+    listadoDepartamentos();
     cargarFoto();
     activadorEventosClientes();
 }
@@ -4386,7 +4398,7 @@ function AddQuejaCliente(jsonObject)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
-                            '<input type="text" name="id_usuario" value="4" readonly="readonly"/>'+
+                            '<input type="text" name="id_usuario" value="'+jsonObject.nombre_usuario+'" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
