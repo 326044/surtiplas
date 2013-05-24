@@ -87,10 +87,11 @@ public class LineaProduccionSQL
     
         return(LineaProduccion);
     }
-    
-    //*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA*************************
-//*************  PARA VISUALIZAR LOS VIATICOS                  ********************    
-//**************************************************************************************
+
+//*****************************************************************************************
+//*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA****************************
+//*************  PARA VISUALIZAR LOS LINEA PRODUCCION                  ********************    
+//*****************************************************************************************
     
     public JSONObject Datoslineas(String codlinea)
     {
@@ -142,7 +143,7 @@ public class LineaProduccionSQL
 //*************                                                            *********************
 //************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
 //************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
-//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA VIATICOS      *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA LINEA PRODUCCION *********************
 //*************                                                            *********************
 //**********************************************************************************************
 //**********************************************************************************************
@@ -156,6 +157,36 @@ public class LineaProduccionSQL
             LineaProduccion lp = new LineaProduccion("", String.valueOf(datos.get("nombre_linea")));
             String tsql;
             tsql = "UPDATE linea_produccion SET nombre_linea='" + lp.getNombre_linea() + "' WHERE cod_linea = " + Codlinea + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+//************************************************************************************************
+//************************************************************************************************
+//*************                                                              *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS    *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB      *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA LINEA PRODUCCION *********************
+//*************                                                              *********************
+//************************************************************************************************
+//************************************************************************************************
+    
+    public boolean BorrarLinea(String CodLinea)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM linea_produccion WHERE cod_linea = '" + CodLinea + "';";
             this.st.execute(tsql);
             this.desconectar();
         }

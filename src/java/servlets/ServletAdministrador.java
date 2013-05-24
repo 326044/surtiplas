@@ -668,7 +668,7 @@ public class ServletAdministrador extends HttpServlet
         
         if (op.equals("ModLinea"))
         {
-            String cod = String.valueOf(jsonObj.get("Codlinea"));
+            String cod = String.valueOf(jsonObj.get("CodLinea"));
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
             JSONParser parser = new JSONParser();
@@ -696,6 +696,24 @@ public class ServletAdministrador extends HttpServlet
             catch (ParseException e) 
             {
                 e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("DelLinea"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodLinea"));  
+            JSONObject objRes = new JSONObject();
+            
+            if (lp.BorrarLinea(cod))
+            {
+                objRes.put("DelLinea", "true");
+                out.print(objRes);
+            }
+
+            else
+            {
+                objRes.put("DelCliente", "false");
+                out.print(objRes);
             }
         }
         

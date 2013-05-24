@@ -280,13 +280,17 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var addLinea, modLinea, verViatico, delViatico;
+    var addLinea, modLinea, verViatico, delLinea, PBorrarLOk;
     var volverLinea, VBorrarV, hideDelViatico, hideAddLinea;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     verViatico=$(".VerViatico");
     verViatico.click(DatosVerViatico);
-    delViatico=$(".DelViatico");
-    delViatico.click(DatosDelViatico);
+    delLinea=$(".DelLinea");
+    delLinea.click(DatosDelLinea);
+    PBorrarLOk=$("#OkDelLinea");
+    PBorrarLOk.click(DelLineaOk);
+    volverLinea=$("#NotDelLinea");
+    volverLinea.click(HideConfirmAddLinea);
     
     addLinea=$(".addLinea");
     addLinea.click(ConfirmAddLinea);
@@ -4555,7 +4559,7 @@ function cargarListadolineas(jsonArray, id)
                 codigoHTML+=               '<tr class="even">';
             
            codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].cod_linea + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
                                                                '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].cod_linea + '" /></td>';
             codigoHTML+=                          '<td>' + jsonArray[i].cod_linea + '</td>';
             codigoHTML+=                          '<td>' + jsonArray[i].nombre_linea + '</td>';  
@@ -4711,9 +4715,10 @@ function DatosModlinea()
 //********************                                      ********************
 //******************************************************************************
 
-function ModLinea(jsonObject, id)
+function ModLinea(jsonObject)
 {
-    
+    var id = $(this)[0].name;
+    //alert(id);
     var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
                      '<div class="tabla">'+
                             '<form id="form_modificar_linea"  enctype="multipart/form-data"  align="center">'+
@@ -4805,6 +4810,114 @@ function HideConfirmAddLinea()
     $("#fadeDelItem").css({display: "none"});
     activadorEventosProductos();    
 }
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_eliminar_linea").submit(DelLineaOk);
+    activadorEventosProductos();
+}
+function DelLineaOk()
+{
+    var id = $(this)[0].name; 
+    alert(id);
+    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelLinea(jsonObj)
+{
+    if (jsonObj.DelLinea  ==="true")
+    {
+        alert("La Linea se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Linea no se pudo Borrar");
+    }   
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 

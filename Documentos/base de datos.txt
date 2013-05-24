@@ -1611,4 +1611,15 @@ INSERT INTO  `surtiplas`.`usuarios` (
 VALUES (
 NULL ,  'v',  'v',  'v',  '21',  '3512',  '231',  '213',  'dv1',  'v',  'V',  'vdf',  '2013-05-23',  '2013-05-23',  'dfsd',  'sd',  'a',  'df',  '1'
 );
+
+/*Ubicacion Geografica*/
+INSERT INTO  `surtiplas`.`ubicacion_geografica` (
+`id_ubicacion` ,
+`latitud` ,
+`longitud`
+)
+VALUES (
+NULL ,  '0.999999',  '0.512566'
+);
+
 >>>>>>> branch 'master' of https://github.com/326044/surtiplas.git
