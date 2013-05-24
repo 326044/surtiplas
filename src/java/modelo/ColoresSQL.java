@@ -106,4 +106,115 @@ public class ColoresSQL
     
         return(colores);
     }  
+//*****************************************************************************************
+//*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA        ********************
+//*************  PARA VISUALIZAR LOS COLORES                           ********************    
+//*****************************************************************************************
+    
+    public JSONObject DatosColor(String CodColor)
+    {
+        JSONObject color= new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT * FROM colores WHERE cod_color = '" + CodColor + "';";
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            Colores usp = new Colores(rs.getString("cod_color"), rs.getString("color"));
+            color = usp.getJSONObject();
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return (color);
+    }
+    
+    public boolean AdicionarColor(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Colores usp = new Colores("", String.valueOf(datos.get("color")));
+            String tsql;
+            tsql = "INSERT INTO colores VALUES(DEFAULT, '";
+            tsql += usp.getColor() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+  
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA LINEA PRODUCCION *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean ModificarColor(JSONObject datos, String CodColor)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Colores usp = new Colores("", String.valueOf(datos.get("color")));
+            String tsql;
+            tsql = "UPDATE colores SET color='" + usp.getColor() + "' WHERE cod_color = " + CodColor + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+//************************************************************************************************
+//************************************************************************************************
+//*************                                                              *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS    *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB      *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA LINEA PRODUCCION *********************
+//*************                                                              *********************
+//************************************************************************************************
+//************************************************************************************************
+    
+    public boolean BorrarColor(String CodColor)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM colores WHERE cod_color = '" + CodColor + "';";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }

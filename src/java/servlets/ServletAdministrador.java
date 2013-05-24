@@ -106,6 +106,14 @@ public class ServletAdministrador extends HttpServlet
             colores = usp.cargarListadoColores();
             out.print(colores);
         }
+        
+        if (op.equals("DatosColores"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodColor"));   
+            JSONObject color = usp.DatosColor(cod);
+            out.print(color);
+        }
+        
         if (op.equals("Tallas"))
         {
             JSONArray tallas = new JSONArray();
@@ -712,7 +720,88 @@ public class ServletAdministrador extends HttpServlet
 
             else
             {
-                objRes.put("DelCliente", "false");
+                objRes.put("DelLinea", "false");
+                out.print(objRes);
+            }
+        }
+        
+        if (op.equals("AddLinea"))
+        {
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usp.AdicionarColor(jsonObject))
+                {
+                    objRes.put("AddColor", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("AddColor", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        if (op.equals("ModColor"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodColor"));
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usp.ModificarColor(jsonObject, cod))
+                {
+                    objRes.put("ModColor", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModColor", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        if (op.equals("DelColor"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodColor"));  
+            JSONObject objRes = new JSONObject();
+            
+            if (usp.BorrarColor(cod))
+            {
+                objRes.put("DelColor", "true");
+                out.print(objRes);
+            }
+
+            else
+            {
+                objRes.put("DelColor", "false");
                 out.print(objRes);
             }
         }

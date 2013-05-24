@@ -280,11 +280,11 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var addLinea, modLinea, verViatico, delLinea, PBorrarLOk;
+    var addLinea, modLinea, verLinea, delLinea, PBorrarLOk;
     var volverLinea, VBorrarV, hideDelViatico, hideAddLinea;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    verViatico=$(".VerViatico");
-    verViatico.click(DatosVerViatico);
+    verLinea=$(".VerLinea");
+    verLinea.click(DatosVerLinea);
     delLinea=$(".DelLinea");
     delLinea.click(DatosDelLinea);
     PBorrarLOk=$("#OkDelLinea");
@@ -298,6 +298,26 @@ function  activadorEventosProductos()
     modLinea.click(DatosModlinea);
     hideAddLinea=$("#NotAddLinea");
     hideAddLinea.click(HideConfirmAddLinea);
+    
+//*******************************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
+//*******************************************************************
+    var addColor, modColor, verLinea, delLinea, PBorrarLOk;
+    var volverLinea, VBorrarV, hideDelViatico, hideAddColor;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    verLinea=$(".VerLinea");
+    verLinea.click(DatosVerLinea);
+    delLinea=$(".DelLinea");
+    delLinea.click(DatosDelLinea);
+    PBorrarLOk=$("#OkDelLinea");
+    PBorrarLOk.click(DelLineaOk);
+    
+    addColor=$(".addColor");
+    addColor.click(ConfirmAddColor);
+    modColor=$(".ModColor");
+    modColor.click(DatosModColor);
+    hideAddColor=$("#NotAddColor");
+    hideAddColor.click(HideConfirmAddColor);
     
 }
 
@@ -534,81 +554,6 @@ function MenuColores()
     seccionListadoColores();
     $(".menu-vertical li a#coloresProductos").addClass("active");
     activadorEventosProductos();
-}
-
-//*********************************************************************************************************
-//*********************************************************************************************************
-//***********************                                                           ***********************
-//***********************                    SECCION DE COLORES                    ***********************
-//***********************                                                           ***********************
-//*********************************************************************************************************
-//*********************************************************************************************************
-
-function seccionListadoColores()
-{
-    var request = {"Usuarios":"Colores"};
-    var jsonobj=JSON.stringify(request);
-    $.ajax({
-                    data: {administrador:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletAdministrador',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        cargarListadoColores(jsonArray);     
-                    },
-                    error: function(jsonArray) 
-                    {
-                        alert('Error al conectar con ServletAdministrador');
-                    }
-           });
-}
-
-//******************************************************************************************
-//******************************************************************************************
-//*************                                                        *********************
-//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION DE COLORES *********************
-//*************                                                        *********************
-//******************************************************************************************
-//******************************************************************************************
-
-function cargarListadoColores(jsonArray)
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Colores de los productos</div>'+
-                     '<div class="tabla">'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
-                            '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>id Color</th>'+
-                            '<th>Color</th>'+
-                         '</tr>';
-                                 
-    for (var i = 0; i < jsonArray.length; i++)
-    {
-            if (i % 2 === 0)
-                codigoHTML+=               '<tr>';
-           else
-                codigoHTML+=               '<tr class="even">';
-            
-           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].cod_color + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';  
-            codigoHTML+=                   '</tr>';
-            
-    }
-    
-    codigoHTML+=                '</table>'+
-                                  '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".content-float-datos").css({width: 630});
-    $(".tbonita").css({width: 620});
-    $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#coloresProductos").addClass("active");
-    activadorEventosProductos(); 
 }
 
 //**********************************************************************************
@@ -4560,7 +4505,7 @@ function cargarListadolineas(jsonArray, id)
             
            codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
                                                                '<td><img src="images/b_drop.png" title="Eliminar" class="DelLinea" id="' + jsonArray[i].cod_linea + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].cod_linea + '" /></td>';
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerLinea" id="' + jsonArray[i].cod_linea + '" /></td>';
             codigoHTML+=                          '<td>' + jsonArray[i].cod_linea + '</td>';
             codigoHTML+=                          '<td>' + jsonArray[i].nombre_linea + '</td>';  
             codigoHTML+=                   '</tr>';
@@ -4660,7 +4605,7 @@ function enviarDatosAddLinea(evento)
 }
 function verificarAddLinea(jsonObj)
 {
-    if (jsonObj.AddLinea=="true")
+    if (jsonObj.AddLinea==="true")
     {
         alert("La Linea se ha adicionado correctamente");
     }
@@ -4810,6 +4755,66 @@ function HideConfirmAddLinea()
     $("#fadeDelItem").css({display: "none"});
     activadorEventosProductos();    
 }
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function VerLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    activadorEventosProductos();
+}
 
 //***************************************************************************************************************
 //***************************************************************************************************************
@@ -4856,9 +4861,484 @@ function DelLinea(jsonObject)
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" required/></td>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" required/></td>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_eliminar_linea").submit(DelLineaOk);
+    activadorEventosProductos();
+}
+function DelLineaOk()
+{
+    var id = $(this)[0].name; 
+    alert(id);
+    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelLinea(jsonObj)
+{
+    if (jsonObj.DelLinea  ==="true")
+    {
+        alert("La Linea se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Linea no se pudo Borrar");
+    }   
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE COLORES                    ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoColores()
+{
+    var request = {"Usuarios":"Colores"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoColores(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//******************************************************************************************
+//******************************************************************************************
+//*************                                                        *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION DE COLORES *********************
+//*************                                                        *********************
+//******************************************************************************************
+//******************************************************************************************
+
+function cargarListadoColores(jsonArray, id)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Colores de los productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addColor"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>id Color</th>'+
+                            '<th>Color</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 === 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModColor" id="' + jsonArray[i].cod_color + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelColor" id="' + jsonArray[i].cod_color + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerColor" id="' + jsonArray[i].cod_color + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cod_color + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#coloresProductos").addClass("active");
+    activadorEventosProductos(); 
+}
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+function ConfirmAddColor()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosColores","CodColor":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        AddColor(jsonObject); 
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });  
+}
+
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************         FUNCION PARA ADICIONAR A UN NUEVO USUARIO         ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+
+function AddColor()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Adicionar Color</div>'+
+                        '<table align="center">'+
+                            '<form id="form_crear_color"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_color" value="" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Color</th>'+
+                                    '<td><input type="text" name="color" value="" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddColor"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosAddColor" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_crear_color").submit(enviarDatosAddColor);
+    activadorEventosProductos();
+}
+function enviarDatosAddColor(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddColor","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddColor(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+function verificarAddColor(jsonObj)
+{
+    if (jsonObj.AddColor==="true")
+    {
+        alert("El Color se ha adicionado correctamente");
+    }
+    
+    else
+    {
+        alert("El Color no se pudo adicionar");
+    }   
+    
+    HideConfirmAddColor();
+}
+
+function HideConfirmAddColor()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModColor()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosColores","CodColor":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModColor(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModColor(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Modificar Color</div>'+
+                     '<div class="tabla">'+
+                            '<form id="form_modificar_color"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Color</th>'+
+                                    '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="cod_colormod" id="cod_colormod" value="' + jsonObject.cod_color + '" /></td>'+
+                                  '</tr>'+
+                                '</br>'+
+                              '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddLinea"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosModColor" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                    '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_modificar_color").submit(enviarDatosModColor);
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModColor(evento)
+{
+    evento.preventDefault();
+    var cod_color = $("#cod_colormod").val();
+    //alert(id_viaticos);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModColor","Datos":datos, "CodColor":cod_color};
+    var jsonobj=JSON.stringify(request);
+   // alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModColor(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModColor(jsonObj)
+{
+    if (jsonObj.ModLinea  ==="true")
+    {
+        alert("El Color se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Color no se pudo modificar");
+    }   
+    HideConfirmAddColor();
+}
+
+function HideConfirmAddColor()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function VerLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
