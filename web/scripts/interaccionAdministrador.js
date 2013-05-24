@@ -302,11 +302,11 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var addColor, modColor, verLinea, delLinea, PBorrarLOk;
+    var addColor, modColor, verColor, delLinea, PBorrarLOk;
     var volverLinea, VBorrarV, hideDelViatico, hideAddColor;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    verLinea=$(".VerLinea");
-    verLinea.click(DatosVerLinea);
+    verColor=$(".VerColor");
+    verColor.click(DatosVerColor);
     delLinea=$(".DelLinea");
     delLinea.click(DatosDelLinea);
     PBorrarLOk=$("#OkDelLinea");
@@ -4588,7 +4588,7 @@ function enviarDatosAddLinea(evento)
     var jsonobj=JSON.stringify(request);
     //alert(jsonobj.toString());
     
-    $.ajax({        
+    $.ajax({       
                 data: {administrador:jsonobj},
                 type: 'POST',
                 dataType: 'json',
@@ -4605,7 +4605,7 @@ function enviarDatosAddLinea(evento)
 }
 function verificarAddLinea(jsonObj)
 {
-    if (jsonObj.AddLinea==="true")
+    if (jsonObj.AddLinea =="true")
     {
         alert("La Linea se ha adicionado correctamente");
     }
@@ -5238,10 +5238,10 @@ function HideConfirmAddColor()
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function DatosVerLinea()
+function DatosVerColor()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var request = {"Usuarios":"DatosColores","CodColor":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -5251,7 +5251,7 @@ function DatosVerLinea()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        VerLinea(jsonObject);     
+                        VerColor(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -5266,7 +5266,7 @@ function DatosVerLinea()
 //***********************                                                                 ***********************
 //***************************************************************************************************************
 
-function VerLinea(jsonObject)
+function VerColor(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
@@ -5275,12 +5275,12 @@ function VerLinea(jsonObject)
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Color</th>'+
+                                    '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                                '<input type="button" value="Volver" class="button" id="NotAddColor"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
