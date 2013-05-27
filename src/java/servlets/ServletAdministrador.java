@@ -725,7 +725,7 @@ public class ServletAdministrador extends HttpServlet
             }
         }
         
-        if (op.equals("AddLinea"))
+        if (op.equals("AddColor"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();

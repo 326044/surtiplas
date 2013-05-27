@@ -4605,7 +4605,7 @@ function enviarDatosAddLinea(evento)
 }
 function verificarAddLinea(jsonObj)
 {
-    if (jsonObj.AddLinea =="true")
+    if (jsonObj.AddLinea  ==="true")
     {
         alert("La Linea se ha adicionado correctamente");
     }
