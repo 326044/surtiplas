@@ -3382,7 +3382,7 @@ function AddCliente()
                                 '<table align="center" border="0" align="left" id="tablaMapa">'+
                                     '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Latitud</th>'+
-                                    '<td><input type="text" name="lalitud" value="" size="15" maxlength="15"/ ></td>'+                                                                   
+                                    '<td><input type="text" name="latitud" value="" size="15" maxlength="15"/ ></td>'+                                                                   
                                     '<th align="right" style="padding-right:10px;">Longitud</th>'+
                                     '<td><input type="text" name="longitud" value="" size="15" maxlength="15" /></td>'+                                   
                                   '</tr>'+
@@ -3556,7 +3556,7 @@ function VerCliente(jsonObject, id)
                             '<table align="center" border="0" align="left">'+                                  
                                   '<tr>'+
                                     '<th align="right" style="padding-right:10px;">Latitud</th>'+
-                                    '<td><input type="text" name="lalitud" value="'+ jsonObject.latitud +'" size="15" maxlength="15"/ ></td>'+                                                                   
+                                    '<td><input type="text" name="latitud" value="'+ jsonObject.latitud +'" size="15" maxlength="15"/ ></td>'+                                                                   
                                     '<th align="right" style="padding-right:10px;">Longitud</th>'+
                                     '<td><input type="text" name="longitud" value="'+ jsonObject.longitud +'" size="15" maxlength="15" /></td>'+                                   
                                   '</tr>'+
@@ -3725,7 +3725,7 @@ function VerCliente(jsonObject, id)
     $("#enviarDatosBuscarPagoCliente").submit(enviarDatosBuscarPagoCliente);
     $('#MapCliente').click(function(){
         var latlon = new google.maps.LatLng(lat, lon);
-        alert(lat);
+        //alert(lat);
         var myOptions = {
                                     zoom: 17,
                                     center: latlon,

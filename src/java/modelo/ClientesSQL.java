@@ -127,8 +127,8 @@ public class ClientesSQL
             this.st = this.cn.createStatement();          
             String sql = "SELECT clientes.fecha, clientes.nombre, clientes.razon_social, clientes.telefono, clientes.email,"
                     + " clientes.id_cliente, clientes.cedula, usuarios.nombre_usuario, clientes.apellido, clientes.direccion, clientes.celular, departamentos.nombre_depto,"
-                    + " municipios.NombreMunicipio "
-                    + " FROM clientes, municipios, departamentos, usuarios WHERE clientes.codMunicipio=municipios.codMunicipio AND usuarios.id_usuario=clientes.id_usuario AND departamentos.cod_departamento=municipios.cod_departamento AND"
+                    + " municipios.NombreMunicipio, ubicacion_geografica.latitud, ubicacion_geografica.longitud "
+                    + " FROM clientes, municipios, departamentos, usuarios, ubicacion_geografica WHERE clientes.codMunicipio=municipios.codMunicipio AND clientes.id_ubicacion=ubicacion_geografica.id_ubicacion AND usuarios.id_usuario=clientes.id_usuario AND departamentos.cod_departamento=municipios.cod_departamento AND"
                     + " id_cliente = '" + id_cliente + "';";
             this.rs = this.st.executeQuery(sql);
             this.rs.first();            
@@ -146,7 +146,9 @@ public class ClientesSQL
             cliente.put("direccion", rs.getString("direccion"));
             cliente.put("celular", rs.getString("celular"));
             cliente.put("nombre_depto", rs.getString("nombre_depto"));
-            cliente.put("NombreMunicipio", rs.getString("NombreMunicipio"));              
+            cliente.put("NombreMunicipio", rs.getString("NombreMunicipio"));
+            cliente.put("latitud", rs.getString("latitud"));  
+            cliente.put("longitud", rs.getString("longitud"));  
             System.out.printf(cliente.toString());
             
             this.desconectar();
