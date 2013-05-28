@@ -2238,7 +2238,7 @@ function addcampos(A)
                 '</div>';
 
     }
-    
+    $("#datos").html(codigoHTML);
     $('#date_field29').datepick({yearRange: '1980:2050'});
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
     listadoDepartamentos();   
