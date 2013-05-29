@@ -2005,7 +2005,8 @@ function AddActividades()
     $("#overAddProducto").html(codigoHTML);
     $("#fadeAddProducto").css({display: "block"});    
     listadoDepartamentos();
-    $("#form_crear_actividad").submit(crearActividadVisita);  
+    $("#form_crear_actividad").submit(crearActividadVisita);
+    $("#form_crear_actividad").submit(crearActividadPago);
     activadorEventosClientes();
     activadorEventosVendedores();
 }
@@ -2090,6 +2091,10 @@ function addcampos(A)
                           '<td>'+
                             '<input type="text" name="id_pago" value="" readonly="readonly"/>'+
                           '</td>'+
+                          '<th align="right" style="padding-right:5px;">Id pedido</th>'+
+                          '<td>'+
+                            '<input type="text" name="id_cliente" value="" required/>'+
+                          '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
                             '<input type="text" name="fecha" value="" id="date_field29"/>'+
@@ -2118,13 +2123,13 @@ function addcampos(A)
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
-                          '<th align="right" style="padding-right:5px;">NIT</th>'+
+                          '<th align="right" style="padding-right:5px;">Id cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value="" />'+
+                            '<input type="text" name="id_cliente" value="" required/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_que" value="" />'+
+                            '<input type="text" name="telefono_que" value="" required/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2158,7 +2163,7 @@ function addcampos(A)
                         '</tr>'+                              
                     '</table>'+ 
                     '<br>'+
-                    '<table align="center">'+
+                     '<table align="center">'+
                       '<tr>'+
                         '<td colspan="4" align="center">'+
                             '<input type="submit" value="Aceptar" class="button" id="OkAddRecaudo"/>'+
