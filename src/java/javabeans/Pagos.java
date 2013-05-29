@@ -14,7 +14,7 @@ import org.json.simple.JSONObject;
 public class Pagos 
 {   
     private String id_pago;
-   // private String numero_de_factura;
+   private String id_pedido;
     private String id_cliente;
     private String id_usuario;
     private String fecha;
@@ -27,7 +27,7 @@ public class Pagos
     public Pagos()
     {
         this.id_pago = "";
-       // this.numero_de_factura = "";
+       this.id_pedido = "";
         this.id_cliente = "";
         this.id_usuario = "";
         this.fecha = "";
@@ -38,10 +38,10 @@ public class Pagos
         this.descripcion = ""; 
     }
      //Metodo para llamar los datos de la base de datos para agregarlos a cada campo correspondiente 
-    public Pagos (String id_pago, String id_cliente, String id_usuario, String fecha, String tipo_de_pago, String cantidad_de_pago, String forma_de_pago, String descripcion)
+    public Pagos (String id_pago, String id_pedido, String id_cliente, String id_usuario, String fecha, String tipo_de_pago, String cantidad_de_pago, String forma_de_pago, String descripcion)
     {
         this.id_pago = id_pago;
-        //this.numero_de_factura = numero_de_factura;
+        this.id_pedido = id_pedido;
         this.id_cliente = id_cliente;
         this.id_usuario = id_usuario;
         this.fecha = fecha;
@@ -57,7 +57,7 @@ public class Pagos
         JSONObject obj = new JSONObject();
         
         obj.put("id_pago", this.id_pago);
-       // obj.put("numero_de_factura", this.numero_de_factura);
+        obj.put("id_pedido", this.id_pedido);
         obj.put("id_cliente", this.id_cliente);
         obj.put("id_usuario", this.id_usuario);
         obj.put("fecha", this.fecha);
@@ -79,16 +79,16 @@ public class Pagos
     {
         return this.id_pago;
     }
-    // establecer Numero_de_factura
-    /*public void setNumero_de_factura(String numero_de_factura)
+    // establecer id_pedido
+    public void setid_pedido(String id_pedido)
     {
-        this.numero_de_factura = numero_de_factura;
+        this.id_pedido = id_pedido;
     }
-     // obtener Numero_de_factura
-    public String getNumero_de_factura()
+     // obtener id_pedido
+    public String getid_pedido()
     {
-        return this.numero_de_factura;
-    }*/
+        return this.id_pedido;
+    }
     // establecer Id_cliente
     public void setId_cliente(String id_cliente)
     {
