@@ -2134,7 +2134,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Valor $</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_vis" value="150000" />'+
+                            '<input type="text" name="telefono_vis" value="" />'+
                           '</td>'+                          
                           '</tr>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Tipo de Pago</th>'+
@@ -2156,8 +2156,7 @@ function addcampos(A)
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
                         '</tr>'+                              
-                    '</table>'+                
-
+                    '</table>'+ 
                     '<br>'+
                     '<table align="center">'+
                       '<tr>'+
@@ -2223,8 +2222,7 @@ function addcampos(A)
                               '<textarea name="descripcion" cols="67" rows="6"></textarea>'+
                             '</td>'+
                         '</tr>'+                              
-                    '</table>'+                
-
+                    '</table>'+  
                     '<br>'+
                     '<table align="center">'+
                       '<tr>'+
