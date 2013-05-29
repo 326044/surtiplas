@@ -86,4 +86,116 @@ public class MaterialSQL
     
         return(Materiales);
     }
+    
+    //*****************************************************************************************
+//*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA        ********************
+//*************  PARA VISUALIZAR LOS COLORES                           ********************    
+//*****************************************************************************************
+    
+    public JSONObject DatosMaterial(String Codigo)
+    {
+        JSONObject mater= new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT * FROM material WHERE codigo = '" + Codigo + "';";
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            Material use = new Material(rs.getString("codigo"), rs.getString("material"));
+            mater = use.getJSONObject();
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return (mater);
+    }
+    
+    public boolean AdicionarMaterial(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Material use = new Material("", String.valueOf(datos.get("material")));
+            String tsql;
+            tsql = "INSERT INTO material VALUES(DEFAULT, '";
+            tsql += use.getNombre_material() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+  
+    //**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA LINEA PRODUCCION *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean ModificarMaterial(JSONObject datos, String Codigo)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Material use = new Material("", String.valueOf(datos.get("material")));
+            String tsql;
+            tsql = "UPDATE material SET material='" + use.getNombre_material() + "' WHERE codigo = " + Codigo + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+//************************************************************************************************
+//************************************************************************************************
+//*************                                                              *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS    *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB      *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA LINEA PRODUCCION *********************
+//*************                                                              *********************
+//************************************************************************************************
+//************************************************************************************************
+    
+    public boolean BorrarMaterial(String Codigo)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM material WHERE codigo = '" + Codigo + "';";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }

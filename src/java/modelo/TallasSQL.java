@@ -105,5 +105,116 @@ public class TallasSQL
         }
     
         return(tallas);
-    }  
+    }
+    //*****************************************************************************************
+//*************  FUNCION QUE SE ENCARGA DE REALIZAR LA CONSULTA        ********************
+//*************  PARA VISUALIZAR LOS COLORES                           ********************    
+//*****************************************************************************************
+    
+    public JSONObject DatosTallas(String CodTalla)
+    {
+        JSONObject talla= new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT * FROM tallas WHERE cod_talla = '" + CodTalla + "';";
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            Tallas usb = new Tallas(rs.getString("cod_talla"), rs.getString("talla"));
+            talla = usb.getJSONObject();
+            this.desconectar();
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return (talla);
+    }
+    
+    public boolean AdicionarTallas(JSONObject datos)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Tallas usb = new Tallas("", String.valueOf(datos.get("talla")));
+            String tsql;
+            tsql = "INSERT INTO tallas VALUES(DEFAULT, '";
+            tsql += usb.getTalla() + "')";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+  
+//**********************************************************************************************
+//**********************************************************************************************
+//*************                                                            *********************
+//************* METODO QUE SE ENCARGA DE MODIFICAR EN LA BASE DE DATOS LOS *********************
+//************* DATOS QUE SE CAMBIARON EN LOS CAMPOS DE LA INTERFAZ WEB    *********************
+//************* A TRAVES DEL ESTAMENTO "UPDATE" PARA LA TABLA LINEA PRODUCCION *********************
+//*************                                                            *********************
+//**********************************************************************************************
+//**********************************************************************************************
+    
+    public boolean ModificarTallas(JSONObject datos, String CodTalla)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Tallas usb = new Tallas("", String.valueOf(datos.get("talla")));
+            String tsql;
+            tsql = "UPDATE tallas SET talla='" + usb.getTalla() + "' WHERE cod_talla = " + CodTalla + ";";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+//************************************************************************************************
+//************************************************************************************************
+//*************                                                              *********************
+//************* METODO QUE SE ENCARGA DE ELIMINAR EN LA BASE DE DATOS LOS    *********************
+//************* DATOS QUE SE ENCUENTRAN VISUALIZADOS EN LA INTERFAZ WEB      *********************
+//************* A TRAVES DEL ESTAMENTO "DELETE" EN LA TABLA LINEA PRODUCCION *********************
+//*************                                                              *********************
+//************************************************************************************************
+//************************************************************************************************
+    
+    public boolean BorrarTallas(String CodTalla)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String tsql;
+            tsql = "DELETE FROM tallas WHERE cod_talla = '" + CodTalla + "';";
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }

@@ -195,6 +195,7 @@ public class ServletAdministrador extends HttpServlet
             JSONObject pedido = usw.datosPedidos(cod);
             out.print(pedido);
         }
+        
         if (op.equals("Departamentos"))
         {   
             JSONArray deptos = new JSONArray();
@@ -230,20 +231,20 @@ public class ServletAdministrador extends HttpServlet
             out.print(clients);
 	}
         
-        if (op.equals("Perfil"))
+         /*if (op.equals("Perfil"))
         {   
             JSONArray perfils = new JSONArray();
             perfils = per.cargarPerfil();
             out.print(perfils);
 	}
         
-        if (op.equals("DatosPerfil"))
+       if (op.equals("DatosPerfil"))
         {
             String cod = String.valueOf(jsonObj.get("Id_usuario"));  
             System.out.print(cod);
             JSONObject perfil = per.datosPerfil(cod);
             out.print(perfil);
-        }
+        }*/
         
         if (op.equals("DatosDevoluciones"))
         {
@@ -273,8 +274,24 @@ public class ServletAdministrador extends HttpServlet
             colors = cl.cargarColor();
             out.print(colors);
 	}
+        
+        if (op.equals("DatosTallas"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodTalla"));  
+            System.out.print(cod);
+            JSONObject talla = usb.DatosTallas(cod);
+            out.print(talla);
+        }
+        
+        if (op.equals("DatosMateriales"))
+        {
+            String cod = String.valueOf(jsonObj.get("Codigo"));  
+            System.out.print(cod);
+            JSONObject material = use.DatosMaterial(cod);
+            out.print(material);
+        }
 
-        if (op.equals("AddUsuario"))
+        if (op.equals("AddMaterial"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
@@ -287,15 +304,15 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.AdicionarUsuario(jsonObject,this.IdUsuario))
+                if (use.AdicionarMaterial(jsonObject))
                 {
-                    objRes.put("AddUsuario", "true");
+                    objRes.put("AddMaterial", "true");
                     out.print(objRes);
                 }
 
                 else
                 {
-                    objRes.put("AddUsuario", "false");
+                    objRes.put("AddMaterial", "false");
                     out.print(objRes);
                 }
                 
@@ -305,9 +322,9 @@ public class ServletAdministrador extends HttpServlet
                 e.printStackTrace();
             }
         }
-        if (op.equals("ModUsuario"))
+        if (op.equals("ModMaterial"))
         {
-            String cod = String.valueOf(jsonObj.get("Id_usuario"));
+            String cod = String.valueOf(jsonObj.get("Codigo"));
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
             JSONParser parser = new JSONParser();
@@ -319,15 +336,15 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.ModificarUsuario(jsonObject,this.IdUsuario, cod))
+                if (use.ModificarMaterial(jsonObject, cod))
                 {
-                    objRes.put("ModUsuario", "true");
+                    objRes.put("ModMaterial", "true");
                     out.print(objRes);
                 }
 
                 else
                 {
-                    objRes.put("ModUsuario", "false");
+                    objRes.put("ModMaterial", "false");
                     out.print(objRes);
                 }
                 
@@ -337,23 +354,25 @@ public class ServletAdministrador extends HttpServlet
                 e.printStackTrace();
             }
         }
-        if (op.equals("DelUsuario"))
+        
+        if (op.equals("DelMaterial"))
         {
-            String cod = String.valueOf(jsonObj.get("Id_usuario"));  
+            String cod = String.valueOf(jsonObj.get("Codigo"));  
             JSONObject objRes = new JSONObject();
             
-            if (usr.BorrarUsuario(cod))
+            if (use.BorrarMaterial(cod))
             {
-                objRes.put("DelUsuario", "true");
+                objRes.put("DelMaterial", "true");
                 out.print(objRes);
             }
 
             else
             {
-                objRes.put("DelUsuario", "false");
+                objRes.put("DelMaterial", "false");
                 out.print(objRes);
             }
         }
+        
         if (op.equals("AddVisita"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
@@ -802,6 +821,89 @@ public class ServletAdministrador extends HttpServlet
             else
             {
                 objRes.put("DelColor", "false");
+                out.print(objRes);
+            }
+        }
+        
+        if (op.equals("AddTalla"))
+        {
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usb.AdicionarTallas(jsonObject))
+                {
+                    objRes.put("AddTalla", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("AddTalla", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("ModTalla"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodTalla"));
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usb.ModificarTallas(jsonObject, cod))
+                {
+                    objRes.put("ModTalla", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModTalla", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("DelTalla"))
+        {
+            String cod = String.valueOf(jsonObj.get("CodTalla"));  
+            JSONObject objRes = new JSONObject();
+            
+            if (usb.BorrarTallas(cod))
+            {
+                objRes.put("DelTalla", "true");
+                out.print(objRes);
+            }
+
+            else
+            {
+                objRes.put("DelTalla", "false");
                 out.print(objRes);
             }
         }

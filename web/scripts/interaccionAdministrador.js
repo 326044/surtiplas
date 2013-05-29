@@ -319,6 +319,65 @@ function  activadorEventosProductos()
     hideAddColor=$("#NotAddColor");
     hideAddColor.click(HideConfirmAddColor);
     
+//*******************************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
+//*******************************************************************
+    var AddTalla, modTalla, verTalla, delLinea, PBorrarLOk;
+    var volverLinea, VBorrarV, hideDelViatico, hideAddTalla;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    verTalla=$(".VerTalla");
+    verTalla.click(DatosVerTalla);
+    delLinea=$(".DelLinea");
+    delLinea.click(DatosDelLinea);
+    PBorrarLOk=$("#OkDelLinea");
+    PBorrarLOk.click(DelLineaOk);
+    
+    AddTalla=$(".AddTalla");
+    AddTalla.click(ConfirmAddTalla);
+    modTalla=$(".ModTalla");
+    modTalla.click(DatosModTalla);
+    hideAddTalla=$("#NotAddTalla");
+    hideAddTalla.click(HideConfirmAddTalla);
+    
+//*******************************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
+//*******************************************************************
+    var AddTalla, modTalla, verTalla, delLinea, PBorrarLOk;
+    var volverLinea, VBorrarV, hideDelViatico, hideAddTalla;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    verTalla=$(".VerTalla");
+    verTalla.click(DatosVerTalla);
+    delLinea=$(".DelLinea");
+    delLinea.click(DatosDelLinea);
+    PBorrarLOk=$("#OkDelLinea");
+    PBorrarLOk.click(DelLineaOk);
+    
+    AddTalla=$(".AddTalla");
+    AddTalla.click(ConfirmAddTalla);
+    modTalla=$(".ModTalla");
+    modTalla.click(DatosModTalla);
+    hideAddTalla=$("#NotAddTalla");
+    hideAddTalla.click(HideConfirmAddTalla);
+
+//*******************************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
+//*******************************************************************
+    var AddMaterial, modMaterial, verMaterial, delLinea, PBorrarLOk;
+    var volverLinea, VBorrarV, hideDelViatico, hideAddMaterial;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    verMaterial=$(".VerMaterial");
+    verMaterial.click(DatosVerMaterial);
+    delLinea=$(".DelLinea");
+    delLinea.click(DatosDelLinea);
+    PBorrarLOk=$("#OkDelLinea");
+    PBorrarLOk.click(DelLineaOk);
+    
+    AddMaterial=$(".AddMaterial");
+    AddMaterial.click(ConfirmAddMaterial);
+    modMaterial=$(".ModMaterial");
+    modMaterial.click(DatosModMaterial);
+    hideAddMaterial=$("#NotAddMaterial");
+    hideAddMaterial.click(HideConfirmAddMaterial);
 }
 
 //**********************************************************************************
@@ -589,81 +648,6 @@ function Menutallas()
 //*********************************************************************************************************
 //*********************************************************************************************************
 //***********************                                                           ***********************
-//***********************                    SECCION DE TALLAS                      ***********************
-//***********************                                                           ***********************
-//*********************************************************************************************************
-//*********************************************************************************************************
-
-function seccionListadoTalla()
-{
-    var request = {"Usuarios":"Tallas"};
-    var jsonobj=JSON.stringify(request);
-    $.ajax({
-                    data: {administrador:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletAdministrador',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        cargarListadoTallas(jsonArray);     
-                    },
-                    error: function(jsonArray) 
-                    {
-                        alert('Error al conectar con ServletAdministrador');
-                    }
-           });
-}
-//
-//**************************************************************************************
-//**************************************************************************************
-//*************                                                    *********************
-//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION TALLAS *********************
-//*************                                                    *********************
-//**************************************************************************************
-//**************************************************************************************
-
-function cargarListadoTallas(jsonArray)
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Tallas de los productos</div>'+
-                     '<div class="tabla">'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
-                            '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>id Talla</th>'+
-                            '<th>Talla</th>'+
-                         '</tr>';
-                                 
-    for (var i = 0; i < jsonArray.length; i++)
-    {
-            if (i % 2 === 0)
-                codigoHTML+=               '<tr>';
-           else
-                codigoHTML+=               '<tr class="even">';
-            
-           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].cod_talla + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';  
-            codigoHTML+=                   '</tr>';
-            
-    }
-    
-    codigoHTML+=                '</table>'+
-                                  '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".content-float-datos").css({width: 630});
-    $(".tbonita").css({width: 620});
-    $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#tallasProductos").addClass("active");
-    activadorEventosProductos();
-}
-
-//*********************************************************************************************************
-//*********************************************************************************************************
-//***********************                                                           ***********************
 //***********************                    SECCION DE USUARIOS                    ***********************
 //***********************                                                           ***********************
 //*********************************************************************************************************
@@ -689,81 +673,6 @@ function Menumateriales()
     seccionListadoMateriales();
     $(".menu-vertical li a#materialesProductos").addClass("active");
     activadorEventosProductos();  
-}
-
-//*********************************************************************************************************
-//*********************************************************************************************************
-//***********************                                                           ***********************
-//***********************                    SECCION DE MATERIALES                  ***********************
-//***********************                                                           ***********************
-//*********************************************************************************************************
-//*********************************************************************************************************
-
-function seccionListadoMateriales()
-{
-    var request = {"Usuarios":"Materiales"};
-    var jsonobj=JSON.stringify(request);
-    $.ajax({
-                    data: {administrador:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletAdministrador',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        cargarMateriales(jsonArray);     
-                    },
-                    error: function(jsonArray) 
-                    {
-                        alert('Error al conectar con ServletAdministrador');
-                    }
-           });
-}
-
-//*********************************************************************************************************
-//*********************************************************************************************************
-//***********************                                                           ***********************
-//***********************  FUNCION PARA CARGAR LOS DATOS DE LA SECCION MATERIALES   ***********************
-//***********************                                                           ***********************
-//*********************************************************************************************************
-//*********************************************************************************************************
-
-function cargarMateriales(jsonArray)
-{
-    var codigoHTML = '<div class="encabezado2">Listado de Materiales de los productos</div>'+
-                     '<div class="tabla">'+
-                        '<table class="tbonita">'+
-                          '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AVendedor"/></th>'+
-                            '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>Codigo</th>'+
-                            '<th>Material</th>'+
-                         '</tr>';
-                                 
-    for (var i = 0; i < jsonArray.length; i++)
-    {
-            if (i % 2 === 0)
-                codigoHTML+=               '<tr>';
-           else
-                codigoHTML+=               '<tr class="even">';
-            
-           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelUsuario" id="' + jsonArray[i].id_usuario + '" /></td>'+
-                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerUsuario" id="' + jsonArray[i].id_usuario + '" /></td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].codigo + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].material + '</td>';  
-            codigoHTML+=                   '</tr>';
-            
-    }
-    
-    codigoHTML+=                '</table>'+
-                                  '</div>';
-
-    $("#datos").html(codigoHTML);
-    $(".content-float-datos").css({width: 630});
-    $(".tbonita").css({width: 620});
-    $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#materialesProductos").addClass("active");
-    activadorEventosProductos();
 }
 
 //*********************************************************************************************************
@@ -5398,6 +5307,954 @@ function HideConfirmAddLinea()
     activadorEventosProductos();    
 }
 
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE TALLAS                      ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoTalla()
+{
+    var request = {"Usuarios":"Tallas"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarListadoTallas(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+//
+//**************************************************************************************
+//**************************************************************************************
+//*************                                                    *********************
+//************* FUNCION PARA CARGAR LOS DATOS DE LA SECCION TALLAS *********************
+//*************                                                    *********************
+//**************************************************************************************
+//**************************************************************************************
+
+function cargarListadoTallas(jsonArray, id)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Tallas de los productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddTalla"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>id Talla</th>'+
+                            '<th>Talla</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 === 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModTalla" id="' + jsonArray[i].cod_talla + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelTalla" id="' + jsonArray[i].cod_talla + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerTalla" id="' + jsonArray[i].cod_talla + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].cod_talla + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#tallasProductos").addClass("active");
+    activadorEventosProductos();
+}
+
+function ConfirmAddTalla()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosTallas","CodTalla":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        AddTalla(jsonObject); 
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });  
+}
+
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************         FUNCION PARA ADICIONAR A UN NUEVO USUARIO         ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+
+function AddTalla()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+                        '<table align="center">'+
+                            '<form id="form_crear_talla"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_talla" value="" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                    '<td><input type="text" name="talla" value="" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddTalla"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosAddTalla" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_crear_talla").submit(enviarDatosAddTalla);
+    activadorEventosProductos();
+}
+function enviarDatosAddTalla(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddTalla","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({       
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddTallas(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+function verificarAddTallas(jsonObj)
+{
+    if (jsonObj.AddTalla  ==="true")
+    {
+        alert("La talla se ha adicionado correctamente");
+    }
+    
+    else
+    {
+        alert("La talla no se pudo adicionar");
+    }   
+    
+    HideConfirmAddTalla();
+}
+
+function HideConfirmAddTalla()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModTalla()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosTallas","CodTalla":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModTalla(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModTalla(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Modificar Talla</div>'+
+                     '<div class="tabla">'+
+                            '<form id="form_modificar_talla"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                    '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="cod_tallamod" id="cod_tallamod" value="' + jsonObject.cod_talla + '" /></td>'+
+                                  '</tr>'+
+                                '</br>'+
+                              '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddTalla"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosModTalla" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                    '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_modificar_talla").submit(enviarDatosModTalla);
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModTalla(evento)
+{
+    evento.preventDefault();
+    var cod_talla = $("#cod_tallamod").val();
+    //alert(id_viaticos);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModTalla","Datos":datos, "CodTalla":cod_talla};
+    var jsonobj=JSON.stringify(request);
+   // alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModTalla(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModTalla(jsonObj)
+{
+    if (jsonObj.ModTalla  ==="true")
+    {
+        alert("La talla se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("La talla no se pudo modificar");
+    }   
+    HideConfirmAddTalla();
+}
+
+function HideConfirmAddTalla()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerTalla()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosTallas","CodTalla":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerTalla(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function VerTalla(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Visualizar Tallas</div>'+
+                        '<table align="center">'+
+                        '<form id=""  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                    '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddTalla"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_eliminar_linea").submit(DelLineaOk);
+    activadorEventosProductos();
+}
+function DelLineaOk()
+{
+    var id = $(this)[0].name; 
+    alert(id);
+    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelLinea(jsonObj)
+{
+    if (jsonObj.DelLinea  ==="true")
+    {
+        alert("La Linea se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Linea no se pudo Borrar");
+    }   
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************                    SECCION DE MATERIALES                  ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function seccionListadoMateriales()
+{
+    var request = {"Usuarios":"Materiales"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        cargarMateriales(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+           });
+}
+
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************  FUNCION PARA CARGAR LOS DATOS DE LA SECCION MATERIALES   ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarMateriales(jsonArray, id)
+{
+    var codigoHTML = '<div class="encabezado2">Listado de Materiales de los productos</div>'+
+                     '<div class="tabla">'+
+                        '<table class="tbonita">'+
+                          '<tr align="left">'+
+                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddMaterial"/></th>'+
+                            '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th>Codigo</th>'+
+                            '<th>Material</th>'+
+                         '</tr>';
+                                 
+    for (var i = 0; i < jsonArray.length; i++)
+    {
+            if (i % 2 === 0)
+                codigoHTML+=               '<tr>';
+           else
+                codigoHTML+=               '<tr class="even">';
+            
+           codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModMaterial" id="' + jsonArray[i].codigo + '" /></td>'+
+                                                               '<td><img src="images/b_drop.png" title="Eliminar" class="DelMaterial" id="' + jsonArray[i].codigo + '" /></td>'+
+                                                               '<td><img src="images/b_search.png" title="Visualizar" class="VerMaterial" id="' + jsonArray[i].codigo + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].codigo + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].material + '</td>';  
+            codigoHTML+=                   '</tr>';
+            
+    }
+    
+    codigoHTML+=                '</table>'+
+                                  '</div>';
+
+    $("#datos").html(codigoHTML);
+    $(".content-float-datos").css({width: 630});
+    $(".tbonita").css({width: 620});
+    $(".menu-vertical li a").removeClass("active");
+    $(".menu-vertical li a#materialesProductos").addClass("active");
+    activadorEventosProductos();
+}
+
+function ConfirmAddMaterial()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosMateriales","Codigo":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        AddMaterial(jsonObject); 
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });  
+}
+
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************         FUNCION PARA ADICIONAR A UN NUEVO USUARIO         ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+
+function AddMaterial()
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Adicionar Material</div>'+
+                        '<table align="center">'+
+                            '<form id="form_crear_material"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="codigo" value="" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td><input type="text" name="material" value="" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddMaterial"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosAddMaterial" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_crear_material").submit(enviarDatosAddMaterial);
+    activadorEventosProductos();
+}
+function enviarDatosAddMaterial(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray(); 
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"AddMaterial","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({       
+                data: {administrador:jsonobj},
+                type: 'POST',
+                dataType: 'json',
+                url: 'ServletAdministrador',
+                success: function(jsonObj)
+                {
+                    verificarAddMaterial(jsonObj);
+                },
+                error: function() 
+                {
+                    alert('Error al conectar con el servidor');
+                }
+           });
+}
+function verificarAddMaterial(jsonObj)
+{
+    if (jsonObj.AddMaterial  ==="true")
+    {
+        alert("El Material se ha adicionado correctamente");
+    }
+    
+    else
+    {
+        alert("El Material no se pudo adicionar");
+    }   
+    
+    HideConfirmAddMaterial();
+}
+
+function HideConfirmAddMaterial()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosModMaterial()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosMateriales","Codigo":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        ModMaterial(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//******************************************************************************
+//********************                                      ********************
+//******************** FUNCION PARA MODIFICAR LOS VIATICOS  ********************
+//********************                                      ********************
+//******************************************************************************
+
+function ModMaterial(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Modificar Material</div>'+
+                     '<div class="tabla">'+
+                            '<form id="form_modificar_material"  enctype="multipart/form-data"  align="center">'+
+                                  '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" required/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" required/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<td><input type="hidden" name="cod_materialmod" id="cod_materialmod" value="' + jsonObject.codigo + '" /></td>'+
+                                  '</tr>'+
+                                '</br>'+
+                              '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddMaterial"/>'+
+                                '<input type="submit" value="Registrar" class="button" id="enviarDatosModMaterial" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                    '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_modificar_material").submit(enviarDatosModMaterial);
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA ENVIAR LOS DATOS MODIFICADOS A LA BASE DE DATOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function enviarDatosModMaterial(evento)
+{
+    evento.preventDefault();
+    var codigo = $("#cod_materialmod").val();
+    //alert(id_viaticos);
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModMaterial","Datos":datos, "Codigo":codigo};
+    var jsonobj=JSON.stringify(request);
+   // alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {administrador:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    success: function(jsonObj)
+                    {
+                        verificarModMaterial(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************  FUNCION PARA VERIFICAR QUE LOS DATOS HALLAN SIDO MODIFICADOS   ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function verificarModMaterial(jsonObj)
+{
+    if (jsonObj.ModMaterial  ==="true")
+    {
+        alert("El Material se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El Material no se pudo modificar");
+    }   
+    HideConfirmAddMaterial();
+}
+
+function HideConfirmAddMaterial()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosVerMaterial()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosMateriales","Codigo":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerMaterial(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrado');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function VerMaterial(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Visualizar Tallas</div>'+
+                        '<table align="center">'+
+                        '<form id=""  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotAddMaterial"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    activadorEventosProductos();
+}
+
+//***************************************************************************************************************
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************        FUNCION PARA CONECTAR EL FORMULARIO CON EL SERVLET       ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+//***************************************************************************************************************
+
+function DatosDelLinea()
+{
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        DelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+
+//***************************************************************************************************************
+//***********************                                                                 ***********************
+//***********************          FUNCION PARA ELIMINAR UN LINEA DE PRODUCCION           ***********************
+//***********************                                                                 ***********************
+//***************************************************************************************************************
+
+function DelLinea(jsonObject)
+{
+    var id = $(this)[0].name;
+    //alert(id);
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+                        '<table align="center">'+
+                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
+                            '<tr align="center">'+
+                                    '<th align="right" style="padding-right:5px;">Código</th>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                  '</tr>'+
+                            '<td colspan="4" align="center">'+
+                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
+                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                            '</td>'+
+                        '</table>'+
+                     '</div>';
+
+    $("#overDelItem").css({display: "block"});
+    $("#overDelItem").html(codigoHTML);
+    $("#fadeDelItem").css({display: "block"});
+    $("#form_eliminar_linea").submit(DelLineaOk);
+    activadorEventosProductos();
+}
+function DelLineaOk()
+{
+    var id = $(this)[0].name; 
+    alert(id);
+    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    var jsonobj=JSON.stringify(request);
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    
+    $.ajax({
+                    data: {administrador:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletAdministrador', 
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        verificarDelLinea(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletAdministrador');
+                    }
+               });
+}
+function verificarDelLinea(jsonObj)
+{
+    if (jsonObj.DelLinea  ==="true")
+    {
+        alert("La Linea se ha borrado correctamente");
+    }
+    
+    else
+    {
+        alert("La Linea no se pudo Borrar");
+    }   
+    HideConfirmAddLinea();
+}
+
+function HideConfirmAddLinea()
+{
+    $("#overDelItem").css({display: "none"});
+    $("#fadeDelItem").css({display: "none"});
+    activadorEventosProductos();    
+}
+
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
@@ -7624,7 +8481,7 @@ function menuPerfil()
 *********************                                     *************************
 **********************************************************************************/
 
-function seccionDatosPerfil()
+/*function seccionDatosPerfil()
 {
 var id = $(this)[0].id;
     var request = {"Usuarios":"DatosPerfil","Id_usuario":id};
@@ -7644,13 +8501,13 @@ var id = $(this)[0].id;
                         alert('Error al conectar con ServletAdministrador');
                     }
                });
-}
+}*/
 /**********************************************************************************
 *********************                                     *************************
 *********************   FUNCION PARA MODIFICAR EL PERFIL  *************************
 *********************                                     *************************
 **********************************************************************************/
-function ModUsuario(jsonObject)
+/*function ModUsuario(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
                      '<div class="tabla">'+
@@ -7811,7 +8668,7 @@ function ModUsuario(jsonObject)
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_usuario").submit(enviarDatosModUsuario);
     activadorEventosUsuarios();
-}
+}*/
 
 //***************************************************************************************************************
 //***************************************************************************************************************
@@ -7821,7 +8678,7 @@ function ModUsuario(jsonObject)
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function enviarDatosModUsuario(evento)
+/*function enviarDatosModUsuario(evento)
 {
     evento.preventDefault();
     var id_usuario = $("#id_usuarioMod").val();
@@ -7869,7 +8726,7 @@ function verificarModUsuario(jsonObj)
     }   
     
     seccionListado();
-}
+}*/
 
 //**********************************************************************************
 
