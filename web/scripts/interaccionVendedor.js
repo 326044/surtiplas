@@ -2075,8 +2075,7 @@ function addcampos(A)
                               '</td>'+
                             '</tr>'+
                       '</table>'+                   
-                     '</form>'+
-                   '</div>';   
+                     '</form>';   
    
     }  
     
@@ -2167,8 +2166,7 @@ function addcampos(A)
                         '</td>'+
                       '</tr>'+
                     '</table>'+
-                    '</form>'+
-                '</div>';
+                    '</form>';
    
     }
     else
@@ -2234,15 +2232,14 @@ function addcampos(A)
                         '</td>'+
                       '</tr>'+
                     '</table>'+
-                    '</form>'+
-                '</div>';
+                    '</form>';
 
     }
-    $("#datos").html(codigoHTML);
+    
+    $("#campos").html(codigoHTML);
     $('#date_field29').datepick({yearRange: '1980:2050'});
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
-    listadoDepartamentos();   
-    $("#campos").html(codigoHTML);
+    listadoDepartamentos();       
     $("#form_crear_actividad_visita").submit(crearActividadVisita);
     $("#form_crear_actividad_pago").submit(crearActividadPago);
     activadorEventosClientes();
