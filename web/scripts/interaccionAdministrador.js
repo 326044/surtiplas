@@ -1021,7 +1021,7 @@ function enviarDatosAddUsuario(evento)
     //alert(datos.toString());
     var request = {"Usuarios":"AddUsuario","Datos":datos};
     var jsonobj=JSON.stringify(request);
-    //alert(jsonobj.toString());
+    alert(jsonobj.toString());
     
     $.ajax({        
                 data: {administrador:jsonobj},
