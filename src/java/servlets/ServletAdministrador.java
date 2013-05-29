@@ -291,7 +291,7 @@ public class ServletAdministrador extends HttpServlet
             out.print(material);
         }
 
-        if (op.equals("AddMaterial"))
+        if (op.equals("AddUsuario"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
@@ -304,15 +304,15 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (use.AdicionarMaterial(jsonObject))
+                if (usr.AdicionarUsuario(jsonObject, this.IdUsuario))
                 {
-                    objRes.put("AddMaterial", "true");
+                    objRes.put("AddUsuario", "true");
                     out.print(objRes);
                 }
 
                 else
                 {
-                    objRes.put("AddMaterial", "false");
+                    objRes.put("AddUsuario", "false");
                     out.print(objRes);
                 }
                 
@@ -322,9 +322,9 @@ public class ServletAdministrador extends HttpServlet
                 e.printStackTrace();
             }
         }
-        if (op.equals("ModMaterial"))
+        if (op.equals("ModUsuario"))
         {
-            String cod = String.valueOf(jsonObj.get("Codigo"));
+            String cod = String.valueOf(jsonObj.get("Id_usuario"));
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
             JSONParser parser = new JSONParser();
@@ -336,15 +336,15 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (use.ModificarMaterial(jsonObject, cod))
+                if (usr.ModificarUsuario(jsonObject, this.IdUsuario, cod))
                 {
-                    objRes.put("ModMaterial", "true");
+                    objRes.put("ModUsuario", "true");
                     out.print(objRes);
                 }
 
                 else
                 {
-                    objRes.put("ModMaterial", "false");
+                    objRes.put("ModUsuario", "false");
                     out.print(objRes);
                 }
                 
@@ -355,20 +355,20 @@ public class ServletAdministrador extends HttpServlet
             }
         }
         
-        if (op.equals("DelMaterial"))
+        if (op.equals("DelUsuario"))
         {
-            String cod = String.valueOf(jsonObj.get("Codigo"));  
+            String cod = String.valueOf(jsonObj.get("Id_usuario"));  
             JSONObject objRes = new JSONObject();
             
-            if (use.BorrarMaterial(cod))
+            if (usr.BorrarUsuario(cod))
             {
-                objRes.put("DelMaterial", "true");
+                objRes.put("DelUsuario", "true");
                 out.print(objRes);
             }
 
             else
             {
-                objRes.put("DelMaterial", "false");
+                objRes.put("DelUsuario", "false");
                 out.print(objRes);
             }
         }
@@ -904,6 +904,89 @@ public class ServletAdministrador extends HttpServlet
             else
             {
                 objRes.put("DelTalla", "false");
+                out.print(objRes);
+            }
+        }
+        
+        if (op.equals("AddMaterial"))
+        {
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (use.AdicionarMaterial(jsonObject))
+                {
+                    objRes.put("AddMaterial", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("AddMaterial", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("ModMaterial"))
+        {
+            String cod = String.valueOf(jsonObj.get("Codigo"));
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (use.ModificarMaterial(jsonObject, cod))
+                {
+                    objRes.put("ModMaterial", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModMaterial", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        if (op.equals("DelMaterial"))
+        {
+            String cod = String.valueOf(jsonObj.get("Codigo"));  
+            JSONObject objRes = new JSONObject();
+            
+            if (use.BorrarMaterial(cod))
+            {
+                objRes.put("DelMaterial", "true");
+                out.print(objRes);
+            }
+
+            else
+            {
+                objRes.put("DelMaterial", "false");
                 out.print(objRes);
             }
         }
