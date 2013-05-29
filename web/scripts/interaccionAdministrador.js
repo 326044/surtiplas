@@ -4790,7 +4790,7 @@ function DelLinea(jsonObject)
 function DelLineaOk()
 {
     var id = $(this)[0].name; 
-    alert(id);
+    //alert(id);
     var request = {"Usuarios":"DelLinea","CodLinea":id};
     var jsonobj=JSON.stringify(request);
     $("#overDelItem").css({display: "none"});
