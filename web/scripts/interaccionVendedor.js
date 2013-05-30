@@ -2003,10 +2003,9 @@ function AddActividades()
     
     $("#overAddProducto").css({display: "block"});
     $("#overAddProducto").html(codigoHTML);
-    $("#fadeAddProducto").css({display: "block"});    
-    listadoDepartamentos();
-    $("#form_crear_actividad").submit(crearActividadVisita);
-    $("#form_crear_actividad").submit(crearActividadPago);
+    $("#fadeAddProducto").css({display: "block"});   
+    /*$("#form_crear_actividad").submit(crearActividadVisita);
+    $("#form_crear_actividad").submit(crearActividadPago);*/
     activadorEventosClientes();
     activadorEventosVendedores();
 }
@@ -2173,7 +2172,7 @@ function addcampos(A)
                     '</form>';
    
     }
-    else
+    else if(A==3)
     {
         codigoHTML = '<form id="form_crear_queja" enctype="multipart/form-data">'+
                     '<br>'+
@@ -2192,7 +2191,7 @@ function addcampos(A)
                          '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="cliente_que" value="" readonly="readonly"/>'+
+                            '<input type="text" name="cliente_que" value="" />'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
@@ -2202,21 +2201,22 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                           '<td>'+
-                            '<input type="text" name="ciudad_que" value="" readonly="readonly"/>'+
+                            '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()"  required>'+                                           
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Departamento</th>'+
                           '<td>'+
-                            '<input type="text" name="depto_que" value="" readonly="readonly"/>'+
+                            '<select name="codMunicipio" style="width:160px;" class="municipios"  required>'+                            
+                            '</select>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">NIT</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value="" readonly="readonly"/>'+
+                            '<input type="text" name="id_cliente" value="" />'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Telefono</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_que" value="" readonly="readonly"/>'+
+                            '<input type="text" name="telefono_que" value="" />'+
                           '</td>'+
                         '</tr>'+                        
                         '<tr>'+
