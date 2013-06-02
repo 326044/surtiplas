@@ -113,7 +113,7 @@ function activadorEventosVendedores()
     delVenta=$(".DelVenta");
     delVenta.click(ConfirmDelVenta);
 
-    hideDelVenta=$("#NotDelVenta")
+    hideDelVenta=$("#NotDelVenta");
     hideDelVenta.click(HideConfirmDelVenta);
     volverVentas=$("#volverVenta");
     volverVentas.click(seccionVentas);
@@ -242,7 +242,7 @@ function cargarListado(JSONArray)
 {    
     for (var k = 0; k < JSONArray.length; k++)
     {
-        if (k==0)
+        if (k===0)
         {
                var codigoHTML =     '<div class="encabezado2">Visualizar Los Vendedores</div>'+
                                     '<div class="tabla">'+
@@ -264,7 +264,7 @@ function cargarListado(JSONArray)
 
                for (var i = 0; i < JSONArray[k].length; i++)
                {
-                      if (i % 2 == 0)
+                      if (i % 2 === 0)
                            codigoHTML+=           '<tr>';
                       else
 							codigoHTML+=           '<tr class="even">';
@@ -312,7 +312,7 @@ function DatosVerVendedor()
         {
             alert('Error al conectar con ServletSecretaria');
         }
-    })
+    });
 }
 
 function VerVendedor1(jsonObject)
@@ -450,7 +450,7 @@ function cargarListadoVentas(JSONArray)
 {
     for(var k = 0; k < JSONArray.length; k++)
     {
-        if(k==0)
+        if(k===0)
         {
             var codigoHTML =    '<div class="encabezado2">Pedidos de Cliente</div>'+
                                 '<div class="tabla">'+ 
@@ -472,7 +472,7 @@ function cargarListadoVentas(JSONArray)
     
             for(var i = 0; i < JSONArray[k].length; i++)
             {
-                if(i % 2 == 0)
+                if(i % 2 === 0)
                     codigoHTML+= '<tr>';
                 else
                     codigoHTML+=           '<tr class="even">';
@@ -518,7 +518,7 @@ function DatosVerVenta()
         {
             alert('Error al conectar con ServletSecretaria');
         }
-    })
+    });
 }
 
 function VerVenta1(jsonObject)
