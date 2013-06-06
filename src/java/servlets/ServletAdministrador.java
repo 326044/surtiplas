@@ -231,7 +231,7 @@ public class ServletAdministrador extends HttpServlet
             out.print(clients);
 	}
         
-         /*if (op.equals("Perfil"))
+        if (op.equals("Perfil"))
         {   
             JSONArray perfils = new JSONArray();
             perfils = per.cargarPerfil();
@@ -244,7 +244,7 @@ public class ServletAdministrador extends HttpServlet
             System.out.print(cod);
             JSONObject perfil = per.datosPerfil(cod);
             out.print(perfil);
-        }*/
+        }
         
         if (op.equals("DatosDevoluciones"))
         {
@@ -1255,7 +1255,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (per.ModificarPerfil(jsonObject, cod))
+                if (usr.ModificarUsuario(jsonObject, cod))
                 {
                     objRes.put("ModPerfil", "true");
                     out.print(objRes);

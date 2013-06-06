@@ -8481,7 +8481,7 @@ function menuPerfil()
 *********************                                     *************************
 **********************************************************************************/
 
-/*function seccionDatosPerfil()
+function seccionDatosPerfil()
 {
 var id = $(this)[0].id;
     var request = {"Usuarios":"DatosPerfil","Id_usuario":id};
@@ -8501,13 +8501,13 @@ var id = $(this)[0].id;
                         alert('Error al conectar con ServletAdministrador');
                     }
                });
-}*/
+}
 /**********************************************************************************
 *********************                                     *************************
 *********************   FUNCION PARA MODIFICAR EL PERFIL  *************************
 *********************                                     *************************
 **********************************************************************************/
-/*function ModUsuario(jsonObject)
+function ModUsuario(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
                      '<div class="tabla">'+
@@ -8668,7 +8668,7 @@ var id = $(this)[0].id;
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_usuario").submit(enviarDatosModUsuario);
     activadorEventosUsuarios();
-}*/
+}
 
 //***************************************************************************************************************
 //***************************************************************************************************************
@@ -8678,7 +8678,7 @@ var id = $(this)[0].id;
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-/*function enviarDatosModUsuario(evento)
+function enviarDatosModUsuario(evento)
 {
     evento.preventDefault();
     var id_usuario = $("#id_usuarioMod").val();
@@ -8725,8 +8725,8 @@ function verificarModUsuario(jsonObj)
         alert("El usuario no se pudo modificar");
     }   
     
-    seccionListado();
-}*/
+    seccionDatosPerfil();
+}
 
 //**********************************************************************************
 
