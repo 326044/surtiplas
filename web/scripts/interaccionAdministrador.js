@@ -302,15 +302,17 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var addColor, modColor, verColor, delLinea, PBorrarLOk;
-    var volverLinea, VBorrarV, hideDelViatico, hideAddColor;
+    var addColor, modColor, verColor, delColor, PBorrarCOk;
+    var volverColor, hideAddColor;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     verColor=$(".VerColor");
     verColor.click(DatosVerColor);
-    delLinea=$(".DelLinea");
-    delLinea.click(DatosDelLinea);
-    PBorrarLOk=$("#OkDelLinea");
-    PBorrarLOk.click(DelLineaOk);
+    delColor=$(".DelColor");
+    delColor.click(DatosDelColor);
+    PBorrarCOk=$("#OkDelColor");
+    PBorrarCOk.click(DelColorOk);
+    volverColor=$("#NotDelColor");
+    volverColor.click(HideConfirmAddLinea);
     
     addColor=$(".addColor");
     addColor.click(ConfirmAddColor);
@@ -322,15 +324,17 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var AddTalla, modTalla, verTalla, delLinea, PBorrarLOk;
-    var volverLinea, VBorrarV, hideDelViatico, hideAddTalla;
+    var AddTalla, modTalla, verTalla, delTalla, PBorrarTOk;
+    var volverTalla, VBorrarV, hideDelViatico, hideAddTalla;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     verTalla=$(".VerTalla");
     verTalla.click(DatosVerTalla);
-    delLinea=$(".DelLinea");
-    delLinea.click(DatosDelLinea);
-    PBorrarLOk=$("#OkDelLinea");
-    PBorrarLOk.click(DelLineaOk);
+    delTalla=$(".DelTalla");
+    delTalla.click(DatosDelTallas);
+    PBorrarTOk=$("#OkDelTalla");
+    PBorrarTOk.click(DelTallaOk);
+    volverTalla=$("#NotDelTalla");
+    volverTalla.click(HideConfirmAddLinea);
     
     AddTalla=$(".AddTalla");
     AddTalla.click(ConfirmAddTalla);
@@ -342,35 +346,17 @@ function  activadorEventosProductos()
 //*******************************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
 //*******************************************************************
-    var AddTalla, modTalla, verTalla, delLinea, PBorrarLOk;
-    var volverLinea, VBorrarV, hideDelViatico, hideAddTalla;
-// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-    verTalla=$(".VerTalla");
-    verTalla.click(DatosVerTalla);
-    delLinea=$(".DelLinea");
-    delLinea.click(DatosDelLinea);
-    PBorrarLOk=$("#OkDelLinea");
-    PBorrarLOk.click(DelLineaOk);
-    
-    AddTalla=$(".AddTalla");
-    AddTalla.click(ConfirmAddTalla);
-    modTalla=$(".ModTalla");
-    modTalla.click(DatosModTalla);
-    hideAddTalla=$("#NotAddTalla");
-    hideAddTalla.click(HideConfirmAddTalla);
-
-//*******************************************************************
-//** VARIABLES DE LAS OPCIONES DEL LISTADO DE LINEAS DE PRODUCCION **
-//*******************************************************************
-    var AddMaterial, modMaterial, verMaterial, delLinea, PBorrarLOk;
-    var volverLinea, VBorrarV, hideDelViatico, hideAddMaterial;
+    var AddMaterial, modMaterial, verMaterial, delMaterial, PBorrarMOk;
+    var volverMaterial, hideAddMaterial;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     verMaterial=$(".VerMaterial");
     verMaterial.click(DatosVerMaterial);
-    delLinea=$(".DelLinea");
-    delLinea.click(DatosDelLinea);
-    PBorrarLOk=$("#OkDelLinea");
-    PBorrarLOk.click(DelLineaOk);
+    delMaterial=$(".DelMaterial");
+    delMaterial.click(DatosDelMaterial);
+    PBorrarMOk=$("#OkDelMaterial");
+    PBorrarMOk.click(DelMaterialOk);
+    volverMaterial=$("#NotDelMaterial");
+    volverMaterial.click(HideConfirmAddLinea);
     
     AddMaterial=$(".AddMaterial");
     AddMaterial.click(ConfirmAddMaterial);
@@ -4763,20 +4749,17 @@ function DatosDelLinea()
 
 function DelLinea(jsonObject)
 {
-    var id = $(this)[0].name;
-    //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
                         '<table align="center">'+
-                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
-                                  '</tr>'+
+                                '<th align="right" style="padding-right:5px;">Código</th>'+
+                                '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                              '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
-                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                                '<input type="button" value="Borrar" class="button" id="OkDelLinea" name="' + jsonObject.cod_linea + '"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -4784,9 +4767,9 @@ function DelLinea(jsonObject)
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
-    $("#form_eliminar_linea").submit(DelLineaOk);
     activadorEventosProductos();
 }
+
 function DelLineaOk()
 {
     var id = $(this)[0].name; 
@@ -5208,10 +5191,10 @@ function VerColor(jsonObject)
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function DatosDelLinea()
+function DatosDelColor()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var request = {"Usuarios":"DatosColores","CodColor":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -5221,7 +5204,7 @@ function DatosDelLinea()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        DelLinea(jsonObject);     
+                        DelColor(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -5236,22 +5219,20 @@ function DatosDelLinea()
 //***********************                                                                 ***********************
 //***************************************************************************************************************
 
-function DelLinea(jsonObject)
+function DelColor(jsonObject)
 {
-    var id = $(this)[0].name;
-    //alert(id);
     var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
-                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                                '<input type="button" value="Volver" class="button" id="NotDelColor"/>'+
+                                '<input type="button" value="Borrar" class="button" id="OkDelColor" name="' + jsonObject.cod_color + '"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -5259,14 +5240,13 @@ function DelLinea(jsonObject)
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
-    $("#form_eliminar_linea").submit(DelLineaOk);
     activadorEventosProductos();
 }
-function DelLineaOk()
+function DelColorOk()
 {
     var id = $(this)[0].name; 
-    alert(id);
-    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    //alert(id);
+    var request = {"Usuarios":"DelColor","CodColor":id};
     var jsonobj=JSON.stringify(request);
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
@@ -5278,7 +5258,7 @@ function DelLineaOk()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        verificarDelLinea(jsonObject);     
+                        verificarDelColor(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -5286,16 +5266,16 @@ function DelLineaOk()
                     }
                });
 }
-function verificarDelLinea(jsonObj)
+function verificarDelColor(jsonObj)
 {
-    if (jsonObj.DelLinea  ==="true")
+    if (jsonObj.DelColor  ==="true")
     {
-        alert("La Linea se ha borrado correctamente");
+        alert("El Color se ha borrado correctamente");
     }
     
     else
     {
-        alert("La Linea no se pudo Borrar");
+        alert("El Color no se pudo Borrar");
     }   
     HideConfirmAddLinea();
 }
@@ -5682,10 +5662,10 @@ function VerTalla(jsonObject)
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function DatosDelLinea()
+function DatosDelTallas()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var request = {"Usuarios":"DatosTallas","CodTalla":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -5695,7 +5675,7 @@ function DatosDelLinea()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        DelLinea(jsonObject);     
+                        DelTalla(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -5710,22 +5690,20 @@ function DatosDelLinea()
 //***********************                                                                 ***********************
 //***************************************************************************************************************
 
-function DelLinea(jsonObject)
+function DelTalla(jsonObject)
 {
-    var id = $(this)[0].name;
-    //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Talla</div>'+
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
-                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                                '<input type="button" value="Volver" class="button" id="NotDelTalla"/>'+
+                                '<input type="button" value="Borrar" class="button" id="OkDelTalla" name="' + jsonObject.cod_talla + '"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -5733,14 +5711,13 @@ function DelLinea(jsonObject)
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
-    $("#form_eliminar_linea").submit(DelLineaOk);
     activadorEventosProductos();
 }
-function DelLineaOk()
+function DelTallaOk()
 {
     var id = $(this)[0].name; 
-    alert(id);
-    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    //alert(id);
+    var request = {"Usuarios":"DelTalla","CodTalla":id};
     var jsonobj=JSON.stringify(request);
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
@@ -5752,7 +5729,7 @@ function DelLineaOk()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        verificarDelLinea(jsonObject);     
+                        verificarDelTalla(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -5760,16 +5737,16 @@ function DelLineaOk()
                     }
                });
 }
-function verificarDelLinea(jsonObj)
+function verificarDelTalla(jsonObj)
 {
-    if (jsonObj.DelLinea  ==="true")
+    if (jsonObj.DelTalla  ==="true")
     {
-        alert("La Linea se ha borrado correctamente");
+        alert("La Talla se ha borrado correctamente");
     }
     
     else
     {
-        alert("La Linea no se pudo Borrar");
+        alert("La Talla no se pudo Borrar");
     }   
     HideConfirmAddLinea();
 }
@@ -5780,7 +5757,6 @@ function HideConfirmAddLinea()
     $("#fadeDelItem").css({display: "none"});
     activadorEventosProductos();    
 }
-
 //*********************************************************************************************************
 //*********************************************************************************************************
 //***********************                                                           ***********************
@@ -6156,10 +6132,10 @@ function VerMaterial(jsonObject)
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function DatosDelLinea()
+function DatosDelMaterial()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosLineas","CodLinea":id};
+    var request = {"Usuarios":"DatosMateriales","Codigo":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -6169,7 +6145,7 @@ function DatosDelLinea()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        DelLinea(jsonObject);     
+                        DelMaterial(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -6184,22 +6160,21 @@ function DatosDelLinea()
 //***********************                                                                 ***********************
 //***************************************************************************************************************
 
-function DelLinea(jsonObject)
+function DelMaterial(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
     var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
                         '<table align="center">'+
-                        '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
-                                '<input type="button" value="Volver" class="button" id="NotDelLinea"/>'+
-                                '<input type="button" value="Eliminar" class="button" id="OkDelLinea" name="' + id + '"/>'+
+                                '<input type="button" value="Volver" class="button" id="NotDelMaterial"/>'+
+                                '<input type="button" value="Borrar" class="button" id="OkDelMaterial" name="' + jsonObject.codigo + '"/>'+
                             '</td>'+
                         '</table>'+
                      '</div>';
@@ -6207,14 +6182,13 @@ function DelLinea(jsonObject)
     $("#overDelItem").css({display: "block"});
     $("#overDelItem").html(codigoHTML);
     $("#fadeDelItem").css({display: "block"});
-    $("#form_eliminar_linea").submit(DelLineaOk);
     activadorEventosProductos();
 }
-function DelLineaOk()
+function DelMaterialOk()
 {
     var id = $(this)[0].name; 
     alert(id);
-    var request = {"Usuarios":"DelLinea","CodLinea":id};
+    var request = {"Usuarios":"DelMaterial","Codigo":id};
     var jsonobj=JSON.stringify(request);
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
@@ -6226,7 +6200,7 @@ function DelLineaOk()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        verificarDelLinea(jsonObject);     
+                        verificarDelMaterial(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -6234,16 +6208,16 @@ function DelLineaOk()
                     }
                });
 }
-function verificarDelLinea(jsonObj)
+function verificarDelMaterial(jsonObj)
 {
-    if (jsonObj.DelLinea  ==="true")
+    if (jsonObj.DelMaterial  ==="true")
     {
-        alert("La Linea se ha borrado correctamente");
+        alert("El Material se ha borrado correctamente");
     }
     
     else
     {
-        alert("La Linea no se pudo Borrar");
+        alert("El Material no se pudo Borrar");
     }   
     HideConfirmAddLinea();
 }
@@ -8725,7 +8699,7 @@ function verificarModUsuario(jsonObj)
         alert("El usuario no se pudo modificar");
     }   
     
-    seccionDatosPerfil();
+    seccionListado();
 }
 
 //**********************************************************************************
