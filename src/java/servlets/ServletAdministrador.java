@@ -290,6 +290,21 @@ public class ServletAdministrador extends HttpServlet
             JSONObject material = use.DatosMaterial(cod);
             out.print(material);
         }
+        
+        if (op.equals("Perfil"))
+        {   
+            JSONArray perf = new JSONArray();
+            perf = per.cargarPerfil();
+            out.print(perf);
+	}
+        
+        if (op.equals("DatosPerfil"))
+        {
+            String cod = String.valueOf(jsonObj.get("IdUsuario"));  
+            System.out.print(cod);
+            JSONObject perf = per.datosPerfil(cod);
+            out.print(perf);
+        }
 
         if (op.equals("AddUsuario"))
         {
@@ -1240,9 +1255,9 @@ public class ServletAdministrador extends HttpServlet
             }
         }
         
-        /*if (op.equals("ModPerfil"))
+        if (op.equals("ModPerfil"))
         {
-            String cod = String.valueOf(jsonObj.get("id_usuario"));
+            String cod = String.valueOf(jsonObj.get("IdUsuario"));
             System.out.print(cod);
             System.out.print(String.valueOf(jsonObj.get("Datos")));
             JSONObject objRes = new JSONObject();
@@ -1255,7 +1270,7 @@ public class ServletAdministrador extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (usr.ModificarUsuario(jsonObject, cod))
+                if (per.ModificarPerfil(jsonObject, this.IdUsuario, cod))
                 {
                     objRes.put("ModPerfil", "true");
                     out.print(objRes);
@@ -1272,7 +1287,7 @@ public class ServletAdministrador extends HttpServlet
             {
                 e.printStackTrace();
             }
-        }*/
+        }
     }
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException 

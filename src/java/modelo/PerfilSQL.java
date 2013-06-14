@@ -172,4 +172,25 @@ public class PerfilSQL
         }
         return Perfil;
     }
+     public boolean ModificarPerfil(JSONObject datos, String tipoUsuario, String id_usuario)
+    {
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Usuarios usr = new Usuarios("", String.valueOf(datos.get("nickname_usuario")), String.valueOf(datos.get("nombre_usuario")), String.valueOf(datos.get("apellidos_usuario")), String.valueOf(datos.get("cedula_usuario")), String.valueOf(datos.get("direccion_usuario")), String.valueOf(datos.get("telefono_usuario")), String.valueOf(datos.get("celular_usuario")), String.valueOf(datos.get("email_usuario")), String.valueOf(datos.get("password_usuario")), String.valueOf(datos.get("tipo_usuario")), "foto_usuario", String.valueOf(datos.get("fecha")),  String.valueOf(datos.get("fecha_cumpleanos")),  String.valueOf(datos.get("banco")),  String.valueOf(datos.get("tipo_cuenta_bancaria")),  String.valueOf(datos.get("numero_cuenta")),  String.valueOf(datos.get("otros_datos")),  String.valueOf(datos.get("id_ubicacion")));
+            String tsql;
+            tsql = "UPDATE usuarios SET  nickname_usuario='" + usr.getNickname() + "', nombre_usuario='" + usr.getNombres() +"', apellidos_usuario='" + usr.getApellidos() +"', cedula_usuario='" + usr.getCedula() + "', direccion_usuario='" + usr.getDireccion() + "', telefono_usuario='" + usr.getTelefono() + "', celular_usuario='" + usr.getCelular() + "', email_usuario='" + usr.getEmail() + "',password_usuario='" + usr.getPassword() + "', tipo_usuario='" + usr.getTipo() + "', foto_usuario='" + usr.getFoto() +"', fecha='" + usr.getFechaIngreso() + "', fecha_cumpleanos ='" + usr.getFechaCumple()+"', banco=" + usr.getBanco() + ", tipo_cuenta_bancaria=" + usr.getTipoCuenta() + ", numero_cuenta='" + usr.getNumCuenta()+"', otros_datos='" + usr.getOtrosDatos() + "', id_ubicacion=" + usr.getIdUbicacion() + " WHERE id_usuario = " + id_usuario + ";";            
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
 }

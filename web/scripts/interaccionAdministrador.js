@@ -365,7 +365,19 @@ function  activadorEventosProductos()
     hideAddMaterial=$("#NotAddMaterial");
     hideAddMaterial.click(HideConfirmAddMaterial);
 }
-
+function activadorEventosPerfil()
+{
+//********************************************************
+//** VARIABLES DE LAS OPCIONES DEL LISTADO DE PRODUCTOS **
+//********************************************************
+    var modificarA;
+    var PBorrarOk,volverProducto, vBorrarP, vHideDelP;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    modificarA=$(".ModPerfil");
+    modificarA.click(seccionDatosPerfil);
+    volverProducto=$("#volverAddProducto");
+    volverProducto.click(seccionListadoProductos);
+}
 //**********************************************************************************
 //**********************************************************************************
 //*************                                                *********************
@@ -8458,7 +8470,7 @@ function menuPerfil()
 function seccionDatosPerfil()
 {
 var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosPerfil","Id_usuario":id};
+    var request = {"Usuarios":"DatosPerfil","IdUsuario":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -8481,7 +8493,7 @@ var id = $(this)[0].id;
 *********************   FUNCION PARA MODIFICAR EL PERFIL  *************************
 *********************                                     *************************
 **********************************************************************************/
-function ModUsuario(jsonObject)
+function ModPerfil(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
                      '<div class="tabla">'+
@@ -8491,7 +8503,7 @@ function ModUsuario(jsonObject)
                         '</ul>'+
                         '<div class="tab_container">'+
                             '<div id="Personal" class="tab_content">'+
-                            '<form id="form_modificar_usuario"  enctype="multipart/form-data">'+
+                            '<form id="form_modificar_perfil"  enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="left">'+
                                   '<tr>'+
                                       '<td colspan="2" rowspan="10" align="center">'+
@@ -8616,7 +8628,7 @@ function ModUsuario(jsonObject)
                                     '</td>'+
                                   '</tr>'+
                                 '<tr>'+
-                                    '<td><input type="hidden" name="id_usuarioMod" id="id_usuarioMod" value="' + jsonObject.id_usuario + '" /></td>'+
+                                    '<td><input type="hidden" name="id_perfilMod" id="id_perfilMod" value="' + jsonObject.id_usuario + '" /></td>'+
                                 '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -8640,8 +8652,8 @@ function ModUsuario(jsonObject)
     $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
-    $("#form_modificar_usuario").submit(enviarDatosModUsuario);
-    activadorEventosUsuarios();
+    $("#form_modificar_perfil").submit(enviarDatosModPerfil);
+    activadorEventosPerfil();
 }
 
 //***************************************************************************************************************
@@ -8652,14 +8664,14 @@ function ModUsuario(jsonObject)
 //***************************************************************************************************************
 //***************************************************************************************************************
 
-function enviarDatosModUsuario(evento)
+function enviarDatosModPerfil(evento)
 {
     evento.preventDefault();
-    var id_usuario = $("#id_usuarioMod").val();
+    var id_usuario = $("#id_perfilMod").val();
     var datos_formulario = $(this).serializeArray();   
     var datos = JSON.stringify(SerializeToJson(datos_formulario));
     //alert(datos.toString());
-    var request = {"Usuarios":"ModUsuario","Datos":datos, "Id_usuario":id_usuario};
+    var request = {"Usuarios":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
     var jsonobj=JSON.stringify(request);
     //alert(jsonobj.toString());
     
@@ -8670,7 +8682,7 @@ function enviarDatosModUsuario(evento)
                     url: 'ServletAdministrador',
                     success: function(jsonObj)
                     {
-                        verificarModUsuario(jsonObj);
+                        verificarModPerfil(jsonObj);
                     },
                     error: function() 
                     {
@@ -8687,19 +8699,19 @@ function enviarDatosModUsuario(evento)
 //***********************************************************************************************************************
 //***********************************************************************************************************************
 
-function verificarModUsuario(jsonObj)
+function verificarModPerfil(jsonObj)
 {
-    if (jsonObj.ModUsuario  ==="true")
+    if (jsonObj.ModPerfil  ==="true")
     {
-        alert("El usuario se modificó correctamente");
+        alert("El perfil se modificó correctamente");
     }
     
     else
     {
-        alert("El usuario no se pudo modificar");
+        alert("El perfil no se pudo modificar");
     }   
     
-    seccionListado();
+    seccionDatosPerfil();
 }
 
 //**********************************************************************************
