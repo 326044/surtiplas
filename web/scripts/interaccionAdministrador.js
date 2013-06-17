@@ -1797,7 +1797,7 @@ function AddVisita()
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value=""/>'+
                                     '</td>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -1968,11 +1968,11 @@ function ModVisita(jsonObject)
                             '<form id="form_modificar_visita" enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '"/>'+
                                     '</td>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -1980,7 +1980,7 @@ function ModVisita(jsonObject)
                                   '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Usuario:</th>'+
+                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
                                     '<td>'+
                                     '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                       //'<option value="null"></option>'+
@@ -1990,7 +1990,7 @@ function ModVisita(jsonObject)
                                   '</tr>'+
                                   '<tr>'+
                                     '<td colspan="4" align="left">'+
-                                      'Datos Adicionales:<br>'+
+                                      'Datos Adicionales<br>'+
                                       '<textarea name="descripcion" cols="74" rows="6">' + jsonObject.descripcion + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
@@ -2132,20 +2132,20 @@ function VerVisita(jsonObject)
                             '<form action="" method="POST" id="form_crear_venta">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
                                     '</td>'+
                                   
-                                    '<td align="right" style="padding-right:5px;">Id Cliente:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Id Cliente</td>'+ 
                                     '<td><input type="text" name="cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                     '<td colspan="4" align="left">'+
-                                      'Datos Adicionales:<br>'+
+                                      'Datos Adicionales<br>'+
                                       '<textarea name="descripcion" cols="74" rows="6">' + jsonObject.descripcion + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
