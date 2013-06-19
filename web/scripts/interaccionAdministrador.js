@@ -1019,7 +1019,7 @@ function enviarDatosAddUsuario(evento)
     //alert(datos.toString());
     var request = {"Usuarios":"AddUsuario","Datos":datos};
     var jsonobj=JSON.stringify(request);
-    alert(jsonobj.toString());
+    //alert(jsonobj.toString());
     
     $.ajax({        
                 data: {administrador:jsonobj},
@@ -1675,8 +1675,9 @@ function seccionVisitas()
                                       '<br>'+
                                         '<table class="tbonita" align="center" id="tablaVisitas">'+
                                             '<tr align="left">'+
-                                                    '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
+                                                    '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                                                     '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                    '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                                     '<th>Id Visita</th>'+
                                                     '<th>Fecha</th>'+
                                                     '<th>Id Cliente</th>'+
@@ -1734,8 +1735,9 @@ function seccionVisitas()
     TablaVisitas = jsonArray;
     
     var codigoHTML = '<tr align="left">'+
-                        '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
+                        '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                         '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                        '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                         '<th>Id Visita</th>'+
                         '<th>Fecha</th>'+
                         '<th>Id Cliente</th>'+
@@ -2220,20 +2222,20 @@ function DelVisita(jsonObject)
                             '<form id="form_modificar_visita" enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
                                     '</td>'+
-                                    '<td align="right" style="padding-right:5px;">Id Cliente:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Id Cliente</td>'+ 
                                     '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<td colspan="4" align="left">'+ 
-                                      'Datos Adicionales:<br>'+
+                                      'Datos Adicionales<br>'+
                                       '<textarea name="descripcion" cols="74" rows="6" readonly="readonly">' + jsonObject.descripcion + '</textarea>'+
                                     '</td>'+
                                   '</tr>'+
@@ -2383,8 +2385,9 @@ function seccionViaticos(jsonArray)
                         '<br>'+
                         '<table class="tbonita" align="center" id="tablaViaticos">'+
                       '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
+                            '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2445,8 +2448,9 @@ function buscarViatico(evento)
     function tablaViaticos(jsonArray)
     {
         var codigoHTML = '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
+                            '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2499,13 +2503,13 @@ function AddViatico()
                         '<div class="tabla">'+
                               '<table align="center">'+
                                  '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                   '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="\n\"/>'+
                                     '</td>'+
                                     '</tr>'+
                                    '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Id Usuario:</th>'+
+                                   '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -2517,7 +2521,7 @@ function AddViatico()
                                   '<br>'+
                                   '<tr>'+
                                   '<table align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Concepto:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Concepto</th>'+
                                     '<td>'+ 
                                         '<select name="concepto" style="width:160px;">'+ 
                                             '<option value=""></option>'+ 
@@ -2527,16 +2531,16 @@ function AddViatico()
                                             '<option value="Urbanos">Otros</option>'+ 
                                         '</select>'+ 
                                     '</td>'+
-                                    '<td align="right" style="padding-right:5px;">Valor:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Valor</td>'+ 
                                     '<td><input type="text" name="valor" value="" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                      '<td>'+
                                         '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+
                                         '</select>'+
                                      '</td>'+
-                                        '<th align="right" style="padding-right:5px;">Ciudad:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                      '<td>'+
                                         '<select name="codMunicipio" style="width:165px;" class="municipios">'+
                                             //'<option value="null"></option>'+
@@ -2682,19 +2686,19 @@ function DatosModViatico()
 
 function ModViatico(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Viático</div>'+
                      '<div class="tabla">'+
                             '<div id="Viatic" class="tab_content">'+
                             '<form id="form_modificar_viatico" enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Fecha:</th>'+
+                                   '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '"/>'+
                                     '</td>'+
                                     '</tr>'+
                                    '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Id Usuario:</th>'+
+                                   '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -2706,7 +2710,7 @@ function ModViatico(jsonObject)
                                   '<br>'+
                                   '<tr>'+
                                   '<table align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Concepto:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Concepto</th>'+
                                     '<td>'+ 
                                         '<select name="concepto" style="width:160px;">'+ 
                                             '<option value=""></option>'+ 
@@ -2716,16 +2720,16 @@ function ModViatico(jsonObject)
                                             '<option value="Otros">Otros</option>'+ 
                                         '</select>'+ 
                                     '</td>'+
-                                    '<td align="right" style="padding-right:5px;">Valor:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Valor</td>'+ 
                                     '<td><input type="text" name="valor" value="' + jsonObject.valor + '" size="20" maxlength="10" required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                      '<td>'+
                                         '<select name="cod_departamento" class="deptos" style="width:160px;" onchange="cargarMunicipios()">'+
                                         '</select>'+
                                      '</td>'+
-                                        '<th align="right" style="padding-right:5px;">Ciudad:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                      '<td>'+
                                         '<select name="codMunicipio" style="width:165px;" class="municipios">'+
                                             //'<option value="null"></option>'+
@@ -2864,11 +2868,11 @@ function VerViatico(jsonObject)
                             '<form action="" method="POST" name="form_crear_venta">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Fecha:</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Fecha</td>'+ 
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</table>'+
@@ -2876,15 +2880,15 @@ function VerViatico(jsonObject)
                                   '<br>'+
                                   '<tr>'+
                                   '<table align="center">'+
-                                    '<td align="right" style="padding-right:5px;">Concepto:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Concepto</td>'+ 
                                     '<td><input type="text" name="concepto" value="' + jsonObject.concepto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<td align="right" style="padding-right:5px;">Total:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Total</td>'+ 
                                     '<td><input type="text" name="Total" value="' + jsonObject.valor + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Departamento:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Departamento</td>'+ 
                                     '<td><input type="text" name="departamento" value="' + jsonObject.nombre_depto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<td align="right" style="padding-right:5px;">Ciudad:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Ciudad</td>'+ 
                                     '<td><input type="text" name="ciudad" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -2947,17 +2951,17 @@ function DatosDelViatico()
 
 function DelViatico(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Eliminar Viatico</div>'+
+    var codigoHTML = '<div class="encabezado2">Eliminar Viático</div>'+
                      '<div class="tabla">'+
                          '<div id="Visit" class="tab_content">'+
                             '<form id="form_eliminar_viatico" enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Fecha:</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Fecha</td>'+ 
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Id Usuario:</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</table>'+
@@ -2965,15 +2969,15 @@ function DelViatico(jsonObject)
                                   '<br>'+
                                   '<tr>'+
                                   '<table align="center">'+
-                                    '<td align="right" style="padding-right:5px;">Concepto:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Concepto</td>'+ 
                                     '<td><input type="text" name="concepto" value="' + jsonObject.concepto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<td align="right" style="padding-right:5px;">Total:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Total</td>'+ 
                                     '<td><input type="text" name="Total" value="' + jsonObject.valor + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Departamento:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Departamento</td>'+ 
                                     '<td><input type="text" name="departamento" value="' + jsonObject.nombre_depto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<td align="right" style="padding-right:5px;">Ciudad:</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Ciudad</td>'+ 
                                     '<td><input type="text" name="ciudad" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -3008,10 +3012,10 @@ function ConfirmDelViatico()
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Viatico</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Viático</div>'+
                         '<table align="center">'+
                             '<tr>'+
-                              '<th>Está seguro que desea borrar el Viatico?</th>'+
+                              '<th>Está seguro que desea borrar el Viático?</th>'+
                             '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Si" class="button" id="OkDelViatico" name="' + id + '"/>'+
@@ -3053,12 +3057,12 @@ function verificarDelViatico(jsonObj)
 {
     if (jsonObj.DelViatico  ==="true")
     {
-        alert("El Viatico se ha borrado correctamente");
+        alert("El Viático se ha borrado correctamente");
     }
     
     else
     {
-        alert("El Viatico no se pudo borrar");
+        alert("El Viático no se pudo borrar");
     }   
     
     seccionViaticos();
@@ -3542,8 +3546,9 @@ function cargarListadoProducto(jsonArray)
                                '<tr>'+
                                '<table class="tbonita">'+
                                  '<tr align="center">'+
-                                   '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
+                                   '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
                                    '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                    '<th>Id Producto</th>'+
                                    '<th>Nombre</th>'+
                                    '<th>Cantidad</th>'+
@@ -3595,7 +3600,7 @@ function AddProducto()
     var codigoHTML = '<div class="encabezado2">Adicionar Producto</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Informacion">Informaciòn</a></li>'+
+                            '<li><a href="#Informacion">Información</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
                             '<div id="Informacion" class="tab_content">'+
@@ -3621,7 +3626,7 @@ function AddProducto()
                                       '<td><input type="text" name="nombre" value="" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                      '<th align="left" style="padding-right:5px;">Linea de Producciòn</th>'+
+                                      '<th align="left" style="padding-right:5px;">Linea de Producción</th>'+
                                     '<td>'+
                                         '<select name="nombre_linea" style="width:165px;" class="lines">'+
                                           //'<option value="null"></option>'+
@@ -3661,7 +3666,7 @@ function AddProducto()
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Còdigo de Barras</th>'+
+                                    '<th align="right" style="padding-right:5px;">Código de Barras</th>'+
                                     '<td><input type="text" name="codigo_barras" value="" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -3669,15 +3674,15 @@ function AddProducto()
                                     '<td><input type="text" name="cantidad" value="" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Costo</th>'+
                                     '<td><input type="text" name="precio_costo" value="" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Venta</th>'+
                                     '<td><input type="text" name="precio_venta" value="" size="20" maxlength="10"/></td>'+
                                     '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Descuento</th>'+
                                     '<td><input type="text" name="precio_descuento" value="" size="20" maxlength="12"/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -3859,7 +3864,7 @@ function ModProducto(jsonObject)
     var codigoHTML = '<div class="encabezado2">Modificar Producto</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Informacion">Informaciòn</a></li>'+
+                            '<li><a href="#Informacion">Información</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
                             '<div id="Informacion" class="tab_content">'+
@@ -3925,7 +3930,7 @@ function ModProducto(jsonObject)
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Còdigo de Barras</th>'+
+                                    '<th align="right" style="padding-right:5px;">Código de Barras</th>'+
                                     '<td><input type="text" name="codigo_barras" value="' + jsonObject.codigo_barras + '" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -3933,15 +3938,15 @@ function ModProducto(jsonObject)
                                     '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Costo</th>'+
                                     '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Venta</th>'+
                                     '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10"/></td>'+
                                     '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Precio de Descuento</th>'+
                                     '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -4243,19 +4248,19 @@ function DelProducto(jsonObject)
                                         '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Talla:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Talla</th>'+
                                         '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Costo</th>'+
                                         '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Venta</th>'+
                                         '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                         '</tr>'+
                                         '<tr>'+
-                                          '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                          '<th align="right" style="padding-right:5px;">Precio de Descuento</th>'+
                                           '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                         '</tr>'+
                                       '</table>'+
@@ -4393,12 +4398,13 @@ function seccionListadolineas()
 
 function cargarListadolineas(jsonArray, id)
 {
-    var codigoHTML = '<div class="encabezado2">Listado de lineas de Produccion</div>'+
+    var codigoHTML = '<div class="encabezado2">Listado de lineas de Producción</div>'+
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Nombre</th>'+
                          '</tr>';
@@ -4463,7 +4469,7 @@ function AddLinea()
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+    var codigoHTML = '<div class="encabezado2">Adicionar Linea</div>'+
                         '<table align="center">'+
                             '<form id="form_crear_linea"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
@@ -4571,7 +4577,7 @@ function ModLinea(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Modificar Viatico</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Linea</div>'+
                      '<div class="tabla">'+
                             '<form id="form_modificar_linea"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
@@ -4702,7 +4708,7 @@ function VerLinea(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Linea</div>'+
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
@@ -4761,7 +4767,7 @@ function DatosDelLinea()
 
 function DelLinea(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
                         '<table align="center">'+
                             '<tr align="center">'+
                                 '<th align="right" style="padding-right:5px;">Código</th>'+
@@ -4869,8 +4875,9 @@ function cargarListadoColores(jsonArray, id)
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addColor"/></th>'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addColor"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Color</th>'+
                             '<th>Color</th>'+
                          '</tr>';
@@ -5341,8 +5348,9 @@ function cargarListadoTallas(jsonArray, id)
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddTalla"/></th>'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddTalla"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Talla</th>'+
                             '<th>Talla</th>'+
                          '</tr>';
@@ -5811,8 +5819,9 @@ function cargarMateriales(jsonArray, id)
                      '<div class="tabla">'+
                         '<table class="tbonita">'+
                           '<tr align="left">'+
-                            '<th colspan="2"><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddMaterial"/></th>'+
+                            '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddMaterial"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Material</th>'+
                          '</tr>';
