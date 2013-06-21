@@ -2474,8 +2474,6 @@ function buscarViatico(evento)
             codigoHTML+=                   '</tr>';
             
     }
-
-
     
     $("#valorTotalViaticos").val(jsonArray[i].valor_total);
     $("#tablaViaticos").html(codigoHTML);
@@ -5123,7 +5121,7 @@ function enviarDatosModColor(evento)
 
 function verificarModColor(jsonObj)
 {
-    if (jsonObj.ModLinea  ==="true")
+    if (jsonObj.ModColor==="true")
     {
         alert("El Color se modificó correctamente");
     }
