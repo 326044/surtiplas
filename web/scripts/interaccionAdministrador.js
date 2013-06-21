@@ -5414,7 +5414,7 @@ function AddTalla()
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+    var codigoHTML = '<div class="encabezado2">Adicionar Talla</div>'+
                         '<table align="center">'+
                             '<form id="form_crear_talla"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
@@ -6124,7 +6124,7 @@ function VerMaterial(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Visualizar Tallas</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Material</div>'+
                         '<table align="center">'+
                         '<form id=""  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
@@ -6185,7 +6185,7 @@ function DelMaterial(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Material</div>'+
                         '<table align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
@@ -6642,7 +6642,7 @@ function DatosModClientes()
 
 function ModCliente(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Cliente</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Datos Personales</a></li>'+
@@ -8096,7 +8096,7 @@ function DatosModDevolucion()
 
 function ModDevolucion(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Prdido</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Devolución</div>'+
                      '<div class="tabla">'+
                      '<form id="form_modificar_devolucion"  enctype="multipart/form-data">'+
                             '<div id="Dev" class="tab_content">'+
@@ -8478,18 +8478,18 @@ function menuPerfil()
 
 function seccionDatosPerfil()
 {
-var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosPerfil","IdUsuario":id};
+    var id = $(this)[0].id;
+    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
     var jsonobj=JSON.stringify(request);
-    
     $.ajax({
+        
                     data: {administrador:jsonobj},
                     dataType: 'json',
                     url: 'ServletAdministrador',
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        ModUsuario(jsonObject);     
+                        ModPerfil(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -8504,7 +8504,7 @@ var id = $(this)[0].id;
 **********************************************************************************/
 function ModPerfil(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
+    var codigoHTML = '<div class="encabezado2">Perfil</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
@@ -8662,7 +8662,7 @@ function ModPerfil(jsonObject)
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_perfil").submit(enviarDatosModPerfil);
-    activadorEventosPerfil();
+    activadorEventosUsuarios();
 }
 
 //***************************************************************************************************************
@@ -8675,16 +8675,10 @@ function ModPerfil(jsonObject)
 
 function enviarDatosModPerfil(evento)
 {
-    evento.preventDefault();
-    var id_usuario = $("#id_perfilMod").val();
-    var datos_formulario = $(this).serializeArray();   
-    var datos = JSON.stringify(SerializeToJson(datos_formulario));
-    //alert(datos.toString());
-    var request = {"Usuarios":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
+    var request = {"Vendedores":"Perfil"};
     var jsonobj=JSON.stringify(request);
-    //alert(jsonobj.toString());
+    $.ajax({
     
-    $.ajax({        
                     data: {administrador:jsonobj},
                     type: 'POST',
                     dataType: 'json',
