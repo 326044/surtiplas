@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modelo.clientes1SQL;
 import modelo.ColorSQL;
 import modelo.ColoresSQL;
@@ -73,6 +74,8 @@ public class ServletAdministrador extends HttpServlet
         ColorSQL cl=new ColorSQL();
         TipoProductoSQL ti=new TipoProductoSQL();
 
+        HttpSession session = request.getSession(true);
+        session.setMaxInactiveInterval(20 * 60);
         
         if (op.equals("Listado"))
         {
@@ -300,10 +303,9 @@ public class ServletAdministrador extends HttpServlet
         
         if (op.equals("DatosPerfil"))
         {
-            String cod = String.valueOf(jsonObj.get("IdUsuario"));  
-            System.out.print(cod);
-            JSONObject perf = per.datosPerfil(cod);
-            out.print(perf);
+            System.out.print(String.valueOf(session.getAttribute("IdUsuario")));
+            JSONObject vendedor = usr.datosUsuario(String.valueOf(session.getAttribute("IdUsuario")));
+            out.print(vendedor);
         }
 
         if (op.equals("AddUsuario"))
