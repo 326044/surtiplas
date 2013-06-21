@@ -5414,7 +5414,7 @@ function AddTalla()
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
+    var codigoHTML = '<div class="encabezado2">Adicionar Talla</div>'+
                         '<table align="center">'+
                             '<form id="form_crear_talla"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
@@ -6124,7 +6124,7 @@ function VerMaterial(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Visualizar Tallas</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Material</div>'+
                         '<table align="center">'+
                         '<form id=""  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
@@ -6185,7 +6185,7 @@ function DelMaterial(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Material</div>'+
                         '<table align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Código</th>'+
@@ -6642,7 +6642,7 @@ function DatosModClientes()
 
 function ModCliente(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Usuario</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Cliente</div>'+
                      '<div class="tabla">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Datos Personales</a></li>'+
@@ -8096,7 +8096,7 @@ function DatosModDevolucion()
 
 function ModDevolucion(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Modificar Prdido</div>'+
+    var codigoHTML = '<div class="encabezado2">Modificar Devolución</div>'+
                      '<div class="tabla">'+
                      '<form id="form_modificar_devolucion"  enctype="multipart/form-data">'+
                             '<div id="Dev" class="tab_content">'+
