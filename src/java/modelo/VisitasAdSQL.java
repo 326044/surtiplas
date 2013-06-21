@@ -238,6 +238,7 @@ public class VisitasAdSQL
                     else
                     {
                         tsql = "SELECT * FROM visitas WHERE id_usuario='"+ id_usuario +"';";
+                        System.out.printf(tsql.toString());
                     }
                 }                 
             }
