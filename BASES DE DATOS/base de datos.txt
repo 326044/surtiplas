@@ -132,10 +132,10 @@ precio_venta DOUBLE,
 precio_descuento DOUBLE,
 codigo_barras VARCHAR(20),
 cod_tipo_producto INT NOT NULL,
-cod_color INT AUTO_INCREMENT NOT NULL,
-cod_talla INT AUTO_INCREMENT NOT NULL,
-cod_linea INT AUTO_INCREMENT NOT NULL,
-codigo INT AUTO_INCREMENT NOT NULL,
+cod_color INT NOT NULL,
+cod_talla INT NOT NULL,
+cod_linea INT NOT NULL,
+codigo INT NOT NULL,
 PRIMARY KEY(codigo_producto)
 )ENGINE=InnoDB;
 
@@ -191,7 +191,6 @@ banco VARCHAR(20),
 tipo_cuenta_bancaria VARCHAR(20),
 numero_cuenta VARCHAR(15),
 otros_datos TEXT,
-id_ubicacion INT NOT NULL,
 PRIMARY KEY(id_usuario)
 )ENGINE=InnoDB;
 
@@ -294,19 +293,19 @@ ADD FOREIGN KEY(cod_tipo_producto)
 REFERENCES tipo_producto(cod_tipo_producto) ON UPDATE CASCADE;
 
 ALTER TABLE productos
-ADD FOREING KEY(cod_color)
+ADD FOREIGN KEY(cod_color)
 REFERENCES colores(cod_color) ON UPDATE CASCADE;
 
 ALTER TABLE productos
-ADD FOREING KEY(cod_talla)
+ADD FOREIGN KEY(cod_talla)
 REFERENCES tallas(cod_talla) ON UPDATE CASCADE;
 
 ALTER TABLE productos
-ADD FOREING KEY(cod_linea)
+ADD FOREIGN KEY(cod_linea)
 REFERENCES linea_produccion(cod_linea) ON UPDATE CASCADE;
 
 ALTER TABLE productos
-ADD FOREING KEY(codigo)
+ADD FOREIGN KEY(codigo)
 REFERENCES material(codigo) ON UPDATE CASCADE;
 
 
@@ -318,11 +317,6 @@ REFERENCES clientes(id_cliente) ON UPDATE CASCADE;
 ALTER TABLE quejas
 ADD FOREIGN KEY(id_usuario)
 REFERENCES usuarios(id_usuario) ON UPDATE CASCADE;
-
-/*CREACION DE LAS LLAVES FORANEAS PARA usuarios*/
-ALTER TABLE usuarios
-ADD FOREIGN KEY(id_ubicacion)
-REFERENCES ubicacion_geografica(id_ubicacion) ON UPDATE CASCADE;
 
 /*CREACION DE LAS LLAVES FORANEAS PARA viaticos*/
 ALTER TABLE viaticos
@@ -1492,3 +1486,32 @@ INSERT INTO  `surtiplas`.`tipo_producto`
 (`cod_tipo_producto`,`nombre_tipo_producto`)
 VALUES 
 (DEFAULT , 'abrigos'),(DEFAULT ,'carpas');
+
+/*Creamos el usuario administrador*/
+INSERT INTO `surtiplas`.`usuarios` (
+ `id_usuario` ,
+`nickname_usuario` ,
+`nombre_usuario` ,
+`apellidos_usuario` ,
+`cedula_usuario` ,
+`direccion_usuario` ,
+`telefono_usuario` ,
+`celular_usuario` ,
+`email_usuario` ,
+`password_usuario` ,
+`tipo_usuario` ,
+`foto_usuario` ,
+`fecha` ,
+`fecha_cumpleanos` ,
+`banco` ,
+`tipo_cuenta_bancaria` ,
+`numero_cuenta` ,
+`otros_datos` 
+)
+VALUES (
+ NULL , 'a', 'Administrador', 'Administrador', '1', 'Administrador', '123', '123', NULL , 'a', 'A', NULL , NULL , NULL , NULL , NULL , NULL , NULL),
+(NULL , 'v', 'Vendedor', 'Vendedor', '1', '1', '1', '1', NULL , 'v', 'V', NULL , NULL , NULL , NULL , NULL , NULL , NULL 
+), 
+(NULL , 'g', 'Gerente', 'Gerente', '1', NULL , NULL , NULL , NULL , 'g', 'G', NULL , NULL , NULL , NULL , NULL , NULL , NULL);
+
+
