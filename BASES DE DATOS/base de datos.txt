@@ -1,4 +1,4 @@
-/*Eliminar la base de datos*/
+﻿/*Eliminar la base de datos*/
 DROP DATABASE surtiplas;
 
 /*Crear la base de datos */
@@ -39,14 +39,6 @@ color VARCHAR(11),
 PRIMARY KEY(cod_color)
 )ENGINE=InnoDB;
 
-/*Crear Tabla Coloresprod*/
-CREATE TABLE coloresprod(
-id_coloresProd INT AUTO_INCREMENT NOT NULL,
-cod_color INT NOT NULL,
-codigo_producto INT NOT NULL,
-PRIMARY KEY(id_coloresProd)
-)ENGINE=InnoDB;
-
 /*Crear tabla Departamentos*/
 CREATE TABLE departamentos(
 cod_departamento INT AUTO_INCREMENT NOT NULL,
@@ -69,27 +61,11 @@ nombre_linea VARCHAR(25) NOT NULL,
 PRIMARY KEY(cod_linea)
 )ENGINE=InnoDB;
 
-/*Crear tabla lineaprod*/
-CREATE TABLE lineaprod(
-id_lineaprod INT AUTO_INCREMENT NOT NULL,
-cod_linea INT  NOT NULL,
-codigo_producto INT  NOT NULL,
-PRIMARY KEY(id_lineaprod)
-)ENGINE=InnoDB;
-
 /*Crear table Material*/
 CREATE TABLE material(
 codigo INT AUTO_INCREMENT NOT NULL,
 material VARCHAR(40),
 PRIMARY KEY(codigo)
-)ENGINE=InnoDB;
-
-/*Crear tabla Materialprod*/
-CREATE TABLE materialprod(
-id_materialProd INT AUTO_INCREMENT NOT NULL,
-codigo INT NOT NULL,
-codigo_producto INT NOT NULL,
-PRIMARY KEY(id_materialProd)
 )ENGINE=InnoDB;
 
 /*Crear tabla municipios*/
@@ -156,6 +132,10 @@ precio_venta DOUBLE,
 precio_descuento DOUBLE,
 codigo_barras VARCHAR(20),
 cod_tipo_producto INT NOT NULL,
+cod_color INT AUTO_INCREMENT NOT NULL,
+cod_talla INT AUTO_INCREMENT NOT NULL,
+cod_linea INT AUTO_INCREMENT NOT NULL,
+codigo INT AUTO_INCREMENT NOT NULL,
 PRIMARY KEY(codigo_producto)
 )ENGINE=InnoDB;
 
@@ -174,14 +154,6 @@ CREATE TABLE tallas(
 cod_talla INT AUTO_INCREMENT NOT NULL,
 talla VARCHAR(20),
 PRIMARY KEY(cod_talla)
-)ENGINE=InnoDB;
-
-/*Crear tabla tallasprod */
-CREATE TABLE tallasprod(
-id_tallasProd INT AUTO_INCREMENT NOT NULL,
-cod_talla INT NOT NULL,
-codigo_producto INT NOT NULL,
-PRIMARY KEY(id_tallasProd)
 )ENGINE=InnoDB;
 
 /*Crear tabla tipo_producto */
@@ -262,15 +234,6 @@ ALTER TABLE clientes
 ADD FOREIGN KEY(id_ubicacion)
 REFERENCES ubicacion_geografica(id_ubicacion) ON UPDATE CASCADE;
 
-/*CREACION DE LAS LLAVES FORANEAS PARA coloresprod*/
-ALTER TABLE coloresprod
-ADD FOREIGN KEY(cod_color)
-REFERENCES colores(cod_color) ON UPDATE CASCADE;
-
-ALTER TABLE coloresprod
-ADD FOREIGN KEY(codigo_producto)
-REFERENCES productos(codigo_producto) ON UPDATE CASCADE;
-
 /*CREACION DE LAS LLAVES FORANEAS PARA devolucion*/
 ALTER TABLE devolucion
 ADD FOREIGN KEY(id_cliente)
@@ -283,24 +246,6 @@ REFERENCES productos(codigo_producto) ON UPDATE CASCADE;
 ALTER TABLE devolucion
 ADD FOREIGN KEY(id_usuario)
 REFERENCES usuarios(id_usuario) ON UPDATE CASCADE;
-
-/*CREACION DE LAS LLAVES FORANEAS PARA lineaprod*/
-ALTER TABLE lineaprod
-ADD FOREIGN KEY(cod_linea)
-REFERENCES linea_produccion(cod_linea) ON UPDATE CASCADE;
-
-ALTER TABLE lineaprod
-ADD FOREIGN KEY(codigo_producto)
-REFERENCES productos (codigo_producto) ON UPDATE CASCADE;
-
-/*CREACION DE LAS LLAVES FORANEAS PARA materialprod*/
-ALTER TABLE materialprod
-ADD FOREIGN KEY(codigo)
-REFERENCES material(codigo) ON UPDATE CASCADE;
-
-ALTER TABLE materialprod
-ADD FOREIGN KEY(codigo_producto)
-REFERENCES productos(codigo_producto) ON UPDATE CASCADE;
 
 /*CREACION DE LAS LLAVES FORANEAS PARA munucipios*/
 ALTER TABLE municipios
@@ -348,6 +293,23 @@ ALTER TABLE productos
 ADD FOREIGN KEY(cod_tipo_producto)
 REFERENCES tipo_producto(cod_tipo_producto) ON UPDATE CASCADE;
 
+ALTER TABLE productos
+ADD FOREING KEY(cod_color)
+REFERENCES colores(cod_color) ON UPDATE CASCADE;
+
+ALTER TABLE productos
+ADD FOREING KEY(cod_talla)
+REFERENCES tallas(cod_talla) ON UPDATE CASCADE;
+
+ALTER TABLE productos
+ADD FOREING KEY(cod_linea)
+REFERENCES linea_produccion(cod_linea) ON UPDATE CASCADE;
+
+ALTER TABLE productos
+ADD FOREING KEY(codigo)
+REFERENCES material(codigo) ON UPDATE CASCADE;
+
+
 /*CREACION DE LAS LLAVES FORANEAS PARA quejas*/
 ALTER TABLE quejas
 ADD FOREIGN KEY(id_cliente)
@@ -356,15 +318,6 @@ REFERENCES clientes(id_cliente) ON UPDATE CASCADE;
 ALTER TABLE quejas
 ADD FOREIGN KEY(id_usuario)
 REFERENCES usuarios(id_usuario) ON UPDATE CASCADE;
-
-/*CREACION DE LAS LLAVES FORANEAS PARA tallasprod*/
-ALTER TABLE tallasprod
-ADD FOREIGN KEY(cod_talla)
-REFERENCES tallas(cod_talla) ON UPDATE CASCADE;
-
-ALTER TABLE tallasprod
-ADD FOREIGN KEY(codigo_producto)
-REFERENCES productos(codigo_producto) ON UPDATE CASCADE;
 
 /*CREACION DE LAS LLAVES FORANEAS PARA usuarios*/
 ALTER TABLE usuarios
@@ -1539,87 +1492,3 @@ INSERT INTO  `surtiplas`.`tipo_producto`
 (`cod_tipo_producto`,`nombre_tipo_producto`)
 VALUES 
 (DEFAULT , 'abrigos'),(DEFAULT ,'carpas');
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-INSERT INTO  `surtiplas`.`productos` (
-`codigo_producto` ,
-`nombre` ,
-`foto` ,
-`cantidad` ,
-`precio_costo` ,
-`precio_venta` ,
-`precio_descuento` ,
-`codigo_barras` ,
-`cod_tipo_producto`
-)
-VALUES (
-NULL ,  'carpa',  'd',  '150',  '255',  '534',  '2154',  '1225545',  '1'
-);
-=======
-/*Usuario tipo Administrador*/
-INSERT INTO `surtiplas`.`usuarios` (`id_usuario`, `nickname_usuario`, `nombre_usuario`, `apellidos_usuario`, `cedula_usuario`, `direccion_usuario`, `telefono_usuario`, `celular_usuario`, `email_usuario`, `password_usuario`, `tipo_usuario`, `foto_usuario`, `fecha`, `fecha_cumpleanos`, `banco`, `tipo_cuenta_bancaria`, `numero_cuenta`, `otros_datos`, `id_ubicacion`) VALUES (NULL, 'a', 'David', 'Jaramillo', '9512110470', 'Mz11', '326', '312', 'cdg@hot.com', 'a', 'A', NULL, '2013-05-24', '2013-05-23', 'Bancafé', 'Ahorros', '4224564874', 'Área Administrativa', '1');
->>>>>>> branch 'master' of https://github.com/326044/surtiplas.git
-=======
-/*Usuario tipo Administrador*/
-INSERT INTO  `surtiplas`.`usuarios` (
-`id_usuario` ,
-`nickname_usuario` ,
-`nombre_usuario` ,
-`apellidos_usuario` ,
-`cedula_usuario` ,
-`direccion_usuario` ,
-`telefono_usuario` ,
-`celular_usuario` ,
-`email_usuario` ,
-`password_usuario` ,
-`tipo_usuario` ,
-`foto_usuario` ,
-`fecha` ,
-`fecha_cumpleanos` ,
-`banco` ,
-`tipo_cuenta_bancaria` ,
-`numero_cuenta` ,
-`otros_datos` ,
-`id_ubicacion`
-)
-VALUES (
-NULL ,  'a',  'David',  'Jaramillo',  '9512110470',  'Mz11',  '326',  '312',  'cdg@hot.com',  'a',  'A', NULL ,  '2013-05-24',  '2013-05-23',  'Bancafé',  'Ahorros',  '4224564874',  'Área Administrativa',  '1'
-);
-
-INSERT INTO  `surtiplas`.`usuarios` (
-`id_usuario` ,
-`nickname_usuario` ,
-`nombre_usuario` ,
-`apellidos_usuario` ,
-`cedula_usuario` ,
-`direccion_usuario` ,
-`telefono_usuario` ,
-`celular_usuario` ,
-`email_usuario` ,
-`password_usuario` ,
-`tipo_usuario` ,
-`foto_usuario` ,
-`fecha` ,
-`fecha_cumpleanos` ,
-`banco` ,
-`tipo_cuenta_bancaria` ,
-`numero_cuenta` ,
-`otros_datos` ,
-`id_ubicacion`
-)
-VALUES (
-NULL ,  'v',  'v',  'v',  '21',  '3512',  '231',  '213',  'dv1',  'v',  'V',  'vdf',  '2013-05-23',  '2013-05-23',  'dfsd',  'sd',  'a',  'df',  '1'
-);
-
-/*Ubicacion Geografica*/
-INSERT INTO  `surtiplas`.`ubicacion_geografica` (
-`id_ubicacion` ,
-`latitud` ,
-`longitud`
-)
-VALUES (
-NULL ,  '0.999999',  '0.512566'
-);
-
->>>>>>> branch 'master' of https://github.com/326044/surtiplas.git
