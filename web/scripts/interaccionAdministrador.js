@@ -1626,7 +1626,7 @@ function seccionVisitas()
                                 '<form action="" method="POST" id="form_buscar_Visitas">'+
                                     '<table align="center" border="0" align="left">'+
                                         '<tr>'+ 
-                                             '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                             '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                                 '<td>'+
                                                 '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                                   //'<option value="null"></option>'+
@@ -1660,8 +1660,8 @@ function seccionVisitas()
                                                     '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                                     '<th>Id Visita</th>'+
                                                     '<th>Fecha</th>'+
-                                                    '<th>Id Cliente</th>'+
-                                                    '<th>Id Usuario</th>'+
+                                                    '<th>Cliente</th>'+
+                                                    '<th>Usuario</th>'+
                                             '</tr>'+
                                         '</div>';
     $("#datos").html(codigoHTML);
@@ -1720,8 +1720,8 @@ function seccionVisitas()
                         '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                         '<th>Id Visita</th>'+
                         '<th>Fecha</th>'+
-                        '<th>Id Cliente</th>'+
-                        '<th>Id Usuario</th>'+
+                        '<th>Cliente</th>'+
+                        '<th>Usuario</th>'+
                     '</tr>';
         
     var i;    
@@ -1779,7 +1779,7 @@ function AddVisita()
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value=""/>'+
                                     '</td>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<th align="left" style="padding-left:5px;">Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -1787,7 +1787,7 @@ function AddVisita()
                                   '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                     '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                       //'<option value="null"></option>'+
@@ -1954,7 +1954,7 @@ function ModVisita(jsonObject)
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '"/>'+
                                     '</td>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<th align="left" style="padding-left:5px;">Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -1962,7 +1962,7 @@ function ModVisita(jsonObject)
                                   '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                     '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                       //'<option value="null"></option>'+
@@ -2119,11 +2119,11 @@ function VerVisita(jsonObject)
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
                                     '</td>'+
                                   
-                                    '<td align="right" style="padding-right:5px;">Id Cliente</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Cliente</td>'+ 
                                     '<td><input type="text" name="cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                     '<td colspan="4" align="left">'+
@@ -2206,11 +2206,11 @@ function DelVisita(jsonObject)
                                     '<td>'+
                                       '<input id="date_field9" type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly"/>'+
                                     '</td>'+
-                                    '<td align="right" style="padding-right:5px;">Id Cliente</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Cliente</td>'+ 
                                     '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
+                                    '<td align="right" style="padding-right:5px;">Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -2487,7 +2487,7 @@ function AddViatico()
                                     '</td>'+
                                     '</tr>'+
                                    '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                   '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -2676,7 +2676,7 @@ function ModViatico(jsonObject)
                                     '</td>'+
                                     '</tr>'+
                                    '<tr>'+
-                                   '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                   '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -2850,7 +2850,7 @@ function VerViatico(jsonObject)
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</table>'+
@@ -2939,7 +2939,7 @@ function DelViatico(jsonObject)
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                  '<td align="right" style="padding-right:5px;">Id Usuario</td>'+ 
+                                  '<td align="right" style="padding-right:5px;">Usuario</td>'+ 
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</table>'+
@@ -3240,7 +3240,7 @@ function cargarcomboClient(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var d = 0; d < jsonArray.length; d++)
     {
-        codigoHTML += '<option value="'+ jsonArray[d].id_cliente +'">'+ jsonArray[d].id_cliente +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[d].id_cliente +'">'+ jsonArray[d].nombre +'</option>';
     }
     
     $('.clients').html(codigoHTML);   
@@ -6279,7 +6279,7 @@ function cargarListadoClientes(jsonArray)
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="ACliente"/></th>'+
                                    '<th><a href="ServletInformes?informe=reporteClientesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                    '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                   '<th>Id Cliente</th>'+
+                                   '<th>Cliente</th>'+
                                    '<th>Nombre</th>'+
                                    '<th>Apellido</th>'+
                                    '<th>Telefono</th>'+
@@ -6416,7 +6416,7 @@ function AddCliente()
                                             //'<option value="null"></option>'+
                                         '</select>'+
                                      '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -6709,7 +6709,7 @@ function ModCliente(jsonObject)
                                             //'<option value="null"></option>'+
                                         '</select>'+
                                      '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                      '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                             //'<option value="null"></option>'+
@@ -6938,7 +6938,7 @@ function VerCliente(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td><input type="text" name="codMunicipio" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7091,7 +7091,7 @@ function DelCliente(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td><input type="text" name="codMunicipio" value="' + jsonObject.nombreMunicipio + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7246,7 +7246,7 @@ function cargarPedidos(jsonArray)
                             '<th><a href="ServletInformes?informe=reportePedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Id Pedido</th>'+
-                            '<th>Id Cliente</th>'+
+                            '<th>Cliente</th>'+
                             '<th>Fecha</th>'+
                             '<th>Hora</th>'+
                             '<th>Valor Total</th>'+
@@ -7299,13 +7299,13 @@ function AddPedido()
                                 '<br>'+
                                 '<form id="form_crear_pedido"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                  '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                  '<th align="left" style="padding-left:5px;">Cliente:</th>'+
                                       '<td>'+
                                         '<select name="id_cliente" style="width:165px;" class="clients">'+
                                           //'<option value="null"></option>'+
                                          '</select>'+
                                       '</td>'+ 
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                           //'<option value="null"></option>'+
@@ -7452,13 +7452,13 @@ function ModPedido(jsonObject)
                                 '<br>'+
                                 '<form id="form_modificar_pedido"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                  '<th align="left" style="padding-left:5px;">Id Cliente:</th>'+
+                                  '<th align="left" style="padding-left:5px;">Cliente:</th>'+
                                       '<td>'+
                                         '<select name="id_cliente" style="width:165px;" class="clients">'+
                                           //'<option value="null"></option>'+
                                          '</select>'+
                                       '</td>'+ 
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                         '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                           //'<option value="null"></option>'+
@@ -7612,9 +7612,9 @@ function VerPedido(jsonObject)
                                 '<br>'+
                                 '<form id="form_ver_pedido"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<th align="right" style="padding-right:5px;">Cliente</th>'+
                                     '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7696,9 +7696,9 @@ function DelPedido(jsonObject)
                                 '<br>'+
                                 '<form id="form_ver_pedido"  enctype="multipart/form-data">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<th align="right" style="padding-right:5px;">Cliente</th>'+
                                     '<td><input type="text" name="id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7879,9 +7879,9 @@ function cargarDevoluciones(jsonArray)
                             '<th><img src="images/b_insrow.png" title="Agregar" id="AddDevolucion"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteDevolucionesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th>Id cliente</th>'+
+                            '<th>cliente</th>'+
                             '<th>Codigo Producto</th>'+
-                            '<th>Id Usuario</th>'+
+                            '<th>Usuario</th>'+
                             '<th>Id Devolucion</th>'+
                             '<th>Causa Devolucion</th>'+
                          '</tr>';
@@ -7929,7 +7929,7 @@ function AddDevolucion()
                             '<div id="Dev" class="tab_content">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<th align="left" style="padding-left:5px;">Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -7943,7 +7943,7 @@ function AddDevolucion()
                                   '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                     '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                       //'<option value="null"></option>'+
@@ -8080,7 +8080,7 @@ function ModDevolucion(jsonObject)
                             '<div id="Dev" class="tab_content">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Cliente</th>'+
+                                    '<th align="left" style="padding-left:5px;">Cliente</th>'+
                                     '<td>'+
                                     '<select name="id_cliente" style="width:165px;" class="clients">'+
                                       //'<option value="null"></option>'+
@@ -8094,7 +8094,7 @@ function ModDevolucion(jsonObject)
                                   '</td>'+ 
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="left" style="padding-left:5px;">Id Usuario</th>'+
+                                    '<th align="left" style="padding-left:5px;">Usuario</th>'+
                                     '<td>'+
                                     '<select name="id_usuario" style="width:165px;" class="vendor">'+
                                       //'<option value="null"></option>'+
@@ -8237,13 +8237,13 @@ function VerDevolucion(jsonObject)
                             '<div id="Dev" class="tab_content">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<th align="right" style="padding-right:5px;">Cliente</th>'+
                                     '<td><input type="text" name="Id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Codigo Producto</th>'+
                                     '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</tr>'+
@@ -8316,13 +8316,13 @@ function DelDevolucion(jsonObject)
                             '<div id="Dev" class="tab_content">'+
                               '<table align="center" border="0" align="center">'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
+                                    '<th align="right" style="padding-right:5px;">Cliente</th>'+
                                     '<td><input type="text" name="Id_cliente" value="' + jsonObject.id_cliente + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Codigo Producto</th>'+
                                     '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id Usuario</th>'+
+                                    '<th align="right" style="padding-right:5px;">Usuario</th>'+
                                     '<td><input type="text" name="id_usuario" value="' + jsonObject.id_usuario + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '</tr>'+
