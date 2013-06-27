@@ -896,14 +896,6 @@ function AddUsuario()
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
-                                '<td>'+
-                                    '<select name="id_ubicacion" style="width:165px;" class="ubicacion">'+
-                                      //'<option value="null"></option>'+
-                                     '</select>'+
-                                  '</td>'+ 
-                               '</tr>'+
-                                  '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
                                       '<textarea name="otros_datos" cols="74" rows="6"></textarea>'+
@@ -1216,14 +1208,6 @@ function ModUsuario(jsonObject)
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
-                                    '<td>'+ 
-                                        '<select name="id_ubicacion" style="width:160px;" class="ubicacion">'+
-                                            //'<option value="null"></option>'+
-                                        '</select>'+ 
-                                    '</td>'+
-                               '</tr>'+
-                                  '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
                                       '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
@@ -1434,10 +1418,6 @@ function VerUsuario(jsonObject)
                                     '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
                                     '<td><input type="text" name="banco" value="' + jsonObject.banco + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Id ubicacion</th>'+
-                                    '<td><input type="text" name="id_ubicacion" value="' + jsonObject.id_ubicacion + '" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<td colspan="4" align="left">'+
@@ -3221,7 +3201,7 @@ function cargarVendedor(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var v = 0; v < jsonArray.length; v++)
     {
-        codigoHTML += '<option value="'+ jsonArray[v].id_usuario +'">'+ jsonArray[v].id_usuario +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[v].id_usuario +'">'+ jsonArray[v].nombre_usuario +'</option>';
     }
     
     $('.vendor').html(codigoHTML);   

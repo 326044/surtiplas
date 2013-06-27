@@ -22,9 +22,7 @@ public class Usuarios
     private String banco;
     private String tipo_cuenta_bancaria;
     private String numero_cuenta;
-    private String otros_datos;
-    private String id_ubicacion;
-    
+    private String otros_datos;    
     
     public Usuarios()
     {
@@ -46,10 +44,9 @@ public class Usuarios
         this.tipo_cuenta_bancaria = "";
         this.numero_cuenta = "";
         this.otros_datos = "";
-        this.id_ubicacion = "";
     }
     
-    public Usuarios(String id_usuario, String nickname_usuario, String nombre_usuario, String apellidos_usuario, String cedula_usuario, String direccion_usuario, String telefono_usuario, String celular_usuario, String email_usuario, String password_usuario, String tipo_usuario, String foto_usuario, String fecha, String fecha_cumpleanos, String banco, String tipo_cuenta_bancaria, String numero_cuenta, String otros_datos, String id_ubicacion)
+    public Usuarios(String id_usuario, String nickname_usuario, String nombre_usuario, String apellidos_usuario, String cedula_usuario, String direccion_usuario, String telefono_usuario, String celular_usuario, String email_usuario, String password_usuario, String tipo_usuario, String foto_usuario, String fecha, String fecha_cumpleanos, String banco, String tipo_cuenta_bancaria, String numero_cuenta, String otros_datos)
     {
         this.nickname_usuario = nickname_usuario;
         this.id_usuario = id_usuario;
@@ -69,7 +66,6 @@ public class Usuarios
         this.tipo_cuenta_bancaria = tipo_cuenta_bancaria;
         this.numero_cuenta = numero_cuenta;
         this.otros_datos= otros_datos;
-        this.id_ubicacion= id_ubicacion;
     }
     
     public JSONObject getJSONObject() 
@@ -93,7 +89,6 @@ public class Usuarios
         obj.put("tipo_cuenta_bancaria", this.tipo_cuenta_bancaria);
         obj.put("numero_cuenta", this.numero_cuenta);
         obj.put("otros_datos", this.otros_datos);
-        obj.put("id_ubicacion", this.id_ubicacion);
            
         return obj;
     }
@@ -275,15 +270,5 @@ public class Usuarios
     public String getOtrosDatos()
     {
         return this.otros_datos;
-    } 
-    
-    public void setIdUbicacion(String id_ubicacion)
-    {
-        this.id_ubicacion = id_ubicacion;
-    }
-    
-    public String getIdUbicacion()
-    {
-        return this.id_ubicacion;
     } 
 }
