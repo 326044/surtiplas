@@ -14,6 +14,10 @@ public class productos
     private String precio_descuento;
     private String codigo_barras;
     private String cod_tipo_producto;
+    private String cod_color;
+    private String cod_talla;
+    private String cod_linea;
+    private String codigo;
     
   //inicialisamos la variable con un valor nulo.
     public productos()
@@ -27,9 +31,13 @@ public class productos
         this.precio_descuento = "";
         this.codigo_barras = "";
         this.cod_tipo_producto = "";
+        this.cod_color = "";
+        this.cod_talla = "";
+        this.cod_linea = "";
+        this.codigo = "";
     }
     
-    public productos(String codigo_produto,String nombre, String foto, String cantidad, String precio_costo, String precio_venta, String precio_descuento, String codigo_barras, String cod_tipo_producto)
+    public productos(String codigo_produto,String nombre, String foto, String cantidad, String precio_costo, String precio_venta, String precio_descuento, String codigo_barras, String cod_tipo_producto, String cod_color, String cod_talla, String cod_linea, String codigo)
     {
         this.codigo_produto = codigo_produto;
         this.nombre = nombre;
@@ -39,7 +47,11 @@ public class productos
          this.precio_venta = precio_venta;
         this.precio_descuento = precio_descuento;
         this.codigo_barras = codigo_barras;
-        this.cod_tipo_producto = cod_tipo_producto;      
+        this.cod_tipo_producto = cod_tipo_producto; 
+        this.cod_color = cod_color; 
+        this.cod_talla = cod_talla; 
+        this.cod_linea = cod_linea; 
+        this.codigo = codigo; 
     }
     
     public JSONObject getJSONObject() 
@@ -54,6 +66,10 @@ public class productos
         obj.put("precio_descuento", this.precio_descuento); 
         obj.put("codigo_barras", this.codigo_barras);
         obj.put("cod_tipo_producto", this.cod_tipo_producto);
+        obj.put("cod_color", this.cod_color);
+        obj.put("cod_talla", this.cod_talla);
+        obj.put("cod_linea", this.cod_linea);
+        obj.put("codigo", this.codigo);
         
         return obj;
     }
@@ -150,5 +166,41 @@ public class productos
     public String getcod_tipo_producto()
     {
         return this.cod_tipo_producto;
+    }
+    public void setcod_color(String cod_color)
+    {
+        this.cod_color = cod_color;
+    }
+    
+    public String getcod_color()
+    {
+        return this.cod_color;
+    }
+    public void setcod_talla(String cod_talla)
+    {
+        this.cod_talla = cod_talla;
+    }
+    
+    public String getcod_talla()
+    {
+        return this.cod_talla;
+    }
+    public void setcod_linea(String cod_linea)
+    {
+        this.cod_linea = cod_linea;
+    }
+    
+    public String getcod_linea()
+    {
+        return this.cod_linea;
+    }
+    public void setcodigo(String codigo)
+    {
+        this.codigo = codigo;
+    }
+    
+    public String getcodigo()
+    {
+        return this.codigo;
     }
 }

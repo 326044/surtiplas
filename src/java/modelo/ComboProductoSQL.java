@@ -90,7 +90,7 @@ public class ComboProductoSQL
             
             while(this.rs.next())
             {
-                productos cp = new productos(rs.getString("codigo_producto"), rs.getString("nombre"), rs.getString("foto"), rs.getString("cantidad"), rs.getString("precio_costo"), rs.getString("precio_venta"), rs.getString("precio_descuento"), rs.getString("codigo_barras"), rs.getString("cod_tipo_producto"));                
+                productos cp = new productos(rs.getString("codigo_producto"), rs.getString("nombre"), rs.getString("foto"), rs.getString("cantidad"), rs.getString("precio_costo"), rs.getString("precio_venta"), rs.getString("precio_descuento"), rs.getString("codigo_barras"), rs.getString("cod_tipo_producto"), rs.getString("cod_color"), rs.getString("cod_talla"), rs.getString("cod_linea"), rs.getString("codigo"));                
                 prods = cp.getJSONObject();
                 System.out.printf(prods.toString());
                 productoss.add(prods);
