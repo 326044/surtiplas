@@ -5867,8 +5867,6 @@ function AddMaterial()
                         '<table align="center">'+
                             '<form id="form_crear_material"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="codigo" value="" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Material</th>'+
                                     '<td><input type="text" name="material" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
