@@ -1,4 +1,4 @@
-﻿/*Eliminar la base de datos*/
+/*Eliminar la base de datos*/
 DROP DATABASE surtiplas;
 
 /*Crear la base de datos */
