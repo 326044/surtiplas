@@ -1,4 +1,4 @@
-/*Eliminar la base de datos*/
+﻿/*Eliminar la base de datos*/
 DROP DATABASE surtiplas;
 
 /*Crear la base de datos */
@@ -1514,4 +1514,5 @@ VALUES (
 ), 
 (NULL , 'g', 'Gerente', 'Gerente', '1', NULL , NULL , NULL , NULL , 'g', 'G', NULL , NULL , NULL , NULL , NULL , NULL , NULL);
 
+INSERT INTO `surtiplas`.`usuarios` (`id_usuario`, `nickname_usuario`, `nombre_usuario`, `apellidos_usuario`, `cedula_usuario`, `direccion_usuario`, `telefono_usuario`, `celular_usuario`, `email_usuario`, `password_usuario`, `tipo_usuario`, `foto_usuario`, `fecha`, `fecha_cumpleanos`, `banco`, `tipo_cuenta_bancaria`, `numero_cuenta`, `otros_datos`) VALUES (NULL, 'p', 'produccion', 'produccion', '1', '1', NULL, NULL, NULL, 'p', 'P', NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
