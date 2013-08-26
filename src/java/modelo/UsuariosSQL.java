@@ -55,7 +55,7 @@ public class UsuariosSQL
             this.cn = getConnection();
             this.st = this.cn.createStatement();
             String sql;
-            sql = "SELECT * FROM usuarios WHERE tipo_usuario = 'A' or tipo_usuario ='G' or tipo_usuario = 'C' or tipo_usuario ='JP' or tipo_usuario ='JC' or tipo_usuario ='V' or tipo_usuario ='S'";
+            sql = "SELECT * FROM usuarios WHERE tipo_usuario = 'A' or tipo_usuario ='G' or tipo_usuario ='JP' or tipo_usuario ='JC' or tipo_usuario ='V' or tipo_usuario ='S'";
             this.rs = this.st.executeQuery(sql);
             
             while(this.rs.next())
