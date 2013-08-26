@@ -262,7 +262,7 @@ public class ServletVendedor extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (que.AdicionarQueja(jsonObject))
+                if (que.AdicionarQueja(jsonObject, this.idUsuario))
                 {
                     objRes.put("AddQueja", "true");
                     out.print(objRes);
@@ -294,7 +294,7 @@ public class ServletVendedor extends HttpServlet
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
                 
-                if (pag.AdicionarPago(jsonObject))
+                if (pag.AdicionarPago(jsonObject, this.idUsuario))
                 {
                     objRes.put("AddPago", "true");
                     out.print(objRes);

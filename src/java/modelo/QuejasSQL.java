@@ -94,7 +94,7 @@ public class QuejasSQL
 //*************  PARA ADICIONAR UNA QUEJA A LOS CLIENTES********************    
 //**************************************************************************************
      
-    public boolean AdicionarQueja(JSONObject datos)
+    public boolean AdicionarQueja(JSONObject datos, String id_usuario)
     {
         try
         {            
@@ -103,7 +103,7 @@ public class QuejasSQL
             Quejas que= new Quejas("", String.valueOf(datos.get("fecha")), String.valueOf(datos.get("id_cliente")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("descripcion")));
             String tsql;
             tsql = "INSERT INTO quejas VALUES(DEFAULT, '";
-            tsql += que.getFecha() + "'," + que.getId_cliente()+ "," + que.getId_usuario() + ",'" + que.getDescripcion() + "')";
+            tsql += que.getFecha() + "'," + que.getId_cliente()+ ","+ id_usuario + ",'" + que.getDescripcion() + "')";
         
             this.st.execute(tsql);
             System.out.printf(tsql.toString());

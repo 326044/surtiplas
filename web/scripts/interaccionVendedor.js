@@ -1971,11 +1971,11 @@ function tablaActividad(jsonArray)
 
 function AddActividades()
 {
-    var codigoHTML= '<div class="encabezado2">Adicionar Actividad</div>'+
-                    '<form id="form_crear_actividad" enctype="multipart/form-data">'+
+    var codigoHTML= '<div class="encabezado2">Adicionar Actividad</div>'+                    
                     '<br>'+
+                    '<div id="campos">'+
                     '<table align="center">'+
-                     '<tbody id="campos">'+
+                     '<tbody>'+
                         '<tr>'+                                   
                             '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
                             '<td>'+
@@ -1989,6 +1989,7 @@ function AddActividades()
                         '</tr>'+
                      '</tbody>'+                     
                     '</table>'+ 
+                    '</div>'+
                     '<br>'+
                        '<table align="center">'+
                             '<tr>'+
@@ -1997,13 +1998,15 @@ function AddActividades()
                               '</td>'+
                             '</tr>'+
                       '</table>'+
-                    '<br>'+                    
-                    '</form>'+
+                    '<br>'+
                 '</div>';           
     
     $("#overAddProducto").css({display: "block"});
     $("#overAddProducto").html(codigoHTML);
-    $("#fadeAddProducto").css({display: "block"});   
+    $("#fadeAddProducto").css({display: "block"});
+    $("#form_crear_actividad_visita").submit(crearVisita);
+    $("#form_crear_actividad_pago").submit(crearPago);
+    $("#form_crear_queja").submit(crearQueja);
     /*$("#form_crear_actividad").submit(crearActividadVisita);
     $("#form_crear_actividad").submit(crearActividadPago);*/
     activadorEventosClientes();
@@ -2070,7 +2073,7 @@ function addcampos(A)
                         '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="submit" value="Aceptar" class="button" id="OkAddActividad"/>'+
+                                  '<input type="submit" value="Aceptar" class="button"/>'+
                                   '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                                    
                               '</td>'+
                             '</tr>'+
@@ -2091,7 +2094,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Id pedido</th>'+
                           '<td>'+
-                            '<input type="text" name="id_cliente" value="" required/>'+
+                            '<input type="text" name="id_pedido" value="" required/>'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Fecha</th>'+
                           '<td>'+
@@ -2102,7 +2105,7 @@ function addcampos(A)
                         '<tr>'+
                           '<th align="right" style="padding-right:5px;">Cliente</th>'+
                           '<td>'+
-                            '<input type="text" name="cliente_que" value="" />'+
+                            '<input type="text" name="nombre" value="" />'+
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
@@ -2137,7 +2140,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Valor $</th>'+
                           '<td>'+
-                            '<input type="text" name="telefono_vis" value="" />'+
+                            '<input type="text" name="cantidad_de_pago" value="" />'+
                           '</td>'+                          
                           '</tr>'+
                           '<th align="right" colspan="0" style="padding-right:5px;">Tipo de Pago</th>'+
@@ -2164,7 +2167,7 @@ function addcampos(A)
                      '<table align="center">'+
                       '<tr>'+
                         '<td colspan="4" align="center">'+
-                            '<input type="submit" value="Aceptar" class="button" id="OkAddRecaudo"/>'+
+                            '<input type="submit" value="Aceptar" class="button" id=""/>'+
                             '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                             
                         '</td>'+
                       '</tr>'+
@@ -2195,7 +2198,7 @@ function addcampos(A)
                           '</td>'+
                           '<th align="right" style="padding-right:5px;">Vendedor</th>'+
                           '<td>'+
-                            '<input type="text" name="id_usuario" value="4" readonly="readonly"/>'+
+                            '<input type="text" name="id_usuario" value="" readonly="readonly"/>'+
                           '</td>'+
                         '</tr>'+
                         '<tr>'+
@@ -2230,7 +2233,7 @@ function addcampos(A)
                     '<table align="center">'+
                       '<tr>'+
                         '<td colspan="4" align="center">'+
-                            '<input type="submit" value="Aceptar" class="button" id="OkAddQuejas"/>'+
+                            '<input type="submit" value="Aceptar" class="button"/>'+
                             '<input type="button" value="Atras" class="button" onclick="AddActividades()"/>'+                             
                         '</td>'+
                       '</tr>'+
@@ -2242,9 +2245,10 @@ function addcampos(A)
     $("#campos").html(codigoHTML);
     $('#date_field29').datepick({yearRange: '1980:2050'});
     $('#date_field29').datepick('option', {dateFormat: $.datepick.ATOM});
-    listadoDepartamentos();       
-    $("#form_crear_actividad_visita").submit(crearActividadVisita);
-    $("#form_crear_actividad_pago").submit(crearActividadPago);
+    listadoDepartamentos();      
+    $("#form_crear_actividad_visita").submit(crearVisita);
+    $("#form_crear_actividad_pago").submit(crearPago);    
+    $("#form_crear_queja").submit(crearQueja);
     activadorEventosClientes();
     activadorEventosVendedores();
 }
@@ -4480,12 +4484,12 @@ function verificarAddQueja(jsonObj)
 {
     if (jsonObj.AddQueja  =="true")
     {
-        alert("La visita se adicionó correctamente");
+        alert("La Queja se adicionó correctamente");
     }
     
     else
     {
-        alert("La visita no se pudo adicionar");
+        alert("La Queja no se pudo adicionar");
     }   
     
     HideConfirmAddQuejas();
