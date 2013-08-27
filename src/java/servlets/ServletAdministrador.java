@@ -662,7 +662,7 @@ public class ServletAdministrador extends HttpServlet
         }
         if (op.equals("DelProducto"))
         {
-            String cod = String.valueOf(jsonObj.get("Codigo_Productos"));  
+            String cod = String.valueOf(jsonObj.get("Codigo_Producto"));  
             JSONObject objRes = new JSONObject();
             
             if (usj.BorrarProducto(cod))

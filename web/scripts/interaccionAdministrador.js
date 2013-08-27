@@ -3973,7 +3973,7 @@ function enviarDatosModProductos(evento)
     var datos_formulario = $(this).serializeArray();   
     var datos = JSON.stringify(SerializeToJson(datos_formulario));
     //alert(datos.toString());
-    var request = {"Usuarios":"ModProducto","Datos":datos, "Codigo_Producto":codigo_producto};
+    var request = {"Usuarios":"ModProducto","Datos":datos, "Codigo_Productos":codigo_producto};
     var jsonobj=JSON.stringify(request);
     //alert(jsonobj.toString());
     
@@ -4086,19 +4086,19 @@ function VerProducto(jsonObject)
                                 '</tr>'+
                                 '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                    '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                 '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Material</th>'+
-                                        '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="codigo" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                     '</tr>'+
                                         '<tr>'+
                                             '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
-                                            '<td><input type="text" name="nombre_tipo_producto" value="' + jsonObject.nombre_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                            '<td><input type="text" name="cod_tipo_producto" value="' + jsonObject.nombre_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                         '</tr>'+
                                       '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Color</th>'+
-                                        '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="cod_color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Cantidad</th>'+
@@ -4207,19 +4207,19 @@ function DelProducto(jsonObject)
                                     '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                        '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="cod_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Material</th>'+
-                                        '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="codigo" value="' + jsonObject.material + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
-                                        '<td><input type="text" name="cod_tipo_producto" value="' + jsonObject.cod_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="cod_tipo_producto" value="' + jsonObject.nombre_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Color</th>'+
-                                        '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                        '<td><input type="text" name="cod_color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Cantidad</th>'+
