@@ -126,7 +126,7 @@ public class ProductosAdSQL
             this.cn = getConnection();
             this.st = this.cn.createStatement();
             String sql = "SELECT productos.codigo_producto, productos.nombre, productos.foto, productos.cantidad, productos.precio_costo, productos.precio_venta, productos.precio_descuento, productos.codigo_barras,"
-                    + "tipo_producto.cod_tipo_producto, linea_produccion.nombre_linea, tallas.talla, material.material, colores.color FROM productos, tipo_producto, usuarios, linea_produccion, lineaprod, tallas, tallasprod, material, materialprod, colores, coloresprod WHERE tipo_producto.cod_tipo_producto=productos.cod_tipo_producto AND productos.codigo_producto=tallasprod.codigo_producto AND tallasprod.cod_talla=tallas.cod_talla AND materialprod.codigo_producto=productos.codigo_producto AND materialprod.codigo=material.codigo AND lineaprod.codigo_producto=productos.codigo_producto AND lineaprod.cod_linea=linea_produccion.cod_linea AND coloresprod.codigo_producto=productos.codigo_producto AND coloresprod.cod_color=colores.cod_color AND productos.codigo_producto= " + idProductos + ";";
+                    + "tipo_producto.nombre_tipo_producto, linea_produccion.nombre_linea, tallas.talla, material.material, colores.color FROM productos, tipo_producto, usuarios, linea_produccion, tallas, material, colores WHERE tipo_producto.cod_tipo_producto=productos.cod_tipo_producto AND tallas.cod_talla=productos.cod_talla AND material.codigo=productos.codigo AND linea_produccion.cod_linea=productos.cod_linea AND colores.cod_color=productos.cod_color AND productos.codigo_producto= " + idProductos + ";";
                     
             this.rs = this.st.executeQuery(sql);
             this.rs.first();
@@ -139,7 +139,7 @@ public class ProductosAdSQL
             productos.put("precio_venta", rs.getString("precio_venta"));
             productos.put("precio_descuento", rs.getString("precio_descuento"));
             productos.put("codigo_barras", rs.getString("codigo_barras"));
-            productos.put("cod_tipo_producto", rs.getString("cod_tipo_producto"));
+            productos.put("nombre_tipo_producto", rs.getString("nombre_tipo_producto"));
             productos.put("nombre_linea", rs.getString("nombre_linea"));
             productos.put("talla", rs.getString("talla"));
             productos.put("material", rs.getString("material"));

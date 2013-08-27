@@ -3279,7 +3279,7 @@ function cargarLineasCombo(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var x = 0; x < jsonArray.length; x++)
     {
-        codigoHTML += '<option value="'+ jsonArray[x].nombre_linea +'">'+ jsonArray[x].nombre_linea +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[x].cod_linea +'">'+ jsonArray[x].nombre_linea +'</option>';
     }
     
     $('.lines').html(codigoHTML);   
@@ -3318,7 +3318,7 @@ function cargarMaterialesCombo(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var m = 0; m < jsonArray.length; m++)
     {
-        codigoHTML += '<option value="'+ jsonArray[m].material +'">'+ jsonArray[m].material +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[m].codigo +'">'+ jsonArray[m].material +'</option>';
     }
     
     $('.maters').html(codigoHTML);   
@@ -3357,7 +3357,7 @@ function cargarTallasCombo(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var t = 0; t < jsonArray.length; t++)
     {
-        codigoHTML += '<option value="'+ jsonArray[t].talla +'">'+ jsonArray[t].talla +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[t].cod_talla +'">'+ jsonArray[t].talla +'</option>';
     }
     
     $('.talls').html(codigoHTML);   
@@ -3396,7 +3396,7 @@ function cargColor(jsonArray)
     var codigoHTML =  '<option value="null"></option>';
     for (var f = 0; f < jsonArray.length; f++)
     {
-        codigoHTML += '<option value="'+ jsonArray[f].color +'">'+ jsonArray[f].color +'</option>';
+        codigoHTML += '<option value="'+ jsonArray[f].cod_color +'">'+ jsonArray[f].color +'</option>';
     }
     
     $('.colors').html(codigoHTML);   
@@ -3606,7 +3606,7 @@ function AddProducto()
                                   '<tr>'+
                                       '<th align="left" style="padding-right:5px;">Linea de Producción</th>'+
                                     '<td>'+
-                                        '<select name="nombre_linea" style="width:165px;" class="lines">'+
+                                        '<select name="cod_linea" style="width:165px;" class="lines">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+ 
@@ -3614,7 +3614,7 @@ function AddProducto()
                                   '<tr>'+
                                       '<th align="right" style="padding-right:5px;">Material</th>'+
                                     '<td>'+
-                                        '<select name="material" style="width:165px;" class="maters">'+
+                                        '<select name="codigo" style="width:165px;" class="maters">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -3630,7 +3630,7 @@ function AddProducto()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Talla</th>'+
                                     '<td>'+
-                                        '<select name="talla" style="width:165px;" class="talls">'+
+                                        '<select name="cod_talla" style="width:165px;" class="talls">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -3638,7 +3638,7 @@ function AddProducto()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td>'+
-                                        '<select name="color" style="width:165px;" class="colors">'+
+                                        '<select name="cod_color" style="width:165px;" class="colors">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -3870,7 +3870,7 @@ function ModProducto(jsonObject)
                                   '<tr>'+
                                       '<th align="left" style="padding-right:5px;">Linea de Producciòn</th>'+
                                     '<td>'+
-                                        '<select name="nombre_linea" style="width:165px;" class="lines">'+
+                                        '<select name="cod_linea" style="width:165px;" class="lines">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+ 
@@ -3878,7 +3878,7 @@ function ModProducto(jsonObject)
                                   '<tr>'+
                                       '<th align="right" style="padding-right:5px;">Material</th>'+
                                     '<td>'+
-                                        '<select name="material" style="width:165px;" class="maters">'+
+                                        '<select name="codigo" style="width:165px;" class="maters">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -3894,7 +3894,7 @@ function ModProducto(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Talla</th>'+
                                     '<td>'+
-                                        '<select name="talla" style="width:165px;" class="talls">'+
+                                        '<select name="cod_talla" style="width:165px;" class="talls">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -3902,7 +3902,7 @@ function ModProducto(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td>'+
-                                        '<select name="color" style="width:165px;" class="colors">'+
+                                        '<select name="cod_color" style="width:165px;" class="colors">'+
                                           //'<option value="null"></option>'+
                                         '</select>'+
                                     '</td>'+
@@ -4013,7 +4013,7 @@ function verificarModProducto(jsonObj)
         alert("El Producto no se pudo modificar");
     }   
     
-    activadorEventosProductos();
+    seccionListadoProductos();
 }
 
 //***************************************************************************************************************
@@ -4094,7 +4094,7 @@ function VerProducto(jsonObject)
                                     '</tr>'+
                                         '<tr>'+
                                             '<th align="right" style="padding-right:5px;">Tipo de Producto</th>'+
-                                            '<td><input type="text" name="nombre_tipo_producto" value="' + jsonObject.cod_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                            '<td><input type="text" name="nombre_tipo_producto" value="' + jsonObject.nombre_tipo_producto + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                         '</tr>'+
                                       '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Color</th>'+
