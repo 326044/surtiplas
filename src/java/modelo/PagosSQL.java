@@ -194,4 +194,66 @@ public class PagosSQL
         return(Pagos);
     }
     
+    public JSONArray obtenerListadoPagos2(JSONObject jsonObject)
+     {
+        JSONArray Pagos = new JSONArray();        
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
+            String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));            
+            String tsql;
+               
+            if("".equals(fechaInicial))
+            {
+                if("".equals(fechaFinal))
+                {
+                 tsql = "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion"
+                    + " FROM pagos, clientes, usuarios, municipios"
+                    + " WHERE pagos.id_cliente=clientes.id_cliente AND pagos.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " ORDER BY pagos.fecha DESC;";   
+                 this.rs = this.st.executeQuery(tsql);
+                 System.out.printf(tsql.toString());
+                }
+            }
+            else
+            {
+                tsql =  "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion"
+                    + " FROM pagos, clientes, usuarios, municipios"
+                    + " WHERE pagos.id_cliente=clientes.id_cliente AND pagos.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " AND pagos.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"' ORDER BY pagos.fecha DESC;";
+                this.rs = this.st.executeQuery(tsql);
+                System.out.printf(tsql.toString());
+            }
+                        
+            while(this.rs.next())
+            {
+                JSONObject pago = new JSONObject();
+                
+                pago.put("id_visita", rs.getString("id_pago"));
+                pago.put("fecha", rs.getString("fecha"));
+                pago.put("razon_social", rs.getString("razon_social"));
+                pago.put("nombre_usuario", rs.getString("nombre_usuario"));
+                pago.put("NombreMunicipio", rs.getString("NombreMunicipio"));                         
+                pago.put("descripcion", rs.getString("descripcion"));
+                
+                System.out.printf(pago.toString());
+                Pagos.add(pago);
+            }
+            
+                     
+            
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();            
+        }
+    
+        return(Pagos);
+    }
+    
 }

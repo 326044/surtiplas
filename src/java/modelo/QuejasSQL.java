@@ -189,4 +189,66 @@ public class QuejasSQL
         return(Quejas);
     }
   
+    public JSONArray obtenerListadoQuejas2(JSONObject jsonObject)
+     {
+        JSONArray Quejas = new JSONArray();        
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
+            String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));            
+            String tsql;
+               
+            if("".equals(fechaInicial))
+            {
+                if("".equals(fechaFinal))
+                {
+                 tsql = "SELECT quejas.id_queja, quejas.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, quejas.descripcion"
+                    + " FROM quejas, clientes, usuarios, municipios"
+                    + " WHERE quejas.id_cliente=clientes.id_cliente AND quejas.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " ORDER BY quejas.fecha DESC;";   
+                 this.rs = this.st.executeQuery(tsql);
+                 System.out.printf(tsql.toString());
+                }
+            }
+            else
+            {
+                tsql =  "SELECT quejas.id_queja, quejas.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, quejas.descripcion"
+                    + " FROM quejas, clientes, usuarios, municipios"
+                    + " WHERE quejas.id_cliente=clientes.id_cliente AND quejas.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " AND quejas.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"' ORDER BY quejas.fecha DESC;";
+                this.rs = this.st.executeQuery(tsql);
+                System.out.printf(tsql.toString());
+            }
+                        
+            while(this.rs.next())
+            {
+                JSONObject queja = new JSONObject();
+                
+                queja.put("id_visita", rs.getString("id_queja"));
+                queja.put("fecha", rs.getString("fecha"));
+                queja.put("razon_social", rs.getString("razon_social"));
+                queja.put("nombre_usuario", rs.getString("nombre_usuario"));
+                queja.put("NombreMunicipio", rs.getString("NombreMunicipio"));
+                queja.put("descripcion", rs.getString("descripcion"));
+               
+                
+                System.out.printf(queja.toString());
+                Quejas.add(queja);
+            }
+            
+                     
+            
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();            
+        }
+    
+        return(Quejas);
+    }
 }

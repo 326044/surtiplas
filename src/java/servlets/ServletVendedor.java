@@ -544,14 +544,30 @@ public class ServletVendedor extends HttpServlet
                 Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));  
                 JSONObject jsonObject = (JSONObject) obj;
                 System.out.print(jsonObject.toString());
-                Actividades = vis.obtenerListadoActividades(jsonObject, this.idUsuario); 
+                String tipoActividad= String.valueOf(jsonObject.get("tipoActividad"));
+                
+                if("1".equals(tipoActividad))
+                {
+                   Actividades = vis.obtenerListadoVisitas2(jsonObject, this.idUsuario); 
+                }
+                
+                if("2".equals(tipoActividad))
+                {
+                    Actividades = pag.obtenerListadoPagos2(jsonObject);
+                }
+                
+                if("3".equals(tipoActividad))
+                {
+                    Actividades = que.obtenerListadoQuejas2(jsonObject);
+                }
+                 
                 
             }
             catch (ParseException e)
             {
                 e.printStackTrace();
             }
-            out.print(Actividades); 
+            out.print(Actividades);
         }
     }
     

@@ -150,6 +150,68 @@ public class VisitasSQL
     
         return(Visitas);
     }
+    
+    public JSONArray obtenerListadoVisitas2(JSONObject jsonObject, String IdUsuario)
+     {
+        JSONArray Visitas = new JSONArray();        
+        
+        try
+        {
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
+            String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));            
+            String tsql;
+               
+            if("".equals(fechaInicial))
+            {
+                if("".equals(fechaFinal))
+                {
+                 tsql = "SELECT visitas.id_visita, visitas.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, visitas.descripcion"
+                    + " FROM visitas, clientes, usuarios, municipios"
+                    + " WHERE visitas.id_cliente=clientes.id_cliente AND visitas.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " ORDER BY visitas.fecha DESC;";   
+                 this.rs = this.st.executeQuery(tsql);                  
+                }
+            }
+            else
+            {
+                tsql =  "SELECT visitas.id_visita, visitas.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, visitas.descripcion"
+                    + " FROM visitas, clientes, usuarios, municipios"
+                    + " WHERE visitas.id_cliente=clientes.id_cliente AND visitas.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
+                    + " AND visitas.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"' ORDER BY visitas.fecha DESC;";
+                    
+                this.rs = this.st.executeQuery(tsql); 
+            }
+            
+            while(this.rs.next())
+            {
+                JSONObject visita = new JSONObject();
+                
+                visita.put("id_visita", rs.getString("id_visita"));
+                visita.put("fecha", rs.getString("fecha"));
+                visita.put("razon_social", rs.getString("razon_social"));
+                visita.put("nombre_usuario", rs.getString("nombre_usuario"));
+                visita.put("NombreMunicipio", rs.getString("NombreMunicipio"));
+                visita.put("descripcion", rs.getString("descripcion"));
+                
+                
+                System.out.printf(visita.toString());
+                Visitas.add(visita);
+            }
+            
+                     
+            
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();            
+        }
+    
+        return(Visitas);
+    }
     //**********************************************************************************************
 //**********************************************************************************************
 //*************                                                            *********************
@@ -254,93 +316,4 @@ public class VisitasSQL
         return visita;
     }
     
-    public JSONArray obtenerListadoActividades(JSONObject jsonObject, String IdUsuario)
-     {
-        JSONArray Actividades = new JSONArray();
-        JSONObject actividad = new JSONObject();
-        
-        JSONObject visita = new JSONObject();
-        
-        
-        
-        try
-        {
-            this.cn = getConnection();
-            this.st = cn.createStatement();
-            String tipoActividad= String.valueOf(jsonObject.get("tipoActividad"));
-            String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
-            String fechaFinal= String.valueOf(jsonObject.get("fechaFin")); 
-            String id_cliente= String.valueOf(jsonObject.get("id_cliente"));
-            String tsql=null;
-         
-            
-            if("Visitas".equals(tipoActividad))
-            { 
-                
-                
-                tsql = "SELECT * FROM visitas";
-                this.rs = this.st.executeQuery(tsql); 
-                
-                /*this.rs.first();
-                
-                visita.put("id_visita", rs.getString("id_visita"));
-                visita.put("fecha", rs.getString("fecha"));
-                visita.put("id_cliente", rs.getString("id_cliente"));
-                visita.put("id_usuario", rs.getString("id_usuario"));            
-                visita.put("descripcion", rs.getString("descripcion"));
-                System.out.printf(visita.toString());*/
-           
-            }
-             
-            if("Recaudos".equals(tipoActividad))
-            { 
-                tsql = "SELECT * FROM pagos WHERE pagos.id_usuario="+ IdUsuario +"";
-                        this.rs = this.st.executeQuery(tsql);
-                        
-                        while(this.rs.next())
-            {
-                Pagos pag = new Pagos(rs.getString("id_pago"), rs.getString("id_cliente"), rs.getString("id_usuario"), rs.getString("id_pedido"),rs.getString("fecha"), rs.getString("tipo_de_pago"), rs.getString("cantidad_de_pago"), rs.getString("forma_de_pago"), rs.getString("descripcion"));
-                actividad = pag.getJSONObject();
-                System.out.printf(actividad.toString());
-                Actividades.add(actividad);           
-               
-            }
-                                   
-            }
-            
-            if("Quejas".equals(tipoActividad))
-            { 
-                tsql = "SELECT * FROM quejas WHERE quejas.id_usuario="+ IdUsuario +"";
-                        this.rs = this.st.executeQuery(tsql);
-                        //System.out.printf(tsql.toString());
-                        
-                         while(this.rs.next())
-            {
-                Quejas que = new Quejas(rs.getString("id_queja"), rs.getString("fecha"), rs.getString("id_cliente"), rs.getString("id_usuario"), rs.getString("descripcion"));
-                actividad = que.getJSONObject();
-                System.out.printf(actividad.toString());
-                Actividades.add(actividad);           
-               
-            }
-       
-            }            
-           while(this.rs.next())
-            {
-                Visitas est = new Visitas(rs.getString("id_visita"), rs.getString("fecha"), rs.getString("id_cliente"), rs.getString("id_usuario"), rs.getString("descripcion"));
-                actividad = est.getJSONObject();
-                System.out.printf(actividad.toString());
-                Actividades.add(actividad);           
-               
-            }
-                     
-           
-        }
-        
-        catch(Exception e)
-        {
-            e.printStackTrace();            
-        }
-    
-        return (Actividades);
-     }
 }

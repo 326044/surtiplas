@@ -1829,10 +1829,10 @@ function seccionActividades()
                                 '<tr>'+                                   
                                     '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
                                     '<td>'+
-                                        '<select name="tipoActividad" style="width:160px;">'+                                           
-                                            '<option value="Visitas">Visitas</option>'+
-                                            '<option value="Recaudos">Recaudos</option>'+
-                                            '<option value="Quejas">Quejas</option>'+
+                                        '<select name="tipoActividad"  style="width:160px;">'+                                           
+                                            '<option value="1">Visitas</option>'+
+                                            '<option value="2">Recaudos</option>'+
+                                            '<option value="3">Quejas</option>'+
                                         '</select>'+
                                     '</td>'+
                                     '<div id="campos"><div>'+
@@ -1854,8 +1854,9 @@ function seccionActividades()
                                 '</tr>'+
                             '</table>'+
                         '</form>'+
-                        '<br>'+
-                        '<table class="tbonita" align="center" id="tablaActividades">'+
+                        '<br>'+                        
+                    '</div>'+
+                    '<table class="tbonita" align="center" id="tablaActividades">'+
                           '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
                             '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
@@ -1866,20 +1867,19 @@ function seccionActividades()
                             '<th>Cuidad</th>'+
                             '<th>Tema</th>'+
                           '</tr>'+                
-                        '</table>'+
-                    '</div>';
+                        '</table>';
 
     $("#datos").html(codigoHTML);
     $(".menu-vertical li a").removeClass("active");
     $(this).addClass("active");
     $('#date_field7').datepick({yearRange: '1980:2050'});
+    $('#date_field7').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field8').datepick({yearRange: '1980:2050'});
+    $('#date_field8').datepick('option', {dateFormat: $.datepick.ATOM});
      $("#form_buscar_Actividad").submit(buscarActividad);
     activadorEventosVendedores();
     //activadorEventosClientes();
 }
-
-
 
 function buscarActividad(evento)
 {
@@ -1923,7 +1923,7 @@ function tablaActividad(jsonArray)
                       '</tr>';
       
     var i;
-    for (i = 0; i < jsonArray.length-1; i++)
+    for (i = 0; i < jsonArray.length; i++)
     {
         if (i % 2 == 0)
                 codigoHTML+=      '<tr>';
@@ -1932,14 +1932,13 @@ function tablaActividad(jsonArray)
         codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerVisita" id="' + jsonArray[i].id_visita + '" /></td>';
         codigoHTML+=                          '<td>' + jsonArray[i].id_visita + '</td>';
         codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
-        codigoHTML+=                          '<td>' + jsonArray[i].id_cliente + '</td>';  
-        codigoHTML+=                          '<td>' + jsonArray[i].nombre_depto + '</td>'; 
+        codigoHTML+=                          '<td>' + jsonArray[i].razon_social + '</td>';  
+        codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>'; 
         codigoHTML+=                          '<td>' + jsonArray[i].NombreMunicipio + '</td>';   
         codigoHTML+=                          '<td>' + jsonArray[i].descripcion + '</td>';   
         codigoHTML+=                  '</tr>';
-            
-    }    
-   
+    }
+    
     $("#tablaActividades").html(codigoHTML);
     activadorEventosClientes();
     activadorEventosVendedores();
