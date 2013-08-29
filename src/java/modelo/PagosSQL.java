@@ -210,7 +210,7 @@ public class PagosSQL
             {
                 if("".equals(fechaFinal))
                 {
-                 tsql = "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion"
+                 tsql = "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion, pagos.tipo_de_pago, pagos.forma_de_pago"
                     + " FROM pagos, clientes, usuarios, municipios"
                     + " WHERE pagos.id_cliente=clientes.id_cliente AND pagos.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
                     + " ORDER BY pagos.fecha DESC;";   
@@ -220,7 +220,7 @@ public class PagosSQL
             }
             else
             {
-                tsql =  "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion"
+                tsql =  "SELECT pagos.id_pago, pagos.fecha, clientes.razon_social, usuarios.nombre_usuario, municipios.NombreMunicipio, pagos.descripcion, pagos.tipo_de_pago, pagos.forma_de_pago"
                     + " FROM pagos, clientes, usuarios, municipios"
                     + " WHERE pagos.id_cliente=clientes.id_cliente AND pagos.id_usuario=usuarios.id_usuario AND clientes.codMunicipio=municipios.codMunicipio"
                     + " AND pagos.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"' ORDER BY pagos.fecha DESC;";
@@ -232,11 +232,13 @@ public class PagosSQL
             {
                 JSONObject pago = new JSONObject();
                 
-                pago.put("id_visita", rs.getString("id_pago"));
+                 pago.put("id_pago", rs.getString("id_pago"));
                 pago.put("fecha", rs.getString("fecha"));
                 pago.put("razon_social", rs.getString("razon_social"));
                 pago.put("nombre_usuario", rs.getString("nombre_usuario"));
-                pago.put("NombreMunicipio", rs.getString("NombreMunicipio"));                         
+                pago.put("NombreMunicipio", rs.getString("NombreMunicipio"));
+                pago.put("tipo_de_pago", rs.getString("tipo_de_pago"));
+                pago.put("forma_de_pago", rs.getString("forma_de_pago"));         
                 pago.put("descripcion", rs.getString("descripcion"));
                 
                 System.out.printf(pago.toString());

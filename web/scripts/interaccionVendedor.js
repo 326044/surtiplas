@@ -1829,7 +1829,7 @@ function seccionActividades()
                                 '<tr>'+                                   
                                     '<th align="right" style="padding-right:5px;">Tipo Actividad</th>'+
                                     '<td>'+
-                                        '<select name="tipoActividad"  style="width:160px;">'+                                           
+                                        '<select name="tipoActividad" id="selectActividad" style="width:160px;">'+                                           
                                             '<option value="1">Visitas</option>'+
                                             '<option value="2">Recaudos</option>'+
                                             '<option value="3">Quejas</option>'+
@@ -1863,7 +1863,7 @@ function seccionActividades()
                             '<th>IdAct.</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
-                            '<th>Departamento</th>'+
+                            '<th>Vendedor</th>'+
                             '<th>Cuidad</th>'+
                             '<th>Tema</th>'+
                           '</tr>'+                
@@ -1875,7 +1875,7 @@ function seccionActividades()
     $('#date_field7').datepick({yearRange: '1980:2050'});
     $('#date_field7').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field8').datepick({yearRange: '1980:2050'});
-    $('#date_field8').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field8').datepick('option', {dateFormat: $.datepick.ATOM});    
      $("#form_buscar_Actividad").submit(buscarActividad);
     activadorEventosVendedores();
     //activadorEventosClientes();
@@ -1883,6 +1883,7 @@ function seccionActividades()
 
 function buscarActividad(evento)
 {
+    var TA=$('#selectActividad').val();
     evento.preventDefault();
     var datos_formulario = $(this).serializeArray();   
     var datos = JSON.stringify(SerializeToJson(datos_formulario));
@@ -1898,7 +1899,7 @@ function buscarActividad(evento)
                     url: 'ServletVendedor',
                     success: function(jsonArray)
                     {
-                        tablaActividad(jsonArray);
+                        tablaActividad(jsonArray, TA);
                     },
                     error: function() 
                     {
@@ -1907,38 +1908,108 @@ function buscarActividad(evento)
                 });
 }
 
-function tablaActividad(jsonArray)
+function tablaActividad(jsonArray, TA)
 {
     //TablaViaticos = jsonArray;
-    
-    var codigoHTML = '<tr align="left">'+
-                        '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                        '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
-                        '<th>Id</th>'+
-                        '<th>Fecha</th>'+
-                        '<th>Cliente</th>'+
-                        '<th>Departamento</th>'+
-                        '<th>Cuidad</th>'+
-                        '<th>Tema</th>'+
-                      '</tr>';
-      
-    var i;
-    for (i = 0; i < jsonArray.length; i++)
+    alert(TA)
+    if(TA==1)
     {
-        if (i % 2 == 0)
-                codigoHTML+=      '<tr>';
-        else
-                codigoHTML+=      '<tr class="even">';
-        codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerVisita" id="' + jsonArray[i].id_visita + '" /></td>';
-        codigoHTML+=                          '<td>' + jsonArray[i].id_visita + '</td>';
-        codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
-        codigoHTML+=                          '<td>' + jsonArray[i].razon_social + '</td>';  
-        codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>'; 
-        codigoHTML+=                          '<td>' + jsonArray[i].NombreMunicipio + '</td>';   
-        codigoHTML+=                          '<td>' + jsonArray[i].descripcion + '</td>';   
-        codigoHTML+=                  '</tr>';
+        var codigoHTML = '<tr align="left">'+
+                            '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
+                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th>Id</th>'+
+                            '<th>Fecha</th>'+
+                            '<th>Cliente</th>'+
+                            '<th>Vendedor</th>'+
+                            '<th>Cuidad</th>'+
+                            '<th>Tema</th>'+
+                          '</tr>';
+
+        var i;
+        for (i = 0; i < jsonArray.length; i++)
+        {
+            if (i % 2 == 0)
+                    codigoHTML+=      '<tr>';
+            else
+                    codigoHTML+=      '<tr class="even">';
+            codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerVisita" id="' + jsonArray[i].id_visita + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_visita + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].razon_social + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].NombreMunicipio + '</td>';   
+            codigoHTML+=                          '<td>' + jsonArray[i].descripcion + '</td>';   
+            codigoHTML+=                  '</tr>';
+        }
     }
     
+    if(TA==2)
+    {
+        var codigoHTML = '<tr align="left">'+
+                            '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
+                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th>Id</th>'+
+                            '<th>Fecha</th>'+
+                            '<th>Cliente</th>'+
+                            '<th>Vendedor</th>'+
+                            '<th>Cuidad</th>'+
+                            '<th>Tipo Pago</th>'+
+                            '<th>Forma Pago</th>'+
+                            '<th>Tema</th>'+
+                          '</tr>';
+
+        var i;
+        for (i = 0; i < jsonArray.length; i++)
+        {
+            if (i % 2 == 0)
+                    codigoHTML+=      '<tr>';
+            else
+                    codigoHTML+=      '<tr class="even">';
+            codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerRecaudo" id="' + jsonArray[i].id_pago + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_pago + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].razon_social + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].NombreMunicipio + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].tipo_de_pago + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].forma_de_pago + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].descripcion + '</td>';   
+            codigoHTML+=                  '</tr>';
+        }
+        
+    }
+        
+    if(TA==3)
+    {
+        var codigoHTML = '<tr align="left">'+
+                            '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
+                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th>Id</th>'+
+                            '<th>Fecha</th>'+
+                            '<th>Cliente</th>'+
+                            '<th>Vendedor</th>'+
+                            '<th>Cuidad</th>'+
+                            '<th>Tema</th>'+
+                          '</tr>';
+
+        var i;
+        for (i = 0; i < jsonArray.length; i++)
+        {
+            if (i % 2 == 0)
+                    codigoHTML+=      '<tr>';
+            else
+                    codigoHTML+=      '<tr class="even">';
+            codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerQuejas" id="' + jsonArray[i].id_visita + '" /></td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].id_visita + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';
+            codigoHTML+=                          '<td>' + jsonArray[i].razon_social + '</td>';  
+            codigoHTML+=                          '<td>' + jsonArray[i].nombre_usuario + '</td>'; 
+            codigoHTML+=                          '<td>' + jsonArray[i].NombreMunicipio + '</td>';   
+            codigoHTML+=                          '<td>' + jsonArray[i].descripcion + '</td>';   
+            codigoHTML+=                  '</tr>';
+        }
+    
+    }
     $("#tablaActividades").html(codigoHTML);
     activadorEventosClientes();
     activadorEventosVendedores();
