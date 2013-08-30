@@ -194,7 +194,7 @@ public class UsuariosSQL
                     + " usuarios.direccion_usuario, usuarios.telefono_usuario, usuarios.celular_usuario, usuarios.email_usuario,"
                     + " usuarios.nickname_usuario, usuarios.password_usuario, usuarios.tipo_usuario, usuarios.foto_usuario, usuarios.fecha,"
                     + " usuarios.fecha_cumpleanos, usuarios.banco, usuarios.tipo_cuenta_bancaria, usuarios.numero_cuenta,"
-                    + " usuarios.otros_datos FROM usuarios";
+                    + " usuarios.otros_datos FROM usuarios WHERE usuarios.id_usuario='"+idUsuario+"';";
                     
             this.rs = this.st.executeQuery(sql);
             this.rs.first();

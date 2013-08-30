@@ -515,7 +515,7 @@ public class ServletVendedor extends HttpServlet
          if (op.equals("Perfil"))
         {
             System.out.print(String.valueOf(session.getAttribute("IdUsuario")));
-            JSONObject vendedor = usr.datosUsuario(String.valueOf(session.getAttribute("IdUsuario")));
+            JSONObject vendedor = usr.datosUsuario(this.idUsuario);
             out.print(vendedor);
         }
          

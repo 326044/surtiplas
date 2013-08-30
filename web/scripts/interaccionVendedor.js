@@ -1911,10 +1911,10 @@ function buscarActividad(evento)
 function tablaActividad(jsonArray, TA)
 {
     //TablaViaticos = jsonArray;
-    alert(TA)
+    var codigoHTML;
     if(TA==1)
     {
-        var codigoHTML = '<tr align="left">'+
+         codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
                             '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
                             '<th>Id</th>'+
@@ -1945,7 +1945,7 @@ function tablaActividad(jsonArray, TA)
     
     if(TA==2)
     {
-        var codigoHTML = '<tr align="left">'+
+         codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
                             '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
                             '<th>Id</th>'+
@@ -1981,7 +1981,7 @@ function tablaActividad(jsonArray, TA)
         
     if(TA==3)
     {
-        var codigoHTML = '<tr align="left">'+
+         codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
                             '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
                             '<th>Id</th>'+
