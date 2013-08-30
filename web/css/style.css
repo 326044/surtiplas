@@ -870,3 +870,49 @@ ul.tabs li.active, ul.tabs2 li.active
 	margin-top:-4px;
 	color: #a0a0a0;
 }
+
+.Editable 
+{
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -o-border-radius: 0px;
+    padding-left:5px;
+    padding-right:5px;
+    color: #000;
+    font-weight: bold;
+    background-color: #FFF;
+    font-family: 'BlacklightDRegular';
+    font-size: 13px;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+}
+
+.Prec_editable
+{
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom-style: none;
+    border-radius: 0px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -o-border-radius: 0px;
+    padding-left:5px;
+    padding-right:5px;
+    color: #000;
+    font-weight: bold;
+    background-color: #FFF;
+    font-family: 'BlacklightDRegular';
+    font-size: 13px;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    -o-box-shadow: none;
+}

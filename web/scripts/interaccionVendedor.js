@@ -1236,73 +1236,86 @@ function AdicionarBusquedaPedidosProductos(jsonArray)
     
 }
 
+var cont=100;
+var f=0;
+
+
 function checkVerProducto()
 {
-    HideConfirmAddProducto();
-    var id = $(this)[0].id;
-    var request = {"Vendedores":"DatosCheckProducto","codigo_producto":id};
-    var jsonobj=JSON.stringify(request);
-    //alert(jsonobj.toString());
-    
-    $.ajax({
-                    data: {vendedor:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        VerCheckProducto(jsonArray);     
-                    },
-                    error: function() 
-                    {
-                        alert('Error al conectar con ServletVendedor');
-                    }
-               });
+    for(f=1;f==1;f++)
+    {
+        HideConfirmAddProducto();
+        var id = $(this)[0].id;
+        var request = {"Vendedores":"DatosCheckProducto","codigo_producto":id};
+        var jsonobj=JSON.stringify(request);
+        //alert(jsonobj.toString());
+
+        $.ajax({
+                        data: {vendedor:jsonobj},
+                        dataType: 'json',
+                        url: 'ServletVendedor',
+                        type: 'POST',
+                        success: function(jsonArray)
+                        {
+                            VerCheckProducto(jsonArray);     
+                        },
+                        error: function() 
+                        {
+                            alert('Error al conectar con ServletVendedor');
+                        }
+                   });
+    }   
+    cont++;
 }
+
+
 
 function VerCheckProducto(jsonArray)
-{
- var codigoHTML =                     '<tr>'+
-                                       '<td colspan="4" align="center">'+
-                                         '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
-                                         '<input type="submit" value="Eliminar Fila" class="button"/>'+
-                                       '</td>'+
-                                      '</tr>'+
-                                       '<tr align="left">'+                            
-                                         '<th colspan="1"></th>'+
-                                         '<th>C</th>'+
-                                         '<th>Nombre</th>'+
-                                         '<th>Cantidad</th>'+
-                                         '<th>Color</th>'+
-                                         '<th>Talla</th>'+
-                                         '<th>Precio C/U</th>'+
-                                        '</tr>';
-
-                for (var i = 0; i < jsonArray.length; i++)
-                {
-                            if (i % 2 == 0)
-                                codigoHTML+=      '<tr>';
-                           else
-                                codigoHTML+=      '<tr class="even">';
-                            
-                    
-                    //codigoHTML+=                        '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
-                    //codigoHTML+=                          '<td><input id="' + jsonArray[i].codigo_producto + '"></td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
-                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
-                    codigoHTML+=                  '</tr>';
-
-                } 
-        
-    $("#TablaCheckProducto").html(codigoHTML);
+{ 
+ // var cantidad=$('.Editable').val();
+ // var precio=$('.Prec_editable').val();
+  $('.uno').append(                      '<tr>'+
+                                             '<td><input type="checkbox" id="' + jsonArray.codigo_producto + '"></td>'+
+                                              '<td>' + jsonArray.codigo_producto + '</td>'+
+                                              '<td>' + jsonArray.nombre + '</td>'+
+                                              '<td><input type="text" size="5" class="Editable Editable'+ cont +'" value="'+ jsonArray.cantidad +'" id="1000'+ cont +'"></td>'+  
+                                              '<td>' + jsonArray.color + '</td>'+
+                                              '<td>' + jsonArray.talla + '</td>'+
+                                              '<td><input type="text" size="10" class="Prec_editable" value="'+ jsonArray.precio_venta +'" id="'+ cont +'"></td>'+
+                                              '<td id="subTotal'+cont +'">' + jsonArray.precio_venta + '</td>'+
+                                          '</tr>');
+            
+    //$("#TablaCheckProducto").html(codigoHTML);
     activadorEventosVendedores();
-    activadorEventosClientes();
-    
+    activadorEventosClientes();  
+    ObtenerSubTotal();
 }
+            
+  
+function ObtenerSubTotal()
+{   
+    $(".Prec_editable").on("change", function()
+    {        
+        //alert(precio);     
+        var id = $(this)[0].id;
+        var precio=$("#"+id).val();        
+        var cantidad=$('.Editable'+id).val();        
+        var subT= precio * cantidad; 
+        $("#subTotal"+ id ).html(subT);
+    })
+    
+    $(".Editable").on("change", function()
+    {        
+        //alert(precio);     
+        var id = $(this)[0].id;
+        var id2 = id - 1000000;
+        var precio=$("#"+id2).val();        
+        var cantidad=$('.Editable'+id2).val();                
+        var subT= precio * cantidad; 
+        $("#subTotal"+ id2 ).html(subT);
+    })
+}
+
             
   
 
@@ -1400,6 +1413,7 @@ function AddPedido()
                               '</fieldset>'+                              
                               '<fieldset><legend>Productos</legend>'+
                               '<table class="tbonita" align="center" id="TablaCheckProducto">'+ 
+                              '<tbody>'+
                                   '<tr>'+
                                      '<td colspan="4" align="center">'+
                                         '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
@@ -1414,8 +1428,12 @@ function AddPedido()
                                          '<th>Color</th>'+
                                          '<th>Talla</th>'+
                                          '<th>Precio C/U</th>'+
-                                        '</tr>'+                       
-                                '</table>'+ 
+                                         '<th>SubTotal</th>'+
+                                  '</tr>'+
+                              '</tbody>'+
+                              '<tbody class="uno">'+
+                              
+                              '</tbody>'+ 
                               '</table>'+
                               '</fieldset>'+                                                    
                           '</div>'+
@@ -1453,6 +1471,7 @@ function AddPedido()
         tablaPedido(TablaPedidos);
     }
     IniciarTabers();
+    //$("#valorTotalViaticos").val(jsonArray[i].valor_total);
     $('#date_field').datepick({yearRange: '1980:2050'});
     $('#date_field').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field2').datepick({yearRange: '1980:2050'});
@@ -1466,6 +1485,7 @@ function AddPedido()
     //$("#form_buscar_Pedido_cliente").submit(buscarPedidoCliente);
     //$("#form_buscar_Pedido_Productos").submit(enviarDatosBuscarProducto); 
     activadorEventosVendedores(); 
+    
 }
 
 
