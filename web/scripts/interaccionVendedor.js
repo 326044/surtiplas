@@ -3014,6 +3014,7 @@ function cargarDatosPerfil(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Perfil</div>'+
                      '<div class="tabla">'+
+                      '<form id="form_modificar_perfil">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
                             '<li><a href="#Laboral">Laboral</a></li>'+
@@ -3037,8 +3038,8 @@ function cargarDatosPerfil(jsonObject)
                                   '</tr>'+
                                  '</form>'+                              
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Identificación</th>'+
-                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
+                                    '<td><input type="text" name="id_perfilMod" id="id_perfilMod" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
@@ -3151,6 +3152,55 @@ function cargarDatosPerfil(jsonObject)
     $("#form_modificar_perfil").submit(enviarDatosModPerfil);
     activadorEventosVendedores();
     cargarFoto();
+}
+function enviarDatosModPerfil(evento)
+{
+    evento.preventDefault();
+    var id_usuario = $("#id_perfilMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonObj)
+                    {
+                        verificarModPerfil(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+//***********************                                                                         ***********************
+//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
+//***********************                                                                         ***********************
+//***********************************************************************************************************************
+//***********************************************************************************************************************
+
+function verificarModPerfil(jsonObj)
+{
+    if (jsonObj.ModPerfil  ==="true")
+    {
+        alert("El perfil se modificó correctamente");
+    }
+    
+    else
+    {
+        alert("El perfil no se pudo modificar");
+    }   
+    
+    seccionDatosPerfil();
 }
 
 function cargarFoto()

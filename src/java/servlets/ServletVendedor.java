@@ -569,6 +569,40 @@ public class ServletVendedor extends HttpServlet
             }
             out.print(Actividades);
         }
+          
+        if (op.equals("ModPerfil"))
+        {
+            String cod = String.valueOf(jsonObj.get("IdUsuario"));
+            System.out.print(cod);
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (usrv.ModificarPerfilVendedor(jsonObject, this.idUsuario, cod))
+                {
+                    objRes.put("ModPerfil", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("ModPerfil", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
     }
     
     
