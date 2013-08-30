@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" session="true"%>
 <%
-    response.setHeader("Pragma","no-cache");
+response.setHeader("Pragma","no-cache");
     response.setHeader("Cache-Control","must-revalidate");
     response.setHeader("Cache-Control","no-cache");
     response.setHeader("Cache-Control","no-store");
