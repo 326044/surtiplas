@@ -64,6 +64,7 @@ function inicializar()
     //Inicializacion de las opciones
     perfil=$("#Perfil");
     perfil.click(menuPerfil);
+    activadorEventosPerfil();
 }
 
 //**********************************************************************************
@@ -367,16 +368,18 @@ function  activadorEventosProductos()
 }
 function activadorEventosPerfil()
 {
+// VARIABLES DEL MENU VERTICAL DE LA OPCION VENDEDORES
+    var perfilA;
+// ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+    perfilA=$("#Perfil");
+    perfilA.click(seccionDatosPerfil);
 //********************************************************
 //** VARIABLES DE LAS OPCIONES DEL LISTADO DE PRODUCTOS **
 //********************************************************
     var modificarA;
-    var PBorrarOk,volverProducto, vBorrarP, vHideDelP;
 // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     modificarA=$(".ModPerfil");
     modificarA.click(seccionDatosPerfil);
-    volverProducto=$("#volverAddProducto");
-    volverProducto.click(seccionListadoProductos);
 }
 //**********************************************************************************
 //**********************************************************************************
@@ -8439,7 +8442,7 @@ function menuPerfil()
 
     $(".content-float-vendedores").html(codigoHTML);
     $(".content-float-vendedores").hide();
-    $(".content-float-datos").css({width: 830});
+    $(".content-float-datos").css({width: 870});
     seccionDatosPerfil();
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
@@ -8455,7 +8458,7 @@ function menuPerfil()
 function seccionDatosPerfil()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosUsuario","Id_usuario":id};
+    var request = {"Usuarios":"Perfil","IdUsuario":id};
     var jsonobj=JSON.stringify(request);
     $.ajax({
         
@@ -8599,14 +8602,6 @@ function ModPerfil(jsonObject)
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                '<th align="left" style="padding-left:5px;">Id Ubicacion</th>'+
-                                    '<td>'+ 
-                                        '<select name="id_ubicacion" style="width:160px;" class="ubicacion">'+
-                                            //'<option value="null"></option>'+
-                                        '</select>'+ 
-                                    '</td>'+
-                               '</tr>'+
-                                  '<tr>'+
                                     '<td colspan="4" align="left">'+
                                       'Otros datos:<br>'+
                                       '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
@@ -8622,7 +8617,6 @@ function ModPerfil(jsonObject)
                           '<table align="center">'+
                             '<tr>'+
                               '<td colspan="4" align="center">'+
-                                  '<input type="button" value="Volver" class="button" id="volverAddUsuario" />'+
                                   '<input type="submit" value="Registrar" class="button" />'+
                               '</td>'+
                             '</tr>'+
@@ -8631,14 +8625,13 @@ function ModPerfil(jsonObject)
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    listUbicacion();
     IniciarTabers();
     $('#date_field13').datepick({yearRange: '1980:2050'});
     $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_perfil").submit(enviarDatosModPerfil);
-    activadorEventosUsuarios();
+    activadorEventosPerfil();
 }
 
 //***************************************************************************************************************
@@ -8651,10 +8644,16 @@ function ModPerfil(jsonObject)
 
 function enviarDatosModPerfil(evento)
 {
-    var request = {"Vendedores":"Perfil"};
+    evento.preventDefault();
+    var id_usuario = $("#id_perfilMod").val();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Usuarios":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
     var jsonobj=JSON.stringify(request);
-    $.ajax({
+    //alert(jsonobj.toString());
     
+    $.ajax({        
                     data: {administrador:jsonobj},
                     type: 'POST',
                     dataType: 'json',

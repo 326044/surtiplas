@@ -234,21 +234,6 @@ public class ServletAdministrador extends HttpServlet
             out.print(clients);
 	}
         
-        if (op.equals("Perfil"))
-        {   
-            JSONArray perfils = new JSONArray();
-            perfils = per.cargarPerfil();
-            out.print(perfils);
-	}
-        
-       if (op.equals("DatosPerfil"))
-        {
-            String cod = String.valueOf(jsonObj.get("Id_usuario"));  
-            System.out.print(cod);
-            JSONObject perfil = per.datosPerfil(cod);
-            out.print(perfil);
-        }
-        
         if (op.equals("DatosDevoluciones"))
         {
             String cod = String.valueOf(jsonObj.get("Id_Devolucion"));  
@@ -293,21 +278,21 @@ public class ServletAdministrador extends HttpServlet
             JSONObject material = use.DatosMaterial(cod);
             out.print(material);
         }
+       
+        if (op.equals("DatosPerfil"))
+        {
+            String cod = String.valueOf(jsonObj.get("IdUsuario"));   
+            JSONObject perfil = per.datosPerfil(cod);
+            out.print(perfil);
+        }
         
         if (op.equals("Perfil"))
-        {   
-            JSONArray perf = new JSONArray();
-            perf = per.cargarPerfil();
-            out.print(perf);
-	}
-        
-        if (op.equals("DatosPerfil"))
         {
             System.out.print(String.valueOf(session.getAttribute("IdUsuario")));
             JSONObject vendedor = usr.datosUsuario(String.valueOf(session.getAttribute("IdUsuario")));
             out.print(vendedor);
         }
-
+        
         if (op.equals("AddUsuario"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
