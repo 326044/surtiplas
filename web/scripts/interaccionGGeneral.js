@@ -7,6 +7,8 @@ var map;
 var latitud;
 var longitud;
 var precision;
+var TablaProductos=null;
+var TablaProductosPedidos=null;
 pagina=$(document);
 pagina.ready(inicializar);
 
@@ -18,7 +20,6 @@ function inicializar()
     var Gcomecial;
     vendedores=$("#Vendedores");
     vendedores.click(menuVendedores);
-    alert("nicolas es gay");
     
 /* Inicializacion de los eventos */
 
@@ -43,7 +44,8 @@ function inicializar()
     
     productos=$("#Productos");
     productos.click(menuProductos);
-    
+    activadorEventosProductos();
+
 // Se crea la variable perfil */  
     
     var perfil;
@@ -95,6 +97,30 @@ function activadorEventosVendedores()
     egresosV=$("#EgresosFinanciera");
     egresosV.click(VerEgreso);
     
+}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE ACTIVA LOS EVENTOS PRINCIPALES    *********************
+//*************  DE LA SECCION PRODUCTOS                       *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+
+
+function activadorEventosProductos ()
+{
+    //*****************************************************
+    //** VARIABLES PRINCIPALES DE LA SECCION PRODUCTOS **
+    //*****************************************************
+    var verProducto, volverProducto;
+    // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
+
+    verProducto=$(".VerProducto");
+    verProducto.click(DatosVerProducto);
+    volverProducto=$("#VolverProducto");
+    volverProducto.click(seccionListadoProductos);
+
 }
 
 /* Funciones para crear y activar eventos en los tabers(pestañas) de la aplicacion */
@@ -219,26 +245,16 @@ function menuClientes()
 
 /*Funcion para la asigancion de eventos para las variables declaradas*/
 
-function menuProductos()
-{   
-    // Se le asigna un titulo al encabezado
-    
-   var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
-                    '<ul class="menu-vertical">'+
-                        
-                    '</ul>'; 
-                
-    /* Se activa los eventos y propeidades */
-    
-    $(".content-float-vendedores").html(codigoHTML);
-    $(".nav .menu li a").removeClass("active");
-    $(this).addClass("active");
-    
-    //activador de eventos
-    
-    seccionListadoProductos();
-    
-}
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCION QUE CREA LOS COMPONENTES DEL MENU     *********************
+//*************  VERTICAL DE LA SECCION PRODUCTOS              *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
+
+
 
 /* funcion para la asignacion e eventos para las variables declaradas*/
 
@@ -421,6 +437,8 @@ function cargarListado(jsonArray)
     /* Se activan los eventos y se activan las pestañas */
     
     $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
+    $(".content-float-datos").css({width: 630});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#listadoVentas").addClass("active");
     
@@ -658,6 +676,8 @@ function seccionListadoPedidos(jsonArray)
     /*Se activan los evento*/
 
     $("#datos").html(codigoHTML);
+    $(".tbonita").css({width: 620});
+    $(".content-float-datos").css({width: 630});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#ventasVendedor").addClass("active");
     
@@ -1541,17 +1561,386 @@ function seccionegreso(jsonArray)
     IniciarTabers();
 }
 
+function confirmBuscarProducto()
+{
+    var codigoHTML='<div class="encabezado2">Buscar Producto</div>'+
+                     '<div id="Cliente" class="tab_content">'+
+                     '<form id="form_buscar_producto_pedido">'+
+                              '<br>'+
+                              '<fieldset><legend>Datos Generales</legend>'+
+                              '<table align="center">'+                              
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Linea de Produccion</th>'+
+                                    '<td>'+
+                                      '<input type="text" name="lineaProduccion" value=""/>'+                                      
+                                    '</td>'+
+                                    '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
+                                    '<td>'+
+                                      '<input type="text" name="tipoProducto" value=""/>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Material</th>'+
+                                    '<td>'+
+                                      '<input type="text" name="materiales" value="" />'+
+                                    '</td>'+                                   
+                              '</table>'+
+                              '<table align="center">'+
+                            '<tr>'+
+                                '<td colspan="4" align="center">'+
+                                   '<input type="submit" value="Buscar" class="button"/>'+
+                                   '<input type="reset" value="Limpiar" class="button"/>'+
+                                   '<input type="button" class="button" value="Volver" id="NotAddProducto"/>'+
+                                '</td>'+
+                             '</tr>'+    
+                          '</table>'+  
+                              '</fieldset>'+                              
+                              '<fieldset><legend>Resultado</legend>'+
+                               '<table class="tbonita" align="center" id="TablaProductosPedidos">'+                                   
+                                 '<tr align="left">'+                            
+                                    '<th colspan="1"></th>'+
+                                    '<th>Codigo</th>'+
+                                    '<th>Nombre</th>'+
+                                    '<th>Cantidad</th>'+
+                                    '<th>Color</th>'+
+                                    '<th>Talla</th>'+
+                                    '<th>Precio C/U</th>'+                                 
+                                  '</tr>'+                          
+                                '</table>'+ 
+                              '</table>'+                              
+                              '</fieldset>'+                             
+                          '</div>'+
+                          '</div>'+
+                          '<br>'+                                                   
+                         '</form>'+
+                    '</div>';
+
+
+    $("#overAddProducto").css({display: "block"});    
+    $("#overAddProducto").html(codigoHTML);
+    $("#fadeAddProducto").css({display: "block"});
+    if(TablaProductosPedidos != null)
+    {
+        AdicionarBusquedaPedidosProductos(TablaProductosPedidos);
+    }  
+    $("#form_buscar_producto_pedido").submit(enviarDatosBuscarPedidosProductos);
+    activadorEventosVendedores();
+    activadorEventosProductos();
+}
+
+
+function enviarDatosBuscarPedidosProductos(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    var request = {"Vendedores":"BuscarProductos","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonArray)
+                    {
+                        AdicionarBusquedaPedidosProductos(jsonArray);
+                    },
+                    error: function()
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });    
+}
+
+function AdicionarBusquedaPedidosProductos(jsonArray)
+{
+    
+    var codigoHTML =                     '<tr align="left">'+                            
+                                         '<th colspan="1"></th>'+
+                                         '<th>Codigo</th>'+
+                                         '<th>Nombre</th>'+
+                                         '<th>Cantidad</th>'+
+                                         '<th>Color</th>'+
+                                         '<th>Talla</th>'+
+                                         '<th>Precio C/U</th>'+
+                                        '</tr>';
+
+                for (var i = 0; i < jsonArray.length; i++)
+                {
+                            if (i % 2 == 0)
+                                codigoHTML+=      '<tr>';
+                           else
+                                codigoHTML+=      '<tr class="even">';
+                    
+                    //codigoHTML+=                        '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
+                    codigoHTML+=                          '<td><input type="checkbox" class="checkProducto" name="checkboxproducto" id="' + jsonArray[i].codigo_producto + '"></td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                }              
+    
+   $("#TablaProductosPedidos").html(codigoHTML);   
+   $(".checkProducto").click(checkVerProducto);    
+   activadorEventosProductos();
+    
+}
+
+function checkVerProducto()
+{
+    HideConfirmAddProducto();
+    var id = $(this)[0].id;
+    var request = {"Vendedores":"DatosCheckProducto","codigo_producto":id};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        VerCheckProducto(jsonArray);     
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });
+}
+
+function VerCheckProducto(jsonArray)
+{
+ var codigoHTML =                     '<tr>'+
+                                       '<td colspan="4" align="center">'+
+                                         '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
+                                         '<input type="submit" value="Eliminar Fila" class="button"/>'+
+                                       '</td>'+
+                                      '</tr>'+
+                                       '<tr align="left">'+                            
+                                         '<th colspan="1"></th>'+
+                                         '<th>C</th>'+
+                                         '<th>Nombre</th>'+
+                                         '<th>Cantidad</th>'+
+                                         '<th>Color</th>'+
+                                         '<th>Talla</th>'+
+                                         '<th>Precio C/U</th>'+
+                                        '</tr>';
+
+                for (var i = 0; i < jsonArray.length; i++)
+                {
+                            if (i % 2 == 0)
+                                codigoHTML+=      '<tr>';
+                           else
+                                codigoHTML+=      '<tr class="even">';
+                            
+                    
+                    //codigoHTML+=                        '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
+                    //codigoHTML+=                          '<td><input id="' + jsonArray[i].codigo_producto + '"></td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                } 
+        
+    $("#TablaCheckProducto").html(codigoHTML);
+    activadorEventosVendedores();
+    activadorEventosClientes();
+    
+}
+            
+  
+
+
 /*Funcion seccionListadoProductos*/
+
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
+//*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DE LOS   *********************
+//*************  PRODUCTOS                                     *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
 
 function seccionListadoProductos()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
-                     '<div class="tabla">'+
-                        
-                    '</div>';
-
-    $("#datos").html(codigoHTML);  
+    var request = {"Vendedores":"SeccionProducto"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        ListadoProductos(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+           });
 }
+
+function ListadoProductos(jsonArray)
+{
+   for (var k = 0; k < jsonArray.length; k++)
+   {
+       if (k==0)
+       {
+         var codigoHTML = '<div class="encabezado2">Listado Productos</div>'+
+                          '<div class="tabla">'+
+                             '<form id="form_buscar_producto">'+
+                                 '<table align="center" border="0" >'+
+                                     '<tr>'+                                    
+                                         '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+ 
+                                            '<td>'+
+                                             '<select name="lineaProduccion" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                             for (var j = 0; j < jsonArray[k].length; j++)
+                                             {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][j].cod_linea +'">'+ jsonArray[k][j].nombre_linea +'</option>';
+                                             }                                                                                              
+            codigoHTML +=                    '</select>'+ 
+                                         '</td>'; 
+       }
+       
+       if (k==1)
+       {
+            codigoHTML+=                '<th align="right" style="padding-right:5px;">Material</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="materiales" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var l = 0; l < jsonArray[k].length; l++) 
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][l].codigo +'">'+ jsonArray[k][l].material +'</option>';                                                 
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>';  
+        }
+       
+        if (k==2)
+        {
+            codigoHTML +=                '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="tipoProducto" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var m = 0; m < jsonArray[k].length; m++)
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][m].cod_tipo_producto  +'">'+ jsonArray[k][m].nombre_tipo_producto +'</option>';                                                     
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>'+ 
+                                     '</tr>'+
+                                     '<tr>'+                                
+                                         '<td colspan="6" align="center"><br>'+
+                                           '<input type="submit" value="Buscar" class="button"  />'+
+                                         '</td>'+
+                                     '</tr>'+
+                                 '</table>'+
+                             '</form>'+
+                             '<br>'+
+                             '<table align="center" border="0"  width="800" class="tbonita" id="TablaProductos">'+ 
+                                '<tr align="left">'+                     
+                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                    '<th>Codigo</th>'+
+                                    '<th>Nombre</th>'+
+                                    '<th>Cantidad</th>'+
+                                    '<th>Color</th>'+
+                                    '<th>Talla</th>'+
+                                    '<th>Precio C/U</th>'+
+                                  '</tr>'+
+                             '</table>'+                  
+                          '</div>'; 
+        }
+                                      
+  }                  
+    $("#datos").html(codigoHTML);
+    $(".menu-vertical li a").removeClass("active");
+    if(TablaProductos != null)
+    {
+        AdicionarBusquedaProductos(TablaProductos);
+    }
+    $(this).addClass("active");   
+    $("#form_buscar_producto").submit(enviarDatosBuscarProducto);
+     activadorEventosProductos();
+    //$(".menu-vertical li a").removeClass("active");
+    //$(this).addClass("active");
+}
+
+
+
+function enviarDatosBuscarProducto(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    var request = {"Vendedores":"BuscarProductos","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonArray)
+                    {
+                        AdicionarBusquedaProductos(jsonArray);
+                    },
+                    error: function()
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });    
+}
+
+function AdicionarBusquedaProductos(jsonArray)
+{
+    TablaProductos = jsonArray;
+    var codigoHTML =                     '<tr align="left">'+                            
+                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                         '<th>Codigo</th>'+
+                                         '<th>Nombre</th>'+
+                                         '<th>Cantidad</th>'+
+                                         '<th>Color</th>'+
+                                         '<th>Talla</th>'+
+                                         '<th>Precio C/U</th>'+
+                                        '</tr>';
+
+                for (var i = 0; i < jsonArray.length; i++)
+                {
+                            if (i % 2 == 0)
+                                codigoHTML+=      '<tr>';
+                           else
+                                codigoHTML+=      '<tr class="even">';
+                    codigoHTML+=                          '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                }
+                
+                
+    $("#TablaProductos").html(codigoHTML);
+    activadorEventosProductos();
+}
+
 
 /*Funcion seccionDatosPerfil*/
 
@@ -1741,6 +2130,7 @@ function menuVendedores()
     /* Se activa los eventos y propeidades */
 
     $(".content-float-vendedores").html(codigoHTML).css({height:"165px"});
+    $(".content-float-vendedores").show();
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     
@@ -1771,6 +2161,7 @@ function menuClientes()
     /* Se activa los eventos y propeidades */
     
     $(".content-float-vendedores").html(codigoHTML).css({height:"100px"});
+    $(".content-float-vendedores").show();
     $(".nav .menu li a").removeClass("active"); 
     $(this).addClass("active");         
     $(".menu-vertical li a#IngresosFinanciera").addClass("active");    
@@ -1799,13 +2190,15 @@ function menuProductos()
     /* Se activa los eventos y propeidades */
     
     $(".content-float-vendedores").html(codigoHTML);
+    $(".content-float-vendedores").hide();
+    $(".content-float-datos").css({width: 870});
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
-    
+
     //activador de eventos
     
     seccionListadoProductos();
-    
+
 }
 
 /* funcion para la asignacion e eventos para las variables declaradas*/
@@ -3092,24 +3485,383 @@ function seccionegreso(jsonArray)
 
 function seccionListadoProductos()
 {
-    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
-                     '<div class="tabla">'+
-                        
-                    '</div>';
 
-    $("#datos").html(codigoHTML);  
+    var request = {"Vendedores":"SeccionProducto"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        ListadoProductos(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+           });
 }
+
+function ListadoProductos(jsonArray)
+{
+
+   for (var k = 0; k < jsonArray.length; k++)
+   {
+       if (k==0)
+       {
+         var codigoHTML = '<div class="encabezado2">Listado Productos</div>'+
+                          '<div class="tabla">'+
+                             '<form id="form_buscar_producto">'+
+                                 '<table align="center" border="0" >'+
+                                     '<tr>'+                                    
+                                         '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+ 
+                                            '<td>'+
+                                             '<select name="lineaProduccion" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                             for (var j = 0; j < jsonArray[k].length; j++)
+                                             {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][j].cod_linea +'">'+ jsonArray[k][j].nombre_linea +'</option>';
+                                             }                                                                                              
+            codigoHTML +=                    '</select>'+ 
+                                         '</td>'; 
+       }
+       
+       if (k==1)
+       {
+            codigoHTML+=                '<th align="right" style="padding-right:5px;">Material</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="materiales" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var l = 0; l < jsonArray[k].length; l++) 
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][l].codigo +'">'+ jsonArray[k][l].material +'</option>';                                                 
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>';  
+        }
+       
+        if (k==2)
+        {
+            codigoHTML +=                '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="tipoProducto" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var m = 0; m < jsonArray[k].length; m++)
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][m].cod_tipo_producto  +'">'+ jsonArray[k][m].nombre_tipo_producto +'</option>';                                                     
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>'+ 
+                                     '</tr>'+
+                                     '<tr>'+                                
+                                         '<td colspan="6" align="center"><br>'+
+                                           '<input type="submit" value="Buscar" class="button"  />'+
+                                         '</td>'+
+                                     '</tr>'+
+                                 '</table>'+
+                             '</form>'+
+                             '<br>'+
+                             '<table align="center" border="0"  width="800" class="tbonita" id="TablaProductos">'+ 
+                                '<tr align="left">'+                     
+                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                    '<th>Codigo</th>'+
+                                    '<th>Nombre</th>'+
+                                    '<th>Cantidad</th>'+
+                                    '<th>Color</th>'+
+                                    '<th>Talla</th>'+
+                                    '<th>Precio C/U</th>'+
+                                  '</tr>'+
+                             '</table>'+                  
+                          '</div>'; 
+        }
+                                      
+  }                  
+    $("#datos").html(codigoHTML);
+    $(".menu-vertical li a").removeClass("active");
+    if(TablaProductos != null)
+    {
+        AdicionarBusquedaProductos(TablaProductos);
+    }
+    $(this).addClass("active");   
+    $("#form_buscar_producto").submit(enviarDatosBuscarProducto);
+     activadorEventosProductos();
+    //$(".menu-vertical li a").removeClass("active");
+    //$(this).addClass("active");
+}
+
+
+
+function enviarDatosBuscarProducto(evento)
+
+{
+
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    var request = {"Vendedores":"BuscarProductos","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonArray)
+                    {
+                        AdicionarBusquedaProductos(jsonArray);
+                    },
+                    error: function()
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });    
+}
+
+function AdicionarBusquedaProductos(jsonArray)
+{
+    TablaProductos = jsonArray;
+    var codigoHTML =                     '<tr align="left">'+                            
+                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                         '<th>Codigo</th>'+
+                                         '<th>Nombre</th>'+
+                                         '<th>Cantidad</th>'+
+                                         '<th>Color</th>'+
+                                         '<th>Talla</th>'+
+                                         '<th>Precio C/U</th>'+
+                                        '</tr>';
+
+                for (var i = 0; i < jsonArray.length; i++)
+                {
+                            if (i % 2 == 0)
+                                codigoHTML+=      '<tr>';
+                           else
+                                codigoHTML+=      '<tr class="even">';
+                    codigoHTML+=                          '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                }
+                
+                
+    $("#TablaProductos").html(codigoHTML);
+    activadorEventosProductos();
+}
+
 
 /*Funcion seccionDatosPerfil*/
 
+//**********************************************************************************
+//**********************************************************************************
+//*************                                                *********************
+//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
+//*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DEL      *********************
+//*************  PERFIL DEL USUARIO                            *********************
+//*************                                                *********************
+//**********************************************************************************
+//**********************************************************************************
 function seccionDatosPerfil()
 {
-    var codigoHTML = '<div class="encabezado2">Datos del Jefe Comercial</div>'+
+    var request = {"Vendedores":"Perfil"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        cargarDatosPerfil(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+           });
+}
+
+function cargarDatosPerfil(jsonObject)
+{
+    var codigoHTML = '<div class="encabezado2">Perfil</div>'+
                      '<div class="tabla">'+
-                        
+                        '<ul class="tabs">'+
+                            '<li><a href="#Personal">Personal</a></li>'+
+                            '<li><a href="#Laboral">Laboral</a></li>'+
+                        '</ul>'+                        
+                        '<div class="tab_container">'+
+                            '<div id="Personal" class="tab_content">'+
+                            '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
+                              '<table align="center" border="0" align="left">'+
+                                  '<tr>'+
+                                      '<td colspan="2" rowspan="9" align="center">'+
+                                          '<div class="foto">'+
+                                                '<div class="imagen" id="fotoVendedores">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                  '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                              '</div>'+   
+                                          '</div>'+
+                                      '</td>'+
+                                  '</tr>'+
+                                 '</form>'+                              
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Identificación</th>'+
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Apellidos</th>'+
+                                    '<td><input type="text" name="apellidos" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nombres</th>'+
+                                    '<td><input type="text" name="nombres" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Nickname</th>'+
+                                    '<td><input type="text" name="nickname" value="' + jsonObject.nickname_usuario + '" size="20" maxlength="10" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Contraseña</th>'+
+                                    '<td><input type="password" name="contrasena" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Dirección</th>'+
+                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Teléfono</th>'+
+                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Celular</th>'+
+                                    '<td><input type="text" name="celular" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
+                                  '</tr>'+
+                              '</table>'+
+                            '</div>'+
+                            '<div id="Laboral" class="tab_content">'+
+                              '<table>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
+                                    '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">email</th>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
+                                    '<td><input type="text" name="cumpleanos" value="' + jsonObject.fecha_cumpleanos + '"  readonly="readonly" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
+                                    '<td>'+
+                                      '<select name="tipoCuenta" style="width:177px">'+
+                                        '<option value="1">Ahorros</option>'+
+                                        '<option value="2">Corriente</option>'+
+                                      '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                    '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
+                                    '<td><input type="text" name="num_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Banco</th>'+
+                                    '<td>'+
+                                      '<select name="banco" style="width:177px">'+
+                                        '<option value="1">Bancafé</option>'+
+                                        '<option value="2">Banco AV Villas</option>'+
+                                        '<option value="3">BBVA</option>'+
+                                        '<option value="4">Banco Caja Social BCSC</option>'+
+                                        '<option value="5">Banco de Bogotá</option>'+
+                                        '<option value="6">Banco de Credito</option>'+
+                                        '<option value="7">Banco de la República de Colombia</option>'+
+                                        '<option value="8">Banco de Occidente</option>'+
+                                        '<option value="9">Banco GNB Sudameris</option>'+
+                                        '<option value="10">Banco Granahorrar</option>'+
+                                        '<option value="11">Banco Popular</option>'+
+                                        '<option value="12">Banco Santander Colombia</option>'+
+                                        '<option value="13">Bancoldex</option>'+
+                                        '<option value="14">Bancolombia</option>'+
+                                        '<option value="15">BBVA Banco Ganadero</option>'+
+                                        '<option value="16">Citi Bank</option>'+
+                                        '<option value="17">Colmena BCSC</option>'+
+                                        '<option value="18">Colpatria</option>'+
+                                        '<option value="19">Conavi</option>'+
+                                        '<option value="20">Davivienda</option>'+
+                                        '<option value="21">Megabanco</option>'+
+                                        '<option value="22">Banco Finandino</option>'+
+                                        '<option value="23">Banco Falabella</option>'+
+                                        '<option value="24">Banco Coomeva</option>'+
+                                      '</select>'+
+                                    '</td>'+
+                                  '</tr>'+
+                                  '<tr>'+
+                                '<td colspan="4" align="left">'+
+                                    'Otros datos:<br>'+
+                                    '<textarea name="otrosDatos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
+                                '</td>'+
+                                '</tr>'+
+                              '</table>'+
+                            '</div>'+                    
+                          '</div>'+
+                          '<br>'+
+                          '<table align="center">'+
+                            '<tr>'+
+                              '<td colspan="4" align="center">'+
+                                  '<input type="submit" value="Registrar" class="button" />'+
+                              '</td>'+
+                            '</tr>'+
+                          '</table> '+      
+                        '</form>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);
-    //$(".menu-vertical li a").removeClass("active");
-    //$(this).addClass("active");
+    IniciarTabers();
+    $('#date_field13').datepick({yearRange: '1980:2050'});
+    $('#date_field13').datepick('option', {dateFormat: $.datepick.ATOM});
+    $('#date_field14').datepick({yearRange: '1980:2050'});
+    $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
+    $("#form_modificar_perfil").submit(enviarDatosModPerfil);
+    activadorEventosVendedores();
+    cargarFoto();
+}
+
+function cargarFoto()
+{
+    var botonCargarFoto = $("#cargarFoto");
+    
+    new AjaxUpload(botonCargarFoto, 
+    {
+        action: 'ServletFotos',
+        onSubmit : function(file, ext)
+        {
+                if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext)))
+                {
+                        // extensiones permitidas
+                        alert('Error: Solo se permiten imagenes');
+                        // cancela upload
+                        return false;
+                } 
+                else 
+                {
+                        botonCargarFoto.attr("value", "Cargando");
+                        this.disable();
+                }
+        },
+        onComplete: function(file, response)
+        {
+                botonCargarFoto.attr("value", "Cargar Foto");
+                // enable upload button
+                this.enable();			
+                // Agrega archivo a la lista
+                var rutaFoto = "images/empleados/" + file;
+                var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
+                $('#rutaFoto').attr("value",file);
+                $('#fotoVendedores').html(htmlFoto);
+                
+        }	
+    });
 }
