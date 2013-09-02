@@ -4454,8 +4454,6 @@ function AddLinea()
                         '<table align="center">'+
                             '<form id="form_crear_linea"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="nombre_linea" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -4562,8 +4560,6 @@ function ModLinea(jsonObject)
                      '<div class="tabla">'+
                             '<form id="form_modificar_linea"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -4693,8 +4689,6 @@ function VerLinea(jsonObject)
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -4751,8 +4745,6 @@ function DelLinea(jsonObject)
     var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
                         '<table align="center">'+
                             '<tr align="center">'+
-                                '<th align="right" style="padding-right:5px;">Código</th>'+
-                                '<td><input type="text" name="cod_linea" value="' + jsonObject.cod_linea + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                 '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                 '<td><input type="text" name="nombre_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                               '</tr>'+
@@ -4927,8 +4919,6 @@ function AddColor()
                         '<table align="center">'+
                             '<form id="form_crear_color"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_color" value="" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td><input type="text" name="color" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -5035,8 +5025,6 @@ function ModColor(jsonObject)
                      '<div class="tabla">'+
                             '<form id="form_modificar_color"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -5166,8 +5154,6 @@ function VerColor(jsonObject)
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -5225,8 +5211,6 @@ function DelColor(jsonObject)
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_color" value="' + jsonObject.cod_color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -5399,8 +5383,6 @@ function AddTalla()
                         '<table align="center">'+
                             '<form id="form_crear_talla"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_talla" value="" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Talla</th>'+
                                     '<td><input type="text" name="talla" value="" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -5507,8 +5489,6 @@ function ModTalla(jsonObject)
                      '<div class="tabla">'+
                             '<form id="form_modificar_talla"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Talla</th>'+
                                     '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -5638,8 +5618,6 @@ function VerTalla(jsonObject)
                         '<table align="center">'+
                         '<form id=""  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Talla</th>'+
                                     '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -5697,8 +5675,6 @@ function DelTalla(jsonObject)
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="cod_talla" value="' + jsonObject.cod_talla + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -5976,8 +5952,6 @@ function ModMaterial(jsonObject)
                      '<div class="tabla">'+
                             '<form id="form_modificar_material"  enctype="multipart/form-data"  align="center">'+
                                   '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" required/></td>'+
                                     '<th align="right" style="padding-right:5px;">Material</th>'+
                                     '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" required/></td>'+
                                   '</tr>'+
@@ -6107,8 +6081,6 @@ function VerMaterial(jsonObject)
                         '<table align="center">'+
                         '<form id=""  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Material</th>'+
                                     '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -6167,8 +6139,6 @@ function DelMaterial(jsonObject)
     var codigoHTML = '<div class="encabezado2">Borrar Material</div>'+
                         '<table align="center">'+
                             '<tr align="center">'+
-                                    '<th align="right" style="padding-right:5px;">Código</th>'+
-                                    '<td><input type="text" name="codigo" value="' + jsonObject.codigo + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="material" value="' + jsonObject.material + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
@@ -6187,7 +6157,7 @@ function DelMaterial(jsonObject)
 function DelMaterialOk()
 {
     var id = $(this)[0].name; 
-    alert(id);
+    //alert(id);
     var request = {"Usuarios":"DelMaterial","Codigo":id};
     var jsonobj=JSON.stringify(request);
     $("#overDelItem").css({display: "none"});
