@@ -456,8 +456,10 @@ public class pedidosSQL {
             this.st = cn.createStatement();
             Pedidos usw = new Pedidos("", String.valueOf(datos.get("valor_del_iva")), String.valueOf(datos.get("valor_total")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("hora")), String.valueOf(datos.get("id_cliente")));
             String tsql;
+            String tsql2;
             tsql = "INSERT INTO pedidos VALUES(DEFAULT, '";
             tsql += usw.getvalor_del_iva() + "','" + usw.getvalor_total() + "','" + usw.getid_usuario() + "','" + usw.getfecha() + "','" + usw.gethora() + "','" + usw.getid_cliente() + "')";
+             tsql2 = "SELECT SUM(valor) AS valor_total FROM pedidos"; 
             this.st.execute(tsql);
             this.desconectar();
         }

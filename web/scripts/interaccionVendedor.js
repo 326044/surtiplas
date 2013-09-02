@@ -1159,8 +1159,7 @@ function confirmBuscarProducto()
                           '<br>'+                                                   
                          '</form>'+
                     '</div>';
-
-
+                
     $("#overAddProducto").css({display: "block"});    
     $("#overAddProducto").html(codigoHTML);
     $("#fadeAddProducto").css({display: "block"});
@@ -1417,7 +1416,7 @@ function AddPedido()
                                   '<tr>'+
                                      '<td colspan="4" align="center">'+
                                         '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
-                                        '<input type="submit" value="Eliminar Fila" class="button"/>'+
+                                        '<input type="reset" value="Eliminar Fila" class="button"/>'+
                                      '</td>'+
                                   '</tr>'+                                
                                   '<tr align="left">'+                            
@@ -3001,7 +3000,7 @@ function seccionDatosPerfil()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        cargarDatosPerfil(jsonObject);     
+                        ModPerfil(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -3010,7 +3009,7 @@ function seccionDatosPerfil()
            });
 }
 
-function cargarDatosPerfil(jsonObject)
+function ModPerfil(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Perfil</div>'+
                      '<div class="tabla">'+
@@ -3039,35 +3038,35 @@ function cargarDatosPerfil(jsonObject)
                                  '</form>'+                              
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Cedula</th>'+
-                                    '<td><input type="text" name="id_perfilMod" id="id_perfilMod" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
+                                    '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="apellidos_usuario" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombres" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="nombre_usuario" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname" value="' + jsonObject.nickname_usuario + '" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="text" name="nickname_usuario" value="' + jsonObject.nickname_usuario + '" size="20" maxlength="10" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="contrasena" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="password" name="password_usuario" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="direccion_usuario" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="telefono_usuario" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
+                                    '<td><input type="text" name="celular_usuario" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -3077,11 +3076,11 @@ function cargarDatosPerfil(jsonObject)
                                     '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly" /></td>'+
                                     '<th align="right" style="padding-right:5px;">email</th>'+
-                                    '<td><input type="text" name="email" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="email_usuario" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
-                                    '<td><input type="text" name="cumpleanos" value="' + jsonObject.fecha_cumpleanos + '"  readonly="readonly" /></td>'+
+                                    '<td><input type="text" name="fecha_cumpleanos" value="' + jsonObject.fecha_cumpleanos + '"  readonly="readonly" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
                                     '<td>'+
                                       '<select name="tipoCuenta" style="width:177px">'+
@@ -3092,7 +3091,7 @@ function cargarDatosPerfil(jsonObject)
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
-                                    '<td><input type="text" name="num_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
+                                    '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
                                     '<td>'+
                                       '<select name="banco" style="width:177px">'+
@@ -3126,9 +3125,10 @@ function cargarDatosPerfil(jsonObject)
                                   '<tr>'+
                                 '<td colspan="4" align="left">'+
                                     'Otros datos:<br>'+
-                                    '<textarea name="otrosDatos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
+                                    '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
                                 '</td>'+
                                 '</tr>'+
+                                 '<td><input type="hidden" name="id_perfilMod" class="button" id="id_perfilMod" value="'+ jsonObject.id_usuario +'"/></td>'+
                               '</table>'+
                             '</div>'+                    
                           '</div>'+
@@ -3160,7 +3160,7 @@ function enviarDatosModPerfil(evento)
     var datos_formulario = $(this).serializeArray();   
     var datos = JSON.stringify(SerializeToJson(datos_formulario));
     //alert(datos.toString());
-    var request = {"Usuarios":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
+    var request = {"Vendedores":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
     var jsonobj=JSON.stringify(request);
     //alert(jsonobj.toString());
     
@@ -3415,7 +3415,7 @@ function VerViatico(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td>'+
-                                      '<input type="text" name="ciud"  value="'+ jsonObject.NombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
+                                      '<input type="text" name="nombreMunicipio"  value="'+ jsonObject.nombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                     '<td>'+
