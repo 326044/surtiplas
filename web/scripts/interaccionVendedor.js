@@ -1159,7 +1159,8 @@ function confirmBuscarProducto()
                           '<br>'+                                                   
                          '</form>'+
                     '</div>';
-                
+
+
     $("#overAddProducto").css({display: "block"});    
     $("#overAddProducto").html(codigoHTML);
     $("#fadeAddProducto").css({display: "block"});
