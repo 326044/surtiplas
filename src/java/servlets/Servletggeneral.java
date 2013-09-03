@@ -196,6 +196,7 @@ public class Servletggeneral extends HttpServlet
             }
             out.print(pagosSQL); 
         }   */
+     
     }
                     
      @Override

@@ -115,7 +115,7 @@ function activadorEventosProductos ()
     //*****************************************************
     var verProducto, volverProducto;
     // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
-
+     
     verProducto=$(".VerProducto");
     verProducto.click(DatosVerProducto);
     volverProducto=$("#VolverProducto");
@@ -277,6 +277,28 @@ function menuPerfil()
     seccionDatosPerfil();
 }
 
+
+function DatosVerProducto()
+{
+    var id = $(this)[0].id;
+    var request = {"Vendedores":"DatosProducto","codigo_producto":id};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonObject)
+                    {
+                        VerProducto(jsonObject);     
+                    },
+                    error: function(jsonObject) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+               });
+}
 /* Funcio que sirve para comunicarse con el servlet */
 
 function seccionListado()
@@ -1628,6 +1650,59 @@ function confirmBuscarProducto()
     activadorEventosProductos();
 }
 
+function VerProducto(jsonObject)
+{
+    var codigoHTML= '<div class="encabezado2">Visualizar Producto</div>'+
+                    '<table align="center" border="0" align="left">'+
+                          '<tr>'+
+                              '<td colspan="2" rowspan="8" align="center">'+
+                                  '<div class="foto">'+
+                                      '<div class="imagen">'+
+                                          '<img src="images/traje.png" align="center">'+
+                                      '</div>'+                                               
+                                  '</div>'+
+                              '</td>'+
+                          '</tr>'+
+                          '<br>'+
+                          '<br>'+
+                          '<tr>'+
+                            '<th align="right" style="padding-right:10px;">IdPoducto</th>'+
+                            '<td><input type="text" name="id_producto" value="' + jsonObject.codigo_producto + '" size="20"/ readonly="readonly"></td>'+                                                                   
+                            '<th align="right" style="padding-right:10px;">Nombre</th>'+
+                            '<td><input type="text" name="nombre_producto" value="' + jsonObject.nombre + '" size="20" maxlength="35" readonly="readonly"/></td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
+                            '<td><input type="text" name="linea_produccion" value="' + jsonObject.nombre_linea + '" size="20" readonly="readonly"/></td>'+
+                            '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                            '<td><input type="text" name="cantidad_producto" value="' + jsonObject.cantidad + '" size="20" readonly="readonly"/></td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th align="right" style="padding-right:5px;">Material</th>'+
+                            '<td><input type="text" name="material_producto" value="' + jsonObject.material + '" size="20" maxlength="15" readonly="readonly" /></td>'+                                  
+                            '<th align="right" style="padding-right:5px;">Color</th>'+
+                            '<td><input type="text" name="color_producto" value="' + jsonObject.color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
+                          '</tr>'+
+                          '<tr>'+
+                            '<th align="right" style="padding-right:5px;">Talla</th>'+
+                            '<td><input type="text" name="talla_producto" value="' + jsonObject.talla + '" size="20" maxlength="10" readonly="readonly" /></td>'+                                 
+                            '<th align="right" style="padding-right:5px;">Precio $</th>'+
+                            '<td><input type="text" name="precio_producto" value="' + jsonObject.precio_venta + '" size="20" maxlength="15" readonly="readonly" /></td>'+
+                          '</tr>'+
+                          '<br>'+
+                          '<br>'+                                                                
+                      '</table>'+
+                      '<table align="center">'+
+                      '<tr>'+
+                        '<td colspan="4" align="center">'+
+                            '<input type="button" value="Volver" class="button" id="VolverProducto" />'+                                  
+                        '</td>'+
+                      '</tr>'+
+                    '</table> ';
+
+    $("#datos").html(codigoHTML);   
+    activadorEventosProductos();
+}
 
 function enviarDatosBuscarPedidosProductos(evento)
 {
@@ -2182,7 +2257,7 @@ function menuProductos()
 {   
     // Se le asigna un titulo al encabezado
     
-   var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
+   var codigoHTML = '<div class="encabezado">Gestión ññ</div>'+
                     '<ul class="menu-vertical">'+
                         
                     '</ul>'; 
@@ -2198,6 +2273,8 @@ function menuProductos()
     //activador de eventos
     
     seccionListadoProductos();
+        activadorEventosProductos();
+
 
 }
 
@@ -3565,7 +3642,7 @@ function ListadoProductos(jsonArray)
                              '<br>'+
                              '<table align="center" border="0"  width="800" class="tbonita" id="TablaProductos">'+ 
                                 '<tr align="left">'+                     
-                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                    '<th border="1"></th>'+
                                     '<th>Codigo</th>'+
                                     '<th>Nombre</th>'+
                                     '<th>Cantidad</th>'+
@@ -3596,7 +3673,6 @@ function ListadoProductos(jsonArray)
 function enviarDatosBuscarProducto(evento)
 
 {
-
     evento.preventDefault();
     var datos_formulario = $(this).serializeArray();   
     var datos = JSON.stringify(SerializeToJson(datos_formulario));
@@ -3623,7 +3699,7 @@ function AdicionarBusquedaProductos(jsonArray)
 {
     TablaProductos = jsonArray;
     var codigoHTML =                     '<tr align="left">'+                            
-                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                         '<th border="1"></th>'+
                                          '<th>Codigo</th>'+
                                          '<th>Nombre</th>'+
                                          '<th>Cantidad</th>'+
@@ -3651,7 +3727,25 @@ function AdicionarBusquedaProductos(jsonArray)
                 
                 
     $("#TablaProductos").html(codigoHTML);
+    $(".verProducto").click(DatosVerProducto);
     activadorEventosProductos();
+}
+
+function SerializeToJson(form)
+{
+    var o = {};
+    var a = form;
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
 }
 
 
