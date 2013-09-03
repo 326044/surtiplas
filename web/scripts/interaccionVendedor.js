@@ -91,7 +91,7 @@ function inicializar()
 function activadorEventosVendedores()
 {
     // VARIABLES DEL MENU VERTICAL DE LA OPCION VENDEDORES
-    var pedidoV, viaticosV, actividadesV, AddActividad, hideAddActividad, adicionarCampos;
+    var pedidoV, viaticosV, actividadesV, AddActividad;
     // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     pedidoV=$("#pedidoVendedor");
     pedidoV.click(seccionPedido);    
@@ -789,7 +789,7 @@ function tablaPedidoProducto(jsonArray)
 function confirmBuscarCliente()
 {
     var codigoHTML='<div class="encabezado2">Buscar Cliente</div>'+
-                     '<div id="Cliente" class="tab_content">'+
+                     '<div class="tabla">'+
                      '<form id="form_buscar_clientes_pedidos" >'+
                               '<br>'+
                               '<fieldset><legend>Datos Generales</legend>'+
@@ -880,8 +880,7 @@ function confirmBuscarCliente()
     if (TablaClientePedido != null)
     {
         AdicionarBusquedaPedidosClientes(TablaClientePedido);
-    }
-    $(this).addClass("active");
+    }    
     $("#form_buscar_clientes_pedidos").submit(enviarDatosBuscarPedidosCliente);    
     activadorEventosVendedores();
     activadorEventosClientes();
@@ -970,26 +969,7 @@ function checkVerCliente()
 function VerCheckCliente(jsonObject)
 {
     
-   var codigoHTML = '<div class="encabezado2">Agregar Pedido</div>'+
-                     //'<div id="Cliente" class="tab_content">'+
-                              '<br>'+
-                              '<table align="center">'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Pedido</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="id" value="" size="5" readonly="readonly"/>'+                                      
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Fecha</th>'+
-                                    '<td>'+
-                                      '<input id="date_field6" type="text" name="fecha" value="" size="10"/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                              '<br>'+
-                              '<br>'+
-                              '<fieldset><legend>Datos Generales</legend>'+
-                              '<table align="center">'+                              
-                                  '<tr>'+
+   var codigoHTML =               '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
                                     '<td>'+
                                       '<input type="text" name="nit" value="' + jsonObject.id_cliente+ '" size="5" readonly="readonly"/>'+
@@ -1027,66 +1007,17 @@ function VerCheckCliente(jsonObject)
                                   '<td>'+
                                       '<input type="text" name="municipio_cliente" value="' + jsonObject.NombreMunicipio + '" readonly="readonly"/>'+
                                     '</td>'+                                    
-                                  '</tr>'+                                  
+                                  '</tr>'+ 
+                                  '<tr>'+
                                   '<th align="right" style="padding-right:5px;">Dirección</th>'+
                                     '<td colspan="2">'+
                                       '<input type="text" name="direccion_cliente"  value="' + jsonObject.direccion + '"  size="30" readonly="readonly" />'+
-                                    '</td>'+                                 
-                              '</table>'+
-                              '</fieldset>'+                              
-                              '<fieldset><legend>Productos</legend>'+
-                              '<table class="tbonita" align="center" id="TablaCheckProducto">'+ 
-                                  '<tr>'+
-                                     '<td colspan="4" align="center">'+
-                                        '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
-                                        '<input type="submit" value="Eliminar Fila" class="button"/>'+
-                                     '</td>'+
-                                  '</tr>'+ 
-                                  '<tr align="left">'+                            
-                                         '<th colspan="1"></th>'+
-                                         '<th>C</th>'+
-                                         '<th>Nombre</th>'+
-                                         '<th>Cantidad</th>'+
-                                         '<th>Color</th>'+
-                                         '<th>Talla</th>'+
-                                         '<th>Precio C/U</th>'+
-                                        '</tr>'+
-                                '</table>'+ 
-                              '</table>'+
-                              '</fieldset>'+                                                    
-                          '</div>'+
-                          '</div>'+
-                          '<br>'+
-                          '<table align="center">'+
-                              '<tr>'+
-                                '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
-                                '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
-                              '</tr>'+
-                              '<tr>'+
-                                '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
-                              '</tr>'+
-                          '</table>'+
-                          '<table align="center">'+
-                            '<tr>'+
-                                '<td colspan="4" align="center">'+
-                                   '<input type="submit" value="Guardar" class="button" />'+
-                                   '<input type="reset" value="Limpiar" class="button"/>'+
-                                   '<input type="submit" value="Volver" class="button" />'+
-                                '</td>'+
-                             '</tr>'+    
-                          '</table>'+     
-                        '</form>'+
-                    '</div>';
+                                    '</td>'+  
+                                  '</tr>';
 
 
 
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#pedidoVendedor").addClass("active");    
-    IniciarTabers();
+    $("#CargarClientePedidos").html(codigoHTML);
     $('#date_field').datepick({yearRange: '1980:2050'});
     $('#date_field').datepick('option', {dateFormat: $.datepick.ATOM});
     $('#date_field2').datepick({yearRange: '1980:2050'});
@@ -1096,10 +1027,7 @@ function VerCheckCliente(jsonObject)
     $('#date_field5').datepick({yearRange: '1980:2050'});
     $('#date_field6').datepick({yearRange: '1980:2050'});
     $('#date_field6').datepick('option', {dateFormat: $.datepick.ATOM});
-    $("#form_cargar_datos_pedidos").submit(enviarDatosBuscarPedidosCliente);    
-    //$("#form_buscar_Pedido").submit(buscarPedido);
-    //$("#form_buscar_Pedido_cliente").submit(buscarPedidoCliente);
-    //$("#form_buscar_Pedido_Productos").submit(enviarDatosBuscarProducto);   
+    $("#form_cargar_datos_pedidos").submit(enviarDatosBuscarPedidosCliente);
     activadorEventosVendedores();
     activadorEventosClientes();
   
@@ -1109,7 +1037,7 @@ function VerCheckCliente(jsonObject)
 function confirmBuscarProducto()
 {
     var codigoHTML='<div class="encabezado2">Buscar Producto</div>'+
-                     '<div id="Cliente" class="tab_content">'+
+                     '<div class="tabla">'+
                      '<form id="form_buscar_producto_pedido">'+
                               '<br>'+
                               '<fieldset><legend>Datos Generales</legend>'+
@@ -1131,14 +1059,14 @@ function confirmBuscarProducto()
                                     '</td>'+                                   
                               '</table>'+
                               '<table align="center">'+
-                            '<tr>'+
-                                '<td colspan="4" align="center">'+
-                                   '<input type="submit" value="Buscar" class="button"/>'+
-                                   '<input type="reset" value="Limpiar" class="button"/>'+
-                                   '<input type="button" class="button" value="Volver" id="NotAddProducto"/>'+
-                                '</td>'+
-                             '</tr>'+    
-                          '</table>'+  
+                                '<tr>'+
+                                    '<td colspan="4" align="center">'+
+                                       '<input type="submit" value="Buscar" class="button"/>'+
+                                       '<input type="reset" value="Limpiar" class="button"/>'+
+                                       '<input type="button" class="button" value="Volver" id="NotAddProducto"/>'+
+                                    '</td>'+
+                                '</tr>'+    
+                              '</table>'+  
                               '</fieldset>'+                              
                               '<fieldset><legend>Resultado</legend>'+
                                '<table class="tbonita" align="center" id="TablaProductosPedidos">'+                                   
@@ -1151,13 +1079,10 @@ function confirmBuscarProducto()
                                     '<th>Talla</th>'+
                                     '<th>Precio C/U</th>'+                                 
                                   '</tr>'+                          
-                                '</table>'+ 
-                              '</table>'+                              
-                              '</fieldset>'+                             
+                                '</table>'+                             
+                              '</fieldset>'+
+                             '</form>'+
                           '</div>'+
-                          '</div>'+
-                          '<br>'+                                                   
-                         '</form>'+
                     '</div>';
 
 
@@ -1274,7 +1199,7 @@ function VerCheckProducto(jsonArray)
 { 
  // var cantidad=$('.Editable').val();
  // var precio=$('.Prec_editable').val();
-  $('.uno').append(                      '<tr>'+
+  $('.uno').append(                      '<tr class="dato">'+
                                              '<td><input type="checkbox" id="' + jsonArray.codigo_producto + '"></td>'+
                                               '<td>' + jsonArray.codigo_producto + '</td>'+
                                               '<td>' + jsonArray.nombre + '</td>'+
@@ -1289,6 +1214,7 @@ function VerCheckProducto(jsonArray)
     activadorEventosVendedores();
     activadorEventosClientes();  
     ObtenerSubTotal();
+    subtotal();
 }
             
   
@@ -1302,7 +1228,8 @@ function ObtenerSubTotal()
         var cantidad=$('.Editable'+id).val();        
         var subT= precio * cantidad; 
         $("#subTotal"+ id ).html(subT);
-    })
+        subtotal();
+    });
     
     $(".Editable").on("change", function()
     {        
@@ -1313,11 +1240,42 @@ function ObtenerSubTotal()
         var cantidad=$('.Editable'+id2).val();                
         var subT= precio * cantidad; 
         $("#subTotal"+ id2 ).html(subT);
-    })
+        subtotal();
+    });
+    
 }
 
-            
-  
+function subtotal()
+{
+    var subtotal = 0;
+    $('#TablaCheckProducto tr.dato').each(function(){ //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas
+    subtotal += parseInt($(this).find('td').eq(7).text()||0,10); //numero de la celda 3
+    });
+    var codigoHTML = '<input type="text" id="totalsinviva" value="'+subtotal+'" readonly="readonly"/>';
+    $("#totalSinIva").html(codigoHTML);
+   iva();
+}
+
+function iva()
+{
+    var iva=$('#totalsinviva').val();
+    iva= iva*0.16;
+    var codigoHTML = '<input type="text" value="'+iva+'" size="20" id="valorIva" maxlength="35" readonly="readonly" />';
+    $("#iva").html(codigoHTML);
+    Total();
+}
+
+
+function Total()
+{
+    var subtotal, iva;
+    var total=0;
+    subtotal=$('#totalsinviva').val();
+    iva=$('#valorIva').val();
+    total= parseFloat(subtotal) + parseFloat(iva);
+    var codigoHTML = '<input type="text" value="'+total+'" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/>';
+    $("#Total").html(codigoHTML);
+}
 
 
 
@@ -1348,7 +1306,7 @@ function SerializeToJson(form)
 function AddPedido()
 {
     var codigoHTML = '<div class="encabezado2">Agregar Pedido</div>'+
-                     //'<div id="Cliente" class="tab_content">'+
+                     '<div class="tabla">'+
                               '<br>'+
                               '<table align="center">'+
                                   '<tr>'+
@@ -1365,7 +1323,7 @@ function AddPedido()
                               '<br>'+
                               '<br>'+
                               '<fieldset><legend>Datos Generales</legend>'+
-                              '<table align="center">'+                              
+                              '<table align="center" id="CargarClientePedidos">'+                              
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
                                     '<td>'+
@@ -1416,7 +1374,7 @@ function AddPedido()
                               '<tbody>'+
                                   '<tr>'+
                                      '<td colspan="4" align="center">'+
-                                        '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
+                                        '<input type="button" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
                                         '<input type="reset" value="Eliminar Fila" class="button"/>'+
                                      '</td>'+
                                   '</tr>'+                                
@@ -1435,20 +1393,18 @@ function AddPedido()
                               
                               '</tbody>'+ 
                               '</table>'+
-                              '</fieldset>'+                                                    
-                          '</div>'+
-                          '</div>'+
+                              '</fieldset>'+
                           '<br>'+                                                                                                                                                                                                                       
                           '<table align="center">'+
                               '<tr>'+
                                 '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
+                                '<td id="totalSinIva"><input type="text"  value="0" readonly="readonly"/></td>'+
                                 '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
+                                '<td id="iva"><input type="text" value="0" size="20" maxlength="35" readonly="readonly" /></td>'+
                               '</tr>'+
                               '<tr>'+
                                 '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
+                                '<td colspan="2" id="Total"><input type="text" value="0" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
                               '</tr>'+
                           '</table>'+
                           '<table align="center">'+
@@ -1459,13 +1415,10 @@ function AddPedido()
                                    '<input type="reset" value="Volver" class="button"/>'+
                                 '</td>'+
                              '</tr>'+    
-                          '</table>'+     
-                        '</form>'+
+                          '</table>'+
                     '</div>';
 
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    $(".menu-vertical li a#pedidoVendedor").addClass("active");
+    $("#datos").html(codigoHTML);    
     if(TablaPedidos != null)
     {
         tablaPedido(TablaPedidos);
@@ -3001,7 +2954,7 @@ function seccionDatosPerfil()
                     type: 'POST',
                     success: function(jsonObject)
                     {
-                        ModPerfil(jsonObject);     
+                        cargarDatosPerfil(jsonObject);     
                     },
                     error: function(jsonObject) 
                     {
@@ -3010,11 +2963,10 @@ function seccionDatosPerfil()
            });
 }
 
-function ModPerfil(jsonObject)
+function cargarDatosPerfil(jsonObject)
 {
     var codigoHTML = '<div class="encabezado2">Perfil</div>'+
                      '<div class="tabla">'+
-                      '<form id="form_modificar_perfil">'+
                         '<ul class="tabs">'+
                             '<li><a href="#Personal">Personal</a></li>'+
                             '<li><a href="#Laboral">Laboral</a></li>'+
@@ -3038,36 +2990,36 @@ function ModPerfil(jsonObject)
                                   '</tr>'+
                                  '</form>'+                              
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Cedula</th>'+
-                                    '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
+                                    '<th align="right" style="padding-right:5px;">Identificación</th>'+
+                                    '<td><input type="text" name="cedula" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Apellidos</th>'+
-                                    '<td><input type="text" name="apellidos_usuario" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="apellidos" value="' + jsonObject.apellidos_usuario + '" size="20" maxlength="25" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombres</th>'+
-                                    '<td><input type="text" name="nombre_usuario" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" /></td>'+
+                                    '<td><input type="text" name="nombres" value="' + jsonObject.nombre_usuario + '" size="20" maxlength="25" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nickname</th>'+
-                                    '<td><input type="text" name="nickname_usuario" value="' + jsonObject.nickname_usuario + '" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="text" name="nickname" value="' + jsonObject.nickname_usuario + '" size="20" maxlength="10" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Contraseña</th>'+
-                                    '<td><input type="password" name="password_usuario" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" /></td>'+
+                                    '<td><input type="password" name="contrasena" value="' + jsonObject.password_usuario + '" size="20" maxlength="10" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
-                                    '<td><input type="text" name="direccion_usuario" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="direccion" value="' + jsonObject.direccion_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Teléfono</th>'+
-                                    '<td><input type="text" name="telefono_usuario" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
+                                    '<td><input type="text" name="telefono" value="' + jsonObject.telefono_usuario + '" size="20" maxlength="12" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
-                                    '<td><input type="text" name="celular_usuario" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
+                                    '<td><input type="text" name="celular" value="' + jsonObject.celular_usuario + '" size="20" maxlength="15" /></td>'+
                                   '</tr>'+
                               '</table>'+
                             '</div>'+
@@ -3077,11 +3029,11 @@ function ModPerfil(jsonObject)
                                     '<th align="right" style="padding-right:5px;">Fecha Ingreso</th>'+
                                     '<td><input type="text" name="fecha" value="' + jsonObject.fecha + '" readonly="readonly" /></td>'+
                                     '<th align="right" style="padding-right:5px;">email</th>'+
-                                    '<td><input type="text" name="email_usuario" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
+                                    '<td><input type="text" name="email" value="' + jsonObject.email_usuario + '" size="20" maxlength="35" /></td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Fecha Cumpleaños</th>'+
-                                    '<td><input type="text" name="fecha_cumpleanos" value="' + jsonObject.fecha_cumpleanos + '"  readonly="readonly" /></td>'+
+                                    '<td><input type="text" name="cumpleanos" value="' + jsonObject.fecha_cumpleanos + '"  readonly="readonly" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Tipo de Cuenta</th>'+
                                     '<td>'+
                                       '<select name="tipoCuenta" style="width:177px">'+
@@ -3092,7 +3044,7 @@ function ModPerfil(jsonObject)
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Numero Cuenta</th>'+
-                                    '<td><input type="text" name="numero_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
+                                    '<td><input type="text" name="num_cuenta" value="' + jsonObject.numero_cuenta + '" /></td>'+
                                     '<th align="right" style="padding-right:5px;">Banco</th>'+
                                     '<td>'+
                                       '<select name="banco" style="width:177px">'+
@@ -3126,10 +3078,9 @@ function ModPerfil(jsonObject)
                                   '<tr>'+
                                 '<td colspan="4" align="left">'+
                                     'Otros datos:<br>'+
-                                    '<textarea name="otros_datos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
+                                    '<textarea name="otrosDatos" cols="74" rows="6">' + jsonObject.otros_datos + '</textarea>'+
                                 '</td>'+
                                 '</tr>'+
-                                 '<td><input type="hidden" name="id_perfilMod" class="button" id="id_perfilMod" value="'+ jsonObject.id_usuario +'"/></td>'+
                               '</table>'+
                             '</div>'+                    
                           '</div>'+
@@ -3153,55 +3104,6 @@ function ModPerfil(jsonObject)
     $("#form_modificar_perfil").submit(enviarDatosModPerfil);
     activadorEventosVendedores();
     cargarFoto();
-}
-function enviarDatosModPerfil(evento)
-{
-    evento.preventDefault();
-    var id_usuario = $("#id_perfilMod").val();
-    var datos_formulario = $(this).serializeArray();   
-    var datos = JSON.stringify(SerializeToJson(datos_formulario));
-    //alert(datos.toString());
-    var request = {"Vendedores":"ModPerfil","Datos":datos, "IdUsuario":id_usuario};
-    var jsonobj=JSON.stringify(request);
-    //alert(jsonobj.toString());
-    
-    $.ajax({        
-                    data: {vendedor:jsonobj},
-                    type: 'POST',
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    success: function(jsonObj)
-                    {
-                        verificarModPerfil(jsonObj);
-                    },
-                    error: function() 
-                    {
-                        alert('Error al conectar con el servidor');
-                    }
-                });
-}
-
-//***********************************************************************************************************************
-//***********************************************************************************************************************
-//***********************                                                                         ***********************
-//*********************** FUNCION PARA VERIFICAR QUE LOS DATOS SE HALLAN MODIFICADO CORRECTAMENTE ***********************
-//***********************                                                                         ***********************
-//***********************************************************************************************************************
-//***********************************************************************************************************************
-
-function verificarModPerfil(jsonObj)
-{
-    if (jsonObj.ModPerfil  ==="true")
-    {
-        alert("El perfil se modificó correctamente");
-    }
-    
-    else
-    {
-        alert("El perfil no se pudo modificar");
-    }   
-    
-    seccionDatosPerfil();
 }
 
 function cargarFoto()
@@ -3416,7 +3318,7 @@ function VerViatico(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td>'+
-                                      '<input type="text" name="nombreMunicipio"  value="'+ jsonObject.nombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
+                                      '<input type="text" name="ciud"  value="'+ jsonObject.NombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                     '<td>'+
