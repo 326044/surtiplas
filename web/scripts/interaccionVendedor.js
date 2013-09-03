@@ -3318,7 +3318,7 @@ function VerViatico(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td>'+
-                                      '<input type="text" name="ciud"  value="'+ jsonObject.NombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
+                                      '<input type="text" name="nombreMunicipio"  value="'+ jsonObject.nombreMunicipio +'" readonly="readonly" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                     '<td>'+
