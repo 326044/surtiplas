@@ -8605,6 +8605,7 @@ function ModPerfil(jsonObject)
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_perfil").submit(enviarDatosModPerfil);
     activadorEventosPerfil();
+    cargarFoto();
 }
 
 //***************************************************************************************************************
