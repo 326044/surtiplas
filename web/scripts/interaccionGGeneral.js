@@ -258,49 +258,6 @@ function menuClientes()
 
 /* funcion para la asignacion e eventos para las variables declaradas*/
 
-function menuPerfil()
-{
-   // Se le asigna un titulo al encabezado      
-    
-   var codigoHTML = '<div class="encabezado">Gestión del Perfil</div>'+
-                    '<ul class="menu-vertical">'+
-                        
-                    '</ul>'; 
-    /* Se activa los eventos y propeidades */
-    
-    $(".content-float-vendedores").html(codigoHTML);
-    $(".nav .menu li a").removeClass();
-    $(this).addClass("active");
-    
-    //Le asignamos el lugar donde se ubicara mediante un activador
-    
-    seccionDatosPerfil();
-}
-
-
-function DatosVerProducto()
-{
-    var id = $(this)[0].id;
-    var request = {"Vendedores":"DatosProducto","codigo_producto":id};
-    var jsonobj=JSON.stringify(request);
-    
-    $.ajax({
-                    data: {vendedor:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    type: 'POST',
-                    success: function(jsonObject)
-                    {
-                        VerProducto(jsonObject);     
-                    },
-                    error: function(jsonObject) 
-                    {
-                        alert('Error al conectar con ServletVendedor');
-                    }
-               });
-}
-/* Funcio que sirve para comunicarse con el servlet */
-
 function seccionListado()
 {
   var request = {"Ggeneral":"ListadoVendedoresClientes"};
@@ -459,8 +416,6 @@ function cargarListado(jsonArray)
     /* Se activan los eventos y se activan las pestañas */
     
     $("#datos").html(codigoHTML);
-    $(".tbonita").css({width: 620});
-    $(".content-float-datos").css({width: 630});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#listadoVentas").addClass("active");
     
@@ -688,7 +643,7 @@ function seccionListadoPedidos(jsonArray)
                                                   '</tr>'+ 
                                                   '<tr>'+ 
                                                       '<td colspan="4" align="center"><br>'+ 
-                                                        '<input type="submit" value="Generar Reporte" class="button" id="VerReporte" />'+ 
+                                                        '<input type="submit" value="Generar Reporte" class="Reporte" id="VerReporte" />'+ 
                                                       '</td>'+ 
                                                   '</tr> '+ 																
                                               '</table>'+ 											                                                      
@@ -698,8 +653,6 @@ function seccionListadoPedidos(jsonArray)
     /*Se activan los evento*/
 
     $("#datos").html(codigoHTML);
-    $(".tbonita").css({width: 620});
-    $(".content-float-datos").css({width: 630});
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#ventasVendedor").addClass("active");
     
@@ -727,7 +680,7 @@ function seccionListadoPedidos(jsonArray)
     
     // Se activa la interaccion que comunica el boton ".button" y la funcion "VerReporte"
     
-    $(".button").click(VerReporte);       
+    $(".Reporte").click(VerReporte);       
  
 }
 
@@ -1172,7 +1125,7 @@ function seccionViaticos()
                                                         '</select>'+
                                                     '</td>'+                                   
                                                         '<tr>'+
-                                                            '<td colspan="4" align="center"><input type="submit" value="Ver" class="button" />'+
+                                                            '<td colspan="4" align="center"><input type="submit" value="Ver" class="ver" />'+
                                                         '</td>'+											
                                                         '<table class="tbonita id="TablaPagos">'+
                                                          '<tr align="left">'+           				                                       
@@ -1213,7 +1166,7 @@ function seccionViaticos()
                                                             '</select>'+
                                                         '</td>'+                                   					
                                                         '<tr>'+
-                                                            '<td colspan="4" align="center"><input type="submit" value="Ver" class="button" />'+
+                                                            '<td colspan="4" align="center"><input type="submit" value="Ver" class="ver" />'+
                                                         '</td>'+			                                                        
                                                         '<table class="tbonita">'+
                                                                 '<tr align="left">'+           				   
@@ -1264,7 +1217,7 @@ function seccionViaticos()
                                                                                 '</select>'+                                                                                                                                                             
                                                                             '</td>'+                                   
                                                                             '<tr>'+
-                                                                                '<td colspan="4" align="center"><input type="submit" value="Ver" class="button" />'+
+                                                                                '<td colspan="4" align="center"><input type="submit" value="Ver" class="ver" />'+
                                                         '</td>'+																									
 								'</table>'+	
                                                                 
@@ -1272,7 +1225,7 @@ function seccionViaticos()
                                                                 
                                                             '<table class="tbonita">'+
                                                                 '<tr align="left">'+           				                                                                                                                                           
-                                                                    '<th></th>'+
+                                                                   '<th></th>'+
                                                                     '<th></th>'+
                                                                     '<th>id_pedido</th>'+
                                                                     '<th>valor_del_iva</th>'+
@@ -1583,439 +1536,17 @@ function seccionegreso(jsonArray)
     IniciarTabers();
 }
 
-function confirmBuscarProducto()
-{
-    var codigoHTML='<div class="encabezado2">Buscar Producto</div>'+
-                     '<div id="Cliente" class="tab_content">'+
-                     '<form id="form_buscar_producto_pedido">'+
-                              '<br>'+
-                              '<fieldset><legend>Datos Generales</legend>'+
-                              '<table align="center">'+                              
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Produccion</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="lineaProduccion" value=""/>'+                                      
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="tipoProducto" value=""/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="materiales" value="" />'+
-                                    '</td>'+                                   
-                              '</table>'+
-                              '<table align="center">'+
-                            '<tr>'+
-                                '<td colspan="4" align="center">'+
-                                   '<input type="submit" value="Buscar" class="button"/>'+
-                                   '<input type="reset" value="Limpiar" class="button"/>'+
-                                   '<input type="button" class="button" value="Volver" id="NotAddProducto"/>'+
-                                '</td>'+
-                             '</tr>'+    
-                          '</table>'+  
-                              '</fieldset>'+                              
-                              '<fieldset><legend>Resultado</legend>'+
-                               '<table class="tbonita" align="center" id="TablaProductosPedidos">'+                                   
-                                 '<tr align="left">'+                            
-                                    '<th colspan="1"></th>'+
-                                    '<th>Codigo</th>'+
-                                    '<th>Nombre</th>'+
-                                    '<th>Cantidad</th>'+
-                                    '<th>Color</th>'+
-                                    '<th>Talla</th>'+
-                                    '<th>Precio C/U</th>'+                                 
-                                  '</tr>'+                          
-                                '</table>'+ 
-                              '</table>'+                              
-                              '</fieldset>'+                             
-                          '</div>'+
-                          '</div>'+
-                          '<br>'+                                                   
-                         '</form>'+
-                    '</div>';
-
-
-    $("#overAddProducto").css({display: "block"});    
-    $("#overAddProducto").html(codigoHTML);
-    $("#fadeAddProducto").css({display: "block"});
-    if(TablaProductosPedidos != null)
-    {
-        AdicionarBusquedaPedidosProductos(TablaProductosPedidos);
-    }  
-    $("#form_buscar_producto_pedido").submit(enviarDatosBuscarPedidosProductos);
-    activadorEventosVendedores();
-    activadorEventosProductos();
-}
-
-function VerProducto(jsonObject)
-{
-    var codigoHTML= '<div class="encabezado2">Visualizar Producto</div>'+
-                    '<table align="center" border="0" align="left">'+
-                          '<tr>'+
-                              '<td colspan="2" rowspan="8" align="center">'+
-                                  '<div class="foto">'+
-                                      '<div class="imagen">'+
-                                          '<img src="images/traje.png" align="center">'+
-                                      '</div>'+                                               
-                                  '</div>'+
-                              '</td>'+
-                          '</tr>'+
-                          '<br>'+
-                          '<br>'+
-                          '<tr>'+
-                            '<th align="right" style="padding-right:10px;">IdPoducto</th>'+
-                            '<td><input type="text" name="id_producto" value="' + jsonObject.codigo_producto + '" size="20"/ readonly="readonly"></td>'+                                                                   
-                            '<th align="right" style="padding-right:10px;">Nombre</th>'+
-                            '<td><input type="text" name="nombre_producto" value="' + jsonObject.nombre + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                          '</tr>'+
-                          '<tr>'+
-                            '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                            '<td><input type="text" name="linea_produccion" value="' + jsonObject.nombre_linea + '" size="20" readonly="readonly"/></td>'+
-                            '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                            '<td><input type="text" name="cantidad_producto" value="' + jsonObject.cantidad + '" size="20" readonly="readonly"/></td>'+
-                          '</tr>'+
-                          '<tr>'+
-                            '<th align="right" style="padding-right:5px;">Material</th>'+
-                            '<td><input type="text" name="material_producto" value="' + jsonObject.material + '" size="20" maxlength="15" readonly="readonly" /></td>'+                                  
-                            '<th align="right" style="padding-right:5px;">Color</th>'+
-                            '<td><input type="text" name="color_producto" value="' + jsonObject.color + '" size="20" maxlength="15" readonly="readonly"/></td>'+
-                          '</tr>'+
-                          '<tr>'+
-                            '<th align="right" style="padding-right:5px;">Talla</th>'+
-                            '<td><input type="text" name="talla_producto" value="' + jsonObject.talla + '" size="20" maxlength="10" readonly="readonly" /></td>'+                                 
-                            '<th align="right" style="padding-right:5px;">Precio $</th>'+
-                            '<td><input type="text" name="precio_producto" value="' + jsonObject.precio_venta + '" size="20" maxlength="15" readonly="readonly" /></td>'+
-                          '</tr>'+
-                          '<br>'+
-                          '<br>'+                                                                
-                      '</table>'+
-                      '<table align="center">'+
-                      '<tr>'+
-                        '<td colspan="4" align="center">'+
-                            '<input type="button" value="Volver" class="button" id="VolverProducto" />'+                                  
-                        '</td>'+
-                      '</tr>'+
-                    '</table> ';
-
-    $("#datos").html(codigoHTML);   
-    activadorEventosProductos();
-}
-
-function enviarDatosBuscarPedidosProductos(evento)
-{
-    evento.preventDefault();
-    var datos_formulario = $(this).serializeArray();   
-    var datos = JSON.stringify(SerializeToJson(datos_formulario));
-    var request = {"Vendedores":"BuscarProductos","Datos":datos};
-    var jsonobj=JSON.stringify(request);
-    
-    $.ajax({        
-                    data: {vendedor:jsonobj},
-                    type: 'POST',
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    success: function(jsonArray)
-                    {
-                        AdicionarBusquedaPedidosProductos(jsonArray);
-                    },
-                    error: function()
-                    {
-                        alert('Error al conectar con el servidor');
-                    }
-                });    
-}
-
-function AdicionarBusquedaPedidosProductos(jsonArray)
-{
-    
-    var codigoHTML =                     '<tr align="left">'+                            
-                                         '<th colspan="1"></th>'+
-                                         '<th>Codigo</th>'+
-                                         '<th>Nombre</th>'+
-                                         '<th>Cantidad</th>'+
-                                         '<th>Color</th>'+
-                                         '<th>Talla</th>'+
-                                         '<th>Precio C/U</th>'+
-                                        '</tr>';
-
-                for (var i = 0; i < jsonArray.length; i++)
-                {
-                            if (i % 2 == 0)
-                                codigoHTML+=      '<tr>';
-                           else
-                                codigoHTML+=      '<tr class="even">';
-                    
-                    //codigoHTML+=                        '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
-                    codigoHTML+=                          '<td><input type="checkbox" class="checkProducto" name="checkboxproducto" id="' + jsonArray[i].codigo_producto + '"></td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
-                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
-                    codigoHTML+=                  '</tr>';
-
-                }              
-    
-   $("#TablaProductosPedidos").html(codigoHTML);   
-   $(".checkProducto").click(checkVerProducto);    
-   activadorEventosProductos();
-    
-}
-
-function checkVerProducto()
-{
-    HideConfirmAddProducto();
-    var id = $(this)[0].id;
-    var request = {"Vendedores":"DatosCheckProducto","codigo_producto":id};
-    var jsonobj=JSON.stringify(request);
-    //alert(jsonobj.toString());
-    
-    $.ajax({
-                    data: {vendedor:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        VerCheckProducto(jsonArray);     
-                    },
-                    error: function() 
-                    {
-                        alert('Error al conectar con ServletVendedor');
-                    }
-               });
-}
-
-function VerCheckProducto(jsonArray)
-{
- var codigoHTML =                     '<tr>'+
-                                       '<td colspan="4" align="center">'+
-                                         '<input type="submit" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
-                                         '<input type="submit" value="Eliminar Fila" class="button"/>'+
-                                       '</td>'+
-                                      '</tr>'+
-                                       '<tr align="left">'+                            
-                                         '<th colspan="1"></th>'+
-                                         '<th>C</th>'+
-                                         '<th>Nombre</th>'+
-                                         '<th>Cantidad</th>'+
-                                         '<th>Color</th>'+
-                                         '<th>Talla</th>'+
-                                         '<th>Precio C/U</th>'+
-                                        '</tr>';
-
-                for (var i = 0; i < jsonArray.length; i++)
-                {
-                            if (i % 2 == 0)
-                                codigoHTML+=      '<tr>';
-                           else
-                                codigoHTML+=      '<tr class="even">';
-                            
-                    
-                    //codigoHTML+=                        '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
-                    //codigoHTML+=                          '<td><input id="' + jsonArray[i].codigo_producto + '"></td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
-                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
-                    codigoHTML+=                  '</tr>';
-
-                } 
-        
-    $("#TablaCheckProducto").html(codigoHTML);
-    activadorEventosVendedores();
-    activadorEventosClientes();
-    
-}
-            
-  
-
-
 /*Funcion seccionListadoProductos*/
-
-//**********************************************************************************
-//**********************************************************************************
-//*************                                                *********************
-//*************  FUNCIONES QUE MODIFICAN LA INTERFAZ GRAFICA   *********************
-//*************  SEGUN LAS OPCIONES DEL MENU VERTICAL DE LOS   *********************
-//*************  PRODUCTOS                                     *********************
-//*************                                                *********************
-//**********************************************************************************
-//**********************************************************************************
 
 function seccionListadoProductos()
 {
-    var request = {"Vendedores":"SeccionProducto"};
-    var jsonobj=JSON.stringify(request);
-    $.ajax({
-                    data: {vendedor:jsonobj},
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    type: 'POST',
-                    success: function(jsonArray)
-                    {
-                        ListadoProductos(jsonArray);     
-                    },
-                    error: function(jsonArray) 
-                    {
-                        alert('Error al conectar con ServletVendedor');
-                    }
-           });
+    var codigoHTML = '<div class="encabezado2">Listado de Productos</div>'+
+                     '<div class="tabla">'+
+                        
+                    '</div>';
+
+    $("#datos").html(codigoHTML);  
 }
-
-function ListadoProductos(jsonArray)
-{
-   for (var k = 0; k < jsonArray.length; k++)
-   {
-       if (k==0)
-       {
-         var codigoHTML = '<div class="encabezado2">Listado Productos</div>'+
-                          '<div class="tabla">'+
-                             '<form id="form_buscar_producto">'+
-                                 '<table align="center" border="0" >'+
-                                     '<tr>'+                                    
-                                         '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+ 
-                                            '<td>'+
-                                             '<select name="lineaProduccion" style="width:177px">'+
-                                                 '<option value=""></option>';
-                                             for (var j = 0; j < jsonArray[k].length; j++)
-                                             {
-            codigoHTML+=                         '<option value="'+ jsonArray[k][j].cod_linea +'">'+ jsonArray[k][j].nombre_linea +'</option>';
-                                             }                                                                                              
-            codigoHTML +=                    '</select>'+ 
-                                         '</td>'; 
-       }
-       
-       if (k==1)
-       {
-            codigoHTML+=                '<th align="right" style="padding-right:5px;">Material</th>'+ 
-                                             '<td>'+ 
-                                               '<select name="materiales" style="width:177px">'+
-                                                 '<option value=""></option>';
-                                                for (var l = 0; l < jsonArray[k].length; l++) 
-                                                {
-            codigoHTML+=                         '<option value="'+ jsonArray[k][l].codigo +'">'+ jsonArray[k][l].material +'</option>';                                                 
-                                                }
-            codigoHTML+=                        '</select>'+ 
-                                         '</td>';  
-        }
-       
-        if (k==2)
-        {
-            codigoHTML +=                '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
-                                             '<td>'+ 
-                                               '<select name="tipoProducto" style="width:177px">'+
-                                                 '<option value=""></option>';
-                                                for (var m = 0; m < jsonArray[k].length; m++)
-                                                {
-            codigoHTML+=                         '<option value="'+ jsonArray[k][m].cod_tipo_producto  +'">'+ jsonArray[k][m].nombre_tipo_producto +'</option>';                                                     
-                                                }
-            codigoHTML+=                        '</select>'+ 
-                                         '</td>'+ 
-                                     '</tr>'+
-                                     '<tr>'+                                
-                                         '<td colspan="6" align="center"><br>'+
-                                           '<input type="submit" value="Buscar" class="button"  />'+
-                                         '</td>'+
-                                     '</tr>'+
-                                 '</table>'+
-                             '</form>'+
-                             '<br>'+
-                             '<table align="center" border="0"  width="800" class="tbonita" id="TablaProductos">'+ 
-                                '<tr align="left">'+                     
-                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
-                                    '<th>Codigo</th>'+
-                                    '<th>Nombre</th>'+
-                                    '<th>Cantidad</th>'+
-                                    '<th>Color</th>'+
-                                    '<th>Talla</th>'+
-                                    '<th>Precio C/U</th>'+
-                                  '</tr>'+
-                             '</table>'+                  
-                          '</div>'; 
-        }
-                                      
-  }                  
-    $("#datos").html(codigoHTML);
-    $(".menu-vertical li a").removeClass("active");
-    if(TablaProductos != null)
-    {
-        AdicionarBusquedaProductos(TablaProductos);
-    }
-    $(this).addClass("active");   
-    $("#form_buscar_producto").submit(enviarDatosBuscarProducto);
-     activadorEventosProductos();
-    //$(".menu-vertical li a").removeClass("active");
-    //$(this).addClass("active");
-}
-
-
-
-function enviarDatosBuscarProducto(evento)
-{
-    evento.preventDefault();
-    var datos_formulario = $(this).serializeArray();   
-    var datos = JSON.stringify(SerializeToJson(datos_formulario));
-    var request = {"Vendedores":"BuscarProductos","Datos":datos};
-    var jsonobj=JSON.stringify(request);
-    
-    $.ajax({        
-                    data: {vendedor:jsonobj},
-                    type: 'POST',
-                    dataType: 'json',
-                    url: 'ServletVendedor',
-                    success: function(jsonArray)
-                    {
-                        AdicionarBusquedaProductos(jsonArray);
-                    },
-                    error: function()
-                    {
-                        alert('Error al conectar con el servidor');
-                    }
-                });    
-}
-
-function AdicionarBusquedaProductos(jsonArray)
-{
-    TablaProductos = jsonArray;
-    var codigoHTML =                     '<tr align="left">'+                            
-                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
-                                         '<th>Codigo</th>'+
-                                         '<th>Nombre</th>'+
-                                         '<th>Cantidad</th>'+
-                                         '<th>Color</th>'+
-                                         '<th>Talla</th>'+
-                                         '<th>Precio C/U</th>'+
-                                        '</tr>';
-
-                for (var i = 0; i < jsonArray.length; i++)
-                {
-                            if (i % 2 == 0)
-                                codigoHTML+=      '<tr>';
-                           else
-                                codigoHTML+=      '<tr class="even">';
-                    codigoHTML+=                          '<td colspan="1"><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
-                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
-                    codigoHTML+=                  '</tr>';
-
-                }
-                
-                
-    $("#TablaProductos").html(codigoHTML);
-    activadorEventosProductos();
-}
-
 
 /*Funcion seccionDatosPerfil*/
 
@@ -2185,6 +1716,7 @@ function IniciarTabersAnidados()
 
 /* funciona para la asignacion de eventos a las variables de claradas  */
 
+3
 function menuVendedores()
 { 
     
@@ -2205,7 +1737,6 @@ function menuVendedores()
     /* Se activa los eventos y propeidades */
 
     $(".content-float-vendedores").html(codigoHTML).css({height:"165px"});
-    $(".content-float-vendedores").show();
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
     
@@ -2236,7 +1767,6 @@ function menuClientes()
     /* Se activa los eventos y propeidades */
     
     $(".content-float-vendedores").html(codigoHTML).css({height:"100px"});
-    $(".content-float-vendedores").show();
     $(".nav .menu li a").removeClass("active"); 
     $(this).addClass("active");         
     $(".menu-vertical li a#IngresosFinanciera").addClass("active");    
@@ -2257,7 +1787,7 @@ function menuProductos()
 {   
     // Se le asigna un titulo al encabezado
     
-   var codigoHTML = '<div class="encabezado">Gestión ññ</div>'+
+   var codigoHTML = '<div class="encabezado">Gestión de Productos</div>'+
                     '<ul class="menu-vertical">'+
                         
                     '</ul>'; 
@@ -2265,17 +1795,13 @@ function menuProductos()
     /* Se activa los eventos y propeidades */
     
     $(".content-float-vendedores").html(codigoHTML);
-    $(".content-float-vendedores").hide();
-    $(".content-float-datos").css({width: 870});
     $(".nav .menu li a").removeClass("active");
     $(this).addClass("active");
-
+    
     //activador de eventos
     
     seccionListadoProductos();
-        activadorEventosProductos();
-
-
+    
 }
 
 /* funcion para la asignacion e eventos para las variables declaradas*/
