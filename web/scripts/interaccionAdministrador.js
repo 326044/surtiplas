@@ -1103,17 +1103,18 @@ function ModUsuario(jsonObject)
                             '<form id="form_modificar_usuario"  enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="left">'+
                                   '<tr>'+
-                                      '<td colspan="2" rowspan="10" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
                                     '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" "/></td>'+
@@ -1243,6 +1244,7 @@ function ModUsuario(jsonObject)
     $('#date_field14').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_modificar_usuario").submit(enviarDatosModUsuario);
     activadorEventosUsuarios();
+    cargarFoto();
 }
 
 //***************************************************************************************************************
@@ -5906,7 +5908,7 @@ function HideConfirmAddMaterial()
 {
     $("#overDelItem").css({display: "none"});
     $("#fadeDelItem").css({display: "none"});
-    activadorEventosProductos();    
+    activadorEventosProductos();
 }
 //***************************************************************************************************************
 //***************************************************************************************************************
@@ -8464,17 +8466,18 @@ function ModPerfil(jsonObject)
                             '<form id="form_modificar_perfil"  enctype="multipart/form-data">'+
                               '<table align="center" border="0" align="left">'+
                                   '<tr>'+
-                                      '<td colspan="2" rowspan="10" align="center">'+
-                                          '<div class="foto">'+
-                                              '<div class="imagen">'+
-                                                  '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
-                                          '</div>'+
-                                      '</td>'+
-                                  '</tr>'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
+                                            '<div class="foto">'+
+                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                    '<img src="images/usuario.png" align="center">'+
+                                                '</div>'+
+                                                '<div>'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
+                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                '</div>'+   
+                                            '</div>'+
+                                        '</td>'+
+                                    '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Identificación</th>'+
                                     '<td><input type="text" name="cedula_usuario" value="' + jsonObject.cedula_usuario + '" size="20" maxlength="15" "/></td>'+
