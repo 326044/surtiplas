@@ -109,7 +109,7 @@ function activadorEventosVendedores()
      //*****************************************************
     //** VARIABLES DE LAS OPCIONES DEL LISTADO DE PEDIDOS **
     //*****************************************************
-    var addPedido, reportePedido, addProducto, hideAddProducto, ventAddProducto;
+    var addPedido, EliminarFila,addProducto, hideAddProducto, ventAddProducto;
     var volverPedido, verPedido, buscarCliente, buscarProducto;
     // ASIGNACION DE EVENTOS A LAS VARIABLES DECLARADAS
     addPedido=$(".AdicionarPedido");
@@ -128,7 +128,8 @@ function activadorEventosVendedores()
     buscarProducto.click(confirmBuscarProducto);
     hideAddProducto=$("#NotAddProducto");
     hideAddProducto.click(HideConfirmAddProducto);
-    
+    EliminarFila=$("#EliminarFila");
+    EliminarFila.click(EliminarFilasPedido);
     //*****************************************************
     //** VARIABLES DE LAS OPCIONES DEL LISTADO DE VIATICOS **
     //*****************************************************
@@ -1199,8 +1200,8 @@ function VerCheckProducto(jsonArray)
 { 
  // var cantidad=$('.Editable').val();
  // var precio=$('.Prec_editable').val();
-  $('.uno').append(                      '<tr class="dato">'+
-                                             '<td><input type="checkbox" id="' + jsonArray.codigo_producto + '"></td>'+
+  $('.uno').append(                      '<tr class="dato" id="columna'+cont+'">'+
+                                             '<td><input type="checkbox" value=' + cont + '></td>'+
                                               '<td>' + jsonArray.codigo_producto + '</td>'+
                                               '<td>' + jsonArray.nombre + '</td>'+
                                               '<td><input type="text" size="5" class="Editable Editable'+ cont +'" value="'+ jsonArray.cantidad +'" id="1000'+ cont +'"></td>'+  
@@ -1375,7 +1376,7 @@ function AddPedido()
                                   '<tr>'+
                                      '<td colspan="4" align="center">'+
                                         '<input type="button" value="Adicionar Fila" class="button" id="buscarProducto"/>'+
-                                        '<input type="reset" value="Eliminar Fila" class="button"/>'+
+                                        '<input type="button" value="Eliminar Fila" class="button" id="EliminarFila"/>'+
                                      '</td>'+
                                   '</tr>'+                                
                                   '<tr align="left">'+                            
@@ -1437,10 +1438,23 @@ function AddPedido()
     //$("#form_buscar_Pedido").submit(buscarPedido);
     //$("#form_buscar_Pedido_cliente").submit(buscarPedidoCliente);
     //$("#form_buscar_Pedido_Productos").submit(enviarDatosBuscarProducto); 
-    activadorEventosVendedores(); 
+    activadorEventosVendedores();
     
 }
 
+function EliminarFilasPedido()
+{
+    $("input:checkbox").each(function(){    
+    var checkeado = $(this).attr("checked");
+        if(checkeado) 
+        {        
+            var valor=$(this).val();
+            $("tr#columna"+valor).remove();               
+        }
+    
+    });
+     subtotal();
+}
 
 
 function ConfirmAddProducto()
