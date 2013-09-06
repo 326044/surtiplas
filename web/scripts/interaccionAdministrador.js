@@ -788,10 +788,10 @@ function AddUsuario()
                               '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
                                 '<table align="center" border="0">'+
                                     '<tr>'+
-                                        '<td colspan="2" rowspan="10" align="center">'+
+                                        '<td colspan="2" rowspan="10">'+
                                             '<div class="foto">'+
                                                 '<div class="imagen" id="fotoUsuarios">'+
-                                                    '<img src="images/usuario.png" align="center">'+
+                                                    '<img src="images/usuario.png">'+
                                                 '</div>'+
                                                 '<div>'+
                                                     '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+

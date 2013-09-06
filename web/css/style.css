@@ -643,15 +643,16 @@ body
 
 .foto
 {
-	width:180px; 
-	height:180px; 
+	width:200px; 
+	height:auto; 
+        margin-right: 20px;
 }
 
 .foto .imagen
 {
-	width:140px; 
-	height:140px;
-	padding-bottom: 20px;
+	width:180px; 
+	height:auto;
+	
 }
 
 
