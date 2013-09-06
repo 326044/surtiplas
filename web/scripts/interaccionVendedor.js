@@ -115,7 +115,7 @@ function activadorEventosVendedores()
     addPedido=$(".AdicionarPedido");
     addPedido.click(AddPedido);    
     verPedido=$(".VerPedido");
-    verPedido.click(VerPedido);
+    verPedido.click(DatosVerPedido);
     ventAddProducto=$("#VentAddProducto");
     ventAddProducto.click(ConfirmAddProducto);
     volverPedido=$("#volverPedido");
@@ -1603,7 +1603,8 @@ function DatosVerPedido()
     var id = $(this)[0].id;
     var request = {"Vendedores":"DatosPedido","id_pedido":id};
     var jsonobj=JSON.stringify(request);
-    
+    //alert(datos.toString());
+    //alert(jsonobj.toString());
     $.ajax({
                     data: {vendedor:jsonobj},
                     dataType: 'json',
@@ -1613,14 +1614,14 @@ function DatosVerPedido()
                     {
                         VerPedido(jsonObject);     
                     },
-                    error: function(jsonObject) 
+                    error: function(jsonObject, jsonArray) 
                     {
                         alert('Error al conectar con ServletComercial');
                     }
                });
 }
 
-function VerPedido()
+function VerPedido(jsonObject, jsonArray)
 {
     var codigoHTML = '<div class="encabezado2">Datos Pedido</div>'+
                      '<div class="tabla">'+
@@ -1629,26 +1630,8 @@ function VerPedido()
                             '<li><a href="#Cliente">Cliente</a></li>'+
                         '</ul>'+
                         '<div class="tab_container">'+
-                            '<div id="Prod" class="tab_content">'+
-                            '<form action="" method="POST" name="form_crear_Pedido">'+
-                              '<table align="left" border="0" align="left">'+
-                                  '<tr colspan="4">'+
-                                    '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Linea Industrial" readonly="readonly" />'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Ecoflex" readonly="readonly" />'+
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+
-                                    '<td>'+
-                                      '<input type="text" value="Abrigos" readosnly="readonly" />'+
-                                    '</td>'+
-                                  '</tr>'+
-                              '</table>'+ 
+                           '<div id="Prod" class="tab_content">'+
+                            '<form action="" method="POST" name="form_crear_Pedido">'+                              
                               'LISTADO DE PRODUCTOS:'+
                               '<table class="tbonita">'+
                                   '<tr align="right">'+
@@ -1658,35 +1641,26 @@ function VerPedido()
                                     '<th>Color</th>'+
                                     '<th>Talla</th>'+
                                     '<th>Total</th>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">3</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">150000</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">3</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">150000</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<td style="text-align: center;">11111</td>'+
-                                    '<td>vestido Motociclista</td>'+
-                                    '<td style="text-align: center;">1</td>'+
-                                    '<td>Amarillo</td>'+
-                                    '<td style="text-align: center;">XL</td>'+
-                                    '<td style="text-align: center;">100000</td>'+
-                                  '</tr>'+
-                              '</table>'+
-                            '</div>'+
+                                  '</tr>'; 
                             
-                            
+               for (var t = 0; t < jsonArray.length; t++)
+                {
+                            if (t % 2 == 0)
+                                codigoHTML+=      '<tr>';
+                           else
+                                codigoHTML+=      '<tr class="even">';
+                    codigoHTML+=                          '<td>' + jsonArray[t].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[t].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[t].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[t].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[t].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[t].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                }
+                
+                    codigoHTML+='</table>'+
+                            '</div>'+                   
                             '<div id="Cliente" class="tab_content">'+
                               '<br>'+
                               '<table align="center">'+
@@ -1748,8 +1722,7 @@ function VerPedido()
                                     '</td>'+
                                   '</tr>'+
                               '</table>'+
-                            '</div>'+
-                          '</div>'+
+                            '</div>'+                          
                           '<br>'+
                           '<table align="center">'+
                               '<tr>'+
@@ -1771,6 +1744,7 @@ function VerPedido()
                             '</tr>'+
                           '</table>'+     
                         '</form>'+
+                       '<div>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);

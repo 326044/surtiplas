@@ -534,4 +534,41 @@ public class pedidosSQL {
         
         return true;
     }
+    
+    public JSONObject DatosPedidoVendedor(String id_pedido)
+    {
+        JSONObject producto = new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT DISTINCT productos.codigo_producto, productos.nombre, productos.cantidad, productos.precio_venta, colores.color, tallas.talla, linea_produccion.nombre_linea, material.material"
+                    + " FROM productos, colores, coloresprod, tallas, tallasprod, linea_produccion, lineaprod, material, materialprod"
+                    + " WHERE productos.codigo_producto=coloresprod.codigo_producto AND colores.cod_color=coloresprod.cod_color AND"
+                    + " productos.codigo_producto=tallasprod.codigo_producto AND tallas.cod_talla=tallasprod.cod_talla AND productos.codigo_producto=lineaprod.codigo_producto"
+                    + " AND linea_produccion.cod_linea=lineaprod.cod_linea AND productos.codigo_producto=materialprod.codigo_producto AND material.codigo=materialprod.codigo AND"
+                    + " productos.codigo_producto = '" + id_pedido + "';";
+            this.rs = this.st.executeQuery(sql);            
+            this.rs.first();
+            
+            
+            producto.put("codigo_producto", rs.getString("codigo_producto"));
+            producto.put("nombre", rs.getString("nombre"));
+            producto.put("cantidad", rs.getString("cantidad"));
+            producto.put("color", rs.getString("color"));
+            producto.put("talla", rs.getString("talla"));
+            producto.put("precio_venta", rs.getString("precio_venta"));
+            producto.put("material", rs.getString("material"));
+            producto.put("nombre_linea", rs.getString("nombre_linea"));
+            System.out.printf(producto.toString());
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+     
+        return producto;
+    }
+    
 }
