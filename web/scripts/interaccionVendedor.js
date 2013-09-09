@@ -1202,12 +1202,12 @@ function VerCheckProducto(jsonArray)
  // var precio=$('.Prec_editable').val();
   $('.uno').append(                      '<tr class="dato" id="columna'+cont+'">'+
                                              '<td><input type="checkbox" value=' + cont + '></td>'+
-                                              '<td>' + jsonArray.codigo_producto + '</td>'+
+                                              '<td><input type="hidden" name="codigo_producto" value="' + jsonArray.codigo_producto + '"/>' + jsonArray.codigo_producto + '</td>'+
                                               '<td>' + jsonArray.nombre + '</td>'+
-                                              '<td><input type="text" size="5" class="Editable Editable'+ cont +'" value="'+ jsonArray.cantidad +'" id="1000'+ cont +'"></td>'+  
+                                              '<td><input type="text" size="5" name="cant_pedidosprod" class="Editable Editable'+ cont +'" value="'+ jsonArray.cantidad +'" id="1000'+ cont +'"></td>'+  
                                               '<td>' + jsonArray.color + '</td>'+
                                               '<td>' + jsonArray.talla + '</td>'+
-                                              '<td><input type="text" size="10" class="Prec_editable" value="'+ jsonArray.precio_venta +'" id="'+ cont +'"></td>'+
+                                              '<td><input type="text" size="10" name="precio_unitario" class="Prec_editable" value="'+ jsonArray.precio_venta +'" id="'+ cont +'"></td>'+
                                               '<td id="subTotal'+ cont +'">' + jsonArray.precio_venta + '</td>'+
                                           '</tr>');
             
@@ -1250,7 +1250,7 @@ function subtotal()
 {
     var subtotal = 0;
     $('#TablaCheckProducto tr.dato').each(function(){ //filas con clase 'dato', especifica una clase, asi no tomas el nombre de las columnas
-    subtotal += parseInt($(this).find('td').eq(7).text()||0,10); //numero de la celda 3
+    subtotal += parseInt($(this).find('td').eq(7).text()||0,10); //numero de la celda 8
     });
     var codigoHTML = '<input type="text" id="totalsinviva" value="'+subtotal+'" readonly="readonly"/>';
     $("#totalSinIva").html(codigoHTML);
@@ -1261,7 +1261,7 @@ function iva()
 {
     var iva=$('#totalsinviva').val();
     iva= iva*0.16;
-    var codigoHTML = '<input type="text" value="'+iva+'" size="20" id="valorIva" maxlength="35" readonly="readonly" />';
+    var codigoHTML = '<input type="text" value="'+iva+'" name="valor_del_iva" size="20" id="valorIva" maxlength="35" readonly="readonly" />';
     $("#iva").html(codigoHTML);
     Total();
 }
@@ -1274,7 +1274,7 @@ function Total()
     subtotal=$('#totalsinviva').val();
     iva=$('#valorIva').val();
     total= parseFloat(subtotal) + parseFloat(iva);
-    var codigoHTML = '<input type="text" value="'+total+'" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/>';
+    var codigoHTML = '<input type="text" value="'+total+'" name="valor_total" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/>';
     $("#Total").html(codigoHTML);
 }
 
@@ -1308,12 +1308,13 @@ function AddPedido()
 {
     var codigoHTML = '<div class="encabezado2">Agregar Pedido</div>'+
                      '<div class="tabla">'+
+                        '<form id="form_Add_Pedido" enctype="multipart/form-data" >'+
                               '<br>'+
                               '<table align="center">'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Pedido</th>'+
                                     '<td>'+
-                                      '<input type="text" name="id" value="" size="5" readonly="readonly"/>'+                                      
+                                      '<input type="text" name="id_pedido" value="" size="5" readonly="readonly"/>'+                                      
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Fecha</th>'+
                                     '<td>'+
@@ -1328,7 +1329,7 @@ function AddPedido()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
                                     '<td>'+
-                                      '<input type="text" name="nit" value="" size="5" readonly="readonly"/>'+
+                                      '<input type="text" name="id_cliente" value="" size="5" readonly="readonly"/>'+
                                       '<img src="images/b_search.png" title="Buscar" class="buscarCliente">'+
                                     '</td>'+                                    
                                   '</tr>'+
@@ -1401,11 +1402,11 @@ function AddPedido()
                                 '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
                                 '<td id="totalSinIva"><input type="text"  value="0" readonly="readonly"/></td>'+
                                 '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td id="iva"><input type="text" value="0" size="20" maxlength="35" readonly="readonly" /></td>'+
+                                '<td id="iva"><input type="text" name="valor_del_iva" value="0" size="20" maxlength="35" readonly="readonly" /></td>'+
                               '</tr>'+
                               '<tr>'+
                                 '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2" id="Total"><input type="text" value="0" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
+                                '<td colspan="2" id="Total"><input type="text" name="valor_total" value="0" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
                               '</tr>'+
                           '</table>'+
                           '<table align="center">'+
@@ -1417,6 +1418,7 @@ function AddPedido()
                                 '</td>'+
                              '</tr>'+    
                           '</table>'+
+                         '</form>'+
                     '</div>';
 
     $("#datos").html(codigoHTML);    
@@ -1435,7 +1437,7 @@ function AddPedido()
     $('#date_field5').datepick({yearRange: '1980:2050'});
     $('#date_field6').datepick({yearRange: '1980:2050'});
     $('#date_field6').datepick('option', {dateFormat: $.datepick.ATOM});
-    //$("#form_buscar_Pedido").submit(buscarPedido);
+    $("#form_Add_Pedido").submit(enviarDatosAddPedido);
     //$("#form_buscar_Pedido_cliente").submit(buscarPedidoCliente);
     //$("#form_buscar_Pedido_Productos").submit(enviarDatosBuscarProducto); 
     activadorEventosVendedores(); 
@@ -1454,6 +1456,48 @@ function EliminarFilasPedido()
 
     });
      subtotal();
+}
+
+
+function enviarDatosAddPedido(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    //alert(datos.toString());
+    var request = {"Vendedores":"AddPedido","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    //alert(jsonobj.toString());
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonObj)
+                    {
+                        verificarAddPedido(jsonObj);
+                    },
+                    error: function() 
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });
+}
+
+function verificarAddPedido(jsonObj)
+{
+    if (jsonObj.AddPedido  =="true")
+    {
+        alert("El pedido se adicionó correctamente");
+    }
+    
+    else
+    {
+        alert("El pedido no se pudo adicionar");
+    }   
+    
+    AddPedido();
 }
 
 
@@ -1603,8 +1647,7 @@ function DatosVerPedido()
     var id = $(this)[0].id;
     var request = {"Vendedores":"DatosPedido","id_pedido":id};
     var jsonobj=JSON.stringify(request);
-    //alert(datos.toString());
-    //alert(jsonobj.toString());
+    
     $.ajax({
                     data: {vendedor:jsonobj},
                     dataType: 'json',
@@ -3477,8 +3520,9 @@ function AddCliente()
                                   '</tr>'+
                                   '<tr>'+
                                   '<td colspan="4" align="center"><br>'+
-                                    '<input type="button" id="mapa" value="ubicar" class="button"/>'+                                  '</tr>'+
+                                    '<input type="button" id="mapa" value="ubicar" class="button"/>'+                                  
                                   '</td>'+                                                                                                                                                                      
+                                  '</tr>'+
                                 '</table>'+                              
                                 '<div class="Ubicacion-Geografica">'+                                                                                                               
                                 '</div>'+
