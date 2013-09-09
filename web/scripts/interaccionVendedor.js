@@ -973,7 +973,7 @@ function VerCheckCliente(jsonObject)
    var codigoHTML =               '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Id Cliente</th>'+
                                     '<td>'+
-                                      '<input type="text" name="nit" value="' + jsonObject.id_cliente+ '" size="5" readonly="readonly"/>'+
+                                      '<input type="text" name="id_cliente" value="' + jsonObject.id_cliente+ '" size="5" readonly="readonly"/>'+
                                       '<img src="images/b_search.png" title="Buscar" class="buscarCliente">'+
                                     '</td>'+                                    
                                   '</tr>'+

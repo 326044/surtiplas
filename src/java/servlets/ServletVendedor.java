@@ -225,13 +225,13 @@ public class ServletVendedor extends HttpServlet
                 
                 if (ped.AdicionarPedido2(jsonObject, this.idUsuario))
                 {
-                    objRes.put("AddVisita", "true");
+                    objRes.put("AddPedido", "true");
                     out.print(objRes);
                 }
 
                 else
                 {
-                    objRes.put("AddVisita", "false");
+                    objRes.put("AddPedido", "false");
                     out.print(objRes);
                 }
                 
