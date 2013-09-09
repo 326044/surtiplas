@@ -7262,7 +7262,7 @@ function cargarPedidos(jsonArray)
 
 function AddPedido()
 {
-    var codigoHTML = '<div class="encabezado2">Adicionar Producto</div>'+
+    var codigoHTML = '<div class="encabezado2">Adicionar Pedido</div>'+
                      '<div class="tabla">'+
                             '<div id="Informacion" class="tab_content">'+
                               '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
