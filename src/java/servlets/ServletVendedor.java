@@ -210,6 +210,38 @@ public class ServletVendedor extends HttpServlet
             }
         }
         
+        if (op.equals("AddPedido"))
+        {           
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONObject objRes = new JSONObject();
+            JSONParser parser = new JSONParser();
+
+            try 
+            {
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));
+
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                
+                if (ped.AdicionarPedido2(jsonObject, this.idUsuario))
+                {
+                    objRes.put("AddVisita", "true");
+                    out.print(objRes);
+                }
+
+                else
+                {
+                    objRes.put("AddVisita", "false");
+                    out.print(objRes);
+                }
+                
+            } 
+            catch (ParseException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+        
         if (op.equals("CargarDatosAddVisita"))
         {
             String id = String.valueOf(jsonObj.get("id_cliente"));   

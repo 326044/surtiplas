@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Calendar;
 import javabeans.Pedidos;
 import javabeans.Usuarios;
 import org.json.simple.JSONArray;
@@ -460,6 +461,38 @@ public class pedidosSQL {
             tsql = "INSERT INTO pedidos VALUES(DEFAULT, '";
             tsql += usw.getvalor_del_iva() + "','" + usw.getvalor_total() + "','" + usw.getid_usuario() + "','" + usw.getfecha() + "','" + usw.gethora() + "','" + usw.getid_cliente() + "')";
              tsql2 = "SELECT SUM(valor) AS valor_total FROM pedidos"; 
+            this.st.execute(tsql);
+            this.desconectar();
+        }
+        
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public boolean AdicionarPedido2(JSONObject datos, String IdUsuario)
+    {
+        try
+        {
+            Calendar calendario = Calendar.getInstance();
+            int hora, minutos, segundos;
+            hora =calendario.get(Calendar.HOUR_OF_DAY);
+            minutos = calendario.get(Calendar.MINUTE);
+            segundos = calendario.get(Calendar.SECOND);
+            String horaActual = (hora + ":" + minutos + ":" + segundos);
+            
+            this.cn = getConnection();
+            this.st = cn.createStatement();
+            Pedidos usw = new Pedidos("", String.valueOf(datos.get("valor_del_iva")), String.valueOf(datos.get("valor_total")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("hora")), String.valueOf(datos.get("id_cliente")));
+            String tsql;
+            
+            tsql = "INSERT INTO pedidos VALUES(DEFAULT, ";
+            tsql += usw.getvalor_del_iva() + "," + usw.getvalor_total() + "," + IdUsuario + ",'" + usw.getfecha() + "','" + horaActual + "'," + usw.getid_cliente() + ")";
+             
             this.st.execute(tsql);
             this.desconectar();
         }
