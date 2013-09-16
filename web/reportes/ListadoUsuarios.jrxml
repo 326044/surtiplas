@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoUsuarios" language="groovy" pageWidth="792" pageHeight="612" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ec2d6431-8513-475c-b857-2ea5dda414aa">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="386"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -29,12 +29,7 @@ FROM
 	<field name="usuarios_celular_usuario" class="java.lang.String"/>
 	<field name="usuarios_email_usuario" class="java.lang.String"/>
 	<background>
-		<band height="572" splitType="Stretch">
-			<image>
-				<reportElement uuid="cd37b4af-f127-48e0-8b09-0c90ea60d5d1" x="29" y="134" width="643" height="366"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\marca de agua.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="572" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="140" splitType="Stretch">
@@ -63,10 +58,6 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement uuid="883d1d24-2c1d-410d-84fa-4d54573d725e" x="0" y="0" width="244" height="106"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -197,7 +188,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 		<band height="23" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="100" splitType="Stretch">
+		<band height="101" splitType="Stretch">
 			<line>
 				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="0" width="752" height="4"/>
 			</line>

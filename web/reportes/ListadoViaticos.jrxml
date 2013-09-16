@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoViaticos" language="groovy" pageWidth="595" pageHeight="612" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b9a3aaa2-8aef-4583-9ecb-d304a74a90cf">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -23,12 +23,7 @@ FROM
 	<field name="viaticos_concepto" class="java.lang.String"/>
 	<field name="viaticos_fecha" class="java.sql.Date"/>
 	<background>
-		<band height="572" splitType="Stretch">
-			<image>
-				<reportElement uuid="94db0e13-9e92-4600-b73b-a876e894b364" x="0" y="140" width="553" height="320"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\marca de agua.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="572" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="140" splitType="Stretch">
@@ -39,10 +34,6 @@ FROM
 				</textElement>
 				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
 			</staticText>
-			<image>
-				<reportElement uuid="d9f161b4-48f2-4b13-aec2-109642708e48" x="0" y="0" width="239" height="106"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="277" y="33" width="278" height="89"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

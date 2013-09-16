@@ -7,7 +7,7 @@
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
 	<style name="Detail" fontName="Arial" fontSize="12"/>
-	<queryString language="SQL">
+	<queryString>
 		<![CDATA[SELECT
      visitas.`id_visita` AS visitas_id_visita,
      visitas.`fecha` AS visitas_fecha,
@@ -21,12 +21,7 @@ FROM
 	<field name="visitas_id_cliente" class="java.lang.Integer"/>
 	<field name="visitas_id_usuario" class="java.lang.Integer"/>
 	<background>
-		<band height="343" splitType="Stretch">
-			<image>
-				<reportElement uuid="b97d9e21-3c57-4177-a818-0891d4f9338d" x="3" y="0" width="552" height="337"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\marca de agua.png"]]></imageExpression>
-			</image>
-		</band>
+		<band height="343" splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="120" splitType="Stretch">
@@ -55,10 +50,6 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
-			<image>
-				<reportElement uuid="d9f161b4-48f2-4b13-aec2-109642708e48" x="0" y="0" width="244" height="84"/>
-				<imageExpression><![CDATA["H:\\administradorWeb\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
-			</image>
 		</band>
 	</title>
 	<pageHeader>
