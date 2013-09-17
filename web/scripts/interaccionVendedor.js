@@ -758,7 +758,7 @@ function tablaPedidoProducto(jsonArray)
            else
                 codigoHTML+=      '<tr class="even">';
     
-    codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerPedido" id="' + jsonArray[i].id_pedido + '" /></td>';
+    codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerPedido" id="' + jsonArray[i].id_pedidosProd + '" /></td>';
                                    
     codigoHTML+=                          '<td>' + jsonArray[i].id_pedido + '</td>';
     codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';  
@@ -1645,7 +1645,7 @@ function HideConfirmAddProducto()
 function DatosVerPedido()
 {
     var id = $(this)[0].id;
-    var request = {"Vendedores":"DatosPedido","id_pedido":id};
+    var request = {"Vendedores":"DatosPedido","id_pedidosProd":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -1653,18 +1653,18 @@ function DatosVerPedido()
                     dataType: 'json',
                     url: 'ServletVendedor',
                     type: 'POST',
-                    success: function(jsonObject)
+                    success: function(jsonArray)
                     {
-                        VerPedido(jsonObject);     
+                        VerPedido(jsonArray);     
                     },
-                    error: function(jsonObject, jsonArray) 
+                    error: function() 
                     {
-                        alert('Error al conectar con ServletComercial');
+                        alert('Error al conectar con ServletVendedor');
                     }
                });
 }
 
-function VerPedido(jsonObject, jsonArray)
+function VerPedido(jsonArray)
 {
     var codigoHTML = '<div class="encabezado2">Datos Pedido</div>'+
                      '<div class="tabla">'+
@@ -1686,21 +1686,25 @@ function VerPedido(jsonObject, jsonArray)
                                     '<th>Total</th>'+
                                   '</tr>'; 
                             
-               for (var t = 0; t < jsonArray.length; t++)
+                var t;
+                for (t = 0; t < jsonArray.length-1; t++)
                 {
+                    var total=jsonArray[t].cant_pedidosprod*jsonArray[t].precio_unitario;
                             if (t % 2 == 0)
                                 codigoHTML+=      '<tr>';
                            else
                                 codigoHTML+=      '<tr class="even">';
                     codigoHTML+=                          '<td>' + jsonArray[t].codigo_producto + '</td>';
                     codigoHTML+=                          '<td>' + jsonArray[t].nombre + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[t].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[t].cant_pedidosprod + '</td>';  
                     codigoHTML+=                          '<td>' + jsonArray[t].color + '</td>';
                     codigoHTML+=                          '<td>' + jsonArray[t].talla + '</td>';
-                    codigoHTML+=                          '<td>' + jsonArray[t].precio_venta + '</td>'; 
+                    codigoHTML+=                          '<td>' + total + '</td>'; 
                     codigoHTML+=                  '</tr>';
 
                 }
+                
+                var totalSinIva=jsonArray[t].valor_total-jsonArray[t].valor_del_iva;
                 
                     codigoHTML+='</table>'+
                             '</div>'+                   
@@ -1710,27 +1714,27 @@ function VerPedido(jsonObject, jsonArray)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">NIT</th>'+
                                      '<td>'+
-                                       '<input type="text" name="nit" value="123456" readonly="readonly"/>'+
+                                       '<input type="text" name="nit" value="' + jsonArray[t].id_cliente+ '" readonly="readonly"/>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Razón Social</th>'+
                                     '<td>'+
-                                      '<input type="text" name="razonSocial" value="Indu Motos S.A." readonly="readonly"/>'+
+                                      '<input type="text" name="Razon_social" value="' + jsonArray[t].razon_social + '" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Ciudad</th>'+
                                     '<td>'+
-                                      '<input type="text" name="ciudad" value="Medellin" readonly="readonly"/>'+
+                                      '<input type="text" name="nombreMunicipio" value="' + jsonArray[t].nombreMunicipio + '" readonly="readonly"/>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Dirección</th>'+
                                     '<td>'+
-                                      '<input type="text" name="dir" value="Calle 80 #12-50" readonly="readonly"/>'+
+                                      '<input type="text" name="direccion" value="' + jsonArray[t].direccion + '" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Telefono</th>'+
                                     '<td>'+
-                                      '<input type="text" name="telefono" value="3252324" readonly="readonly"/>'+
+                                      '<input type="text" name="telefono_cliente" value="' + jsonArray[t].telefono + '" readonly="readonly"/>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -1741,27 +1745,27 @@ function VerPedido(jsonObject, jsonArray)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td>'+
-                                      '<input type="text" name="nomAutoriza" value="Pedro Perez" readonly="readonly"/>'+
+                                      '<input type="text" name="nombre_usuario" value="' + jsonArray[t].nombre_usuario + '" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Cargo</th>'+
                                     '<td>'+
-                                      '<input type="text" name="cargoAutoriza" value="Jefe de Compras" readonly="readonly"/>'+
+                                      '<input type="text" name="tipo_usuario" value="' + jsonArray[t].tipo_usuario + '" readonly="readonly"/>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Telefono fijo</th>'+
                                     '<td>'+
-                                      '<input type="text" name="telAutoriza" value="3122324" readonly="readonly"/>'+
+                                      '<input type="text" name="telefono_usuario" value="' + jsonArray[t].telefono_usuario + '" readonly="readonly"/>'+
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Celular</th>'+
                                     '<td>'+
-                                      '<input type="text" name="celAutoriza" value="310456789" readonly="readonly"/>'+
+                                      '<input type="text" name="celular_usuario" value="' + jsonArray[t].celular_usuario + '" readonly="readonly"/>'+
                                     '</td>'+
                                   '</tr>'+
                                   '<tr>'+
                                     '<td colspan="4" align="left"><br>'+
                                     'Otros datos:<br />'+
-                                      '<textarea name="mensaje" cols="60" rows="4" readonly="readonly">Entregar maximo en 10 dias</textarea>'+
+                                      '<textarea name="mensaje" cols="60" rows="4" readonly="readonly">"' + jsonArray[t].otros_datos + '"</textarea>'+
                                     '</td>'+
                                   '</tr>'+
                               '</table>'+
@@ -1770,13 +1774,13 @@ function VerPedido(jsonObject, jsonArray)
                           '<table align="center">'+
                               '<tr>'+
                                 '<th align="right" style="padding-right:5px;">Total sin IVA</th>'+
-                                '<td><input type="text" name="totalSinIva" value="2500000" readonly="readonly"/></td>'+
+                                '<td><input type="text" name="totalSinIva" value="'+ totalSinIva +'" readonly="readonly"/></td>'+
                                 '<th align="right" style="padding-right:5px;">IVA</th>'+
-                                '<td><input type="text" name="iva" value="100000" size="20" maxlength="35" readonly="readonly" /></td>'+
+                                '<td><input type="text" name="iva" value="'+ jsonArray[t].valor_del_iva +'" size="20" maxlength="35" readonly="readonly" /></td>'+
                               '</tr>'+
                               '<tr>'+
                                 '<th colspan="2" align="right" style="padding-right:5px; font-weight: bold; font-size: 20px;">Total de la Compra</th>'+
-                                '<td colspan="2"><input type="text" name="totalSinIva" value="2600000" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
+                                '<td colspan="2"><input type="text" name="totalSinIva" value="'+ jsonArray[t].valor_total +'" readonly="readonly" style="padding-right:5px; font-weight: bold; font-size: 20px;"/></td>'+
                               '</tr>'+
                           '</table>'+
                           '<table align="center">'+

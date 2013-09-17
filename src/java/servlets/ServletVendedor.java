@@ -98,9 +98,9 @@ public class ServletVendedor extends HttpServlet
         }
         
          if (op.equals("DatosPedido"))
-        {
-            String cod = String.valueOf(jsonObj.get("id_pedido"));   
-            JSONObject pedidos = ped.DatosPedidoVendedor(cod);
+        {            
+            String cod = String.valueOf(jsonObj.get("id_pedidosProd"));          
+            JSONArray pedidos = ped.DatosPedidoVendedor(cod);           
             out.print(pedidos);
         }
          

@@ -605,40 +605,72 @@ public class pedidosSQL {
         return true;
     }
     
-    public JSONObject DatosPedidoVendedor(String id_pedido)
+    public JSONArray DatosPedidoVendedor(String id_pedidosProd)
     {
-        JSONObject producto = new JSONObject();
+        JSONArray pedidos = new JSONArray();
+        JSONObject cliente = new JSONObject();
+        
         try
         {
             this.cn = getConnection();
             this.st = this.cn.createStatement();
-            String sql = "SELECT DISTINCT productos.codigo_producto, productos.nombre, productos.cantidad, productos.precio_venta, colores.color, tallas.talla, linea_produccion.nombre_linea, material.material"
-                    + " FROM productos, colores, coloresprod, tallas, tallasprod, linea_produccion, lineaprod, material, materialprod"
+            String sql = "SELECT DISTINCT productos.codigo_producto, productos.nombre, pedidosprod.cant_pedidosprod, pedidosprod.precio_unitario, colores.color, tallas.talla"
+                    + " FROM productos, colores, coloresprod, tallas, tallasprod, pedidosprod, pedidos"
                     + " WHERE productos.codigo_producto=coloresprod.codigo_producto AND colores.cod_color=coloresprod.cod_color AND"
-                    + " productos.codigo_producto=tallasprod.codigo_producto AND tallas.cod_talla=tallasprod.cod_talla AND productos.codigo_producto=lineaprod.codigo_producto"
-                    + " AND linea_produccion.cod_linea=lineaprod.cod_linea AND productos.codigo_producto=materialprod.codigo_producto AND material.codigo=materialprod.codigo AND"
-                    + " productos.codigo_producto = '" + id_pedido + "';";
+                    + " productos.codigo_producto=tallasprod.codigo_producto AND tallas.cod_talla=tallasprod.cod_talla"
+                    + " AND pedidosprod.codigo_producto=productos.codigo_producto AND"
+                    + " pedidosprod.id_pedido=pedidos.id_pedido AND pedidosprod.id_pedido='" + id_pedidosProd + "';";
             this.rs = this.st.executeQuery(sql);            
-            this.rs.first();
+            System.out.print(sql.toString());
             
+           while(this.rs.next())
+           {
+                JSONObject pedido = new JSONObject(); 
+                
+                pedido.put("codigo_producto", rs.getString("codigo_producto"));
+                pedido.put("nombre", rs.getString("nombre"));
+                pedido.put("cant_pedidosprod", rs.getString("cant_pedidosprod"));
+                pedido.put("color", rs.getString("color"));
+                pedido.put("talla", rs.getString("talla"));
+                pedido.put("precio_unitario", rs.getString("precio_unitario"));
+    //            producto.put("precio_venta", rs.getString("precio_venta"));
+    //            producto.put("material", rs.getString("material"));
+    //            producto.put("nombre_linea", rs.getString("nombre_linea"));
+                System.out.printf(pedidos.toString());
+                pedidos.add(pedido); 
+    }
+    
+           String sql1 = "SELECT clientes.id_cliente, clientes.razon_social, usuarios.otros_datos, municipios.nombreMunicipio, clientes.telefono,"
+                    + " usuarios.nombre_usuario, usuarios.tipo_usuario, usuarios.telefono_usuario, usuarios.celular_usuario, pedidos.id_pedido, pedidos.valor_del_iva, pedidos.valor_total"                    
+                    + " FROM clientes, municipios, usuarios, pedidos WHERE clientes.codMunicipio=municipios.codMunicipio AND"
+                    + " pedidos.id_cliente=clientes.id_cliente AND pedidos.id_pedido = '" + id_pedidosProd + "';";
+            this.rs = this.st.executeQuery(sql1);
+            this.rs.first();            
+           
             
-            producto.put("codigo_producto", rs.getString("codigo_producto"));
-            producto.put("nombre", rs.getString("nombre"));
-            producto.put("cantidad", rs.getString("cantidad"));
-            producto.put("color", rs.getString("color"));
-            producto.put("talla", rs.getString("talla"));
-            producto.put("precio_venta", rs.getString("precio_venta"));
-            producto.put("material", rs.getString("material"));
-            producto.put("nombre_linea", rs.getString("nombre_linea"));
-            System.out.printf(producto.toString());
-        }
+            cliente.put("id_cliente", rs.getString("id_cliente"));
+            cliente.put("razon_social", rs.getString("razon_social"));
+            cliente.put("nombreMunicipio", rs.getString("nombreMunicipio"));
+            cliente.put("telefono", rs.getString("telefono"));
+            cliente.put("nombre_usuario", rs.getString("nombre_usuario"));
+            cliente.put("tipo_usuario", rs.getString("tipo_usuario"));
+            cliente.put("telefono_usuario", rs.getString("telefono_usuario"));
+            cliente.put("celular_usuario", rs.getString("celular_usuario"));
+            cliente.put("id_pedido", rs.getString("id_pedido"));
+            cliente.put("otros_datos", rs.getString("otros_datos"));
+            cliente.put("valor_del_iva", rs.getString("valor_del_iva"));
+            cliente.put("valor_total", rs.getString("valor_total"));
+            pedidos.add(cliente);
+              
+            System.out.printf(cliente.toString());
+           
+}
     
         catch(Exception e)
         {
             e.printStackTrace();
         }
      
-        return producto;
+        return pedidos;
     }
-    
 }
