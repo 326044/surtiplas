@@ -3496,7 +3496,7 @@ function cargP(jsonArray)
 //**********************************************************************************
 function seccionListadoProductos()
 {
-    var request = {"Usuarios":"Productos"};
+    var request = {"Usuarios":"SeccionProducto"};
     var jsonobj=JSON.stringify(request);
     $.ajax({
                     data: {administrador:jsonobj},
@@ -3523,25 +3523,136 @@ function seccionListadoProductos()
 //*******************************************************************************************************
 
 function cargarListadoProducto(jsonArray)
-{    
-   var codigoHTML =  '<div class="encabezado2">Listado de Productos</div>'+
-                            '<div class="tabla">'+
-                               '<tr>'+
-                               '<table class="tbonita">'+
+{
+   for (var k = 0; k < jsonArray.length; k++)
+   {
+       if (k==0)
+       {
+         var codigoHTML = '<div class="encabezado2">Listado Productos</div>'+
+                          '<div class="tabla">'+
+                             '<form id="form_buscar_producto">'+
+                                 '<table align="center" border="0" >'+
+                                     '<tr>'+                                    
+                                         '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+ 
+                                            '<td>'+
+                                             '<select name="lineaProduccion" style="width:110px">'+
+                                                 '<option value=""></option>';
+                                             for (var j = 0; j < jsonArray[k].length; j++)
+                                             {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][j].cod_linea +'">'+ jsonArray[k][j].nombre_linea +'</option>';
+                                             }                                                                                              
+            codigoHTML +=                    '</select>'+ 
+                                         '</td>'; 
+       }
+       
+       if (k==1)
+       {
+            codigoHTML+=                '<th align="right" style="padding-right:5px;">Material</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="materiales" style="width:110px">'+
+                                                 '<option value=""></option>';
+                                                for (var l = 0; l < jsonArray[k].length; l++) 
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][l].codigo +'">'+ jsonArray[k][l].material +'</option>';                                                 
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>';  
+        }
+       
+        if (k==2)
+        {
+            codigoHTML +=                '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="tipoProducto" style="width:110px">'+
+                                                 '<option value=""></option>';
+                                                for (var m = 0; m < jsonArray[k].length; m++)
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][m].cod_tipo_producto  +'">'+ jsonArray[k][m].nombre_tipo_producto +'</option>';                                                     
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>'+ 
+                                     '</tr>'+
+                                     '<tr>'+                                
+                                         '<td colspan="6" align="center"><br>'+
+                                           '<input type="submit" value="Buscar" class="button"  />'+
+                                         '</td>'+
+                                     '</tr>'+
+                                 '</table>'+
+                             '</form>'+
+                             '<br>'+
+                             '<table align="center" border="0"  width="610" class="tbonita" id="TablaProductos">'+ 
                                  '<tr align="center">'+
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
                                    '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                    '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                   '<th>Id Producto</th>'+
-                                   '<th>Nombre</th>'+
-                                   '<th>Cantidad</th>'+
-                                   '<th>Precio</th>'+
-                                   '<th>Código de Barras</th>'+
-                                 '</tr>';
-                                 
-    for (var i = 0; i < jsonArray.length; i++)
+                                    '<th>Codigo</th>'+
+                                    '<th>Nombre</th>'+
+                                    '<th>Cantidad</th>'+
+                                    '<th>Color</th>'+
+                                    '<th>Talla</th>'+
+                                    '<th>Precio C/U</th>'+
+                                  '</tr>'+
+                             '</table>'+                  
+                          '</div>'; 
+        }
+                                      
+  }                  
+    $("#datos").html(codigoHTML);
+    $(".menu-vertical li a").removeClass("active");
+    if(TablaProductos != null)
     {
-            if (i % 2 === 0)
+        AdicionarBusquedaProductos(TablaProductos);
+    }
+    $(this).addClass("active");   
+    $("#form_buscar_producto").submit(enviarDatosBuscarProducto);
+    activadorEventosProductos();
+    //$(".menu-vertical li a").removeClass("active");
+    //$(this).addClass("active");
+}
+function enviarDatosBuscarProducto(evento)
+{
+    evento.preventDefault();
+    var datos_formulario = $(this).serializeArray();   
+    var datos = JSON.stringify(SerializeToJson(datos_formulario));
+    var request = {"Vendedores":"BuscarProductos","Datos":datos};
+    var jsonobj=JSON.stringify(request);
+    
+    $.ajax({        
+                    data: {vendedor:jsonobj},
+                    type: 'POST',
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    success: function(jsonArray)
+                    {
+                        AdicionarBusquedaProductos(jsonArray);
+                    },
+                    error: function()
+                    {
+                        alert('Error al conectar con el servidor');
+                    }
+                });    
+}
+
+function AdicionarBusquedaProductos(jsonArray)
+{
+    TablaProductos = jsonArray;
+        var codigoHTML =           '<tr>'+
+                                   '<table class="tbonita">'+
+                                         '<tr align="center">'+
+                                         '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
+                                         '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                         '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                         '<th>Codigo</th>'+
+                                         '<th>Nombre</th>'+
+                                         '<th>Cantidad</th>'+
+                                         '<th>Color</th>'+
+                                         '<th>Talla</th>'+
+                                         '<th>Precio C/U</th>'+
+                                        '</tr>';
+
+                for (var i = 0; i < jsonArray.length; i++)
+                {
+                            if (i % 2 === 0)
                 codigoHTML+=               '<tr>';
            else
                 codigoHTML+=               '<tr class="even">';
@@ -3549,27 +3660,22 @@ function cargarListadoProducto(jsonArray)
            codigoHTML+=                            '<td><img src="images/b_edit.png" title="Modificar" class="ModProducto" id="' + jsonArray[i].codigo_producto + '" /></td>'+
                                                                '<td><img src="images/b_drop.png" title="Eliminar" class="DelProducto" id="' + jsonArray[i].codigo_producto + '" /></td>'+
                                                                '<td><img src="images/b_search.png" title="Visualizar" class="VerProducto" id="' + jsonArray[i].codigo_producto + '" /></td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';  
-            codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>';
-            codigoHTML+=                          '<td>' + jsonArray[i].codigo_barras + '</td>';
-            codigoHTML+=                   '</tr>';
-            
-    }
-    
-    codigoHTML+=                '</table>'+
-                                  '</div>';
-    
-    $("#datos").html(codigoHTML);
-    $(".tbonita").css({width: 620});
-    $(".content-float-datos").css({width: 630});
+                    codigoHTML+=                          '<td>' + jsonArray[i].codigo_producto + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].nombre + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].cantidad + '</td>';  
+                    codigoHTML+=                          '<td>' + jsonArray[i].color + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].talla + '</td>';
+                    codigoHTML+=                          '<td>' + jsonArray[i].precio_venta + '</td>'; 
+                    codigoHTML+=                  '</tr>';
+
+                }
+                
+                
+    $("#TablaProductos").html(codigoHTML);
     $(".nav .menu li a#Productos").addClass("active");
     $(".menu-vertical li a").removeClass("active");
     $(".menu-vertical li a#listadoProductos").addClass("active");
     activadorEventosProductos();
-    //$(".menu-vertical li a").removeClass("active");
-    //$(this).addClass("active");
 }
 
 //**********************************************************************************************
@@ -4032,7 +4138,7 @@ function verificarModProducto(jsonObj)
 function DatosVerProducto()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosProductos","Codigo_Producto":id};
+    var request = {"Usuarios":"DatosProducto","Codigo_Producto":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -4081,10 +4187,6 @@ function VerProducto(jsonObject)
                                           '</div>'+
                                       '</td>'+
                                   '</tr>'+
-                            '<tr>'+
-                                '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="15" readonly="readonly"/></td>'+
-                            '</tr>'+
                                 '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+

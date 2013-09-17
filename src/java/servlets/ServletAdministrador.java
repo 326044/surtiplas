@@ -21,7 +21,7 @@ import modelo.MaterialSQL;
 import modelo.MunicipiosSQL;
 import modelo.pedidosSQL;
 import modelo.PerfilSQL;
-import modelo.ProductosAdSQL;
+import modelo.ProductosSQL;
 import modelo.TallasComboSQL;
 import modelo.TallasSQL;
 import modelo.TipoProductoSQL;
@@ -54,7 +54,7 @@ public class ServletAdministrador extends HttpServlet
         UsuariosSQL usr = new UsuariosSQL();
         VisitasAdSQL uss = new VisitasAdSQL();
         ViaticosSQL usrs = new ViaticosSQL();
-        ProductosAdSQL usj = new ProductosAdSQL();
+        ProductosSQL usj = new ProductosSQL();
         clientes1SQL usf = new clientes1SQL();
         LineaProduccionSQL lp = new LineaProduccionSQL();
         ColoresSQL usp = new ColoresSQL();
@@ -84,12 +84,22 @@ public class ServletAdministrador extends HttpServlet
             out.print(usuarios);
         }
         
-        if (op.equals("Productos"))
-        {
-            JSONArray productos = new JSONArray();
-            productos = usj.cargarListadoProducto();
-            out.print(productos);
+        if (op.equals("SeccionProducto"))
+        {   
+            JSONArray lineaProduccion = new JSONArray();
+            lineaProduccion = lp.ObtenerLineasProduccion();
+            JSONArray Material = new JSONArray();
+            Material = use.ObtenerMateriales();
+            JSONArray Tproducto = new JSONArray();
+            Tproducto = tp.ObtenerTipoProducto();
+            JSONArray mensaje = new JSONArray();            
+            mensaje.add(lineaProduccion);
+            mensaje.add(Material);
+            mensaje.add(Tproducto);            
+            System.out.print(mensaje.toString());
+            out.print(mensaje);
         }
+        
         if (op.equals("Clientes"))
         {
             JSONArray clientes = new JSONArray();
@@ -175,11 +185,31 @@ public class ServletAdministrador extends HttpServlet
             JSONObject viatico = usrs.DatosViatico(cod);
             out.print(viatico);
         }
-        if (op.equals("DatosProductos"))
+       
+        if (op.equals("BuscarProductos"))
         {
-            String cod = String.valueOf(jsonObj.get("Codigo_Producto"));  
-            System.out.print(cod);
-            JSONObject producto = usj.datosProductos(cod);
+            System.out.print(String.valueOf(jsonObj.get("Datos")));
+            JSONParser parser = new JSONParser();
+            JSONArray Productos = new JSONArray();
+            
+            try 
+            {   
+                Object obj = parser.parse(String.valueOf(jsonObj.get("Datos")));                
+                JSONObject jsonObject = (JSONObject) obj;
+                System.out.print(jsonObject.toString());
+                Productos = usj.ListadoProductos(jsonObject);   
+            }
+            catch (ParseException e)
+            {
+                e.printStackTrace();
+            }
+            out.print(Productos);             
+        }
+        
+        if (op.equals("DatosCheckProducto"))
+        {
+            String id = String.valueOf(jsonObj.get("codigo_producto"));   
+            JSONObject producto = usj.DatosCheckProducto(id);
             out.print(producto);
         }
 

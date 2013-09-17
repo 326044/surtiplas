@@ -91,7 +91,7 @@ public class ProductosAdSQL
             
             while(this.rs.next())
             {
-                productos usj = new productos(rs.getString("codigo_producto"), rs.getString("nombre"), rs.getString("foto"), rs.getString("cantidad"), rs.getString("precio_costo"), rs.getString("precio_venta"), rs.getString("precio_descuento"), rs.getString("codigo_barras"), rs.getString("cod_tipo_producto"), rs.getString("cod_color"), rs.getString("cod_talla"), rs.getString("cod_linea"), rs.getString("codigo"));
+                productos usj = new productos(rs.getString("codigo_producto"), rs.getString("nombre"), rs.getString("foto"), rs.getString("cantidad"), rs.getString("precio_costo"), rs.getString("precio_venta"), rs.getString("precio_descuento"), rs.getString("codigo_barras"), rs.getString("cod_tipo_producto"));
                 producto = usj.getJSONObject();
                 System.out.printf(producto.toString());
                 productos.add(producto);
@@ -171,10 +171,10 @@ public class ProductosAdSQL
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
-            productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")), String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("cod_talla")), String.valueOf(datos.get("cod_linea")), String.valueOf(datos.get("codigo")));
+            productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
             String tsql;
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
-            tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "','" + usj.getcod_color() + "','" + usj.getcod_talla() + "','" + usj.getcod_linea() + "','" + usj.getcodigo() + "')";
+            tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
             this.st.execute(tsql);
             this.desconectar();
         }
@@ -204,9 +204,9 @@ public class ProductosAdSQL
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
-            productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")), String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("cod_talla")), String.valueOf(datos.get("cod_linea")), String.valueOf(datos.get("codigo")));
+            productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
             String tsql;
-            tsql = "UPDATE productos SET nombre='" + usj.getnombre() + "', foto='" + usj.getfoto() + "', cantidad=" + usj.getcantidad() + ", precio_costo=" + usj.getprecio_costo() + ", precio_venta=" + usj.getprecio_venta() + ", precio_descuento=" + usj.getprecio_descuento() + ", codigo_barras=" + usj.getcodigo_barras() + ", cod_tipo_producto=" + usj.getcod_tipo_producto () + ", cod_color=" + usj.getcod_color () + ", cod_talla=" + usj.getcod_talla () + ", cod_linea=" + usj.getcod_linea () + ", codigo=" + usj.getcodigo () + " WHERE codigo_producto = " + idProductos + ";";
+            tsql = "UPDATE productos SET nombre='" + usj.getnombre() + "', foto='" + usj.getfoto() + "', cantidad=" + usj.getcantidad() + ", precio_costo=" + usj.getprecio_costo() + ", precio_venta=" + usj.getprecio_venta() + ", precio_descuento=" + usj.getprecio_descuento() + ", codigo_barras=" + usj.getcodigo_barras() + ", cod_tipo_producto=" + usj.getcod_tipo_producto () + " WHERE codigo_producto = " + idProductos + ";";
             this.st.execute(tsql);
             this.desconectar();
         }
