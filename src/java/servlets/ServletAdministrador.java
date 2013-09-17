@@ -186,6 +186,13 @@ public class ServletAdministrador extends HttpServlet
             out.print(viatico);
         }
        
+       if (op.equals("DatosProductos"))
+        {
+            String cod = String.valueOf(jsonObj.get("Codigo_Producto"));  
+            JSONObject producto = usj.DatosProductos(cod);
+            out.print(producto);
+        }
+       
         if (op.equals("BuscarProductos"))
         {
             System.out.print(String.valueOf(jsonObj.get("Datos")));
@@ -204,13 +211,6 @@ public class ServletAdministrador extends HttpServlet
                 e.printStackTrace();
             }
             out.print(Productos);             
-        }
-        
-        if (op.equals("DatosCheckProducto"))
-        {
-            String id = String.valueOf(jsonObj.get("codigo_producto"));   
-            JSONObject producto = usj.DatosCheckProducto(id);
-            out.print(producto);
         }
 
         if (op.equals("DatosClientes"))

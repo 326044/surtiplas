@@ -4138,7 +4138,7 @@ function verificarModProducto(jsonObj)
 function DatosVerProducto()
 {
     var id = $(this)[0].id;
-    var request = {"Usuarios":"DatosProducto","Codigo_Producto":id};
+    var request = {"Usuarios":"DatosProductos","Codigo_Producto":id};
     var jsonobj=JSON.stringify(request);
     
     $.ajax({
@@ -4188,9 +4188,9 @@ function VerProducto(jsonObject)
                                       '</td>'+
                                   '</tr>'+
                                 '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre</th>'+
-                                    '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                '</tr>'+
+                                        '<th align="right" style="padding-right:5px;">Nombre</th>'+
+                                        '<td><input type="text" name="nombre" value="' + jsonObject.nombre + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
                                 '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Linea de Producción</th>'+
                                     '<td><input type="text" name="cod_linea" value="' + jsonObject.nombre_linea + '" size="20" maxlength="10" readonly="readonly"/></td>'+
@@ -4303,10 +4303,6 @@ function DelProducto(jsonObject)
                                               '</div>'+   
                                           '</div>'+
                                       '</td>'+
-                                    '</tr>'+
-                                    '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">IdProducto</th>'+
-                                        '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="15" readonly="readonly"/></td>'+
                                     '</tr>'+
                                     '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Nombre</th>'+
@@ -5260,6 +5256,8 @@ function VerColor(jsonObject)
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
+                                    '<th align="right" style="padding-right:5px;">Id Producto</th>'+
+                                    '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Volver" class="button" id="NotAddColor"/>'+

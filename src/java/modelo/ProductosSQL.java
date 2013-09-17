@@ -265,6 +265,46 @@ public class ProductosSQL
      
         return producto;
     }
+     public JSONObject DatosProductos(String codigo_producto)
+    {
+        JSONObject producto = new JSONObject();
+        try
+        {
+            this.cn = getConnection();
+            this.st = this.cn.createStatement();
+            String sql = "SELECT DISTINCT productos.codigo_producto, productos.nombre, productos.cantidad, productos.precio_costo, productos.precio_venta, productos.precio_descuento, productos.codigo_barras, tipo_producto.nombre_tipo_producto, colores.color, tallas.talla, linea_produccion.nombre_linea, material.material"
+                    + " FROM productos, tipo_producto, colores, coloresprod, tallas, tallasprod, linea_produccion, lineaprod, material, materialprod"
+                    + " WHERE tipo_producto.cod_tipo_producto=productos.cod_tipo_producto AND productos.codigo_producto=coloresprod.codigo_producto AND colores.cod_color=coloresprod.cod_color AND"
+                    + " productos.codigo_producto=tallasprod.codigo_producto AND tallas.cod_talla=tallasprod.cod_talla AND productos.codigo_producto=lineaprod.codigo_producto"
+                    + " AND linea_produccion.cod_linea=lineaprod.cod_linea AND productos.codigo_producto=materialprod.codigo_producto AND material.codigo=materialprod.codigo AND"
+                    + " productos.codigo_producto = '" + codigo_producto + "';";
+            this.rs = this.st.executeQuery(sql);            
+            this.rs.first();
+            
+            
+            producto.put("codigo_producto", rs.getString("codigo_producto"));
+            producto.put("nombre", rs.getString("nombre"));
+            producto.put("cantidad", rs.getString("cantidad"));
+            producto.put("precio_costo", rs.getString("precio_costo"));
+            producto.put("precio_venta", rs.getString("precio_venta"));
+            producto.put("precio_descuento", rs.getString("precio_descuento"));
+            producto.put("codigo_barras", rs.getString("codigo_barras"));
+            producto.put("nombre_tipo_producto", rs.getString("nombre_tipo_producto"));
+            producto.put("color", rs.getString("color"));
+            producto.put("talla", rs.getString("talla"));
+            producto.put("precio_venta", rs.getString("precio_venta"));
+            producto.put("material", rs.getString("material"));
+            producto.put("nombre_linea", rs.getString("nombre_linea"));
+            System.out.printf(producto.toString());
+        }
+    
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+     
+        return producto;
+    }
         
 //**********************************************************************************************
 //**********************************************************************************************
