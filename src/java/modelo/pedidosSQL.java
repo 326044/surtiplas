@@ -478,6 +478,7 @@ public class pedidosSQL {
     {
         try
         {
+            // obtenemos la hora del sistema
             Calendar calendario = Calendar.getInstance();
             int hora, minutos, segundos;
             hora =calendario.get(Calendar.HOUR_OF_DAY);
@@ -485,15 +486,51 @@ public class pedidosSQL {
             segundos = calendario.get(Calendar.SECOND);
             String horaActual = (hora + ":" + minutos + ":" + segundos);
             
+            // Establecemos la conexion 
             this.cn = getConnection();
             this.st = cn.createStatement();
             Pedidos usw = new Pedidos("", String.valueOf(datos.get("valor_del_iva")), String.valueOf(datos.get("valor_total")), String.valueOf(datos.get("id_usuario")), String.valueOf(datos.get("fecha")), String.valueOf(datos.get("hora")), String.valueOf(datos.get("id_cliente")));
             String tsql;
             
+            // insertamos un nuevo pedido
             tsql = "INSERT INTO pedidos VALUES(DEFAULT, ";
             tsql += usw.getvalor_del_iva() + "," + usw.getvalor_total() + "," + IdUsuario + ",'" + usw.getfecha() + "','" + horaActual + "'," + usw.getid_cliente() + ")";
              
             this.st.execute(tsql);
+            
+            // seleccionamos el pedido que cabamos de ingresar
+            String precio_unitario= String.valueOf(datos.get("precio_unitario"));
+            String codigo_producto= String.valueOf(datos.get("codigo_producto"));
+            String cant_pedidosprod= String.valueOf(datos.get("cant_pedidosprod"));
+            String sql;
+            String tsql2;
+            String sql3;
+            String sql4;
+            sql = "SELECT MAX(id_pedido) AS pedido FROM pedidos;";
+            this.rs = this.st.executeQuery(sql);
+            this.rs.first();
+            String pedi = rs.getString("pedido");
+            
+            // insertamos los producto que estan asociados al pedido
+            tsql2 = "INSERT INTO pedidosprod VALUES(DEFAULT, ";
+            tsql2 += codigo_producto +"," + pedi + "," + cant_pedidosprod + "," + precio_unitario + ")";
+            
+            this.st.execute(tsql2);
+            
+            // seleccionamos la cantidad de productos pedidos
+            sql3 = "SELECT cantidad FROM productos WHERE codigo_producto="+ codigo_producto +";";
+            this.rs = this.st.executeQuery(sql3);
+            this.rs.first();
+            String cantidad = rs.getString("cantidad");
+            
+            // descontamos la cantidad de productos obtenida al inventario disponible
+            int val3 = Integer.parseInt(cantidad);
+            int val2 = Integer.parseInt(cant_pedidosprod);
+            int cant = val3 - val2;
+            
+            sql4 = "UPDATE productos SET cantidad="+ cant +" WHERE codigo_producto="+ codigo_producto +" ;";                        
+            this.st.execute(sql4);            
+            
             this.desconectar();
         }
         
@@ -502,7 +539,7 @@ public class pedidosSQL {
             e.printStackTrace();
             return false;
         }
-        
+              
         return true;
     }
     
