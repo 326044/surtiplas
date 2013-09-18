@@ -29,7 +29,12 @@ FROM
 	<field name="usuarios_celular_usuario" class="java.lang.String"/>
 	<field name="usuarios_email_usuario" class="java.lang.String"/>
 	<background>
-		<band height="572" splitType="Stretch"/>
+		<band height="572" splitType="Stretch">
+			<image>
+				<reportElement uuid="df2a314d-6b54-4c93-bfbf-339e15f474da" x="55" y="83" width="643" height="370"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marca de agua.png"]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
 		<band height="140" splitType="Stretch">
@@ -58,6 +63,10 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="44dce040-9b2b-456d-8439-fff3cbe2f76a" x="0" y="0" width="244" height="106"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
