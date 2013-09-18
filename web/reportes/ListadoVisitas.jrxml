@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoVisitas" language="groovy" pageWidth="595" pageHeight="612" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="944867fe-f6cb-4fa3-9ba9-a7e5d21cb331">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="192"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -21,7 +21,12 @@ FROM
 	<field name="visitas_id_cliente" class="java.lang.Integer"/>
 	<field name="visitas_id_usuario" class="java.lang.Integer"/>
 	<background>
-		<band height="343" splitType="Stretch"/>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement uuid="1c1e23f4-2e31-4a03-a925-0d09e0838dbe" x="0" y="103" width="555" height="339"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marca de agua.png"]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
 		<band height="120" splitType="Stretch">
@@ -50,6 +55,10 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="aefdc009-5b7f-4a19-9d27-43f5bad1a985" x="0" y="0" width="244" height="84"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>

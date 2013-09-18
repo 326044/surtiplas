@@ -23,7 +23,12 @@ FROM
 	<field name="viaticos_concepto" class="java.lang.String"/>
 	<field name="viaticos_fecha" class="java.sql.Date"/>
 	<background>
-		<band height="572" splitType="Stretch"/>
+		<band height="572" splitType="Stretch">
+			<image>
+				<reportElement uuid="11e11e63-59f6-4bb0-b8b7-42e9157f8473" x="-2" y="105" width="557" height="340"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marca de agua.png"]]></imageExpression>
+			</image>
+		</band>
 	</background>
 	<title>
 		<band height="140" splitType="Stretch">
@@ -52,6 +57,10 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement uuid="96e4bb6b-68a2-43be-b5c0-9b516056f51a" x="0" y="0" width="239" height="106"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
