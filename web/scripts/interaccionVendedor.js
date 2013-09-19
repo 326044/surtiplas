@@ -805,7 +805,7 @@ function confirmBuscarCliente()
                                       '<input type="text" name="nomAutoriza" value=""/>'+
                                     '</td>'+                                    
                                       '</tr>'+
-                                      '<tr>'+
+                                      /*'<tr>'+
                                       '<th align="right" style="padding-right:5px;">Telefono</th>'+
                                     '<td>'+
                                       '<input type="text" name="telefono" value=""/>'+
@@ -816,7 +816,7 @@ function confirmBuscarCliente()
                                     '</td>'+                 
                                   '</tr>'+
                                   '<tr>'+           
-                                  '</tr>'+
+                                  '</tr>'+*/
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                      '<td>'+
@@ -830,7 +830,7 @@ function confirmBuscarCliente()
                                         '</select>'+ 
                                       '</td>'+                                    
                                   '</tr>'+
-                                  '<tr>'+
+                                  /*'<tr>'+
                                     '<th align="right" style="padding-right:5px;">Telefono fijo</th>'+
                                     '<td>'+
                                       '<input type="text" name="telAutoriza" value=""/>'+
@@ -843,7 +843,7 @@ function confirmBuscarCliente()
                                   '<th align="right" style="padding-right:5px;">Cargo</th>'+
                                     '<td>'+
                                       '<input type="text" name="cargoAutoriza" value=""/>'+
-                                    '</td>'+
+                                    '</td>'+*/
                                   
                               '</table>'+
                               '<table align="center">'+
@@ -1037,6 +1037,7 @@ function VerCheckCliente(jsonObject)
 
 function confirmBuscarProducto()
 {
+    
     var codigoHTML='<div class="encabezado2">Buscar Producto</div>'+
                      '<div class="tabla">'+
                      '<form id="form_buscar_producto_pedido">'+
