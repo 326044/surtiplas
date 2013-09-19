@@ -172,6 +172,7 @@ public class ProductosSQL
                 producto.put("color", rs.getString("color"));
                 producto.put("talla", rs.getString("talla"));
                 producto.put("precio_venta", rs.getString("precio_venta"));
+                producto.put("sql",tsql);
                 System.out.printf(producto.toString());
                 productos.add(producto); 
                             

@@ -97,6 +97,7 @@ public class ClientesSQL
             {
                 Clientes usrt = new Clientes(rs.getString("id_cliente"), rs.getString("cedula"), rs.getString("razon_social"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("direccion"),rs.getString("telefono"), rs.getString("nombre_contacto"), rs.getString("celular"), rs.getString("foto"), rs.getString("email"), rs.getString("maximo_credito"), rs.getString("estado"), rs.getString("comentario"), rs.getString("documentos_de_Soporte"), rs.getString("responsable"), rs.getString("fecha"), rs.getString("codMunicipio"), rs.getString("id_usuario"), rs.getString("id_ubicacion"));
                 cliente = usrt.getJSONObject();
+                cliente.put("sql",tsql);
                 System.out.printf(cliente.toString());
                 Clientess.add(cliente);                
             } 

@@ -1034,9 +1034,33 @@ function VerCheckCliente(jsonObject)
   
 }
 
-
 function confirmBuscarProducto()
 {
+    var request = {"Vendedores":"SeccionProducto"};
+    var jsonobj=JSON.stringify(request);
+    $.ajax({
+                    data: {vendedor:jsonobj},
+                    dataType: 'json',
+                    url: 'ServletVendedor',
+                    type: 'POST',
+                    success: function(jsonArray)
+                    {
+                        ConfirmBuscarProducto(jsonArray);     
+                    },
+                    error: function(jsonArray) 
+                    {
+                        alert('Error al conectar con ServletVendedor');
+                    }
+           });
+}
+
+
+function ConfirmBuscarProducto(jsonArray)
+{
+    for (var k = 0; k < jsonArray.length; k++)
+   {
+       if (k==0)
+       {
     
     var codigoHTML='<div class="encabezado2">Buscar Producto</div>'+
                      '<div class="tabla">'+
@@ -1047,18 +1071,44 @@ function confirmBuscarProducto()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Linea de Produccion</th>'+
                                     '<td>'+
-                                      '<input type="text" name="lineaProduccion" value=""/>'+                                      
-                                    '</td>'+
-                                    '<th align="right" style="padding-right:5px;">Nombre Producto</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="tipoProducto" value=""/>'+
-                                    '</td>'+
-                                  '</tr>'+
-                                  '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Material</th>'+
-                                    '<td>'+
-                                      '<input type="text" name="materiales" value="" />'+
-                                    '</td>'+                                   
+                                      '<select name="lineaProduccion" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                             for (var j = 0; j < jsonArray[k].length; j++)
+                                             {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][j].cod_linea +'">'+ jsonArray[k][j].nombre_linea +'</option>';
+                                             }                                                                                              
+            codigoHTML +=                    '</select>'+                                  
+                                    '</td>';
+       }
+       if (k==1)
+       {
+            codigoHTML+=                '<th align="right" style="padding-right:5px;">Material</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="materiales" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var l = 0; l < jsonArray[k].length; l++) 
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][l].codigo +'">'+ jsonArray[k][l].material +'</option>';                                                 
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>'+
+                                    '</tr>';
+        }
+       
+        if (k==2)
+        {
+        codigoHTML +=              '<tr>'+
+                                   '<th align="right" style="padding-right:5px;">Tipo Producto</th>'+ 
+                                             '<td>'+ 
+                                               '<select name="tipoProducto" style="width:177px">'+
+                                                 '<option value=""></option>';
+                                                for (var m = 0; m < jsonArray[k].length; m++)
+                                                {
+            codigoHTML+=                         '<option value="'+ jsonArray[k][m].cod_tipo_producto  +'">'+ jsonArray[k][m].nombre_tipo_producto +'</option>';                                                     
+                                                }
+            codigoHTML+=                        '</select>'+ 
+                                         '</td>'+                                      
+                                    '</tr>'+                                    
                               '</table>'+
                               '<table align="center">'+
                                 '<tr>'+
@@ -1086,8 +1136,8 @@ function confirmBuscarProducto()
                              '</form>'+
                           '</div>'+
                     '</div>';
-
-
+        }
+   }  
     $("#overAddProducto").css({display: "block"});    
     $("#overAddProducto").html(codigoHTML);
     $("#fadeAddProducto").css({display: "block"});
@@ -1096,6 +1146,7 @@ function confirmBuscarProducto()
         AdicionarBusquedaPedidosProductos(TablaProductosPedidos);
     }  
     $("#form_buscar_producto_pedido").submit(enviarDatosBuscarPedidosProductos);
+   
     activadorEventosVendedores();
     activadorEventosProductos();
 }
@@ -2711,7 +2762,7 @@ function AdicionarBusquedaClientes(jsonArray)
    TablaClientes = jsonArray; 
    var codigoHTML=                '<tr align="left">'+
                                     '<th colspan="1"><img src="images/b_insrow.png" title="agregar" id="AdicionarCliente" /></th>'+
-                                    '<th colspan="1"><a href="ServletInformes?informe=ListadoClientesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                    '<th colspan="1"><a href="ServletInformes?informe=ListadoClientesPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>NIT</th>'+
                                     '<th>Razón Social</th>'+
                                     '<th>Dirección</th>'+
@@ -2877,7 +2928,7 @@ function ListadoProductos(jsonArray)
                              '<br>'+
                              '<table align="center" border="0"  width="800" class="tbonita" id="TablaProductos">'+ 
                                 '<tr align="left">'+                     
-                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF1"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>Codigo</th>'+
                                     '<th>Nombre</th>'+
                                     '<th>Cantidad</th>'+
@@ -2933,7 +2984,7 @@ function AdicionarBusquedaProductos(jsonArray)
 {
     TablaProductos = jsonArray;
     var codigoHTML =                     '<tr align="left">'+                            
-                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                          '<th>Codigo</th>'+
                                          '<th>Nombre</th>'+
                                          '<th>Cantidad</th>'+
