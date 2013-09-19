@@ -758,7 +758,7 @@ function tablaPedidoProducto(jsonArray)
            else
                 codigoHTML+=      '<tr class="even">';
     
-    codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerPedido" id="' + jsonArray[i].id_pedidosProd + '" /></td>';
+    codigoHTML+=                          '<td colspan="2"><img src="images/b_search.png" title="Visualizar" class="VerPedido" id="' + jsonArray[i].id_pedido + '" /></td>';
                                    
     codigoHTML+=                          '<td>' + jsonArray[i].id_pedido + '</td>';
     codigoHTML+=                          '<td>' + jsonArray[i].fecha + '</td>';  
@@ -2759,7 +2759,11 @@ function enviarDatosBuscarCliente(evento)
 
 function AdicionarBusquedaClientes(jsonArray)
 {
-   TablaClientes = jsonArray; 
+   TablaClientes = jsonArray;
+   var i=null;
+   
+                    for (i = 0; i < jsonArray.length; i++)
+                    {
    var codigoHTML=                '<tr align="left">'+
                                     '<th colspan="1"><img src="images/b_insrow.png" title="agregar" id="AdicionarCliente" /></th>'+
                                     '<th colspan="1"><a href="ServletInformes?informe=ListadoClientesPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
@@ -2768,8 +2772,8 @@ function AdicionarBusquedaClientes(jsonArray)
                                     '<th>Dirección</th>'+
                                     '<th>Telefono</th>'+
                                   '</tr>';
-
-                    for (var i = 0; i < jsonArray.length; i++)
+                    }
+                    for (i = 0; i < jsonArray.length; i++)
                     {
                             if (i % 2 == 0)
                                 codigoHTML+=      '<tr>';
@@ -2983,6 +2987,9 @@ function enviarDatosBuscarProducto(evento)
 function AdicionarBusquedaProductos(jsonArray)
 {
     TablaProductos = jsonArray;
+    var i=null;   
+                for (i = 0; i < jsonArray.length; i++)
+                {
     var codigoHTML =                     '<tr align="left">'+                            
                                          '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                          '<th>Codigo</th>'+
@@ -2992,8 +2999,8 @@ function AdicionarBusquedaProductos(jsonArray)
                                          '<th>Talla</th>'+
                                          '<th>Precio C/U</th>'+
                                         '</tr>';
-
-                for (var i = 0; i < jsonArray.length; i++)
+                }
+                for (i = 0; i < jsonArray.length; i++)
                 {
                             if (i % 2 == 0)
                                 codigoHTML+=      '<tr>';
