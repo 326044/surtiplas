@@ -1972,11 +1972,15 @@ function tablaActividad(jsonArray, TA)
 {
     //TablaViaticos = jsonArray;
     var codigoHTML;
+   
     if(TA==1)
     {
+         var i=null;   
+                for (i = 0; i < jsonArray.length; i++)
+                {
          codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th border="1"><a href="ServletInformes?informe=ListadoVisitasPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                             '<th>Id</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
@@ -1984,8 +1988,8 @@ function tablaActividad(jsonArray, TA)
                             '<th>Cuidad</th>'+
                             '<th>Tema</th>'+
                           '</tr>';
-
-        var i;
+                }
+       
         for (i = 0; i < jsonArray.length; i++)
         {
             if (i % 2 == 0)
@@ -2005,9 +2009,12 @@ function tablaActividad(jsonArray, TA)
     
     if(TA==2)
     {
+        var i=null;   
+                for (i = 0; i < jsonArray.length; i++)
+                {
          codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th border="1"><a href="ServletInformes?informe=ListadoPagosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                             '<th>Id</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
@@ -2018,7 +2025,7 @@ function tablaActividad(jsonArray, TA)
                             '<th>Tema</th>'+
                           '</tr>';
 
-        var i;
+                }
         for (i = 0; i < jsonArray.length; i++)
         {
             if (i % 2 == 0)
@@ -2041,9 +2048,12 @@ function tablaActividad(jsonArray, TA)
         
     if(TA==3)
     {
+         var i=null;   
+                for (i = 0; i < jsonArray.length; i++)
+                {
          codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th border="1"><a href="ServletInformes?informe=ListadoPagosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                             '<th>Id</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
@@ -2052,7 +2062,7 @@ function tablaActividad(jsonArray, TA)
                             '<th>Tema</th>'+
                           '</tr>';
 
-        var i;
+                }
         for (i = 0; i < jsonArray.length; i++)
         {
             if (i % 2 == 0)

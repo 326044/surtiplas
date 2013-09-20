@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="listadoPedidos" language="groovy" pageWidth="1500" pageHeight="842" columnWidth="1460" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e75615b9-540b-4528-ad5d-b35cac5cc92a">
+	<property name="ireport.zoom" value="1.071794405000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pedidos.`id_pedido` AS pedidos_id_pedido,
+     pedidos.`valor_del_iva` AS pedidos_valor_del_iva,
+     pedidos.`valor_total` AS pedidos_valor_total,
+     pedidos.`id_usuario` AS pedidos_id_usuario,
+     pedidos.`fecha` AS pedidos_fecha,
+     pedidos.`hora` AS pedidos_hora,
+     pedidos.`id_cliente` AS pedidos_id_cliente,
+     pedidosprod.`id_pedidosProd` AS pedidosprod_id_pedidosProd,
+     pedidosprod.`codigo_producto` AS pedidosprod_codigo_producto,
+     pedidosprod.`id_pedido` AS pedidosprod_id_pedido,
+     pedidosprod.`cant_pedidosprod` AS pedidosprod_cant_pedidosprod,
+     pedidosprod.`precio_unitario` AS pedidosprod_precio_unitario,
+     productos.`codigo_producto` AS productos_codigo_producto,
+     productos.`nombre` AS productos_nombre,
+     productos.`foto` AS productos_foto,
+     productos.`cantidad` AS productos_cantidad,
+     productos.`precio_costo` AS productos_precio_costo,
+     productos.`precio_venta` AS productos_precio_venta,
+     productos.`precio_descuento` AS productos_precio_descuento,
+     productos.`codigo_barras` AS productos_codigo_barras,
+     productos.`cod_tipo_producto` AS productos_cod_tipo_producto,
+     clientes.`id_cliente` AS clientes_id_cliente,
+     clientes.`cedula` AS clientes_cedula,
+     clientes.`razon_social` AS clientes_razon_social,
+     clientes.`nombre` AS clientes_nombre,
+     clientes.`apellido` AS clientes_apellido,
+     clientes.`direccion` AS clientes_direccion,
+     clientes.`telefono` AS clientes_telefono,
+     clientes.`nombre_contacto` AS clientes_nombre_contacto,
+     clientes.`celular` AS clientes_celular,
+     clientes.`foto` AS clientes_foto,
+     clientes.`email` AS clientes_email,
+     clientes.`maximo_credito` AS clientes_maximo_credito,
+     clientes.`estado` AS clientes_estado,
+     clientes.`comentario` AS clientes_comentario,
+     clientes.`documentos_de_soporte` AS clientes_documentos_de_soporte,
+     clientes.`responsable` AS clientes_responsable,
+     clientes.`fecha` AS clientes_fecha,
+     clientes.`codMunicipio` AS clientes_codMunicipio,
+     clientes.`id_usuario` AS clientes_id_usuario,
+     clientes.`id_ubicacion` AS clientes_id_ubicacion,
+     municipios.`codMunicipio` AS municipios_codMunicipio,
+     municipios.`cod_departamento` AS municipios_cod_departamento,
+     municipios.`nombreMunicipio` AS municipios_nombreMunicipio,
+     departamentos.`cod_departamento` AS departamentos_cod_departamento,
+     departamentos.`nombre_depto` AS departamentos_nombre_depto,
+     usuarios.`id_usuario` AS usuarios_id_usuario,
+     usuarios.`nickname_usuario` AS usuarios_nickname_usuario,
+     usuarios.`nombre_usuario` AS usuarios_nombre_usuario,
+     usuarios.`apellidos_usuario` AS usuarios_apellidos_usuario,
+     usuarios.`cedula_usuario` AS usuarios_cedula_usuario,
+     usuarios.`direccion_usuario` AS usuarios_direccion_usuario,
+     usuarios.`telefono_usuario` AS usuarios_telefono_usuario,
+     usuarios.`celular_usuario` AS usuarios_celular_usuario,
+     usuarios.`email_usuario` AS usuarios_email_usuario,
+     usuarios.`password_usuario` AS usuarios_password_usuario,
+     usuarios.`tipo_usuario` AS usuarios_tipo_usuario,
+     usuarios.`foto_usuario` AS usuarios_foto_usuario,
+     usuarios.`fecha` AS usuarios_fecha,
+     usuarios.`fecha_cumpleanos` AS usuarios_fecha_cumpleanos,
+     usuarios.`banco` AS usuarios_banco,
+     usuarios.`tipo_cuenta_bancaria` AS usuarios_tipo_cuenta_bancaria,
+     usuarios.`numero_cuenta` AS usuarios_numero_cuenta,
+     usuarios.`otros_datos` AS usuarios_otros_datos,
+     usuarios.`id_ubicacion` AS usuarios_id_ubicacion
+FROM
+     `pedidos` pedidos INNER JOIN `pedidosprod` pedidosprod ON pedidos.`id_pedido` = pedidosprod.`id_pedido`
+     INNER JOIN `productos` productos ON pedidosprod.`codigo_producto` = productos.`codigo_producto`
+     INNER JOIN `clientes` clientes ON pedidos.`id_cliente` = clientes.`id_cliente`
+     INNER JOIN `usuarios` usuarios ON pedidos.`id_usuario` = usuarios.`id_usuario`
+     AND usuarios.`id_usuario` = clientes.`id_usuario`
+     INNER JOIN `municipios` municipios ON clientes.`codMunicipio` = municipios.`codMunicipio`
+     INNER JOIN `departamentos` departamentos ON municipios.`cod_departamento` = departamentos.`cod_departamento`]]>
+	</queryString>
+	<field name="pedidos_id_pedido" class="java.lang.Integer"/>
+	<field name="pedidos_valor_total" class="java.math.BigDecimal"/>
+	<field name="productos_codigo_producto" class="java.lang.Integer"/>
+	<field name="pedidosprod_cant_pedidosprod" class="java.lang.Integer"/>
+	<field name="clientes_razon_social" class="java.lang.String"/>
+	<field name="clientes_id_cliente" class="java.lang.String"/>
+	<field name="clientes_direccion" class="java.lang.String"/>
+	<field name="clientes_telefono" class="java.lang.String"/>
+	<field name="productos_nombre" class="java.lang.String"/>
+	<field name="municipios_nombreMunicipio" class="java.lang.String"/>
+	<field name="departamentos_nombre_depto" class="java.lang.String"/>
+	<field name="usuarios_nombre_usuario" class="java.lang.String"/>
+	<field name="usuarios_tipo_usuario" class="java.lang.String"/>
+	<field name="pedidos_fecha" class="java.sql.Date"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<image>
+				<reportElement uuid="96e4bb6b-68a2-43be-b5c0-9b516056f51a" x="0" y="0" width="239" height="106"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="1358" y="3" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="1182" y="36" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="106" width="239" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="611" y="0" width="237" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Pedidos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="5" y="-1" width="1425" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="68" y="0" width="82" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Producto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="151" y="0" width="126" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre Producto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="344" y="0" width="72" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Valor ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="68" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Pedido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="277" y="0" width="67" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[cantidad Productos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="897" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ciudad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="1235" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Tipo Usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="1330" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha Pedido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="495" y="0" width="136" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Razon Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="416" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="1103" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Vendedor]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="631" y="0" width="80" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Telefono]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="711" y="0" width="186" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Direccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="1008" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Departamento]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement uuid="ef60e50a-5497-4c0d-9ba6-708814a03190" style="Detail" x="2" y="2" width="68" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{pedidos_id_pedido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="4a60ec45-bf05-4429-904c-4d919bb24154" style="Detail" x="70" y="2" width="82" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{productos_codigo_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="a667c802-a33f-43ad-aa0c-b9dd4e22f4ae" style="Detail" x="153" y="2" width="126" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{productos_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0e8c02d3-a045-495b-a3e2-a73931bdbc07" style="Detail" x="279" y="2" width="67" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidosprod_cant_pedidosprod}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="61ef9469-5ed6-43f9-aa82-94f9c33b7f2e" style="Detail" x="348" y="2" width="65" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_valor_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d434819a-4d75-4088-98b8-3370fe5ca69b" style="Detail" x="422" y="3" width="79" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_id_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="164b75a0-9be2-4bcb-844b-6c40d95c6691" style="Detail" x="502" y="3" width="131" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_razon_social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d434819a-4d75-4088-98b8-3370fe5ca69b" style="Detail" x="712" y="3" width="186" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e3a7af2-e1ea-46a1-ba03-40be5e21af91" style="Detail" x="1047" y="3" width="95" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{departamentos_nombre_depto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d434819a-4d75-4088-98b8-3370fe5ca69b" style="Detail" x="899" y="2" width="99" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{municipios_nombreMunicipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2faea008-bc99-46ab-a1af-618c5aca990c" style="Detail" x="1141" y="4" width="96" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{usuarios_nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="da9175a4-2786-41b8-b665-ed1996b8bc65" style="Detail" x="1237" y="0" width="95" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{usuarios_tipo_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="2433693f-5335-4c60-af5c-9b4b31a4508a" style="Detail" x="1332" y="4" width="95" height="14"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="12eceb1d-545e-4e45-ae89-f36650dc4e4e" style="Detail" x="633" y="2" width="79" height="17"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_telefono}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="09521e5f-040f-4cde-88cc-4feb46018173" positionType="FixRelativeToBottom" x="5" y="19" width="1424" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
