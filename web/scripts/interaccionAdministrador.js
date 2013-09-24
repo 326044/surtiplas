@@ -788,7 +788,7 @@ function AddUsuario()
                               '<form id="form_enviar_foto"  enctype="multipart/form-data">'+
                                 '<table align="center" border="0">'+
                                     '<tr>'+
-                                        '<td colspan="2" rowspan="10">'+
+                                        '<td colspan="2" rowspan="10" align="center">'+
                                             '<div class="foto">'+
                                                 '<div class="imagen" id="fotoUsuarios">'+
                                                     '<img src="images/usuario.png">'+
@@ -3583,7 +3583,7 @@ function cargarListadoProducto(jsonArray)
                              '<table align="center" border="0"  width="610" class="tbonita" id="TablaProductos">'+ 
                                  '<tr align="center">'+
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
-                                   '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF2"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                    '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                     '<th>Codigo</th>'+
                                     '<th>Nombre</th>'+
@@ -3636,11 +3636,14 @@ function enviarDatosBuscarProducto(evento)
 function AdicionarBusquedaProductos(jsonArray)
 {
     TablaProductos = jsonArray;
+     var i=null;   
+                for (i = 0; i < jsonArray.length; i++)
+                {
         var codigoHTML =           '<tr>'+
                                    '<table class="tbonita">'+
                                          '<tr align="center">'+
                                          '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
-                                         '<th><a href="ServletInformes?informe=reporteProductosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                         '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                          '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                          '<th>Codigo</th>'+
                                          '<th>Nombre</th>'+
@@ -3649,7 +3652,7 @@ function AdicionarBusquedaProductos(jsonArray)
                                          '<th>Talla</th>'+
                                          '<th>Precio C/U</th>'+
                                         '</tr>';
-
+                }
                 for (var i = 0; i < jsonArray.length; i++)
                 {
                             if (i % 2 === 0)
@@ -8411,7 +8414,7 @@ function DelDevolucion(jsonObject)
                             '<table align="center">'+
                               '<tr>'+
                                 '<td colspan="4" align="center">'+
-                                    '<input type="button" value="Volver" class="button" id="volverAddCliente" />'+
+                                    '<input type="button" value="Volver" class="button" id="volverAddDevolucion" />'+
                                     '<a href="#DelC" class="button" name="' + jsonObject.id_devolucion + '" id="borrarDevolucion" style="text-decoration:none; padding:2px 4px 2px 4px;">Borrar<a/>'+
                                 '</td>'+
                               '</tr>'+

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoProductos" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78b46fa0-5c76-4dba-a8c7-72d11d07420b">
+	<property name="ireport.zoom" value="0.7513148009015779"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="132"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString>
+		<![CDATA[SELECT
+     colores.`color`,
+     linea_produccion.`nombre_linea`,
+     material.`material`,
+     tallas.`talla`,
+     productos.`codigo_producto`,
+     productos.`cantidad`,
+     productos.`precio_venta`,
+     productos.`nombre`
+FROM
+     `colores` colores INNER JOIN `coloresprod` coloresprod ON colores.`cod_color` = coloresprod.`cod_color`
+     INNER JOIN `productos` productos ON coloresprod.`codigo_producto` = productos.`codigo_producto`
+     INNER JOIN `lineaprod` lineaprod ON productos.`codigo_producto` = lineaprod.`codigo_producto`
+     INNER JOIN `materialprod` materialprod ON productos.`codigo_producto` = materialprod.`codigo_producto`
+     INNER JOIN `tallasprod` tallasprod ON productos.`codigo_producto` = tallasprod.`codigo_producto`
+     INNER JOIN `tallas` tallas ON tallasprod.`cod_talla` = tallas.`cod_talla`
+     INNER JOIN `material` material ON materialprod.`codigo` = material.`codigo`
+     INNER JOIN `linea_produccion` linea_produccion ON lineaprod.`cod_linea` = linea_produccion.`cod_linea`]]>
+	</queryString>
+	<field name="color" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_linea" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="material" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="talla" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="codigo_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cantidad" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_venta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band height="550" splitType="Stretch">
+			<image>
+				<reportElement uuid="ecdfc262-6287-4e37-b608-2689a6de4d74" x="2" y="110" width="750" height="348"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="140" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="106" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="474" y="17" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="652" y="0" width="100" height="17"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="271b1a86-5526-4867-ac2d-9a1af25c8331" x="0" y="0" width="244" height="106"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="272" y="0" width="237" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado De Productos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="752" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="29" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6702cb5f-5522-41b9-92eb-f4a7e9f14112" x="29" y="0" width="109" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombres]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="138" y="0" width="66" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="204" y="0" width="83" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Color]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="287" y="0" width="83" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Talla]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="582b2d4b-4fed-475f-bff1-9c1a11d5b634" x="370" y="0" width="165" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Linea de Produccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="ecd63da1-94cc-444c-9251-0c425dc990e2" x="535" y="0" width="95" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Material]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="a8e6a906-1d1a-4fe7-8640-d3fd63db4c44" x="630" y="0" width="122" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Precio]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="24" splitType="Stretch">
+			<frame>
+				<reportElement uuid="a24c4e6c-e827-4624-8ed5-bbbf898d885d" x="0" y="1" width="752" height="20"/>
+				<textField>
+					<reportElement uuid="6a3357ed-c4d6-4664-bb2b-6cee093c70b5" style="Detail" x="2" y="0" width="29" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{codigo_producto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b9435316-7594-4803-83cc-0363c011b13c" style="Detail" x="31" y="0" width="107" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="6a3357ed-c4d6-4664-bb2b-6cee093c70b5" style="Detail" x="204" y="0" width="83" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{color}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="1ea91204-2cf9-473f-a42a-c105a8700215" style="Detail" x="287" y="0" width="83" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{talla}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="ee821cdd-8b59-45df-b29e-934371b6d9f4" style="Detail" x="370" y="0" width="165" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombre_linea}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="b2b68123-89c6-454e-ba20-c544513a8dca" style="Detail" x="535" y="0" width="95" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{material}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="966e3d7a-6069-49c7-adcc-ab6b294b0166" style="Detail" x="630" y="0" width="122" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{precio_venta}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement uuid="dfd90e05-b208-475c-993a-ff4e242104f9" style="Detail" x="138" y="0" width="66" height="20"/>
+					<textElement textAlignment="Center">
+						<font fontName="Comic Sans MS" size="14"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="105" splitType="Stretch">
+			<line>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="0" width="752" height="4"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="404" y="25" width="348" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

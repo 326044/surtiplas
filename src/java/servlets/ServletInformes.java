@@ -347,9 +347,9 @@ public class ServletInformes extends HttpServlet
                 }
             }
             
-            if(op.equals("reporteProductosPDF"))
+            if(op.equals("ListadoProductosPDF2"))
             {
-                response.setHeader("Content-Disposition", "attachment; filename=\"reporteProductos.pdf\";");
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadosProductos.pdf\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
@@ -357,13 +357,49 @@ public class ServletInformes extends HttpServlet
 
                 ServletOutputStream out = response.getOutputStream();
 
-                UsuariosSQL usr = new UsuariosSQL();
-                Connection conn = usr.getConnection(); 
+                ProductosSQL pro = new ProductosSQL();
+                Connection conn = pro.getConnection(); 
 
                 try
                 {
-                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteProductos.jasper"));
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadosProductos.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRExporter exporter = new JRPdfExporter();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(op.equals("ListadosProductosPDF"))
+            {
+                String sql = request.getParameter("query");
+                System.out.printf(sql.toString());
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadosProductos.pdf\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/pdf");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                ClientesSQL clie = new ClientesSQL();
+                Connection conn = clie.getConnection(); 
+
+                try
+                {   
+                    this.cn = getConnection();
+                    this.st = cn.createStatement();
+                    rs = st.executeQuery(sql);
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadosProductos.jasper"));                    
+                    JRResultSetDataSource resultSetDataSource = new JRResultSetDataSource(rs);
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, new HashMap(), resultSetDataSource);
+                    //JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
                     exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
