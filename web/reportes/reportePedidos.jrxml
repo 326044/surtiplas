@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reportePedidos" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="080a6f3b-f9ce-4ecb-8e9e-ae414bdf9e02">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="347"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     pedidos.`id_pedido` AS pedidos_id_pedido,
+     pedidos.`valor_total` AS pedidos_valor_total,
+     pedidos.`id_usuario` AS pedidos_id_usuario,
+     pedidos.`fecha` AS pedidos_fecha,
+     pedidos.`hora` AS pedidos_hora,
+     pedidos.`id_cliente` AS pedidos_id_cliente
+FROM
+     `pedidos` pedidos]]>
+	</queryString>
+	<field name="pedidos_id_pedido" class="java.lang.Integer"/>
+	<field name="pedidos_id_cliente" class="java.lang.Integer"/>
+	<field name="pedidos_id_usuario" class="java.lang.Integer"/>
+	<field name="pedidos_fecha" class="java.sql.Date"/>
+	<field name="pedidos_hora" class="java.sql.Time"/>
+	<field name="pedidos_valor_total" class="java.math.BigDecimal"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement uuid="04c9653a-d0ac-47eb-970a-1a838f9d3025" x="0" y="109" width="801" height="321"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="524" y="47" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="702" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="1" y="102" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="02210b47-ffae-4b4b-ba35-dea1f305d254" x="0" y="0" width="245" height="102"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="245" y="0" width="329" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Pedidos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="801" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="133" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="398" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="1" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Pedido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="265" y="0" width="133" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="530" y="0" width="132" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Hora]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="662" y="0" width="139" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Valor]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement uuid="b32b1b55-dfed-4cd6-972f-5a1048e5752e" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="37b31222-256a-4247-b00d-897c04fb7f35" style="Detail" x="665" y="1" width="137" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_valor_total}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="36395fff-b79b-49b3-9805-fefd2d33d4ea" style="Detail" x="532" y="1" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_hora}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="3586cb34-0a4f-48b1-89c6-325b162336b3" style="Detail" x="399" y="1" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_fecha}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="f94c935b-e6c0-4d65-88a1-4a367bb51486" style="Detail" x="266" y="1" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_id_usuario}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="492c75b8-6d9d-4784-bba5-0c56ea918727" style="Detail" x="0" y="1" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_id_pedido}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="f4b319f5-eb43-4e27-8dd9-cf9b04bbe42b" style="Detail" x="133" y="1" width="133" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{pedidos_id_cliente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="66" splitType="Stretch">
+			<line>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="3" y="0" width="798" height="4"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="265" y="8" width="536" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

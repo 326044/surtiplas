@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteDevoluciones" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a6ca7137-8a45-4f52-b396-5d23fb9c6b30">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="192"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     devolucion.`id_devolucion` AS devolucion_id_devolucion,
+     devolucion.`id_cliente` AS devolucion_id_cliente,
+     devolucion.`codigo_producto` AS devolucion_codigo_producto,
+     devolucion.`id_usuario` AS devolucion_id_usuario,
+     devolucion.`causa_devolucion` AS devolucion_causa_devolucion
+FROM
+     `devolucion` devolucion]]>
+	</queryString>
+	<field name="devolucion_id_devolucion" class="java.lang.Integer"/>
+	<field name="devolucion_id_cliente" class="java.lang.Integer"/>
+	<field name="devolucion_codigo_producto" class="java.lang.Integer"/>
+	<field name="devolucion_id_usuario" class="java.lang.Integer"/>
+	<field name="devolucion_causa_devolucion" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement uuid="cd95c102-76d3-4f33-8267-948c49fc27cb" x="0" y="91" width="802" height="360"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="524" y="47" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="702" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="102" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="d7fe6415-a1d0-4bbf-ac7f-e78669a793ea" x="0" y="0" width="244" height="102"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="222" y="0" width="329" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Devoluciones]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="160" y="0" width="160" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="0" y="0" width="160" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Devolución]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="320" y="0" width="160" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Codigo del Producto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="480" y="0" width="160" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="640" y="0" width="162" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Causa de Devolución]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="17" splitType="Stretch">
+			<line>
+				<reportElement uuid="041c94c7-cc19-4d8e-91c2-ca39669e076a" positionType="FixRelativeToBottom" x="0" y="15" width="802" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="ea1a7fff-6a4d-426e-bf85-3f6dd0075d1e" style="Detail" x="640" y="1" width="162" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{devolucion_causa_devolucion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="87fdd0b0-73c3-4b85-b07e-b1b8d6f6664c" style="Detail" x="0" y="1" width="160" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{devolucion_id_devolucion}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9fac38dc-3f66-43bd-aab2-80b8961c20a1" style="Detail" x="160" y="1" width="160" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{devolucion_id_cliente}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="4504446a-afb2-439b-89f6-c472ef5de953" style="Detail" x="320" y="1" width="160" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{devolucion_codigo_producto}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="0ba30c78-2ec4-4bb1-b5da-698d3b049b1c" style="Detail" x="480" y="1" width="160" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{devolucion_id_usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="63" splitType="Stretch">
+			<line>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="1" width="802" height="4"/>
+			</line>
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="445" y="5" width="357" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

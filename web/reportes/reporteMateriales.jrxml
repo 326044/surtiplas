@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteMateriales" language="groovy" pageWidth="650" pageHeight="595" orientation="Landscape" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f1c435b5-7572-4b1a-8c29-6d0eb7e882ac">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     material.`codigo` AS material_codigo,
+     material.`material` AS material_material
+FROM
+     `material` material]]>
+	</queryString>
+	<field name="material_codigo" class="java.lang.Integer"/>
+	<field name="material_material" class="java.lang.String"/>
+	<background>
+		<band height="555" splitType="Stretch">
+			<image>
+				<reportElement uuid="22bfd6a2-5d59-4762-bab9-b0efc1f9d1cd" x="0" y="84" width="610" height="330"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="136" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="332" y="47" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="510" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="102" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="f7f6fa58-33cb-4bfc-9821-bdc839312e5b" x="0" y="0" width="244" height="102"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="148" y="0" width="329" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Materiales]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="1" y="0" width="610" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="276" y="0" width="334" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Material]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="0" y="0" width="276" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Codigo del Material]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="91e59c77-2ea3-4cd9-a981-22de0dfe47db" style="Detail" x="277" y="1" width="333" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{material_material}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement uuid="9883ba68-69f4-4491-afbe-dbec73c52303" style="Detail" x="0" y="1" width="277" height="15"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{material_codigo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e8043304-5038-4ff1-a004-72bbd4057f27" positionType="FixRelativeToBottom" x="1" y="15" width="610" height="3"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="6" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="69" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="262" y="11" width="348" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="1" width="610" height="4"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
