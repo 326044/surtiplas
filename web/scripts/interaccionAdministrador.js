@@ -720,7 +720,7 @@ function cargarListado(jsonArray)
                                                         '<tr align="left">'+
                                                                 '<th><img src="images/b_insrow.png" title="Agregar" id="AUsuario"/></th>'+
                                                                 '<th><a href="ServletInformes?informe=ListadoUsuariosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                                                '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                                '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                                                 '<th>Cedula</th>'+
                                                                 '<th>Nombres</th>'+
                                                                 '<th>Apellidos</th>'+
@@ -1662,7 +1662,7 @@ function seccionVisitas()
                                             '<tr align="left">'+
                                                     '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                                                     '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                                    '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                    '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                                     '<th>Id Visita</th>'+
                                                     '<th>Fecha</th>'+
                                                     '<th>Cliente</th>'+
@@ -1722,7 +1722,7 @@ function seccionVisitas()
     var codigoHTML = '<tr align="left">'+
                         '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                         '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                        '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                        '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                         '<th>Id Visita</th>'+
                         '<th>Fecha</th>'+
                         '<th>Cliente</th>'+
@@ -2372,7 +2372,7 @@ function seccionViaticos(jsonArray)
                       '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2435,7 +2435,7 @@ function buscarViatico(evento)
         var codigoHTML = '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2845,7 +2845,7 @@ function DatosVerViatico()
 
 function VerViatico(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">visualizar Viático</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Viático</div>'+
                      '<div class="tabla">'+
                             '<div id="Visit" class="tab_content">'+
                             '<form action="" method="POST" name="form_crear_venta">'+
@@ -3584,7 +3584,7 @@ function cargarListadoProducto(jsonArray)
                                  '<tr align="center">'+
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
                                    '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF2"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
-                                   '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                     '<th>Codigo</th>'+
                                     '<th>Nombre</th>'+
                                     '<th>Cantidad</th>'+
@@ -3644,7 +3644,7 @@ function AdicionarBusquedaProductos(jsonArray)
                                          '<tr align="center">'+
                                          '<th><img src="images/b_insrow.png" title="Agregar" id="AProducto"/></th>'+
                                          '<th border="1"><a href="ServletInformes?informe=ListadoProductosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
-                                         '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                         '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                          '<th>Codigo</th>'+
                                          '<th>Nombre</th>'+
                                          '<th>Cantidad</th>'+
@@ -4211,23 +4211,27 @@ function VerProducto(jsonObject)
                                         '<td><input type="text" name="cod_color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Talla</th>'+
+                                        '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                    '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Código de Barras</th>'+
+                                      '<td><input type="text" name="codigo_barras" value="' + jsonObject.codigo_barras + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                      '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Cantidad</th>'+
                                         '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Talla:</th>'+
-                                        '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
-                                      '</tr>'+
-                                      '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Precio de Costo:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Costo</th>'+
                                         '<td><input type="text" name="precio_costo" value="' + jsonObject.precio_costo + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Precio de Venta:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Venta</th>'+
                                         '<td><input type="text" name="precio_venta" value="' + jsonObject.precio_venta + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                         '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Precio de Descuento:</th>'+
+                                        '<th align="right" style="padding-right:5px;">Precio de Descuento</th>'+
                                         '<td><input type="text" name="precio_descuento" value="' + jsonObject.precio_descuento + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '</table>'+
@@ -4289,7 +4293,7 @@ function DelProducto(jsonObject)
     var codigoHTML = '<div class="encabezado2">Borrar Producto</div>'+
                     '<div class="tabla">'+
                         '<ul class="tabs">'+
-                            '<li><a href="#Informacion">Información</a><li>'+
+                            '<li><a href="#Informacion">Información</a></li>'+
                         '</ul>'+
                          '<div class="tab_container">'+
                             '<div id="DelProducto" class="tab_content">'+
@@ -4328,12 +4332,16 @@ function DelProducto(jsonObject)
                                         '<td><input type="text" name="cod_color" value="' + jsonObject.color + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
-                                        '<th align="right" style="padding-right:5px;">Cantidad</th>'+
-                                        '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                      '</tr>'+
-                                      '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Talla</th>'+
                                         '<td><input type="text" name="talla" value="' + jsonObject.talla + '" size="20" maxlength="12" readonly="readonly"/></td>'+
+                                      '</tr>'+
+                                    '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Código de Barras</th>'+
+                                      '<td><input type="text" name="codigo_barras" value="' + jsonObject.codigo_barras + '" size="20" maxlength="10" readonly="readonly"/></td>'+
+                                    '</tr>'+
+                                      '<tr>'+
+                                        '<th align="right" style="padding-right:5px;">Cantidad</th>'+
+                                        '<td><input type="text" name="cantidad" value="' + jsonObject.cantidad + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                       '</tr>'+
                                       '<tr>'+
                                         '<th align="right" style="padding-right:5px;">Precio de Costo</th>'+
@@ -4364,6 +4372,7 @@ function DelProducto(jsonObject)
                     '</div>';
 
     $("#datos").html(codigoHTML);
+    IniciarTabers();
     activadorEventosProductos();
 }
 //**********************************************************************************
@@ -4488,7 +4497,7 @@ function cargarListadolineas(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Nombre</th>'+
                          '</tr>';
@@ -4953,7 +4962,7 @@ function cargarListadoColores(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addColor"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Color</th>'+
                             '<th>Color</th>'+
                          '</tr>';
@@ -5253,14 +5262,12 @@ function VerColor(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Color</div>'+
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
                                     '<th align="right" style="padding-right:5px;">Color</th>'+
                                     '<td><input type="text" name="color" value="' + jsonObject.color + '" size="20" maxlength="25" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Id Producto</th>'+
-                                    '<td><input type="text" name="codigo_producto" value="' + jsonObject.codigo_producto + '" size="20" maxlength="25" readonly="readonly"/></td>'+
                                   '</tr>'+
                             '<td colspan="4" align="center">'+
                                 '<input type="button" value="Volver" class="button" id="NotAddColor"/>'+
@@ -5312,7 +5319,7 @@ function DatosDelColor()
 
 function DelColor(jsonObject)
 {
-    var codigoHTML = '<div class="encabezado2">Borrar Linea</div>'+
+    var codigoHTML = '<div class="encabezado2">Borrar Color</div>'+
                         '<table align="center">'+
                         '<form id="form_eliminar_linea"  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
@@ -5420,7 +5427,7 @@ function cargarListadoTallas(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddTalla"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Talla</th>'+
                             '<th>Talla</th>'+
                          '</tr>';
@@ -5719,7 +5726,7 @@ function VerTalla(jsonObject)
 {
     var id = $(this)[0].name;
     //alert(id);
-    var codigoHTML = '<div class="encabezado2">Visualizar Tallas</div>'+
+    var codigoHTML = '<div class="encabezado2">Visualizar Talla</div>'+
                         '<table align="center">'+
                         '<form id=""  enctype="multipart/form-data"  align="center">'+
                             '<tr align="center">'+
@@ -5883,7 +5890,7 @@ function cargarMateriales(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddMaterial"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Material</th>'+
                          '</tr>';
@@ -6354,7 +6361,7 @@ function cargarListadoClientes(jsonArray)
                                  '<tr align="letf">'+
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="ACliente"/></th>'+
                                    '<th><a href="ServletInformes?informe=reporteClientesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                   '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                    '<th>Cliente</th>'+
                                    '<th>Nombre</th>'+
                                    '<th>Apellido</th>'+
@@ -6479,7 +6486,7 @@ function AddCliente()
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Estado</th>'+
                                     '<td><input type="text" name="estado" value="" size="20" maxlength="35" required/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                      '<td>'+
                                         '<select name="cod_departamento" class="deptos" style="width:165px;" onchange="cargarMunicipios()">'+
                                         '</select>'+
@@ -6772,7 +6779,7 @@ function ModCliente(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Estado</th>'+
                                     '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" required/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                      '<td>'+
                                         '<select name="cod_departamento" class="deptos" style="width:165px;" onchange="cargarMunicipios()">'+
                                         '</select>'+
@@ -7008,7 +7015,7 @@ function VerCliente(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Estado</th>'+
                                     '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                     '<td><input type="text" name="nombre_depto" value="' + jsonObject.nombre_depto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7161,7 +7168,7 @@ function DelCliente(jsonObject)
                                   '<tr>'+
                                     '<th align="right" style="padding-right:5px;">Estado</th>'+
                                     '<td><input type="text" name="estado" value="' + jsonObject.estado + '" size="20" maxlength="35" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Departamento:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Departamento</th>'+
                                     '<td><input type="text" name="nombre_depto" value="' + jsonObject.nombre_depto + '" size="20" maxlength="35" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7320,7 +7327,7 @@ function cargarPedidos(jsonArray)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="AddPedido"/></th>'+
                             '<th><a href="ServletInformes?informe=reportePedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Id Pedido</th>'+
                             '<th>Cliente</th>'+
                             '<th>Fecha</th>'+
@@ -7397,9 +7404,9 @@ function AddPedido()
                                     '<td><input type="text" name="hora" value="" size="20" maxlength="12"required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva</th>'+
                                     '<td><input type="text" name="valor_del_iva" value="" size="20" maxlength="10"required/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total</th>'+
                                     '<td><input type="text" name="valor_total" value="" size="20" maxlength="10"required/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -7550,9 +7557,9 @@ function ModPedido(jsonObject)
                                     '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12"required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva</th>'+
                                     '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10"required/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total</th>'+
                                     '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10"required/></td>'+
                                   '</tr>'+
                                   '<tr>'+
@@ -7702,9 +7709,9 @@ function VerPedido(jsonObject)
                                     '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva</th>'+
                                     '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total</th>'+
                                     '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -7786,9 +7793,9 @@ function DelPedido(jsonObject)
                                     '<td><input type="text" name="hora" value="' + jsonObject.hora + '" size="20" maxlength="12" readonly="readonly"/></td>'+
                                   '</tr>'+
                                   '<tr>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Iva:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Iva</th>'+
                                     '<td><input type="text" name="valor_del_iva" value="' + jsonObject.valor_del_iva + '" size="20" maxlength="10" readonly="readonly"/></td>'+
-                                    '<th align="right" style="padding-right:5px;">Valor Total:</th>'+
+                                    '<th align="right" style="padding-right:5px;">Valor Total</th>'+
                                     '<td><input type="text" name="valor_total" value="' + jsonObject.valor_total + '" size="20" maxlength="10" readonly="readonly"/></td>'+
                                   '</tr>'+
                               '</table>'+
@@ -7954,7 +7961,7 @@ function cargarDevoluciones(jsonArray)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="AddDevolucion"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteDevolucionesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="servletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteDevolucionesXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>cliente</th>'+
                             '<th>Codigo Producto</th>'+
                             '<th>Usuario</th>'+

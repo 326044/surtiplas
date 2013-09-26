@@ -25,7 +25,7 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="987a6350-1abd-442e-b00f-66713dd228c4" x="0" y="105" width="610" height="308"/>
+				<reportElement uuid="a0e2d5ab-875e-4c45-b38a-bb7239107c54" x="0" y="164" width="610" height="341"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
@@ -58,7 +58,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="288127ff-74d7-46ac-b288-473433d3be05" x="0" y="0" width="244" height="102"/>
+				<reportElement uuid="f21f2664-816a-4c48-8bf3-29b61689aa63" x="0" y="1" width="244" height="102"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 		</band>

@@ -25,7 +25,7 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="22bfd6a2-5d59-4762-bab9-b0efc1f9d1cd" x="0" y="84" width="610" height="330"/>
+				<reportElement uuid="a29e0886-2fd2-4d9a-8dbb-e1ebf968ab6b" x="0" y="73" width="610" height="354"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
@@ -58,7 +58,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
 			</staticText>
 			<image>
-				<reportElement uuid="f7f6fa58-33cb-4bfc-9821-bdc839312e5b" x="0" y="0" width="244" height="102"/>
+				<reportElement uuid="9372bbed-be97-48d1-ab81-6647afc7380c" x="0" y="1" width="244" height="102"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 		</band>

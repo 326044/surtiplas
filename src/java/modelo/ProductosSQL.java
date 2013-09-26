@@ -332,40 +332,7 @@ public class ProductosSQL
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
             this.st.execute(tsql);
-            
-            String id_coloresprod= String.valueOf(datos.get("id_coloresprod"));
-            String cod_color= String.valueOf(datos.get("cod_color"));
-            String codigo_producto= String.valueOf(datos.get("codigo_producto"));
-            String tsql2;
-            tsql2 = "INSERT INTO coloresprod VALUES(DEFAULT, ";
-            tsql2 += id_coloresprod +"," + cod_color + "," + codigo_producto + ")";
-            
-            this.st.execute(tsql2);
-            
-            String id_lineaprod= String.valueOf(datos.get("id_lineaprod"));
-            String cod_linea= String.valueOf(datos.get("cod_linea"));
-            String tsql3;
-            tsql3 = "INSERT INTO lineaprod VALUES(DEFAULT, ";
-            tsql3 += id_lineaprod +"," + cod_linea + "," + codigo_producto + ")";
-            
-            this.st.execute(tsql3);
-            
-            String id_materialProd= String.valueOf(datos.get("id_materialProd"));
-            String codigo= String.valueOf(datos.get("codigo"));
-            String tsql4;
-            tsql4 = "INSERT INTO materialprod VALUES(DEFAULT, ";
-            tsql4 += id_materialProd +"," + codigo + "," + codigo_producto + ")";
-            
-            this.st.execute(tsql4);
-            
-            String id_tallasProd= String.valueOf(datos.get("id_tallasProd"));
-            String cod_talla= String.valueOf(datos.get("cod_talla"));
-            String tsql5;
-            tsql5 = "INSERT INTO materialprod VALUES(DEFAULT, ";
-            tsql5 += id_tallasProd +"," + cod_talla + "," + codigo_producto + ")";
-            
-            this.st.execute(tsql5);
-            
+                        
             this.desconectar();
         }
         
