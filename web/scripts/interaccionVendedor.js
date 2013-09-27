@@ -435,7 +435,7 @@ function  seccionPedido()
                                 '<table class="tbonita" align="center" id="tablaPedido">'+ 
                                 '<tr align="left">'+ 
                                     '<th colspan="1"><img src="images/b_insrow.png" title="Adicionar Pedido" class="AdicionarPedido" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Generar Reporte" class="ReportePedido" /></th>'+ 
+                                    '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>IdPedido</th>'+ 
                                     '<th>Fecha</th>'+ 
                                     '<th>Cliente</th>'+ 
@@ -480,7 +480,7 @@ function  seccionPedido()
                                 '<table class="tbonita" align="center" id="tablaPedidoCliente">'+ 
                                   '<tr align="left">'+ 
                                     '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="AdicionarPedido" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento"  /></th>'+ 
+                                    '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>IdPedido</th>'+ 
                                     '<th>Fecha</th>'+ 
                                     '<th>Cliente</th>'+ 
@@ -527,7 +527,7 @@ function  seccionPedido()
                                     '<table class="tbonita" align="center" id="tablaPedidoProducto">'+ 
                                      '<tr align="left">'+ 
                                         '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="AdicionarPedido" /></th>'+ 
-                                        '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento"  /></th>'+ 
+                                        '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                         '<th>IdPedido</th>'+ 
                                         '<th>Fecha</th>'+ 
                                         '<th>Cliente</th>'+ 
@@ -602,10 +602,13 @@ function buscarPedido(evento)
 function tablaPedido(jsonArray)
 {
     TablaPedidos=jsonArray;
-    
+    var i=null;
+   
+                    for (i = 0; i < jsonArray.length; i++)
+                    {
     var codigoHTML =                '<tr align="left">'+ 
                                     '<th colspan="1"><img src="images/b_insrow.png" title="Adicionar Pedido" class="AdicionarPedido" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Generar Reporte" class="ReportePedido" /></th>'+ 
+                                    '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>IdPedido</th>'+ 
                                     '<th>Fecha</th>'+ 
                                     '<th>Cliente</th>'+ 
@@ -613,8 +616,8 @@ function tablaPedido(jsonArray)
                                     '<th>Direccion</th>'+ 
                                     '<th>Total</th>'+ 
                                   '</tr>';
-                         
-    for (var i = 0; i < jsonArray.length; i++)
+                    }  
+    for ( i = 0; i < jsonArray.length; i++)
     {
             if (i % 2 == 0)
                 codigoHTML+=      '<tr>';
@@ -666,9 +669,13 @@ function buscarPedidoCliente(evento)
 
 function TablaPedidoCliente(jsonArray)
 {
+    var i=null;
+   
+                    for (i = 0; i < jsonArray.length; i++)
+                    {
     var codigoHTML =                '<tr align="left">'+ 
                                     '<th colspan="1"><img src="images/b_insrow.png" title="Adicionar Pedido" class="AdicionarPedido" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Generar Reporte" class="ReportePedido" /></th>'+ 
+                                    '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>IdPedido</th>'+ 
                                     '<th>Fecha</th>'+ 
                                     '<th>Cliente</th>'+ 
@@ -676,8 +683,8 @@ function TablaPedidoCliente(jsonArray)
                                     '<th>Direccion</th>'+ 
                                     '<th>Total</th>'+ 
                                   '</tr>';
-                         
-    for (var i = 0; i < jsonArray.length; i++)
+                    }
+    for (i = 0; i < jsonArray.length; i++)
     {
             if (i % 2 == 0)
                 codigoHTML+=      '<tr>';
@@ -740,9 +747,13 @@ function buscarPedidoProducto(evento)
 
 function tablaPedidoProducto(jsonArray)
 {
+    var i=null;
+   
+                    for (i = 0; i < jsonArray.length; i++)
+                    {
     var codigoHTML =                '<tr align="left">'+ 
                                     '<th colspan="1"><img src="images/b_insrow.png" title="Adicionar Pedido" class="AdicionarPedido" /></th>'+ 
-                                    '<th colspan="1"><img src="images/PDF-05.png" title="Generar Reporte" class="ReportePedido" /></th>'+ 
+                                    '<th colspan="1"><a href="ServletInformes?informe=listadoPedidosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                                     '<th>IdPedido</th>'+ 
                                     '<th>Fecha</th>'+ 
                                     '<th>Cliente</th>'+ 
@@ -750,8 +761,8 @@ function tablaPedidoProducto(jsonArray)
                                     '<th>Direccion</th>'+ 
                                     '<th>Total</th>'+ 
                                   '</tr>';
-                         
-    for (var i = 0; i < jsonArray.length; i++)
+                    }
+    for (i = 0; i < jsonArray.length; i++)
     {
             if (i % 2 == 0)
                 codigoHTML+=      '<tr>';
@@ -2607,17 +2618,20 @@ function buscarViatico(evento)
 function tablaViaticos(jsonArray)
 {
     TablaViaticos = jsonArray;
-    
+    var i=null;
+   
+                    for (i = 0; i < jsonArray.length; i++)
+                    {
     var codigoHTML = '<tr align="left">'+
                         '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="AdicionarViatico" /></th>'+
-                        '<th colspan="1"><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                        '<th colspan="1"><a href="ServletInformes?informe=ListadoViaticosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                         '<th>IdViatico</th>'+
                         '<th>Fecha</th>'+
                         '<th>Valor</th>'+
                         '<th>Concepto</th>'+
                       '</tr>';
       
-    var i;
+                    }
     for (i = 0; i < jsonArray.length-1; i++)
     {
         if (i % 2 == 0)

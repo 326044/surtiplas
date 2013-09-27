@@ -267,7 +267,9 @@ public class ViaticosSQL
             {
                 Viaticos via = new Viaticos(rs.getString("id_viaticos"), rs.getString("id_usuario"), rs.getString("valor"), rs.getString("concepto"), rs.getString("fecha"), rs.getString("codMunicipio"), rs.getString("doc_soporte"));
                 viatico = via.getJSONObject();
+                
                 System.out.printf(viatico.toString());
+                viatico.put("sql",tsql);
                 Viaticos.add(viatico);               
             }
             
@@ -275,6 +277,7 @@ public class ViaticosSQL
             this.rs.first();
             
             viaticoo.put("valor_total", rs.getString("valor_total"));
+            viatico.put("sql",tsql);
             System.out.printf(viaticoo.toString());
             Viaticos.add(viaticoo);
             

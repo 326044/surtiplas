@@ -120,7 +120,8 @@ public class pedidosSQL {
            this.st = cn.createStatement();
            String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
            String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));
-           String tsql;            
+           String tsql = null; 
+           
            if("".equals(fechaInicial))
            {
                if("".equals(fechaFinal))
@@ -137,7 +138,9 @@ public class pedidosSQL {
                        + " pedidos.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"';";
                this.rs = this.st.executeQuery(tsql); 
            }
-
+           
+           System.out.printf(tsql.toString());  
+           
            while(this.rs.next())
            {
                JSONObject pedido = new JSONObject();
@@ -147,6 +150,7 @@ public class pedidosSQL {
                pedido.put("nombre_usuario",rs.getString("nombre_usuario"));
                pedido.put("direccion",rs.getString("direccion"));
                pedido.put("valor_total",rs.getString("valor_total"));
+               pedido.put("sql",tsql);
                System.out.printf(pedido.toString());
                Pedidos.add(pedido); 
            }
@@ -173,7 +177,8 @@ public class pedidosSQL {
            String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));
            String nombre_del_cliente= String.valueOf(jsonObject.get("nombre_del_cliente"));
            String id_cliente= String.valueOf(jsonObject.get("id_cliente"));
-           String tsql = null;  
+           String tsql = null; 
+          
            
            if("".equals(nombre_del_cliente))
            {
@@ -255,8 +260,7 @@ public class pedidosSQL {
                }
            }
            
-           System.out.print(tsql.toString());
-           
+           System.out.print(tsql.toString());           
            
            while(this.rs.next())
            {
@@ -267,6 +271,7 @@ public class pedidosSQL {
                pedido.put("nombre_usuario",rs.getString("nombre_usuario"));
                pedido.put("direccion",rs.getString("direccion"));
                pedido.put("valor_total",rs.getString("valor_total"));
+               pedido.put("sql",tsql);
                System.out.printf(pedido.toString());
                Pedidos.add(pedido);
            }
@@ -388,6 +393,7 @@ public class pedidosSQL {
                pedido.put("nombre_usuario",rs.getString("nombre_usuario"));
                pedido.put("direccion",rs.getString("direccion"));
                pedido.put("valor_total",rs.getString("valor_total"));
+               pedido.put("sql",tsql);
                System.out.printf(pedido.toString());
                Pedidos.add(pedido);
            }
