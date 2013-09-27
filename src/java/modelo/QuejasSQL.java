@@ -136,7 +136,7 @@ public class QuejasSQL
             String fechaInicial= String.valueOf(jsonObject.get("fechaInicio"));
             String fechaFinal= String.valueOf(jsonObject.get("fechaFin"));
             String id_cliente= String.valueOf(jsonObject.get("id_cliente"));
-            String tsql;
+            String tsql = null;
                
             if("".equals(fechaInicial))
             {
@@ -169,9 +169,8 @@ public class QuejasSQL
                 queja.put("razon_social", rs.getString("razon_social"));
                 queja.put("nombre_usuario", rs.getString("nombre_usuario"));
                 queja.put("NombreMunicipio", rs.getString("NombreMunicipio"));
-                queja.put("descripcion", rs.getString("descripcion"));
-               
-                
+                queja.put("descripcion", rs.getString("descripcion"));               
+                queja.put("sql",tsql);
                 System.out.printf(queja.toString());
                 Quejas.add(queja);
             }

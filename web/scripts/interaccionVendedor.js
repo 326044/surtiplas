@@ -1930,7 +1930,7 @@ function seccionActividades()
                     '<table class="tbonita" align="center" id="tablaActividades">'+
                           '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                            '<th colspan="1"><img src="images/PDF-05.png" title="Crear Documento" /></th>'+
+                            '<th colspan="1"><a href="ServletInformes?informe=ListadoQuejasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                             '<th>IdAct.</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
