@@ -72,6 +72,8 @@ public class ServletInformes extends HttpServlet
             
             if(op.equals("ListadoProductosPDF1"))
             {
+                String sql = request.getParameter("query");
+                System.out.printf(sql.toString());
                 response.setHeader("Content-Disposition", "attachment; filename=\"ListadoProductos.pdf\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
@@ -85,6 +87,9 @@ public class ServletInformes extends HttpServlet
 
                 try
                 {
+                    this.cn = getConnection();
+                    this.st = cn.createStatement();
+                    rs = st.executeQuery(sql);
                     JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoProductos.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();

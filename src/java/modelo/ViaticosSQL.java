@@ -262,22 +262,21 @@ public class ViaticosSQL
             }
             
             this.rs = this.st.executeQuery(tsql);
-            
+             System.out.printf(tsql.toString());  
             while(this.rs.next())
             {
                 Viaticos via = new Viaticos(rs.getString("id_viaticos"), rs.getString("id_usuario"), rs.getString("valor"), rs.getString("concepto"), rs.getString("fecha"), rs.getString("codMunicipio"), rs.getString("doc_soporte"));
                 viatico = via.getJSONObject();
-                
-                System.out.printf(viatico.toString());
                 viatico.put("sql",tsql);
+                System.out.printf(viatico.toString());                
                 Viaticos.add(viatico);               
             }
-            
-            this.rs = this.st.executeQuery(tsql2);
+              
+           
             this.rs.first();
             
             viaticoo.put("valor_total", rs.getString("valor_total"));
-            viatico.put("sql",tsql);
+            viatico.put("sql",tsql2);
             System.out.printf(viaticoo.toString());
             Viaticos.add(viaticoo);
             
