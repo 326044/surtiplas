@@ -813,7 +813,7 @@ function confirmBuscarCliente()
                                     '</td>'+
                                     '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                     '<td>'+
-                                      '<input type="text" name="nomAutoriza" value=""/>'+
+                                      '<input type="text" name="nombre" value=""/>'+
                                     '</td>'+                                    
                                       '</tr>'+
                                       /*'<tr>'+

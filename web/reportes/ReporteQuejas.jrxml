@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ReporteQuejas" language="groovy" pageWidth="870" pageHeight="575" columnWidth="830" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ce15f3c6-ed92-45db-a0bd-9cbd1d068f89">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="17"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     quejas.`id_queja` AS quejas_id_queja,
+     quejas.`fecha` AS quejas_fecha,
+     quejas.`id_cliente` AS quejas_id_cliente,
+     quejas.`id_usuario` AS quejas_id_usuario,
+     quejas.`descripcion` AS quejas_descripcion,
+     clientes.`id_cliente` AS clientes_id_cliente,
+     clientes.`cedula` AS clientes_cedula,
+     clientes.`razon_social` AS clientes_razon_social,
+     clientes.`nombre` AS clientes_nombre,
+     clientes.`apellido` AS clientes_apellido,
+     clientes.`direccion` AS clientes_direccion,
+     clientes.`telefono` AS clientes_telefono,
+     clientes.`nombre_contacto` AS clientes_nombre_contacto,
+     clientes.`celular` AS clientes_celular,
+     clientes.`foto` AS clientes_foto,
+     clientes.`email` AS clientes_email,
+     clientes.`maximo_credito` AS clientes_maximo_credito,
+     clientes.`estado` AS clientes_estado,
+     clientes.`comentario` AS clientes_comentario,
+     clientes.`documentos_de_soporte` AS clientes_documentos_de_soporte,
+     clientes.`responsable` AS clientes_responsable,
+     clientes.`fecha` AS clientes_fecha,
+     clientes.`codMunicipio` AS clientes_codMunicipio,
+     clientes.`id_usuario` AS clientes_id_usuario,
+     clientes.`id_ubicacion` AS clientes_id_ubicacion,
+     usuarios.`id_usuario` AS usuarios_id_usuario,
+     usuarios.`nickname_usuario` AS usuarios_nickname_usuario,
+     usuarios.`nombre_usuario` AS usuarios_nombre_usuario,
+     usuarios.`apellidos_usuario` AS usuarios_apellidos_usuario,
+     usuarios.`cedula_usuario` AS usuarios_cedula_usuario,
+     usuarios.`direccion_usuario` AS usuarios_direccion_usuario,
+     usuarios.`telefono_usuario` AS usuarios_telefono_usuario,
+     usuarios.`celular_usuario` AS usuarios_celular_usuario,
+     usuarios.`email_usuario` AS usuarios_email_usuario,
+     usuarios.`password_usuario` AS usuarios_password_usuario,
+     usuarios.`tipo_usuario` AS usuarios_tipo_usuario,
+     usuarios.`foto_usuario` AS usuarios_foto_usuario,
+     usuarios.`fecha` AS usuarios_fecha,
+     usuarios.`fecha_cumpleanos` AS usuarios_fecha_cumpleanos,
+     usuarios.`banco` AS usuarios_banco,
+     usuarios.`tipo_cuenta_bancaria` AS usuarios_tipo_cuenta_bancaria,
+     usuarios.`numero_cuenta` AS usuarios_numero_cuenta,
+     usuarios.`otros_datos` AS usuarios_otros_datos
+FROM
+     `clientes` clientes INNER JOIN `quejas` quejas ON clientes.`id_cliente` = quejas.`id_cliente`
+     INNER JOIN `usuarios` usuarios ON clientes.`id_usuario` = usuarios.`id_usuario`
+     AND usuarios.`id_usuario` = quejas.`id_usuario`]]>
+	</queryString>
+	<field name="quejas_id_queja" class="java.lang.Integer"/>
+	<field name="quejas_id_cliente" class="java.lang.Integer"/>
+	<field name="quejas_id_usuario" class="java.lang.Integer"/>
+	<field name="clientes_razon_social" class="java.lang.String"/>
+	<field name="clientes_nombre" class="java.lang.String"/>
+	<field name="clientes_apellido" class="java.lang.String"/>
+	<field name="clientes_direccion" class="java.lang.String"/>
+	<field name="clientes_celular" class="java.lang.String"/>
+	<field name="usuarios_nombre_usuario" class="java.lang.String"/>
+	<field name="usuarios_tipo_usuario" class="java.lang.String"/>
+	<field name="quejas_descripcion" class="java.lang.String"/>
+	<field name="quejas_fecha" class="java.sql.Date"/>
+	<background>
+		<band height="535" splitType="Stretch">
+			<image>
+				<reportElement uuid="ef104506-2087-4c3a-a3dc-7132ded12750" x="127" y="126" width="643" height="308"/>
+				<imageExpression><![CDATA["C:\\Documents and Settings\\juancho\\Mis documentos\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="730" y="0" width="100" height="20"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="552" y="31" width="278" height="89"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONFECCION Y SELLADO EN PLASTICO
+Capas impermeables-Vestidos de Motociclista
+Abrigos y Delantales Industriales
+ Líneas Industrial, Hogar, e Infantil
+VENTAS POR MAYOR Y AL DETAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="86" width="244" height="34"/>
+				<textElement>
+					<font fontName="Comic Sans MS" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
+			</staticText>
+			<image>
+				<reportElement uuid="332fff46-e6cb-4c3e-ac22-f07026bbab07" x="4" y="0" width="239" height="86"/>
+				<imageExpression><![CDATA["C:\\Documents and Settings\\juancho\\Mis documentos\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="46" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="268" y="0" width="237" height="34"/>
+				<textElement textAlignment="Center">
+					<font fontName="Comic Sans MS" size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Listado de Quejas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<frame>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="-1" width="824" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<staticText>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="634" y="0" width="52" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="686" y="0" width="60" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cargo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="72" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Queja]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="73" y="0" width="72" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="145" y="0" width="85" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Razon Social]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="230" y="0" width="85" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nombre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="316" y="0" width="85" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Apellido]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="401" y="0" width="85" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Direccion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="486" y="0" width="74" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Celular]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="560" y="0" width="74" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Id usuario]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="746" y="0" width="60" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Comic Sans MS" size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement uuid="e24dfcf2-3b77-4496-86ca-3fe194fbdd0f" style="Detail" x="0" y="1" width="72" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quejas_id_queja}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="e5f34aa9-a279-4458-97a2-d8503f30d95b" style="Detail" x="73" y="0" width="72" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quejas_id_cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c7d2beff-38d4-49f9-9b95-e139e78752a6" style="Detail" x="145" y="1" width="85" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_razon_social}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7b254255-eb4c-4a7e-ac7a-5a9f5af56235" style="Detail" x="230" y="1" width="85" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e60f5a4-f3c6-406c-82ad-3505b7593392" style="Detail" x="316" y="1" width="85" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_apellido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="96cf9243-ee62-4fc4-9548-f4d7600d94c1" style="Detail" x="401" y="1" width="85" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="8ad05616-7704-4258-8a8f-2d0fb71cdf4a" style="Detail" x="486" y="1" width="74" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{clientes_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7ada4cc3-c7d6-4292-94db-eadc09470767" style="Detail" x="560" y="1" width="74" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quejas_id_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="632a9cff-a28d-4aa8-9c77-4d777cd7b46e" style="Detail" x="634" y="1" width="52" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{usuarios_nombre_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="fdcc26ca-d5e8-438d-876d-4a7549f848b1" style="Detail" x="686" y="1" width="60" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{usuarios_tipo_usuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1cb4ccc7-92b8-4162-a14f-83df867b62c7" style="Detail" x="746" y="1" width="60" height="15"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{quejas_fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<line>
+				<reportElement uuid="8ce09e63-b2c8-4455-86d5-361ee01cb3c7" positionType="FixRelativeToBottom" x="5" y="0" width="819" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="482" y="1" width="348" height="57"/>
+				<textElement textAlignment="Right">
+					<font fontName="Comic Sans MS" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CALLE 40 No.12-50 BARRIO GUADALUPE (DOSQUEBRADAS)
+TELS.(+6)3220874-3230439-3225736
+FAX (+6)3326869 Pereira-Risaralda
+Email: contacto@surtiplas.com
+]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

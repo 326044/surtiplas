@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoVisitas" language="groovy" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="944867fe-f6cb-4fa3-9ba9-a7e5d21cb331">
 	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="0"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -31,14 +31,14 @@ FROM
 	<title>
 		<band height="120" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="0" y="84" width="244" height="34"/>
+				<reportElement uuid="20089071-9f3c-4094-a508-4fd1f1b14165" x="3" y="86" width="244" height="34"/>
 				<textElement>
 					<font fontName="Comic Sans MS" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="524" y="29" width="278" height="89"/>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="524" y="31" width="278" height="89"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Comic Sans MS" size="12" isBold="true"/>
 				</textElement>
@@ -56,7 +56,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="7252555d-d0a8-433b-936b-90978614b152" x="0" y="0" width="244" height="84"/>
+				<reportElement uuid="7252555d-d0a8-433b-936b-90978614b152" x="3" y="2" width="244" height="84"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 		</band>
