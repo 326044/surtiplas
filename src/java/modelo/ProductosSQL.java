@@ -332,7 +332,7 @@ public class ProductosSQL
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
             this.st.execute(tsql);
-                        
+            
             this.desconectar();
         }
         
@@ -393,9 +393,22 @@ public class ProductosSQL
         {
             this.cn = getConnection();
             this.st = cn.createStatement();
-            String tsql;
-            tsql = "DELETE FROM coloresprod, tallasprod, materialprod, lineaprod, productos WHERE codigo_producto = '" + idProductos + "';";
-            this.st.execute(tsql);
+            String tsql1;
+            String tsql2;
+            String tsql3;
+            String tsql4;
+            String tsql5;
+            
+            tsql1 = "DELETE FROM coloresprod WHERE codigo_producto = '" + idProductos + "';";
+            this.st.execute(tsql1);
+            tsql2 = "DELETE FROM tallasprod WHERE codigo_producto = '" + idProductos + "';";
+            this.st.execute(tsql2);
+            tsql3 = "DELETE FROM materialprod WHERE codigo_producto = '" + idProductos + "';";
+            this.st.execute(tsql3);
+            tsql4 = "DELETE FROM lineaprod WHERE codigo_producto = '" + idProductos + "';";
+            this.st.execute(tsql4);
+            tsql5 = "DELETE FROM productos WHERE codigo_producto = '" + idProductos + "';";
+            this.st.execute(tsql5);
             this.desconectar();
         }
         
