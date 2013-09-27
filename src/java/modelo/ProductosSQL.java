@@ -394,7 +394,7 @@ public class ProductosSQL
             this.cn = getConnection();
             this.st = cn.createStatement();
             String tsql;
-            tsql = "DELETE FROM productos WHERE codigo_producto = '" + idProductos + "';";
+            tsql = "DELETE FROM coloresprod, tallasprod, materialprod, lineaprod, productos WHERE codigo_producto = '" + idProductos + "';";
             this.st.execute(tsql);
             this.desconectar();
         }
