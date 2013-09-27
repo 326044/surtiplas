@@ -2064,7 +2064,7 @@ function tablaActividad(jsonArray, TA)
                 {
          codigoHTML = '<tr align="left">'+
                             '<th colspan="1"><img src="images/b_insrow.png" title="agregar" class="addActividad"/></th>'+
-                            '<th border="1"><a href="ServletInformes?informe=ListadoPagosPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
+                            '<th border="1"><a href="ServletInformes?informe=ListadoQuejasPDF&query='+jsonArray[i].sql+'"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></a></th>'+
                             '<th>Id</th>'+
                             '<th>Fecha</th>'+
                             '<th>Cliente</th>'+
