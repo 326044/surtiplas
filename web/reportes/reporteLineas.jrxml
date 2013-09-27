@@ -26,7 +26,7 @@ FROM
 		<band height="555" splitType="Stretch">
 			<image>
 				<reportElement uuid="7fc28a04-19f4-42e8-99ea-58fc977ad9c7" x="0" y="150" width="610" height="300"/>
-				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Cristian\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
@@ -34,7 +34,7 @@ FROM
 		<band height="119" splitType="Stretch">
 			<image>
 				<reportElement uuid="7252555d-d0a8-433b-936b-90978614b152" x="0" y="0" width="244" height="84"/>
-				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+				<imageExpression><![CDATA["C:\\Users\\Cristian\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="510" y="-1" width="100" height="20"/>
