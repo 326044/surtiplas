@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoVisitas" language="groovy" pageWidth="595" pageHeight="612" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="944867fe-f6cb-4fa3-9ba9-a7e5d21cb331">
-	<property name="ireport.zoom" value="1.0"/>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoVisitas" language="groovy" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="944867fe-f6cb-4fa3-9ba9-a7e5d21cb331">
+	<property name="ireport.zoom" value="0.9090909090909091"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="96"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -23,7 +23,7 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="7fc28a04-19f4-42e8-99ea-58fc977ad9c7" x="3" y="157" width="552" height="300"/>
+				<reportElement uuid="7fc28a04-19f4-42e8-99ea-58fc977ad9c7" x="3" y="157" width="799" height="340"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
@@ -38,7 +38,7 @@ FROM
 				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
 			</staticText>
 			<staticText>
-				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="277" y="20" width="278" height="89"/>
+				<reportElement uuid="4849b135-e30b-43bf-b678-0f642082662d" x="524" y="29" width="278" height="89"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Comic Sans MS" size="12" isBold="true"/>
 				</textElement>
@@ -49,7 +49,7 @@ Abrigos y Delantales Industriales
 VENTAS POR MAYOR Y AL DETAL]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="455" y="0" width="100" height="20"/>
+				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="702" y="0" width="100" height="20"/>
 				<textElement textAlignment="Right">
 					<font fontName="Comic Sans MS" size="12"/>
 				</textElement>
@@ -64,7 +64,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 	<pageHeader>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="152" y="0" width="237" height="34"/>
+				<reportElement uuid="796478cc-cd7c-4919-9cff-281533e78947" x="276" y="1" width="237" height="34"/>
 				<textElement textAlignment="Center">
 					<font fontName="Comic Sans MS" size="20" isBold="true"/>
 				</textElement>
@@ -75,30 +75,30 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 	<columnHeader>
 		<band height="21" splitType="Stretch">
 			<frame>
-				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="555" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
+				<reportElement uuid="9d3808a5-34e7-426f-aa66-02ffa8fe381c" mode="Opaque" x="0" y="0" width="802" height="20" forecolor="#FFFFFF" backcolor="#001D7E"/>
 				<staticText>
-					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="138" y="0" width="138" height="20" forecolor="#FFFFFF"/>
+					<reportElement uuid="9b9b402f-a2c9-44fa-9f2b-f8b340ad8102" x="201" y="0" width="213" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Fecha]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="276" y="0" width="138" height="20" forecolor="#FFFFFF"/>
+					<reportElement uuid="1447da69-58c6-4588-9bfb-aa550a95f579" x="414" y="0" width="185" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Id Cliente]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="414" y="0" width="141" height="20" forecolor="#FFFFFF"/>
+					<reportElement uuid="94680801-a951-41a8-b731-5b15de14223f" x="599" y="0" width="203" height="20" forecolor="#FFFFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Id Usuario]]></text>
 				</staticText>
 				<staticText>
-					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="138" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
+					<reportElement uuid="0e827079-951e-426c-b40c-14fa98cc4a6a" stretchType="RelativeToTallestObject" x="0" y="0" width="201" height="20" forecolor="#FFFFFF" backcolor="#00FFFF"/>
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="Comic Sans MS" size="14" isBold="true"/>
 					</textElement>
@@ -110,27 +110,27 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 	<detail>
 		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement uuid="d1373c8f-9436-4a63-801f-1991438ac974" style="Detail" x="0" y="0" width="138" height="15"/>
+				<reportElement uuid="d1373c8f-9436-4a63-801f-1991438ac974" style="Detail" x="0" y="0" width="201" height="15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{visitas_id_visita}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="59587206-edd3-476b-be24-df62eec94492" style="Detail" x="138" y="0" width="138" height="15"/>
+				<reportElement uuid="59587206-edd3-476b-be24-df62eec94492" style="Detail" x="201" y="0" width="213" height="15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{visitas_fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="c439c050-116a-4027-acff-d795400948f9" style="Detail" x="276" y="0" width="138" height="15"/>
+				<reportElement uuid="c439c050-116a-4027-acff-d795400948f9" style="Detail" x="414" y="0" width="185" height="15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{visitas_id_cliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement uuid="1deab150-b21c-4b35-9021-e4a2a4b61788" style="Detail" x="414" y="0" width="138" height="15"/>
+				<reportElement uuid="1deab150-b21c-4b35-9021-e4a2a4b61788" style="Detail" x="599" y="0" width="201" height="15"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{visitas_id_usuario}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement uuid="e2fcde18-60bf-4bfb-af27-8041c5dfc6e9" positionType="FixRelativeToBottom" x="0" y="14" width="555" height="1"/>
+				<reportElement uuid="e2fcde18-60bf-4bfb-af27-8041c5dfc6e9" positionType="FixRelativeToBottom" x="0" y="14" width="800" height="2"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
@@ -138,12 +138,12 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="25" splitType="Stretch"/>
+		<band height="24" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
 		<band height="80" splitType="Stretch">
 			<staticText>
-				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="207" y="8" width="348" height="57"/>
+				<reportElement uuid="5f60d945-f6d2-4d4c-8939-d072179a7387" x="454" y="4" width="348" height="57"/>
 				<textElement textAlignment="Right">
 					<font fontName="Comic Sans MS" size="10" isBold="true"/>
 				</textElement>
@@ -154,7 +154,7 @@ Email: contacto@surtiplas.com
 ]]></text>
 			</staticText>
 			<line>
-				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="0" width="555" height="4"/>
+				<reportElement uuid="ae2bbdd4-d333-4843-813d-a7747c520444" x="0" y="0" width="802" height="4"/>
 			</line>
 		</band>
 	</pageFooter>

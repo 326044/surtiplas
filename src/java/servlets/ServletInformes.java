@@ -229,6 +229,35 @@ public class ServletInformes extends HttpServlet
                 }
             }
              
+             if(op.equals("ListadoVisitasXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadoVisitas.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoVisitas.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+             
             if(op.equals("ListadoPagosPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"ListadoPagos.pdf\";");
@@ -289,7 +318,7 @@ public class ServletInformes extends HttpServlet
             
             if(op.equals("reporteUsuariosXLS"))
             {
-                response.setHeader("Content-Disposition", "attachment; filename=\"reporteUsuarios.xlsx\";");
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadoUsuarios.xlsx\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
@@ -302,7 +331,7 @@ public class ServletInformes extends HttpServlet
 
                 try
                 {
-                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteUsuarios.jasper"));
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoUsuarios.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRXlsxExporter exporter = new JRXlsxExporter ();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
@@ -336,6 +365,35 @@ public class ServletInformes extends HttpServlet
                     JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoViaticos.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(op.equals("ListadoViaticosXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadoViaticos.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoViaticos.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
                     exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
                     exporter.exportReport();
@@ -440,6 +498,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reporteLineasXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteLineas.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteLineas.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteColorPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteColor.pdf\";");
@@ -468,6 +556,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reporteColorXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteColor.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteColor.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteTallasPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteTallas.pdf\";");
@@ -496,6 +614,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reporteTallasXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteTallas.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteTallas.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteMaterialesPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteMateriales.pdf\";");
@@ -524,6 +672,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reporteMaterialesXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteMateriales.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteMateriales.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteClientesPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteClientes.pdf\";");
@@ -552,6 +730,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reporteClientesXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteClientes.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteClientes.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reportePedidosPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reportePedidos.pdf\";");
@@ -580,6 +788,36 @@ public class ServletInformes extends HttpServlet
                     e.printStackTrace();
                 }
             }
+            
+            if(op.equals("reportePedidosXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reportePedidos.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reportePedidos.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteDevolucionesPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteDevoluciones.pdf\";");
@@ -610,7 +848,7 @@ public class ServletInformes extends HttpServlet
             }
             if(op.equals("reporteDevolucionesXLS"))
             {
-                response.setHeader("Content-Disposition", "attachment; filename=\"reporteDevoluciones.xls\";");
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteDevoluciones.xlsx\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);

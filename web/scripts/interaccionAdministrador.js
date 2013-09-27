@@ -1662,7 +1662,7 @@ function seccionVisitas()
                                             '<tr align="left">'+
                                                     '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                                                     '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                                    '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                                    '<th><a href="ServletInformes?informe=ListadoVisitasXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                                     '<th>Id Visita</th>'+
                                                     '<th>Fecha</th>'+
                                                     '<th>Cliente</th>'+
@@ -1722,7 +1722,7 @@ function seccionVisitas()
     var codigoHTML = '<tr align="left">'+
                         '<th><img src="images/b_insrow.png" title="Agregar" id="AdVisita"/></th>'+
                         '<th><a href="ServletInformes?informe=ListadoVisitasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                        '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                        '<th><a href="ServletInformes?informe=ListadoVisitasXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                         '<th>Id Visita</th>'+
                         '<th>Fecha</th>'+
                         '<th>Cliente</th>'+
@@ -2372,7 +2372,7 @@ function seccionViaticos(jsonArray)
                       '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=ListadoViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2435,7 +2435,7 @@ function buscarViatico(evento)
         var codigoHTML = '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
                             '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=ListadoViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -3701,12 +3701,12 @@ function AddProducto()
                                     '<tr>'+
                                         '<td colspan="2" rowspan="12" align="center">'+
                                             '<div class="foto">'+
-                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                '<div class="imagen" id="fotoProductos">'+
                                                     '<img src="images/usuario.png" align="center">'+
                                                 '</div>'+
                                                 '<div>'+
-                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
-                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFotoprod" />'+
+                                                    '<input type="text" value="" id="rutaFotoprod" />'+
                                                 '</div>'+   
                                             '</div>'+
                                         '</td>'+
@@ -3801,13 +3801,56 @@ function AddProducto()
     IniciarTabers();
     $("#form_crear_producto").submit(enviarDatosAddProductos);
     activadorEventosProductos();
-    cargarFoto();
+    cargarFotoprod();
+}
+//*********************************************************************************************************
+//*********************************************************************************************************
+//***********************                                                           ***********************
+//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS USUARIOS       ***********************
+//***********************                                                           ***********************
+//*********************************************************************************************************
+//*********************************************************************************************************
+
+function cargarFotoprod()
+{
+    var botonCargarFoto = $("#cargarFotoprod");
+    
+    new AjaxUpload(botonCargarFoto, 
+    {
+        action: 'ServletFotos',
+        onSubmit : function(file, ext)
+        {
+                if (!(ext && /^(jpg|png|jpeg|gif)$/.test(ext)))
+                {
+                        // extensiones permitidas
+                        alert('Error: Solo se permiten imagenes');
+                        // cancela upload
+                        return false;
+                } 
+                else 
+                {
+                        botonCargarFoto.attr("value", "Cargando");
+                        this.disable();
+                }
+        },
+        onComplete: function(file, response)
+        {
+                botonCargarFoto.attr("value", "Cargar Foto");
+                // enable upload button
+                this.enable();			
+                // Agrega archivo a la lista
+                var rutaFoto = "images/productos/" + file;
+                var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
+                $('#rutaFotoprod').attr("value",file);
+                $('#fotoProductos').html(htmlFoto);
+        }	
+    });
 }
 
 //*********************************************************************************************************
 //*********************************************************************************************************
 //***********************                                                           ***********************
-//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS USUARIOS       ***********************
+//***********************       FUNCION PARA CARGAR LAS FOTOS DE LOS PRODUCTOS       ***********************
 //***********************                                                           ***********************
 //*********************************************************************************************************
 //*********************************************************************************************************
@@ -3965,12 +4008,12 @@ function ModProducto(jsonObject)
                                     '<tr>'+
                                         '<td colspan="2" rowspan="12" align="center">'+
                                             '<div class="foto">'+
-                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                '<div class="imagen" id="fotoProductos">'+
                                                     '<img src="images/usuario.png" align="center">'+
                                                 '</div>'+
                                                 '<div>'+
-                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
-                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFotoprod" />'+
+                                                    '<input type="text" value="" id="rutaFotoprod" />'+
                                                 '</div>'+   
                                             '</div>'+
                                         '</td>'+
@@ -4070,6 +4113,7 @@ function ModProducto(jsonObject)
     $('#date_field14').datepick({yearRange: '1980:2050'});
     $("#form_modificar_producto").submit(enviarDatosModProductos);
     activadorEventosProductos();
+    cargarFotoprod();
 }
 
 //***************************************************************************************************************
@@ -4183,10 +4227,7 @@ function VerProducto(jsonObject)
                                           '<div class="foto">'+
                                               '<div class="imagen">'+
                                                   '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
+                                              '</div>'+  
                                           '</div>'+
                                       '</td>'+
                                   '</tr>'+
@@ -4304,10 +4345,7 @@ function DelProducto(jsonObject)
                                           '<div class="foto">'+
                                               '<div class="imagen">'+
                                                   '<img src="images/usuario.png" align="center">'+
-                                              '</div>'+
-                                              '<div>'+
-                                                  '<input type="button" value="Cargar Foto" class="button" '+
-                                              '</div>'+   
+                                              '</div>'+ 
                                           '</div>'+
                                       '</td>'+
                                     '</tr>'+
@@ -4497,7 +4535,7 @@ function cargarListadolineas(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteLineassXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Nombre</th>'+
                          '</tr>';
@@ -4962,7 +5000,7 @@ function cargarListadoColores(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addColor"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteColorPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteColorXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Color</th>'+
                             '<th>Color</th>'+
                          '</tr>';
@@ -5427,7 +5465,7 @@ function cargarListadoTallas(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddTalla"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteTallasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteTallasXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>id Talla</th>'+
                             '<th>Talla</th>'+
                          '</tr>';
@@ -5890,7 +5928,7 @@ function cargarMateriales(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="AddMaterial"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteMaterialesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteMaterialesXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Material</th>'+
                          '</tr>';
@@ -6361,7 +6399,7 @@ function cargarListadoClientes(jsonArray)
                                  '<tr align="letf">'+
                                    '<th><img src="images/b_insrow.png" title="Agregar" id="ACliente"/></th>'+
                                    '<th><a href="ServletInformes?informe=reporteClientesPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                                   '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                                   '<th><a href="ServletInformes?informe=reporteClientesXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                                    '<th>Cliente</th>'+
                                    '<th>Nombre</th>'+
                                    '<th>Apellido</th>'+
@@ -6423,12 +6461,12 @@ function AddCliente()
                                     '<tr>'+
                                         '<td colspan="2" rowspan="10" align="center">'+
                                             '<div class="foto">'+
-                                                '<div class="imagen" id="fotoUsuarios">'+
+                                                '<div class="imagen" id="fotoCliente">'+
                                                     '<img src="images/usuario.png" align="center">'+
                                                 '</div>'+
                                                 '<div>'+
-                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFoto" />'+
-                                                    '<input type="text" value="" id="rutaFoto" />'+
+                                                    '<input type="button" value="Cargar Foto" class="button" id="cargarFotocliente" />'+
+                                                    '<input type="text" value="" id="rutaFotocliente" />'+
                                                 '</div>'+   
                                             '</div>'+
                                         '</td>'+
@@ -6546,7 +6584,7 @@ function AddCliente()
     $('#date_field9').datepick('option', {dateFormat: $.datepick.ATOM});
     $("#form_crear_cliente").submit(enviarDatosAddCliente);
     ActivadorEventosClientes();
-    cargarFoto();
+    cargarFotocliente();
 }
 
 //*********************************************************************************************************
@@ -6557,9 +6595,9 @@ function AddCliente()
 //*********************************************************************************************************
 //*********************************************************************************************************
 
-function cargarFoto()
+function cargarFotocliente()
 {
-    var botonCargarFoto = $("#cargarFoto");
+    var botonCargarFoto = $("#cargarFotocliente");
     
     new AjaxUpload(botonCargarFoto, 
     {
@@ -6585,10 +6623,10 @@ function cargarFoto()
                 // enable upload button
                 this.enable();			
                 // Agrega archivo a la lista
-                var rutaFoto = "images/Usuarios/" + file;
+                var rutaFoto = "images/clientes/" + file;
                 var htmlFoto = '<img src="' + rutaFoto + '" align="center" width="180px">';
-                $('#rutaFoto').attr("value",file);
-                $('#fotoUsuarios').html(htmlFoto);
+                $('#rutaFotocliente').attr("value",file);
+                $('#fotoCliente').html(htmlFoto);
         }	
     });
 }
@@ -7327,7 +7365,7 @@ function cargarPedidos(jsonArray)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="AddPedido"/></th>'+
                             '<th><a href="ServletInformes?informe=reportePedidosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteUsuariosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reportePedidosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Id Pedido</th>'+
                             '<th>Cliente</th>'+
                             '<th>Fecha</th>'+
