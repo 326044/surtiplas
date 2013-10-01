@@ -130,15 +130,17 @@ public class pedidosSQL {
                         + " FROM pedidos, clientes, usuarios WHERE pedidos.id_usuario=usuarios.id_usuario AND pedidos.id_cliente=clientes.id_cliente;";   
                 this.rs = this.st.executeQuery(tsql);                  
                }
-           }
+           }           
            else
            {
                tsql = "SELECT DISTINCT pedidos.id_pedido, pedidos.fecha, pedidos.valor_total, clientes.razon_social, usuarios.nombre_usuario, clientes.direccion"
                        + " FROM pedidos, clientes, usuarios WHERE pedidos.id_usuario=usuarios.id_usuario AND pedidos.id_cliente=clientes.id_cliente AND"
                        + " pedidos.fecha BETWEEN '"+ fechaInicial +"' AND '"+ fechaFinal +"';";
                this.rs = this.st.executeQuery(tsql); 
+           
            }
            
+         
            System.out.printf(tsql.toString());  
            
            while(this.rs.next())
