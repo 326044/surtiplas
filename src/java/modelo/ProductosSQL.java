@@ -328,10 +328,17 @@ public class ProductosSQL
             this.st = cn.createStatement();
             productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
             String tsql;
+            String tsql1;
             
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
             this.st.execute(tsql);
+            
+            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("codigo_producto")));
+            
+            tsql1 = "INSERT INTO coloresprod VALUES(, '";
+            tsql1 += ubd.getcodColor() + "','" + ubd.getcodigo_producto() + "')";        
+            this.st.execute(tsql1);       
             
             this.desconectar();
         }

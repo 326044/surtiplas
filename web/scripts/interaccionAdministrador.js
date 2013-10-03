@@ -3714,6 +3714,10 @@ function AddProducto()
                                 '</form>'+
                                 '<form id="form_crear_producto"  enctype="multipart/form-data">'+
                                   '<tr>'+
+                                      '<th align="right" style="padding-right:5px;">Codigo</th>'+
+                                      '<td><input type="text" name="codigo_producto" value="" size="20" maxlength="10"/></td>'+
+                                  '</tr>'+
+                                  '<tr>'+
                                       '<th align="right" style="padding-right:5px;">Nombre</th>'+
                                       '<td><input type="text" name="nombre" value="" size="20" maxlength="10"/></td>'+
                                   '</tr>'+

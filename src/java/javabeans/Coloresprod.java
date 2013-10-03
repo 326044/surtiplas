@@ -38,7 +38,7 @@ public class Coloresprod
         this.id_coloresProd = id_coloresProd;
     }
     
-    public String getCodColor()
+    public String getCodColorProd()
     {
         return this.id_coloresProd;
     }
