@@ -2371,8 +2371,8 @@ function seccionViaticos(jsonArray)
                         '<table class="tbonita" align="center" id="tablaViaticos">'+
                       '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
-                            '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=ListadoViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -2434,8 +2434,8 @@ function buscarViatico(evento)
     {
         var codigoHTML = '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="agregar" id="AddViatico" /></th>'+
-                            '<th><a href="ServletInformes?informe=ListadoViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=ListadoViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteViaticosPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteViaticosXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>IdViatico</th>'+
                             '<th>Fecha</th>'+
                             '<th>Concepto</th>'+
@@ -4539,7 +4539,7 @@ function cargarListadolineas(jsonArray, id)
                           '<tr align="left">'+
                             '<th><img src="images/b_insrow.png" title="Agregar" id="' + id + '" class="addLinea"/></th>'+
                             '<th><a href="ServletInformes?informe=reporteLineasPDF"><img src="images/PDF-05.png" title="Generar Informe" id="GenerarReporte" /></th>'+
-                            '<th><a href="ServletInformes?informe=reporteLineassXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
+                            '<th><a href="ServletInformes?informe=reporteLineasXLS"><img src="images/iconoExcel.png" title="Generar Informe" id="GenerarReporte" /></th>'+
                             '<th>Codigo</th>'+
                             '<th>Nombre</th>'+
                          '</tr>';

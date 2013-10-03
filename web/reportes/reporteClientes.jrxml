@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteClientes" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b10e7f1c-5354-4093-b852-fbd8adc17bb2">
-	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.zoom" value="0.8264462809917354"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="48"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -33,7 +33,7 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="5162337c-39dd-432e-8a73-5f21c7f99921" x="0" y="81" width="802" height="361"/>
+				<reportElement uuid="2e7bce5d-4f28-4c8d-b610-226c06124816" x="0" y="82" width="802" height="404"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
@@ -66,7 +66,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="183abe91-c2e1-43f1-97bb-7d66779ef866" x="1" y="0" width="244" height="102"/>
+				<reportElement uuid="41d782ca-2e31-4498-a3d1-d4e1f08a504a" x="1" y="0" width="244" height="102"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 		</band>

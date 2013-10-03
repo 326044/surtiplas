@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListadoVisitas" language="groovy" pageWidth="842" pageHeight="595" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="944867fe-f6cb-4fa3-9ba9-a7e5d21cb331">
-	<property name="ireport.zoom" value="0.9090909090909091"/>
+	<property name="ireport.zoom" value="0.8264462809917354"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="279"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
 	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -23,7 +23,7 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="7fc28a04-19f4-42e8-99ea-58fc977ad9c7" x="3" y="157" width="799" height="340"/>
+				<reportElement uuid="fe255962-0e37-40ff-941f-f7d47503e6e7" x="0" y="53" width="800" height="392"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
@@ -56,7 +56,7 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<image>
-				<reportElement uuid="7252555d-d0a8-433b-936b-90978614b152" x="3" y="2" width="244" height="84"/>
+				<reportElement uuid="fd2f353b-adfe-4025-91a1-e6f6912c5f0c" x="0" y="0" width="247" height="86"/>
 				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
 			</image>
 		</band>

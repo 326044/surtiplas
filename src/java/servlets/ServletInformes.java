@@ -178,8 +178,6 @@ public class ServletInformes extends HttpServlet
             
             if(op.equals("ListadoVisitasPDF"))
             {
-                String sql = request.getParameter("query");
-                System.out.printf(sql.toString());
                 response.setHeader("Content-Disposition", "attachment; filename=\"ListadoVisitas.pdf\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
@@ -193,9 +191,6 @@ public class ServletInformes extends HttpServlet
 
                 try
                 {
-                    this.cn = getConnection();
-                    this.st = cn.createStatement();
-                    rs = st.executeQuery(sql);
                     JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoVisitas.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();
@@ -417,6 +412,64 @@ public class ServletInformes extends HttpServlet
                 try
                 {
                     JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadoViaticos.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(op.equals("reporteViaticosPDF"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteViaticos.pdf\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/pdf");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                ViaticosSQL usl = new ViaticosSQL();
+                Connection conn = usl.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteViaticos.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRExporter exporter = new JRPdfExporter();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
+            if(op.equals("reporteViaticosXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"reporteViaticos.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteViaticos.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRXlsxExporter exporter = new JRXlsxExporter ();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
@@ -729,8 +782,6 @@ public class ServletInformes extends HttpServlet
             
             if(op.equals("reporteClientesPDF"))
             {
-                String sql = request.getParameter("query");
-                System.out.printf(sql.toString());
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteClientes.pdf\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
@@ -744,9 +795,6 @@ public class ServletInformes extends HttpServlet
 
                 try
                 {
-                    this.cn = getConnection();
-                    this.st = cn.createStatement();
-                    rs = st.executeQuery(sql);
                     JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reporteClientes.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();
@@ -794,7 +842,7 @@ public class ServletInformes extends HttpServlet
             if(op.equals("reportePedidosPDF"))
 
             {
-                response.setHeader("Content-Disposition", "attachment; filename=\"listadoPedidos.pdf\";");
+                response.setHeader("Content-Disposition", "attachment; filename=\"reportePedidos.pdf\";");
                 response.setHeader("Cache-Control", "no-cache");
                 response.setHeader("Pragma", "no-cache");
                 response.setDateHeader("Expires", 0);
@@ -807,7 +855,7 @@ public class ServletInformes extends HttpServlet
 
                 try
                 {
-                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/listadoPedidos.jasper"));
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/reportePedidos.jasper"));
                     JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
                     JRExporter exporter = new JRPdfExporter();
                     exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);

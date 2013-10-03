@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteLineas" language="groovy" pageWidth="650" pageHeight="595" orientation="Landscape" columnWidth="610" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="01e9ad9a-a5d2-4a88-b957-3af8832a8c8a">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="192"/>
+	<property name="ireport.y" value="336"/>
 	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
 	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
 	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
@@ -25,17 +25,13 @@ FROM
 	<background>
 		<band height="555" splitType="Stretch">
 			<image>
-				<reportElement uuid="7fc28a04-19f4-42e8-99ea-58fc977ad9c7" x="0" y="150" width="610" height="300"/>
-				<imageExpression><![CDATA["C:\\Users\\Cristian\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
+				<reportElement uuid="3ea5b014-b456-41fd-85c5-6703b66c0f08" x="0" y="124" width="610" height="335"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\marcadeagua.png"]]></imageExpression>
 			</image>
 		</band>
 	</background>
 	<title>
 		<band height="119" splitType="Stretch">
-			<image>
-				<reportElement uuid="7252555d-d0a8-433b-936b-90978614b152" x="0" y="0" width="244" height="84"/>
-				<imageExpression><![CDATA["C:\\Users\\Cristian\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
-			</image>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement uuid="44d063b4-e1d7-45ca-9d44-b44febea9951" x="510" y="-1" width="100" height="20"/>
 				<textElement textAlignment="Right">
@@ -61,6 +57,10 @@ VENTAS POR MAYOR Y AL DETAL]]></text>
 				</textElement>
 				<text><![CDATA[JOSE HUMBERTO GIRALDO CASTAÑO NIT 6026985-4]]></text>
 			</staticText>
+			<image>
+				<reportElement uuid="ece8d0ec-d39f-46a9-9ec1-22a1b199a4f0" x="0" y="1" width="244" height="83"/>
+				<imageExpression><![CDATA["C:\\Users\\SENA\\Documents\\NetBeansProjects\\surtiplas\\web\\reportes\\surtiplasTransparente.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
