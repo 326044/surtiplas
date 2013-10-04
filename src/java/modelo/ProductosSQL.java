@@ -332,12 +332,13 @@ public class ProductosSQL
             
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
+            tsql = "SELECT MAX(cod_producto) FROM producto";
             this.st.execute(tsql);
             
-            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("codigo_producto")));
+            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")),"");
             
             tsql1 = "INSERT INTO coloresprod VALUES(, '";
-            tsql1 += ubd.getcodColor() + "','" + ubd.getcodigo_producto() + "')";        
+            tsql1 += ubd.getcodColor() + "')";        
             this.st.execute(tsql1);       
             
             this.desconectar();
@@ -370,8 +371,34 @@ public class ProductosSQL
             this.st = cn.createStatement();
             productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
             String tsql;
+            String tsql1;
+            String tsql2;
+            String tsql3;
+            String tsql4;
+            
             tsql = "UPDATE productos SET nombre='" + usj.getnombre() + "', foto='" + usj.getfoto() + "', cantidad=" + usj.getcantidad() + ", precio_costo=" + usj.getprecio_costo() + ", precio_venta=" + usj.getprecio_venta() + ", precio_descuento=" + usj.getprecio_descuento() + ", codigo_barras=" + usj.getcodigo_barras() + ", cod_tipo_producto=" + usj.getcod_tipo_producto () + " WHERE codigo_producto = " + idProductos + ";";
             this.st.execute(tsql);
+            
+            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")),"");
+            
+            tsql1 = "UPDATE coloresprod SET cod_color='" + ubd.getcodColor() + "' WHERE codigo_producto = " + idProductos + ";";
+            this.st.execute(tsql1);
+            
+            LineaProd lna = new LineaProd("", String.valueOf(datos.get("cod_linea")),"");
+            
+            tsql2 = "UPDATE lineaprod SET cod_linea='" + lna.getCod_linea() + "' WHERE codigo_producto = " + idProductos + ";";
+            this.st.execute(tsql2);
+            
+            MaterialProd mtr = new MaterialProd("", String.valueOf(datos.get("codigo")),"");
+            
+            tsql3 = "UPDATE materialprod SET codigo='" + mtr.getCodigo() + "' WHERE codigo_producto = " + idProductos + ";";
+            this.st.execute(tsql3);
+            
+            TallasProd tll = new TallasProd("", String.valueOf(datos.get("cod_talla")),"");
+            
+            tsql4 = "UPDATE tallasprod SET cod_talla='" + tll.getcod_talla() + "' WHERE codigo_producto = " + idProductos + ";";
+            this.st.execute(tsql4);
+                       
             this.desconectar();
         }
         
