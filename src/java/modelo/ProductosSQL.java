@@ -332,13 +332,16 @@ public class ProductosSQL
             
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
-            tsql = "SELECT MAX(cod_producto) FROM producto";
             this.st.execute(tsql);
             
-            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")),"");
+            String sql= "SELECT MAX(codigo_producto) FROM productos";
+            this.rs = this.st.executeQuery(sql);            
+            this.rs.first();
+            
+            Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("codigo_producto")));
             
             tsql1 = "INSERT INTO coloresprod VALUES(, '";
-            tsql1 += ubd.getcodColor() + "')";        
+            tsql1 += ubd.getcodColor() + "','" + ubd.getcodigo_producto()+ "')";        
             this.st.execute(tsql1);       
             
             this.desconectar();
