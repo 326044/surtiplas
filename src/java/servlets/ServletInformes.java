@@ -548,6 +548,35 @@ public class ServletInformes extends HttpServlet
                 }
             }
             
+            if(op.equals("ListadosProductosXLS"))
+            {
+                response.setHeader("Content-Disposition", "attachment; filename=\"ListadosProductos.xlsx\";");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setHeader("Pragma", "no-cache");
+                response.setDateHeader("Expires", 0);
+                response.setContentType("application/vnd.ms-excel");
+
+                ServletOutputStream out = response.getOutputStream();
+
+                UsuariosSQL usr = new UsuariosSQL();
+                Connection conn = usr.getConnection(); 
+
+                try
+                {
+                    JasperReport reporte = (JasperReport) JRLoader.loadObjectFromFile(getServletContext().getRealPath("reportes/ListadosProductos.jasper"));
+                    JasperPrint jasperPrint = JasperFillManager.fillReport(reporte, null, conn);
+                    JRXlsxExporter exporter = new JRXlsxExporter ();
+                    exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+                    exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, out);
+                    exporter.exportReport();
+                }
+
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            
             if(op.equals("reporteLineasPDF"))
             {
                 response.setHeader("Content-Disposition", "attachment; filename=\"reporteLineas.pdf\";");
