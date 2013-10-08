@@ -329,20 +329,47 @@ public class ProductosSQL
             productos usj = new productos("", String.valueOf(datos.get("nombre")), "foto", String.valueOf(datos.get("cantidad")), String.valueOf(datos.get("precio_costo")), String.valueOf(datos.get("precio_venta")), String.valueOf(datos.get("precio_descuento")), String.valueOf(datos.get("codigo_barras")), String.valueOf(datos.get("cod_tipo_producto")));
             String tsql;
             String tsql1;
+            String tsql2;
+            String tsql3;
+            String tsql4;
             
             tsql = "INSERT INTO productos VALUES(DEFAULT, '";
             tsql += usj.getnombre()+ "','" + usj.getfoto()+ "','" + usj.getcantidad() + "','" + usj.getprecio_costo() + "','" + usj.getprecio_venta() + "','" + usj.getprecio_descuento() + "','" + usj.getcodigo_barras() + "','" + usj.getcod_tipo_producto() + "')";
             this.st.execute(tsql);
             
-            String sql= "SELECT MAX(codigo_producto) FROM productos";
-            this.rs = this.st.executeQuery(sql);            
-            this.rs.first();
-            
             Coloresprod ubd = new Coloresprod("", String.valueOf(datos.get("cod_color")), String.valueOf(datos.get("codigo_producto")));
             
-            tsql1 = "INSERT INTO coloresprod VALUES(, '";
-            tsql1 += ubd.getcodColor() + "','" + ubd.getcodigo_producto()+ "')";        
-            this.st.execute(tsql1);       
+            String sql;
+            sql= "SELECT MAX(codigo_producto) AS codigo_producto FROM productos";
+            this.rs = this.st.executeQuery(sql);            
+            this.rs.first();
+            String cod = rs.getString("codigo_producto");
+            
+            tsql1 = "INSERT INTO coloresprod VALUES(DEFAULT, '";
+            tsql1 +=ubd.getcodColor() + "','" + cod + "')";
+            System.out.printf(tsql1.toString());
+            this.st.execute(tsql1);
+            
+            LineaProd lni = new LineaProd("", String.valueOf(datos.get("cod_linea")), String.valueOf(datos.get("codigo_producto")));
+            
+            tsql2 = "INSERT INTO lineaprod VALUES(DEFAULT, '";
+            tsql2 += lni.getCod_linea() + "','" + cod + "')";
+            System.out.printf(tsql2.toString());
+            this.st.execute(tsql2);
+            
+            TallasProd tll = new TallasProd("", String.valueOf(datos.get("cod_talla")), String.valueOf(datos.get("codigo_producto")));
+            
+            tsql3 = "INSERT INTO tallasprod VALUES(DEFAULT, '";
+            tsql3 += tll.getcod_talla() + "','" + cod + "')";
+            System.out.printf(tsql3.toString());
+            this.st.execute(tsql3);
+            
+            MaterialProd mat = new MaterialProd("", String.valueOf(datos.get("codigo")), String.valueOf(datos.get("codigo_producto")));
+            
+            tsql4 = "INSERT INTO materialprod VALUES(DEFAULT, '";
+            tsql4 += mat.getCodigo() + "','" + cod + "')";
+            System.out.printf(tsql4.toString());
+            this.st.execute(tsql4);
             
             this.desconectar();
         }
